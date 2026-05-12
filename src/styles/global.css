@@ -104,45 +104,47 @@ img {
   background-color: var(--color-accent);
   color: #ffffff;
   font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  padding: 0.8rem 1.75rem;
   border-radius: var(--radius-btn);
   border: none;
   cursor: pointer;
   transition:
     background-color var(--transition),
-    transform var(--transition);
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .btn-primary:hover {
   background-color: var(--color-accent-dark);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(72, 141, 148, 0.3);
 }
 
 .btn-outline {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
   color: var(--color-text);
   font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  padding: 0.8rem 1.75rem;
   border-radius: var(--radius-btn);
-  border: 1.5px solid var(--color-border);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition:
-    border-color var(--transition),
-    color var(--transition),
-    transform var(--transition);
+  transition: all var(--transition);
 }
 
 .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
   border-color: var(--color-accent);
   color: var(--color-accent);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* Karte */

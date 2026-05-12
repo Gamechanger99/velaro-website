@@ -2,11 +2,280 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Velaro Catering – Willkommen">
+<Layout title="Velaro Catering & Foodtruckservice – Willkommen">
 
-  <section style="padding: 10rem 1.5rem; text-align: center;">
-    <h1>Willkommen bei <span class="text-accent">Velaro Catering & Foodtruckservice</span></h1>
-    <p style="margin-top: 1rem;">Hero-Sektion kommt gleich hier rein.</p>
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero">
+    <div class="container hero-inner">
+
+      <!-- Links: Text + Buttons -->
+      <div class="hero-text">
+        <p class="hero-label">Catering & Foodtruckservice</p>
+        <h1>
+          Willkommen bei<br />
+          <span class="text-accent">Velaro</span>
+        </h1>
+        <p class="hero-desc">
+          Ihr professioneller Partner für unvergessliche kulinarische Erlebnisse. 
+          Von exklusiven Events bis zu regionalen Märkten.
+        </p>
+        <div class="hero-buttons">
+          <a href="/catering" class="btn-primary">Catering entdecken →</a>
+          <a href="/kontakt" class="btn-outline">Kontakt aufnehmen</a>
+        </div>
+      </div>
+
+      <!-- Rechts: Platzhalterbild -->
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&q=80"
+          alt="Catering Buffet"
+        />
+      </div>
+
+    </div>
   </section>
 
+  <!-- ═══════════ KARTEN ═══════════ -->
+  <section class="cards-section container">
+
+    <a href="/catering" class="feature-card">
+  <div class="card-header">
+    <h3>Catering</h3>
+    <img src="/icons/besteck.png" alt="Catering" class="card-icon" />
+  </div>
+  <p>Klassisches Buffet, Grillbuffet, Foodtruck & Canapés — für jeden Anlass das Richtige.</p>
+  <span class="card-link">Mehr erfahren →</span>
+</a>
+
+<a href="/maerkte" class="feature-card">
+  <div class="card-header">
+    <h3>Märkte</h3>
+    <img src="/icons/imbiss-stand.png" alt="Märkte" class="card-icon" />
+  </div>
+  <p>Findet uns auf regionalen Märkten und Veranstaltungen in der Region.</p>
+  <span class="card-link">Mehr erfahren →</span>
+</a>
+
+  </section>
+
+<!-- ═══════════ TRUST ═══════════ -->
+<section class="trust section">
+  <div class="container trust-inner">
+
+    <div class="trust-item">
+      <div class="trust-icon">🌿</div>
+      <h3>Frisch & Regional</h3>
+      <p>Wir verwenden frische, regionale Zutaten — zubereitet mit Leidenschaft direkt für Ihr Event.</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">🍽️</div>
+      <h3>Individuell abgestimmt</h3>
+      <p>Kein Event ist gleich. Wir passen unser Angebot genau auf Ihre Wünsche und Gästezahl an.</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">✅</div>
+      <h3>Zuverlässig & pünktlich</h3>
+      <p>Von der Planung bis zum Service — Sie können sich auf uns verlassen. Versprochen.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ INSTAGRAM ═══════════ -->
+<section class="instagram section">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 2.5rem; font-weight: 500; font-size: 2rem;">Folgt uns gerne auf Instagram</h2>
+  
+    <!-- Elfsight Widget -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-f5197244-2f87-4ce1-abcb-b3effb647ce1" data-elfsight-app-lazy></div>
+  </div>
+</section>
+
 </Layout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding-block: 6rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-label {
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text h1 {
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Bild */
+  .hero-image img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
+  }
+
+  /* ── Karten ── */
+  .cards-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding-block: 5rem;
+  }
+
+  .feature-card {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color var(--transition), transform var(--transition);
+    cursor: pointer;
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+  }
+
+  .feature-card h3 {
+    color: var(--color-text);
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    flex: 1;
+  }
+
+  .card-link {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .hero-image img {
+      height: 260px;
+    }
+
+    .cards-section {
+      grid-template-columns: 1fr;
+    }
+  }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.card-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(51%) sepia(29%) saturate(601%) hue-rotate(143deg) brightness(93%);
+  opacity: 0.9;
+  transition: filter var(--transition);
+}
+
+.feature-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(72, 141, 148, 0.2);
+}
+
+/* ── Trust ── */
+.trust {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.trust-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem;
+  border-radius: var(--radius-card);
+  transition: background-color var(--transition);
+}
+
+.trust-item:hover {
+  background-color: var(--color-bg-card);
+}
+
+.trust-icon {
+  font-size: 2rem;
+}
+
+.trust-item h3 {
+  color: var(--color-text);
+  font-size: 1.1rem;
+}
+
+.trust-item p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 767px) {
+  .trust-inner {
+    grid-template-columns: 1fr;
+  }
+}
+.instagram {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+}
+</style>
