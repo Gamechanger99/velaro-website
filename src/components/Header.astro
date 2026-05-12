@@ -1,0 +1,182 @@
+---
+const navLinks = [
+  { href: '/',         label: 'Start'    },
+  { href: '/catering', label: 'Catering' },
+  { href: '/maerkte',  label: 'Märkte'   },
+  { href: '/kontakt',  label: 'Kontakt'  },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+
+    <!-- Logo -->
+    <a href="/" class="logo-link" aria-label="Velaro Startseite">
+      <img src="/logo.png" alt="Velaro Catering Logo" class="logo-img" />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav>
+      <ul class="nav-list">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class:list={['nav-link', { 'nav-link--active': currentPath === link.href }]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Hamburger Button (nur Mobile sichtbar) -->
+    <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile Menü (versteckt bis Hamburger geklickt) -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul>
+      {navLinks.map(link => (
+        <li>
+          <a href={link.href} class="mobile-nav-link">{link.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-bg-nav);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 6rem;
+  }
+
+  /* Logo */
+  .logo-img {
+    height: 7rem;
+    width: auto;
+    mix-blend-mode: screen; /* schwarzer Hintergrund verschwindet */
+    transition: opacity var(--transition);
+  }
+
+  .logo-img:hover { opacity: 0.85; }
+
+  /* Desktop Nav */
+  .nav-list {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+
+/* NEU */
+.nav-link {
+  display: block;
+  padding: 0.4rem 0.9rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-btn);
+  position: relative;
+  transition: color var(--transition);
+}
+
+/* Linie unter jedem Link — erstmal unsichtbar */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -1.15rem;
+  left: 0.9rem;
+  right: 0.9rem;
+  height: 2px;
+  background-color: var(--color-accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+/* Beim Hover: Linie fährt von links nach rechts rein */
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link:hover { color: var(--color-text); }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 1px;
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+
+  /* Mobile Nav */
+  .mobile-nav {
+    display: none;
+    padding: 1rem 1.5rem 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .mobile-nav ul { list-style: none; }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 1.1rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--transition);
+  }
+
+  .mobile-nav-link:hover { color: var(--color-accent); }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .nav-list  { display: none; }
+    .hamburger { display: flex; }
+    .mobile-nav.is-open { display: block; }
+  }
+</style>
+
+<!-- Hamburger Logik -->
+<script>
+  const btn = document.getElementById('hamburger');
+  const nav = document.getElementById('mobileNav');
+
+  btn?.addEventListener('click', () => {
+    nav?.classList.toggle('is-open');
+  });
+</script>
