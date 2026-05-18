@@ -20,7 +20,7 @@ import Layout from '../layouts/Layout.astro';
           Von exklusiven Events bis zu regionalen Märkten.
         </p>
         <div class="hero-buttons">
-          <a href="/catering" class="btn-primary">Catering entdecken →</a>
+          <a href="/catering" class="btn-primary">Catering entdecken</a>
           <a href="/kontakt" class="btn-outline">Kontakt aufnehmen</a>
         </div>
       </div>
@@ -277,5 +277,41 @@ import Layout from '../layouts/Layout.astro';
   border-radius: var(--radius-card);
   border: 1px solid var(--color-border);
   padding: 2rem;
+}
+
+/* ── Hero Einlauf-Animation ── */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-label {
+  animation: heroFadeIn 1s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.hero-text h1 {
+  animation: heroFadeIn 1s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.hero-desc {
+  animation: heroFadeIn 1s ease forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.hero-buttons {
+  animation: heroFadeIn 1s ease forwards;
+  animation-delay: 0.8s;
+  opacity: 0;
+}
+
+.hero-image {
+  animation: heroFadeIn 1s ease forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
 }
 </style>

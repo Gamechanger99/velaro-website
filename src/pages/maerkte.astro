@@ -54,24 +54,27 @@ function mapsUrl(adresse: string): string {
   </section>
 
   <!-- ═══════════ OFFEN FÜR ALLE ═══════════ -->
-  <section class="offen section container">
-    <div class="offen-card">
-      <div class="offen-icon">🤝</div>
-      <div class="offen-text">
-        <h2>Offen für alles und jeden</h2>
-        <p>
-          Unsere Foodtrucks und Marktstände sind mehr als nur Verpflegung — sie sind Begegnungsorte.
-          Ob Familien, Freunde oder Geschäftspartner: Bei uns ist jeder willkommen.
-          Wir bringen frische, hochwertige Speisen direkt zu Ihnen auf den Markt.
-        </p>
-        <p>
-          Von herzhaften Gerichten bis zu vegetarischen Köstlichkeiten — unsere Auswahl ist vielfältig
-          und wird täglich frisch zubereitet. Genießen Sie die besondere Atmosphäre und lassen Sie sich 
-          verwöhnen.
-        </p>
-      </div>
-    </div>
-  </section>
+ <div class="offen-card">
+  <div class="offen-text">
+    <h2>Offen für alles und jeden</h2>
+    <p>
+      Unsere Foodtrucks und Marktstände sind mehr als nur Verpflegung — sie sind Begegnungsorte.
+      Ob Familien, Freunde oder Geschäftspartner: Bei uns ist jeder willkommen.
+      Wir bringen frische, hochwertige Speisen direkt zu Ihnen auf den Markt.
+    </p>
+    <p>
+      Von herzhaften Gerichten bis zu vegetarischen Köstlichkeiten — unsere Auswahl ist vielfältig
+      und wird täglich frisch zubereitet. Genießen Sie die besondere Atmosphäre und lassen Sie sich 
+      verwöhnen.
+    </p>
+  </div>
+  <div class="offen-image">
+    <img 
+      src="https://images.unsplash.com/photo-1636224601323-550e96f10d66?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+        alt="Food Truck auf dem Markt" 
+      />
+  </div>
+</div>
 
   <!-- ═══════════ KOMMENDE MÄRKTE ═══════════ -->
   <section class="maerkte-section section container">
@@ -507,4 +510,50 @@ function mapsUrl(adresse: string): string {
       justify-content: center;
     }
   }
+
+  /* ── Hero Animation ── */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-hero .container {
+  animation: heroFadeIn 1s ease forwards;
+  animation-delay: 0.15s;
+  opacity: 0;
+}
+
+.offen-image {
+  flex-shrink: 0;
+  width: 320px;    /* etwas breiter */
+}
+
+.offen-image img {
+  width: 100%;
+  height: 260px;   /* etwas höher */
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+}
+
+.offen-text {
+  max-width: 620px;
+}
+
+.offen-card {
+  max-width: 900px;
+  margin-inline: auto;
+  margin-top: 3rem;
+}
+
+@media (max-width: 767px) {
+  .offen-image {
+    width: 100%;
+  }
+
+  .offen-image img {
+    height: 200px;
+  }
+}
 </style>

@@ -566,6 +566,18 @@ import Layout from '../layouts/Layout.astro';
       padding-block: 3rem 2rem;
     }
   }
+
+  /* ── Hero Animation ── */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-hero .container {
+  animation: heroFadeIn 1s ease forwards;
+  animation-delay: 0.15s;
+  opacity: 0;
+}
 </style>
 
 <script>

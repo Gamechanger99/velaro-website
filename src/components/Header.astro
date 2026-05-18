@@ -54,6 +54,7 @@ const currentPath = Astro.url.pathname;
   </nav>
 </header>
 
+
 <style>
   .site-header {
     position: sticky;
@@ -169,6 +170,26 @@ const currentPath = Astro.url.pathname;
     .hamburger { display: flex; }
     .mobile-nav.is-open { display: block; }
   }
+  .site-header {
+  transition: box-shadow var(--transition), background-color var(--transition);
+}
+
+.site-header.scrolled {
+  background-color: rgba(14, 25, 39, 0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.4);
+
+
+}
+
+.nav-link--active {
+  color: var(--color-accent);
+}
+
+.nav-link--active::after {
+  transform: scaleX(1);
+  background-color: var(--color-accent);
+}
 </style>
 
 <!-- Hamburger Logik -->
@@ -178,5 +199,25 @@ const currentPath = Astro.url.pathname;
 
   btn?.addEventListener('click', () => {
     nav?.classList.toggle('is-open');
+  });
+</script>
+
+<script>
+  const btn = document.getElementById('hamburger');
+  const nav = document.getElementById('mobileNav');
+
+  btn?.addEventListener('click', () => {
+    nav?.classList.toggle('is-open');
+  });
+
+  // Header Scroll-Effekt
+  const header = document.querySelector('.site-header');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
   });
 </script>
