@@ -275,10 +275,15 @@ import Layout from '../layouts/Layout.astro';
 .instagram {
   background-color: var(--color-bg-card);
   border-radius: var(--radius-card);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(72, 141, 148, 0.3);    /* ← Akzentfarbe statt grau */
   padding: 2rem;
+  max-width: 1000px;
+  margin-inline: auto;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  box-shadow: 0 0 40px rgba(72, 141, 148, 0.08), 
+              0 8px 32px rgba(0, 0, 0, 0.3);    /* ← subtiler Glow */
 }
-
 /* ── Hero Einlauf-Animation ── */
 @keyframes heroFadeIn {
   from { opacity: 0; transform: translateY(20px); }
