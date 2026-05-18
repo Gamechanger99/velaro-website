@@ -18,13 +18,14 @@ type MarktItem = {
 const alleMarkte = await getCollection('maerkte');
 
 const processed: MarktItem[] = alleMarkte
-  .map((m: { data: MarktItem }) => ({ ...m.data, dateObj: new Date(m.data.datum) } as MarktItem))
-  .filter((m: MarktItem) => m.dateObj >= twoWeeksAgo)
-  .sort((a: MarktItem, b: MarktItem) => a.dateObj.getTime() - b.dateObj.getTime());
+  .map(m => ({ ...m.data, dateObj: new Date(m.data.datum) } as MarktItem))
+  .filter(m => m.dateObj >= twoWeeksAgo)
+  .sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
 
-const kommendeMarkte = processed.filter((m: MarktItem) => m.dateObj >= today);
-const vergangeneMarkte = processed.filter((m: MarktItem) => m.dateObj < today);
-// Hilfsfunktionen für Datum-Formatierung
+const kommendeMarkte = processed.filter(m => m.dateObj >= today);
+const vergangeneMarkte = processed.filter(m => m.dateObj < today);
+
+
 function formatDate(d: Date): string {
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
 }
