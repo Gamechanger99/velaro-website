@@ -1,0 +1,49 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: de
+
+# Kein Mediapfad nötig, wir speichern nur Textdaten
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: maerkte
+    label: Märkte
+    label_singular: Markt
+    folder: src/content/maerkte
+    create: true
+    delete: true
+    format: json
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.name}}"
+    summary: "{{fields.name}} – {{fields.datum}}"
+    fields:
+      - label: Name des Marktes
+        name: name
+        widget: string
+        hint: "z.B. Wochenmarkt Hauptplatz"
+
+      - label: Datum
+        name: datum
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "DD.MM.YYYY"
+        time_format: false
+        picker_utc: false
+        hint: "Datum der Veranstaltung"
+
+      - label: Uhrzeit
+        name: uhrzeit
+        widget: string
+        hint: "z.B. 08:00 - 14:00 Uhr"
+
+      - label: Ort / Veranstaltungsname
+        name: ort
+        widget: string
+        hint: "Kurzname des Ortes, z.B. Hauptplatz Heinsberg"
+
+      - label: Vollständige Adresse
+        name: adresse
+        widget: string
+        hint: "Wird für Google Maps genutzt — z.B. Hauptplatz 1, 52525 Heinsberg"
