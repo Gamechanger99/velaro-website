@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Banketmappe from '../components/Banketmappe.astro';
+---
+
+<Layout title="Catering – Velaro Catering & Foodtruckservice">
+
+  <!-- ═══════════ PAGE HERO ═══════════ -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="page-label">Menüangebote</p>
+      <h1>Catering &<br /><span class="text-accent">Buffet</span></h1>
+      <p class="page-desc">
+        Vielen Dank für Ihr Interesse an unserem Catering-Service.
+        Wir bieten individuell abgestimmte Speisenkonzepte für jeden Anlass —
+        ob private Feier, Firmenveranstaltung oder Großevent.
+        Unsere Menüs werden frisch zubereitet und auf Ihre Wünsche angepasst.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ ÜBERSICHTS-KARTEN ═══════════ -->
+  <section class="overview section container">
+    <div class="overview-grid">
+
+      <div class="overview-card">
+        <div class="ov-icon">🍽️</div>
+        <h3>Klassisches Buffet</h3>
+        <p>Warme Gerichte & Beilagen für jeden Anlass. Pasta, Fleisch, Salate und mehr.</p>
+        <span class="ov-price">ab 32,99 € / Person</span>
+      </div>
+
+      <div class="overview-card">
+        <div class="ov-icon">🔥</div>
+        <h3>Grillbuffet</h3>
+        <p>Frisch vom Grill — Steaks, Bratwurst, vegetarische Optionen und leckere Beilagen.</p>
+        <span class="ov-price">ab 28,99 € / Person</span>
+      </div>
+
+      <div class="overview-card">
+        <div class="ov-icon">🥐</div>
+        <h3>Kleine Speisen</h3>
+        <p>Wraps, Canapés, Spieße und Brötchen — perfekt für Empfänge ab 10 Personen.</p>
+        <span class="ov-price">ab 16,99 € / Person</span>
+      </div>
+
+      <div class="overview-card">
+        <div class="ov-icon">🚚</div>
+        <h3>Food Truck</h3>
+        <p>Saftige Burger direkt zu Ihrem Event — Beef, Chicken und vegetarische Varianten.</p>
+        <span class="ov-price">ab 29,99 € / Person</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ INFO-LEISTE ═══════════ -->
+  <div class="info-strip container">
+    <div class="info-item">
+      <span class="info-dot"></span>
+      <p>Liefergebiet: <strong>Haldensleben und Umgebung</strong> — individuelle Anfragen möglich</p>
+    </div>
+    <div class="info-item">
+      <span class="info-dot"></span>
+      <p>Aufbau &amp; Servicepersonal nach Absprache</p>
+    </div>
+    <div class="info-item">
+      <span class="info-dot"></span>
+      <p>Geschirr &amp; Equipment optional buchbar</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ INTERAKTIVE BANKETMAPPE ═══════════ -->
+  <Banketmappe />
+
+</Layout>
+
+<style>
+  /* ── Page Hero ── */
+  .page-hero {
+    padding-block: 5rem 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-label {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 { margin-bottom: 1.25rem; }
+
+  .page-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ── Übersichts-Karten ── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .overview-card {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+
+  .overview-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+  }
+
+  .ov-icon { font-size: 1.8rem; }
+
+  .overview-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .overview-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .ov-price {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: 0.25rem;
+  }
+
+  /* ── Info-Leiste ── */
+  .info-strip {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    background-color: rgba(72, 141, 148, 0.06);
+    border: 1px solid rgba(72, 141, 148, 0.2);
+    border-radius: var(--radius-card);
+    margin-bottom: 2rem;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.83rem;
+  }
+
+  .info-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .info-item p { color: var(--color-text-muted); }
+  .info-item strong { color: var(--color-text); font-weight: 600; }
+
+  /* ── Animationen ── */
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-hero .container {
+    animation: heroFadeIn 0.9s ease forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .overview-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .page-hero { padding-block: 3rem 2rem; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .info-strip { flex-direction: column; gap: 0.75rem; }
+  }
+</style>

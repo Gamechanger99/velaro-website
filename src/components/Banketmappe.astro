@@ -1,0 +1,754 @@
+---
+// Banketmappe.astro – Interaktiver Catering-Konfigurator
+// Vanilla JS, keine externen Abhängigkeiten
+---
+
+
+
+<section class="bm-section" id="banketmappe">
+
+  <!-- Netlify erkennt dieses Formular beim Build -->
+  <form name="banketmappe" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input name="kategorie" />
+    <input name="datum" />
+    <input name="personen" />
+    <input name="ort" />
+    <input name="gerichte" />
+    <input name="getraenke" />
+    <input name="wuensche" />
+    <input name="preis_pro_person" />
+    <input name="gesamtpreis" />
+    <input name="kontakt_name" />
+    <input name="kontakt_email" />
+    <input name="kontakt_telefon" />
+      </form>
+
+  <div class="container">
+
+    <div class="bm-intro">
+      <h2>Interaktive <span class="text-accent">Banketmappe</span></h2>
+      <p>Stellen Sie Ihr Wunsch-Catering in wenigen Schritten zusammen und erhalten Sie sofort eine Kalkulation.</p>
+    </div>
+
+    <!-- WIZARD -->
+    <div class="bm-card" id="bmCard">
+
+      <div class="bm-card-header">
+        <div class="bm-progress-bar" id="bmProgressBar"></div>
+        <div class="bm-header-text">
+          <span class="bm-step-label" id="bmStepLabel">Interaktive Banketmappe</span>
+          <div class="bm-step-title" id="bmStepTitle">Willkommen</div>
+        </div>
+      </div>
+
+      <div class="bm-price-bar" id="bmPriceBar">
+        <div>
+          <div class="bm-price-label">Preis pro Person</div>
+          <div class="bm-price-ppp" id="bmPPP">–</div>
+        </div>
+        <div style="text-align:right">
+          <div class="bm-price-label">Gesamt (<span id="bmPersText">30</span> Pers.)</div>
+          <div class="bm-price-total" id="bmTotal">–</div>
+        </div>
+      </div>
+
+      <div class="bm-body" id="bmBody"></div>
+
+      <div class="bm-nav">
+        <button class="bm-btn-back btn-outline" id="bmBack">← Zurück</button>
+        <button class="bm-btn-next btn-primary" id="bmNext">Jetzt konfigurieren</button>
+      </div>
+
+    </div>
+
+    <!-- ERFOLG -->
+    <div class="bm-success" id="bmSuccess">
+      <div class="bm-success-check">✓</div>
+      <h3>Anfrage erfolgreich gesendet!</h3>
+      <p>Wir melden uns so bald wie möglich bei Ihnen.</p>
+      <button class="btn-primary" id="bmReset">Neue Anfrage starten</button>
+    </div>
+
+  </div>
+</section>
+
+<style is:global>
+
+  .bm-section {
+    padding-block: 4rem 5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .bm-intro { text-align: center; margin-bottom: 2.5rem; }
+  .bm-intro h2 { margin-bottom: 0.4rem; }
+  .bm-intro p { font-size: 0.93rem; color: var(--color-text-muted); }
+
+  /* ── Karte ── */
+  .bm-card {
+    max-width: 720px;
+    margin-inline: auto;
+    background-color: #1a2840;
+    border: 1px solid #1e2d42;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .bm-card-header {
+    padding: 1.5rem 2rem 1.25rem;
+    border-bottom: 1px solid #1e2d42;
+  }
+
+  .bm-progress-bar { display: flex; gap: 5px; margin-bottom: 1rem; }
+
+  .bm-seg {
+    flex: 1; height: 3px; border-radius: 2px;
+    background-color: #1e2d42;
+    transition: background-color 0.3s, flex 0.3s;
+  }
+  .bm-seg.done   { background-color: #3a7880; }
+  .bm-seg.active { background-color: #488d94; flex: 2; }
+
+  .bm-header-text { display: flex; flex-direction: column; gap: 0.2rem; }
+
+  .bm-step-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #a6a6a6;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .bm-step-title {
+    font-size: 1.25rem; font-weight: 700; color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  /* ── Preis-Leiste ── */
+  .bm-price-bar {
+    display: none; justify-content: space-between; align-items: center;
+    padding: 0.8rem 2rem;
+    background-color: rgba(72,141,148,0.07);
+    border-bottom: 1px solid rgba(72,141,148,0.18);
+  }
+  .bm-price-bar.visible { display: flex; }
+
+  .bm-price-label {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #a6a6a6; margin-bottom: 0.2rem;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-price-ppp  { font-size: 1.15rem; font-weight: 800; color: #488d94; font-family: "Montserrat", sans-serif; }
+  .bm-price-total{ font-size: 1.55rem; font-weight: 800; color: #488d94; font-family: "Montserrat", sans-serif; }
+
+  /* ── Body ── */
+  .bm-body { padding: 1.75rem 2rem; min-height: 280px; }
+
+  .bm-step-desc {
+    font-size: 0.85rem; color: #a6a6a6; margin-bottom: 1.25rem;
+    line-height: 1.5; font-family: "Montserrat", sans-serif;
+  }
+
+  /* ── Nav ── */
+  .bm-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 2rem; border-top: 1px solid #1e2d42;
+  }
+  .bm-btn-back { visibility: hidden; }
+  .bm-btn-back.bm-visible { visibility: visible; }
+
+  /* ══ STEP 0: Willkommen ══ */
+  .bm-welcome {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 1.25rem; padding: 0.75rem 0 0.25rem;
+  }
+  .bm-welcome-headline {
+    font-size: 1.05rem; font-weight: 700; color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-welcome p {
+    max-width: 440px; font-size: 0.88rem; line-height: 1.7;
+    color: #a6a6a6; font-family: "Montserrat", sans-serif;
+  }
+  .bm-feature-row {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    justify-content: center; margin-top: 0.5rem;
+  }
+  .bm-feature-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .bm-feature-bubble {
+    width: 44px; height: 44px; border-radius: 50%;
+    background-color: rgba(72,141,148,0.1);
+    border: 1px solid rgba(72,141,148,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: #488d94; font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-feature-label {
+    font-size: 0.75rem; color: #a6a6a6; font-family: "Montserrat", sans-serif;
+  }
+
+  /* ══ STEP 1: Kategorie ══ */
+  .bm-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+
+  .bm-cat-card {
+    position: relative;
+    background-color: #0e1927;
+    border: 1.5px solid #1e2d42;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    display: flex; flex-direction: column; gap: 0.3rem;
+    user-select: none;
+  }
+  .bm-cat-card:hover {
+    border-color: #488d94;
+    background-color: rgba(72,141,148,0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(72,141,148,0.12);
+  }
+  .bm-cat-card.bm-selected {
+    border-color: #488d94;
+    background-color: rgba(72,141,148,0.1);
+    box-shadow: 0 0 0 1px #488d94;
+  }
+  .bm-cat-card.bm-selected::after {
+    content: '✓';
+    position: absolute; top: 0.75rem; right: 0.875rem;
+    width: 20px; height: 20px;
+    background-color: #488d94; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; color: #fff; font-weight: 700;
+    line-height: 20px; text-align: center;
+  }
+  .bm-cat-tag {
+    display: inline-block; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #488d94;
+    background-color: rgba(72,141,148,0.15); border-radius: 0.3rem;
+    padding: 0.2rem 0.5rem; margin-bottom: 0.35rem; width: fit-content;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-cat-name {
+    font-size: 0.95rem; font-weight: 700; color: #ffffff;
+    font-family: "Montserrat", sans-serif; line-height: 1.2;
+  }
+  .bm-cat-desc {
+    font-size: 0.78rem; color: #a6a6a6; line-height: 1.45;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-cat-price {
+    font-size: 0.78rem; font-weight: 700; color: #488d94;
+    margin-top: 0.4rem; font-family: "Montserrat", sans-serif;
+  }
+
+  /* ══ STEP 2: Eckdaten ══ */
+  .bm-form { display: flex; flex-direction: column; gap: 1rem; }
+  .bm-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+
+  .bm-field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .bm-field label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: #a6a6a6;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-field input,
+  .bm-field textarea {
+    background-color: #0e1927 !important;
+    border: 1.5px solid #1e2d42 !important;
+    border-radius: 0.5rem !important;
+    color: #ffffff !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 0.875rem !important;
+    padding: 0.65rem 0.9rem !important;
+    width: 100% !important;
+    outline: none !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
+    -webkit-appearance: none; appearance: none;
+    box-sizing: border-box !important;
+  }
+  .bm-field input::placeholder,
+  .bm-field textarea::placeholder {
+    color: rgba(166,166,166,0.35) !important;
+  }
+  .bm-field input:focus,
+  .bm-field textarea:focus {
+    border-color: #488d94 !important;
+    box-shadow: 0 0 0 3px rgba(72,141,148,0.15) !important;
+  }
+  /* date input calendar icon color fix */
+  .bm-field input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.6);
+    cursor: pointer;
+  }
+
+  .bm-field-divider { border: none; border-top: 1px solid #1e2d42; margin: 0.25rem 0; }
+  .bm-field-group-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #a6a6a6; margin-bottom: -0.3rem;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  /* ══ STEP 3: Menü ══ */
+  .bm-menu-status {
+    display: flex; justify-content: space-between; align-items: center;
+    background-color: #0e1927; border: 1px solid #1e2d42;
+    border-radius: 0.5rem; padding: 0.65rem 1rem; margin-bottom: 1.25rem;
+    font-size: 0.8rem; font-family: "Montserrat", sans-serif;
+  }
+  .bm-menu-status span { color: #a6a6a6; }
+  .bm-menu-status strong { color: #ffffff; }
+  .bm-extra-badge { color: #488d94; font-weight: 700; font-size: 0.75rem; margin-left: 0.4rem; }
+
+  .bm-dish-group { margin-bottom: 1.5rem; }
+  .bm-dish-group-title {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.09em; color: #a6a6a6; margin-bottom: 0.65rem;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-dish-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+
+  .bm-dish {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.55rem 0.85rem;
+    background-color: #0e1927; border: 1.5px solid #1e2d42;
+    border-radius: 0.5rem; cursor: pointer;
+    font-size: 0.82rem; color: #a6a6a6;
+    font-family: "Montserrat", sans-serif;
+    transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+    user-select: none; line-height: 1.3;
+  }
+  .bm-dish:hover { border-color: #488d94; color: #ffffff; background-color: rgba(72,141,148,0.05); }
+  .bm-dish.bm-active { border-color: #488d94; background-color: rgba(72,141,148,0.1); color: #ffffff; }
+
+  .bm-dish-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1.5px solid #1e2d42; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .bm-dish.bm-active .bm-dish-dot { border-color: #488d94; background-color: #488d94; }
+  .bm-dish-dot-inner {
+    width: 6px; height: 6px; border-radius: 50%;
+    background-color: transparent; transition: background-color 0.15s;
+  }
+  .bm-dish.bm-active .bm-dish-dot-inner { background-color: #ffffff; }
+
+  /* ══ STEP 4: Getränke ══ */
+  .bm-drink-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .bm-drink {
+    background-color: #0e1927; border: 1.5px solid #1e2d42;
+    border-radius: 0.75rem; padding: 1rem 1.1rem; cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+  }
+  .bm-drink:hover { border-color: #488d94; background-color: rgba(72,141,148,0.05); }
+  .bm-drink.bm-active { border-color: #488d94; background-color: rgba(72,141,148,0.1); box-shadow: 0 0 0 1px #488d94; }
+
+  .bm-drink-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem; }
+  .bm-drink-name { font-size: 0.875rem; font-weight: 700; color: #ffffff; line-height: 1.3; font-family: "Montserrat", sans-serif; }
+  .bm-drink-badge { font-size: 0.72rem; font-weight: 700; color: #488d94; white-space: nowrap; margin-left: 0.5rem; font-family: "Montserrat", sans-serif; }
+  .bm-drink-desc { font-size: 0.75rem; color: #a6a6a6; font-family: "Montserrat", sans-serif; line-height: 1.4; }
+
+  /* ══ STEP 5: Wünsche ══ */
+  .bm-wishes-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+  .bm-wishes-wrap textarea {
+    width: 100% !important; min-height: 135px !important;
+    background-color: #0e1927 !important; border: 1.5px solid #1e2d42 !important;
+    border-radius: 0.5rem !important; color: #ffffff !important;
+    font-family: "Montserrat", sans-serif !important; font-size: 0.875rem !important;
+    padding: 0.75rem 1rem !important; resize: vertical !important;
+    outline: none !important; line-height: 1.6 !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
+    box-sizing: border-box !important;
+  }
+  .bm-wishes-wrap textarea::placeholder { color: rgba(166,166,166,0.35) !important; }
+  .bm-wishes-wrap textarea:focus { border-color: #488d94 !important; box-shadow: 0 0 0 3px rgba(72,141,148,0.15) !important; }
+  .bm-hint { font-size: 0.75rem; color: rgba(166,166,166,0.5); line-height: 1.5; font-family: "Montserrat", sans-serif; }
+
+  /* ══ STEP 6: Zusammenfassung ══ */
+  .bm-summary-block { margin-bottom: 1.25rem; }
+  .bm-summary-title {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.09em; color: #a6a6a6; margin-bottom: 0.5rem;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-summary-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.4rem 0; border-bottom: 1px solid #1e2d42;
+    font-size: 0.84rem; gap: 1rem; font-family: "Montserrat", sans-serif;
+  }
+  .bm-row-key { color: #a6a6a6; flex-shrink: 0; }
+  .bm-row-val { color: #ffffff; text-align: right; }
+
+  .bm-price-box {
+    background-color: rgba(72,141,148,0.07);
+    border: 1px solid rgba(72,141,148,0.2);
+    border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.25rem;
+  }
+  .bm-price-line {
+    display: flex; justify-content: space-between;
+    font-size: 0.82rem; color: #a6a6a6; padding: 0.3rem 0;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-price-line b { color: #ffffff; }
+  .bm-price-sep { border: none; border-top: 1px solid rgba(72,141,148,0.25); margin: 0.5rem 0; }
+  .bm-price-grand { display: flex; justify-content: space-between; align-items: baseline; padding-top: 0.25rem; font-family: "Montserrat", sans-serif; }
+  .bm-price-grand-label { font-size: 0.9rem; font-weight: 700; color: #ffffff; }
+  .bm-price-grand-value { font-size: 1.5rem; font-weight: 800; color: #488d94; }
+  .bm-disclaimer { font-size: 0.7rem; color: rgba(166,166,166,0.4); margin-top: 0.65rem; line-height: 1.5; font-family: "Montserrat", sans-serif; }
+
+  /* ══ Erfolg ══ */
+  .bm-success {
+    display: none; flex-direction: column; align-items: center;
+    text-align: center; gap: 1rem; padding: 3.5rem 2rem;
+    max-width: 720px; margin-inline: auto;
+    background-color: #1a2840; border: 1px solid #1e2d42; border-radius: 1rem;
+  }
+  .bm-success.bm-visible { display: flex; }
+  .bm-success-check {
+    width: 58px; height: 58px;
+    background-color: rgba(72,141,148,0.15); border: 1px solid rgba(72,141,148,0.4);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: #488d94; font-weight: 700;
+  }
+  .bm-success h3 { color: #ffffff; font-family: "Montserrat", sans-serif; }
+  .bm-success p { max-width: 360px; line-height: 1.7; color: #a6a6a6; font-family: "Montserrat", sans-serif; font-size: 0.9rem; }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .bm-body, .bm-card-header { padding: 1.25rem; }
+    .bm-nav { padding: 0.9rem 1.25rem; }
+    .bm-price-bar { padding: 0.7rem 1.25rem; }
+    .bm-cat-grid, .bm-drink-grid, .bm-dish-grid { grid-template-columns: 1fr; }
+    .bm-form-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+// @ts-nocheck
+
+const CATS = [
+  { id:'buffet', tag:'Buffet',     name:'Klassisches Buffet',   desc:'Warme & kalte Speisen für jeden Anlass',       price:32.99 },
+  { id:'grill',  tag:'Grill',      name:'Grillbuffet',           desc:'Frisch vom Grill – deftig & gesellig',         price:28.99 },
+  { id:'snacks', tag:'Fingerfood', name:'Kleine Speisen',         desc:'Wraps, Canapés & Fingerfood – ab 10 Personen', price:16.99 },
+  { id:'truck',  tag:'Food Truck', name:'Food Truck Catering',    desc:'Saftige Burger direkt zu Ihrem Event',         price:29.99 },
+];
+
+const MENU = {
+  buffet: { included:5, sections:[
+    { title:'Warme Gerichte', type:'warm', items:['Pasta al Salmone','Hähnchen Caprese','Schweinefilet in Pfefferrahm','Saisonale Gemüseauswahl','Kartoffelgratin','Salzkartoffeln','Vegetarische Alternative'] },
+    { title:'Beilagen',       type:'cold', items:['Frische Salat- & Antipastiauswahl','Baguette und Brot mit Dips und Butter'] },
+  ]},
+  grill: { included:4, sections:[
+    { title:'Vom Grill',         type:'warm', items:['Bratwurst','Schweinesteaks','Feta mit Tomate (vegetarisch)','Gemüsepfanne','Maiskolben'] },
+    { title:'Buffet & Beilagen', type:'cold', items:['Fischvariation','Kartoffel- oder Reisbeilage','Frische Salat- & Antipastiauswahl','Baguette und Brot mit Dips und Butter'] },
+  ]},
+  snacks: { included:4, sections:[
+    { title:'Variationen', type:'warm', items:['Lachs Wraps','Schinken & Käse Wraps','Tomate-Mozzarella Spieße','Belegte Brötchen','Baguette und Brot mit Dips und Butter'] },
+  ]},
+  truck: { included:3, sections:[
+    { title:'Burger-Auswahl', type:'warm', items:['Cheeseburger','Hamburger','Chili-Cheese Burger','Onion Overload','Veggie Burger'] },
+    { title:'Beilagen',       type:'cold', items:['Pommes Frites','Loaded Fries (+3,50 € p.P.)'] },
+  ]},
+};
+
+const EXTRA = 2.50;
+
+const DRINKS = [
+  { id:'none', name:'Keine Getränkepauschale',   desc:'Getränke selbst organisieren', price:0 },
+  { id:'soft', name:'Getränke-Pauschale',         desc:'Inkl. Bier & Weinauswahl',    price:19.99 },
+  { id:'full', name:'Getränke-Pauschale Premium', desc:'Großes Getränke-Sortiment',   price:27.99 },
+];
+
+const TOTAL_STEPS = 6;
+const TITLES = ['Willkommen','Kategorie','Eckdaten','Menü zusammenstellen','Extras','Individuelle Wünsche','Zusammenfassung'];
+
+const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', warm:[], cold:[], drink:'none', wishes:'' };
+
+const fmt = n => n.toFixed(2).replace('.',',') + ' €';
+
+function ppp() {
+  if (!S.category) return 0;
+  const cat = CATS.find(c=>c.id===S.category);
+  const menu = MENU[S.category];
+  const extra = Math.max(0, S.warm.length + S.cold.length - menu.included);
+  const drink = DRINKS.find(d=>d.id===S.drink);
+  return parseFloat((cat.price + extra*EXTRA + (drink?.price||0)).toFixed(2));
+}
+const totalPrice = () => parseFloat((ppp()*S.persons).toFixed(2));
+
+function refreshProgress() {
+  const bar = document.getElementById('bmProgressBar');
+  if (!bar) return;
+  if (S.step===0) { bar.innerHTML=''; return; }
+  bar.innerHTML = Array.from({length:TOTAL_STEPS},(_,i)=>{
+    const n=i+1;
+    return `<div class="bm-seg${n<S.step?' done':n===S.step?' active':''}"></div>`;
+  }).join('');
+}
+
+function refreshPrice() {
+  const bar = document.getElementById('bmPriceBar');
+  if (!bar) return;
+  if (S.step>=2 && S.category) {
+    bar.classList.add('visible');
+    document.getElementById('bmPPP').textContent = fmt(ppp());
+    document.getElementById('bmTotal').textContent = fmt(totalPrice());
+    document.getElementById('bmPersText').textContent = S.persons;
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+function render() {
+  document.getElementById('bmStepTitle').textContent = S.step===0 ? 'Willkommen' : TITLES[S.step];
+  document.getElementById('bmStepLabel').textContent = S.step===0 ? 'Interaktive Banketmappe' : `Schritt ${S.step} von ${TOTAL_STEPS}`;
+  const back = document.getElementById('bmBack');
+  const next = document.getElementById('bmNext');
+  S.step===0 ? back.classList.remove('bm-visible') : back.classList.add('bm-visible');
+  next.textContent = S.step===0 ? 'Jetzt konfigurieren →' : S.step===TOTAL_STEPS ? '✉ Anfrage absenden' : 'Weiter →';
+  refreshProgress();
+  refreshPrice();
+  const body = document.getElementById('bmBody');
+  switch(S.step) {
+    case 0: body.innerHTML = htmlWelcome(); break;
+    case 1: body.innerHTML = htmlCategory(); bindCat(); break;
+    case 2: body.innerHTML = htmlDetails(); bindDetails(); break;
+    case 3: body.innerHTML = htmlMenu(); bindMenu(); break;
+    case 4: body.innerHTML = htmlDrinks(); bindDrinks(); break;
+    case 5: body.innerHTML = htmlWishes(); bindWishes(); break;
+    case 6: body.innerHTML = htmlSummary(); break;
+  }
+}
+
+function htmlWelcome() {
+  return `<div class="bm-welcome">
+    <div class="bm-welcome-headline">Ihr Catering, Ihre Wahl.</div>
+    <p>Kategorien wählen, Gerichte kombinieren, Preis live berechnen — und direkt anfragen. In wenigen Schritten zu Ihrem individuellen Angebot.</p>
+    <div class="bm-feature-row">
+      <div class="bm-feature-item"><div class="bm-feature-bubble">4</div><span class="bm-feature-label">Kategorien</span></div>
+      <div class="bm-feature-item"><div class="bm-feature-bubble">€</div><span class="bm-feature-label">Live-Kalkulation</span></div>
+      <div class="bm-feature-item"><div class="bm-feature-bubble">✉</div><span class="bm-feature-label">Direkt anfragen</span></div>
+    </div>
+  </div>`;
+}
+
+function htmlCategory() {
+  return `<p class="bm-step-desc">Welche Art von Catering möchten Sie buchen?</p>
+  <div class="bm-cat-grid">${CATS.map(c=>`
+    <div class="bm-cat-card${S.category===c.id?' bm-selected':''}" data-id="${c.id}">
+      <span class="bm-cat-tag">${c.tag}</span>
+      <div class="bm-cat-name">${c.name}</div>
+      <div class="bm-cat-desc">${c.desc}</div>
+      <div class="bm-cat-price">ab ${c.price.toFixed(2).replace('.',',')} € / Person</div>
+    </div>`).join('')}</div>`;
+}
+
+function bindCat() {
+  document.querySelectorAll('.bm-cat-card').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const id=el.getAttribute('data-id');
+      if(S.category!==id){S.category=id;S.warm=[];S.cold=[];}
+      document.querySelectorAll('.bm-cat-card').forEach(c=>c.classList.remove('bm-selected'));
+      el.classList.add('bm-selected');
+    });
+  });
+}
+
+function htmlDetails() {
+  return `<p class="bm-step-desc">Bitte geben Sie die Eckdaten Ihrer Veranstaltung an.</p>
+  <div class="bm-form">
+    <div class="bm-form-row">
+      <div class="bm-field"><label>Personenanzahl *</label><input type="number" id="bfPersons" value="${S.persons}" min="1" max="1000" placeholder="z.B. 50"></div>
+      <div class="bm-field"><label>Datum *</label><input type="date" id="bfDate" value="${S.date}"></div>
+    </div>
+    <div class="bm-field"><label>Veranstaltungsort *</label><input type="text" id="bfLocation" value="${S.location}" placeholder="Adresse oder Venue-Name"></div>
+    <hr class="bm-field-divider">
+    <p class="bm-field-group-label">Ihre Kontaktdaten</p>
+    <div class="bm-form-row">
+      <div class="bm-field"><label>Name *</label><input type="text" id="bfName" value="${S.name}" placeholder="Vor- und Nachname"></div>
+      <div class="bm-field"><label>E-Mail *</label><input type="email" id="bfEmail" value="${S.email}" placeholder="ihre@email.de"></div>
+    </div>
+    <div class="bm-field"><label>Telefon (optional)</label><input type="tel" id="bfPhone" value="${S.phone}" placeholder="+49 ..."></div>
+  </div>`;
+}
+
+function bindDetails() {
+  const on=(id,key,parse)=>document.getElementById(id)?.addEventListener('input',e=>{
+    S[key]=parse?parseInt(e.target.value)||1:e.target.value; refreshPrice();
+  });
+  on('bfPersons','persons',true); on('bfDate','date'); on('bfLocation','location');
+  on('bfName','name'); on('bfEmail','email'); on('bfPhone','phone');
+}
+
+function htmlMenu() {
+  const menu=MENU[S.category]; if(!menu) return '';
+  const total=S.warm.length+S.cold.length;
+  const extra=Math.max(0,total-menu.included);
+  return `<div class="bm-menu-status">
+    <span>Im Paket enthalten: <strong>${menu.included} Gerichte</strong></span>
+    <span>Ausgewählt: <strong>${total}</strong>${extra>0?`<span class="bm-extra-badge">+${extra} extra (+${(extra*EXTRA).toFixed(2).replace('.',',')} €/Pers.)</span>`:''}</span>
+  </div>
+  ${menu.sections.map(sec=>`
+    <div class="bm-dish-group">
+      <div class="bm-dish-group-title">${sec.title}</div>
+      <div class="bm-dish-grid">${sec.items.map(item=>{
+        const active=(sec.type==='warm'?S.warm:S.cold).includes(item);
+        return `<div class="bm-dish${active?' bm-active':''}" data-item="${item}" data-type="${sec.type}">
+          <div class="bm-dish-dot"><div class="bm-dish-dot-inner"></div></div>${item}
+        </div>`;
+      }).join('')}</div>
+    </div>`).join('')}`;
+}
+
+function bindMenu() {
+  document.querySelectorAll('.bm-dish').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const item=el.getAttribute('data-item'), type=el.getAttribute('data-type');
+      const arr=type==='warm'?S.warm:S.cold;
+      arr.includes(item)?arr.splice(arr.indexOf(item),1):arr.push(item);
+      document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu(); refreshPrice();
+    });
+  });
+}
+
+function htmlDrinks() {
+  return `<p class="bm-step-desc">Möchten Sie eine Getränkepauschale dazubuchen?</p>
+  <div class="bm-drink-grid">${DRINKS.map(d=>`
+    <div class="bm-drink${S.drink===d.id?' bm-active':''}" data-id="${d.id}">
+      <div class="bm-drink-head">
+        <div class="bm-drink-name">${d.name}</div>
+        ${d.price>0?`<div class="bm-drink-badge">+${d.price.toFixed(2).replace('.',',')} €</div>`:''}
+      </div>
+      <div class="bm-drink-desc">${d.desc}</div>
+    </div>`).join('')}</div>`;
+}
+
+function bindDrinks() {
+  document.querySelectorAll('.bm-drink').forEach(el=>{
+    el.addEventListener('click',()=>{
+      S.drink=el.getAttribute('data-id');
+      document.querySelectorAll('.bm-drink').forEach(d=>d.classList.remove('bm-active'));
+      el.classList.add('bm-active'); refreshPrice();
+    });
+  });
+}
+
+function htmlWishes() {
+  return `<p class="bm-step-desc">Haben Sie besondere Wünsche, Allergien oder sonstige Anmerkungen?</p>
+  <div class="bm-wishes-wrap">
+    <textarea id="bfWishes" placeholder="z.B. vegane Optionen, Nussallergien, besondere Dekoration...">${S.wishes}</textarea>
+    <p class="bm-hint">Alle Angaben sind unverbindlich. Wir prüfen Ihre Wünsche und melden uns bei Bedarf für Details.</p>
+  </div>`;
+}
+
+function bindWishes() {
+  document.getElementById('bfWishes')?.addEventListener('input',e=>{S.wishes=e.target.value;});
+}
+
+function htmlSummary() {
+  const cat=CATS.find(c=>c.id===S.category);
+  const menu=MENU[S.category];
+  const drinkObj=DRINKS.find(d=>d.id===S.drink);
+  const extraDishes=Math.max(0,S.warm.length+S.cold.length-menu.included);
+  const p=ppp(), t=totalPrice();
+  const row=(k,v)=>`<div class="bm-summary-row"><span class="bm-row-key">${k}</span><span class="bm-row-val">${v}</span></div>`;
+  const allDishes=[...S.warm,...S.cold];
+  return `
+    <div class="bm-summary-block"><div class="bm-summary-title">Veranstaltung</div>
+      ${row('Catering-Art',cat.name)}${row('Datum',S.date||'–')}${row('Ort',S.location||'–')}${row('Personen',S.persons+' Personen')}
+    </div>
+    <div class="bm-summary-block"><div class="bm-summary-title">Ausgewählte Speisen</div>
+      ${allDishes.length?allDishes.map(d=>row('—',d)).join(''):row('—','Keine ausgewählt')}
+    </div>
+    <div class="bm-summary-block"><div class="bm-summary-title">Extras</div>${row('Getränke',drinkObj?.name||'–')}</div>
+    <div class="bm-summary-block"><div class="bm-summary-title">Kontakt</div>
+      ${row('Name',S.name||'–')}${row('E-Mail',S.email||'–')}${S.phone?row('Telefon',S.phone):''}
+    </div>
+    ${S.wishes?`<div class="bm-summary-block"><div class="bm-summary-title">Individuelle Wünsche</div><div class="bm-summary-row"><span class="bm-row-val" style="text-align:left">${S.wishes}</span></div></div>`:''}
+    <div class="bm-price-box">
+      <div class="bm-summary-title">Kalkulation (Orientierungswerte)</div>
+      <div class="bm-price-line"><span>Basispreis (${cat.name})</span><b>${cat.price.toFixed(2).replace('.',',')} € / Pers.</b></div>
+      ${extraDishes>0?`<div class="bm-price-line"><span>Zusatzgerichte (${extraDishes}×)</span><b>+${(extraDishes*EXTRA).toFixed(2).replace('.',',')} € / Pers.</b></div>`:''}
+      ${drinkObj?.price>0?`<div class="bm-price-line"><span>${drinkObj.name}</span><b>+${drinkObj.price.toFixed(2).replace('.',',')} € / Pers.</b></div>`:''}
+      <hr class="bm-price-sep">
+      <div class="bm-price-grand">
+        <span class="bm-price-grand-label">Gesamtpreis (${S.persons} Pers.)</span>
+        <span class="bm-price-grand-value">${fmt(t)}</span>
+      </div>
+      <p class="bm-disclaimer">* Orientierungswerte — das finale Angebot erhalten Sie nach individueller Rücksprache mit Willi Vollack.</p>
+    </div>`;
+}
+
+function validate() {
+  if(S.step===1&&!S.category){alert('Bitte wählen Sie eine Catering-Art.');return false;}
+  if(S.step===2){
+    if(!S.persons||S.persons<1){alert('Bitte Personenanzahl angeben.');return false;}
+    if(!S.date){alert('Bitte Datum angeben.');return false;}
+    if(!S.location){alert('Bitte Veranstaltungsort angeben.');return false;}
+    if(!S.name){alert('Bitte Namen angeben.');return false;}
+    if(!S.email||!S.email.includes('@')){alert('Bitte gültige E-Mail angeben.');return false;}
+  }
+  if(S.step===3&&S.warm.length+S.cold.length<1){alert('Bitte mindestens ein Gericht auswählen.');return false;}
+  return true;
+}
+
+async function submit() {
+  const cat     = CATS.find(c => c.id === S.category);
+  const menu    = MENU[S.category];
+  const drinkObj= DRINKS.find(d => d.id === S.drink);
+  const extraDishes = Math.max(0, S.warm.length + S.cold.length - menu.included);
+  const p = ppp(), t = totalPrice();
+
+  const payload = new URLSearchParams({
+    'form-name':       'banketmappe',
+    'kategorie':       cat.name,
+    'datum':           S.date,
+    'personen':        String(S.persons),
+    'ort':             S.location,
+    'gerichte':        [...S.warm, ...S.cold].join(', ') || '–',
+    'getraenke':       drinkObj?.name || '–',
+    'wuensche':        S.wishes || 'Keine',
+    'preis_pro_person': fmt(p),
+    'gesamtpreis':     fmt(t),
+    'kontakt_name':    S.name,
+    'kontakt_email':   S.email,
+    'kontakt_telefon': S.phone || '–',
+  });
+
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: payload.toString(),
+    });
+
+    if (res.ok) {
+      document.getElementById('bmCard').style.display = 'none';
+      document.getElementById('bmSuccess').classList.add('bm-visible');
+    } else {
+      alert('Fehler beim Senden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt: kontakt@velaro-catering.de');
+    }
+  } catch (err) {
+    alert('Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung.');
+  }
+}
+
+document.getElementById('bmNext')?.addEventListener('click',()=>{
+  if(S.step===TOTAL_STEPS){submit();return;}
+  if(!validate())return;
+  S.step++; render();
+  document.getElementById('banketmappe')?.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+document.getElementById('bmBack')?.addEventListener('click',()=>{
+  if(S.step>0){S.step--;render();document.getElementById('banketmappe')?.scrollIntoView({behavior:'smooth',block:'start'});}
+});
+
+document.getElementById('bmReset')?.addEventListener('click',()=>{
+  Object.assign(S,{step:0,category:'',persons:30,date:'',location:'',name:'',email:'',phone:'',warm:[],cold:[],drink:'none',wishes:''});
+  document.getElementById('bmCard').style.display='';
+  document.getElementById('bmSuccess').classList.remove('bm-visible');
+  render();
+});
+
+render();
+</script>
