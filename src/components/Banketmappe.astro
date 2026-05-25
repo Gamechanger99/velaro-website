@@ -13,21 +13,19 @@
     <input name="datum" />
     <input name="personen" />
     <input name="ort" />
-    <input name="gerichte" />
+    <input name="menu_auswahl" />
     <input name="getraenke" />
     <input name="wuensche" />
-    <input name="preis_pro_person" />
-    <input name="gesamtpreis" />
     <input name="kontakt_name" />
     <input name="kontakt_email" />
     <input name="kontakt_telefon" />
-      </form>
+  </form>
 
   <div class="container">
 
     <div class="bm-intro">
       <h2>Interaktive <span class="text-accent">Banketmappe</span></h2>
-      <p>Stellen Sie Ihr Wunsch-Catering in wenigen Schritten zusammen und erhalten Sie sofort eine Kalkulation.</p>
+      <p>Stellen Sie Ihr Wunsch-Catering zusammen und senden Sie uns Ihre Anfrage direkt zu.</p>
     </div>
 
     <!-- WIZARD -->
@@ -41,18 +39,8 @@
         </div>
       </div>
 
-      <div class="bm-price-bar" id="bmPriceBar">
-        <div>
-          <div class="bm-price-label">Preis pro Person</div>
-          <div class="bm-price-ppp" id="bmPPP">–</div>
-        </div>
-        <div style="text-align:right">
-          <div class="bm-price-label">Gesamt (<span id="bmPersText">30</span> Pers.)</div>
-          <div class="bm-price-total" id="bmTotal">–</div>
-        </div>
-      </div>
 
-      <div class="bm-body" id="bmBody"></div>
+<div class="bm-body" id="bmBody"></div>
 
       <div class="bm-nav">
         <button class="bm-btn-back btn-outline" id="bmBack">← Zurück</button>
@@ -295,7 +283,6 @@
   }
   .bm-menu-status span { color: #a6a6a6; }
   .bm-menu-status strong { color: #ffffff; }
-  .bm-extra-badge { color: #488d94; font-weight: 700; font-size: 0.75rem; margin-left: 0.4rem; }
 
   .bm-dish-group { margin-bottom: 1.5rem; }
   .bm-dish-group-title {
@@ -303,7 +290,8 @@
     letter-spacing: 0.09em; color: #a6a6a6; margin-bottom: 0.65rem;
     font-family: "Montserrat", sans-serif;
   }
-  .bm-dish-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .bm-dish-list { display: flex; flex-direction: column; gap: 0.4rem; }
+  .bm-dish-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
 
   .bm-dish {
     display: flex; align-items: center; gap: 0.6rem;
@@ -331,23 +319,32 @@
   }
   .bm-dish.bm-active .bm-dish-dot-inner { background-color: #ffffff; }
 
-  /* ══ STEP 4: Getränke ══ */
-  .bm-drink-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-  .bm-drink {
+  .bm-sub-chips {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    padding: 0.4rem 0.85rem 0.2rem 2.1rem;
+  }
+  .bm-sub-chip {
+    font-size: 0.75rem; padding: 0.3rem 0.7rem;
     background-color: #0e1927; border: 1.5px solid #1e2d42;
-    border-radius: 0.75rem; padding: 1rem 1.1rem; cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+    border-radius: 999px; color: #a6a6a6; cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    transition: border-color 0.15s, color 0.15s, background-color 0.15s;
     user-select: none;
   }
-  .bm-drink:hover { border-color: #488d94; background-color: rgba(72,141,148,0.05); }
-  .bm-drink.bm-active { border-color: #488d94; background-color: rgba(72,141,148,0.1); box-shadow: 0 0 0 1px #488d94; }
+  .bm-sub-chip:hover { border-color: #488d94; color: #ffffff; background-color: rgba(72,141,148,0.05); }
+  .bm-sub-chip.bm-active { border-color: #488d94; background-color: rgba(72,141,148,0.15); color: #488d94; font-weight: 700; }
 
-  .bm-drink-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem; }
-  .bm-drink-name { font-size: 0.875rem; font-weight: 700; color: #ffffff; line-height: 1.3; font-family: "Montserrat", sans-serif; }
-  .bm-drink-badge { font-size: 0.72rem; font-weight: 700; color: #488d94; white-space: nowrap; margin-left: 0.5rem; font-family: "Montserrat", sans-serif; }
-  .bm-drink-desc { font-size: 0.75rem; color: #a6a6a6; font-family: "Montserrat", sans-serif; line-height: 1.4; }
+  .bm-included-box {
+    margin-top: 1.25rem; padding: 0.875rem 1rem;
+    background-color: rgba(72,141,148,0.05); border: 1px solid rgba(72,141,148,0.18);
+    border-radius: 0.5rem;
+  }
+  .bm-included-list { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 0.5rem; }
+  .bm-incl-item {
+    font-size: 0.78rem; color: #488d94; font-family: "Montserrat", sans-serif;
+  }
 
-  /* ══ STEP 5: Wünsche ══ */
+  /* ══ STEP 4: Wünsche ══ */
   .bm-wishes-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
   .bm-wishes-wrap textarea {
     width: 100% !important; min-height: 135px !important;
@@ -363,7 +360,7 @@
   .bm-wishes-wrap textarea:focus { border-color: #488d94 !important; box-shadow: 0 0 0 3px rgba(72,141,148,0.15) !important; }
   .bm-hint { font-size: 0.75rem; color: rgba(166,166,166,0.5); line-height: 1.5; font-family: "Montserrat", sans-serif; }
 
-  /* ══ STEP 6: Zusammenfassung ══ */
+  /* ══ STEP 5: Zusammenfassung ══ */
   .bm-summary-block { margin-bottom: 1.25rem; }
   .bm-summary-title {
     font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
@@ -412,6 +409,51 @@
   .bm-success h3 { color: #ffffff; font-family: "Montserrat", sans-serif; }
   .bm-success p { max-width: 360px; line-height: 1.7; color: #a6a6a6; font-family: "Montserrat", sans-serif; font-size: 0.9rem; }
 
+  /* ── Getränke-Step ── */
+  .bm-drink-cards { display: flex; flex-direction: column; gap: 0.875rem; }
+
+  /* ── Dish label ── */
+  .bm-dish-label { flex: 1; }
+
+  /* ── Item-Badge ── */
+  .bm-item-badge {
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; border-radius: 0.25rem;
+    padding: 0.15rem 0.45rem; white-space: nowrap; flex-shrink: 0;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-badge-incl  { background-color: rgba(72,141,148,0.15); color: #488d94; }
+  .bm-badge-base  { background-color: rgba(72,141,148,0.15); color: #488d94; }
+  .bm-badge-extra { background-color: rgba(166,166,166,0.1); color: #a6a6a6; }
+
+  /* ── Empfehlungsbox ── */
+  .bm-reco-box {
+    margin-top: 1rem; padding: 0.75rem 1rem;
+    background-color: rgba(72,141,148,0.05);
+    border-left: 3px solid #488d94; border-radius: 0.25rem;
+    display: flex; flex-direction: column; gap: 0.45rem;
+  }
+  .bm-reco-label {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: #488d94; font-family: "Montserrat", sans-serif;
+  }
+  .bm-reco-rows {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem;
+    font-size: 0.8rem; color: #a6a6a6; font-family: "Montserrat", sans-serif;
+  }
+  .bm-reco-rows strong { color: #ffffff; }
+
+  /* ── Food-Truck Info-Box ── */
+  .bm-info-box {
+    display: flex; align-items: flex-start; gap: 0.5rem;
+    padding: 0.75rem 1rem; margin-bottom: 1.25rem;
+    background-color: rgba(72,141,148,0.05);
+    border: 1px solid rgba(72,141,148,0.2); border-radius: 0.5rem;
+    font-size: 0.8rem; color: #a6a6a6; line-height: 1.55;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-info-icon { color: #488d94; flex-shrink: 0; margin-top: 0.05rem; }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
     .bm-body, .bm-card-header { padding: 1.25rem; }
@@ -426,54 +468,168 @@
 // @ts-nocheck
 
 const CATS = [
-  { id:'buffet', tag:'Buffet',     name:'Klassisches Buffet',   desc:'Warme & kalte Speisen für jeden Anlass',       price:32.99 },
-  { id:'grill',  tag:'Grill',      name:'Grillbuffet',           desc:'Frisch vom Grill – deftig & gesellig',         price:28.99 },
-  { id:'snacks', tag:'Fingerfood', name:'Kleine Speisen',         desc:'Wraps, Canapés & Fingerfood – ab 10 Personen', price:16.99 },
-  { id:'truck',  tag:'Food Truck', name:'Food Truck Catering',    desc:'Saftige Burger direkt zu Ihrem Event',         price:29.99 },
+  { id:'buffet', tag:'Buffet',     name:'Klassisches Buffet',  desc:'Warme & kalte Speisen für jeden Anlass' },
+  { id:'grill',  tag:'Grill',      name:'Grillbuffet',          desc:'Frisch vom Grill – deftig & gesellig' },
+  { id:'snacks', tag:'Fingerfood', name:'Kleine Speisen',        desc:'Wraps, Canapés & Fingerfood – ab 10 Personen' },
+  { id:'truck',  tag:'Food Truck', name:'Food Truck Catering',   desc:'Saftige Burger direkt zu Ihrem Event' },
+];
+
+const DRINKS = [
+  { id:'none', name:'Keine Getränkepauschale',    desc:'Getränke selbst organisieren' },
+  { id:'soft', name:'Getränke-Pauschale',          desc:'Inkl. Bier & Weinauswahl' },
+  { id:'full', name:'Getränke-Pauschale Premium',  desc:'Großes Getränke-Sortiment' },
+];
+
+// Sub-Optionen: { label, subs: string[] | null }
+// subs:null = keine Sub-Auswahl nötig
+const SHARED_SUPPEN = [
+  { label:'Altmärker Hochzeitssuppe', subs:null },
+  { label:'Tomatencremesuppe', subs:null },
+  { label:'Pilzcremesuppe', subs:null },
+];
+const SHARED_HAUPTGAENGE = [
+  { label:'Deftiges vom Blech (Schnitzel, Schweinefilet & Hähnchenbrust)', subs:['mit Pilzrahmsauce','mit Zwiebel-Bratensauce','mit klassischer Bratensauce','mit Pfeffersauce','dazu mediterranes Grillgemüse'] },
+  { label:'Hähnchenbrust', subs:['A – klassisch gewürzt','B – gefüllt mit Feta und Spinat','C – Caprese Style'] },
+  { label:'Hähnchenbrust – Zubereitung', subs:['auf Bandnudeln in feiner Kräuter-Rahmsauce mit Estragon','mit mediterranem Grillgemüse','mit Pfeffersauce'] },
+  { label:'Schweinefilet', subs:['mit mediterranem Grillgemüse','mit Pfeffersauce','in Pfefferrahm'] },
+  { label:'Lachsfilet', subs:['auf Sesam-Spargel-Pfanne','auf jungem Blattspinat','in Zitronen-Dill-Sauce','Pasta al Salmone / Seelachsfilet'] },
+];
+const SHARED_VEGETARISCH = [
+  { label:'Gnocchipfanne', subs:null },
+  { label:'Falafel', subs:['auf geröstetem Paprikagemüse','Tomatenreis','Rote Beete-Feta-Stampf'] },
+  { label:'Gefüllte Zucchini', subs:['auf geröstetem Paprikagemüse','Tomatenreis','Rote Beete-Feta-Stampf'] },
+];
+const SHARED_BEILAGEN = [
+  { label:'Frische Salatauswahl',  subs:null, default:true, badge:'Inklusive' },
+  { label:'Baguette und Brot',     subs:null, default:true, badge:'Inklusive' },
+  { label:'Butterplatte',          subs:null, default:true, badge:'Inklusive' },
+  { label:'Dipvariation',          subs:null, default:true, badge:'Inklusive' },
+  { label:'Kartoffelgratin',       subs:null },
+  { label:'Salzkartoffeln',        subs:null },
+  { label:'Petersilienkartoffeln', subs:null },
+  { label:'Reis',                  subs:null },
+  { label:'Spätzle',               subs:null },
+  { label:'Nudeln',                subs:null },
+  { label:'Risotto',               subs:null },
+  { label:'Pilzrisotto',           subs:null },
+  { label:'Cheddarrisotto',        subs:null },
+  { label:'Kartoffelbrei',         subs:null },
+];
+const SHARED_DESSERT = [
+  { label:'Obstsalat', subs:null },
+  { label:'Schokomousse mit Kirschgrütze', subs:null },
+  { label:'Crème Brûlée', subs:null },
+  { label:'Schichtgläser', subs:null },
+  { label:'Cremespeise mit Fruchtspiegel', subs:null },
+  { label:'Kuchenvariation', subs:null },
 ];
 
 const MENU = {
-  buffet: { included:5, sections:[
-    { title:'Warme Gerichte', type:'warm', items:['Pasta al Salmone','Hähnchen Caprese','Schweinefilet in Pfefferrahm','Saisonale Gemüseauswahl','Kartoffelgratin','Salzkartoffeln','Vegetarische Alternative'] },
-    { title:'Beilagen',       type:'cold', items:['Frische Salat- & Antipastiauswahl','Baguette und Brot mit Dips und Butter'] },
-  ]},
-  grill: { included:4, sections:[
-    { title:'Vom Grill',         type:'warm', items:['Bratwurst','Schweinesteaks','Feta mit Tomate (vegetarisch)','Gemüsepfanne','Maiskolben'] },
-    { title:'Buffet & Beilagen', type:'cold', items:['Fischvariation','Kartoffel- oder Reisbeilage','Frische Salat- & Antipastiauswahl','Baguette und Brot mit Dips und Butter'] },
-  ]},
-  snacks: { included:4, sections:[
-    { title:'Variationen', type:'warm', items:['Lachs Wraps','Schinken & Käse Wraps','Tomate-Mozzarella Spieße','Belegte Brötchen','Baguette und Brot mit Dips und Butter'] },
-  ]},
-  truck: { included:3, sections:[
-    { title:'Burger-Auswahl', type:'warm', items:['Cheeseburger','Hamburger','Chili-Cheese Burger','Onion Overload','Veggie Burger'] },
-    { title:'Beilagen',       type:'cold', items:['Pommes Frites','Loaded Fries (+3,50 € p.P.)'] },
-  ]},
+  buffet: {
+    sections:[
+      { title:'Suppen', items: SHARED_SUPPEN },
+      { title:'Hauptgänge', items: SHARED_HAUPTGAENGE },
+      { title:'Vegetarisch', items: SHARED_VEGETARISCH },
+      { title:'Beilagen', items: SHARED_BEILAGEN },
+      { title:'Dessert', items: SHARED_DESSERT },
+    ],
+  },
+  grill: {
+    sections:[
+      { title:'Vom Grill', items:[
+        { label:'Bratwurst', subs:null },
+        { label:'Boulette', subs:null },
+        { label:'Grillgemüse', subs:null },
+        { label:'Tomaten-Feta-Pfännchen', subs:null },
+        { label:'Fackeln', subs:null },
+        { label:'Steak', subs:['Schwein','Hühnchen'] },
+      ]},
+      { title:'Suppen', items: SHARED_SUPPEN },
+      { title:'Hauptgänge', items: SHARED_HAUPTGAENGE },
+      { title:'Vegetarisch', items: SHARED_VEGETARISCH },
+      { title:'Beilagen', items: SHARED_BEILAGEN },
+      { title:'Dessert', items: SHARED_DESSERT },
+    ],
+  },
+  snacks: {
+    sections:[
+      { title:'Auswahl', items:[
+        { label:'Obst', subs:null },
+        { label:'Fingerfood', subs:null },
+        { label:'Belegte Brötchen', subs:null },
+        { label:'Obstsalat', subs:null },
+        { label:'Suppe', subs:null },
+        { label:'Crostinis', subs:null },
+        { label:'Bruschetta', subs:null },
+      ]},
+    ],
+  },
+  truck: {
+    infoBox: 'Die folgenden 5 Burger sowie Pommes Frites und Loaded Fries sind im Grundsortiment enthalten. Weitere Burger und Beilagen können gegen Aufpreis (nach Absprache) hinzugefügt werden.',
+    sections:[
+      { title:'Burger', items:[
+        { label:'Cheeseburger',        subs:null, default:true, badge:'Grundsortiment' },
+        { label:'Hamburger',           subs:null, default:true, badge:'Grundsortiment' },
+        { label:'Chili-Cheese Burger', subs:null, default:true, badge:'Grundsortiment' },
+        { label:'Onion Overload',      subs:null, default:true, badge:'Grundsortiment' },
+        { label:'Veggie Burger',       subs:null, default:true, badge:'Grundsortiment' },
+        { label:'Pulled Pork Burger',                      subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'Teriyaki Burger',                         subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'BBQ Burger',                              subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'Apfel-Camembert Burger',                  subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'Pulled Teriyaki Lachs Burger',            subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'Leberkäse Burger',                        subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'Rösti Burger',                            subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'Burger Mexiko-Style',                     subs:null, badge:'Aufpreis auf Anfrage' },
+        { label:'Ziegenkäse-Rucola-Feigenmarmeladen Burger', subs:null, badge:'Aufpreis auf Anfrage' },
+      ]},
+      { title:'Beilagen', items:[
+        { label:'Pommes Frites',      subs:null, default:true, badge:'Grundsortiment' },
+        { label:'Loaded Fries',       subs:null, default:true, badge:'Grundsortiment' },
+        { label:'Onion Rings',        subs:null, badge:'Aufpreis auf Anfrage' }, // TODO: Kunde ergänzt
+        { label:'Coleslaw',           subs:null, badge:'Aufpreis auf Anfrage' }, // TODO: Kunde ergänzt
+        { label:'Sweet Potato Fries', subs:null, badge:'Aufpreis auf Anfrage' }, // TODO: Kunde ergänzt
+        { label:'Mac & Cheese Bites', subs:null, badge:'Aufpreis auf Anfrage' }, // TODO: Kunde ergänzt
+      ]},
+    ],
+  },
 };
 
-const EXTRA = 2.50;
-
-const DRINKS = [
-  { id:'none', name:'Keine Getränkepauschale',   desc:'Getränke selbst organisieren', price:0 },
-  { id:'soft', name:'Getränke-Pauschale',         desc:'Inkl. Bier & Weinauswahl',    price:19.99 },
-  { id:'full', name:'Getränke-Pauschale Premium', desc:'Großes Getränke-Sortiment',   price:27.99 },
-];
-
 const TOTAL_STEPS = 6;
-const TITLES = ['Willkommen','Kategorie','Eckdaten','Menü zusammenstellen','Extras','Individuelle Wünsche','Zusammenfassung'];
+const TITLES = ['Willkommen','Kategorie','Eckdaten','Menü zusammenstellen','Getränkepauschale','Individuelle Wünsche','Zusammenfassung'];
 
-const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', warm:[], cold:[], drink:'none', wishes:'' };
+const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', menuSel:{}, drink:'none', wishes:'' };
 
-const fmt = n => n.toFixed(2).replace('.',',') + ' €';
-
-function ppp() {
-  if (!S.category) return 0;
-  const cat = CATS.find(c=>c.id===S.category);
-  const menu = MENU[S.category];
-  const extra = Math.max(0, S.warm.length + S.cold.length - menu.included);
-  const drink = DRINKS.find(d=>d.id===S.drink);
-  return parseFloat((cat.price + extra*EXTRA + (drink?.price||0)).toFixed(2));
+function initDefaults(catId) {
+  S.menuSel = {};
+  const menu = MENU[catId];
+  if (!menu) return;
+  menu.sections.forEach(sec => {
+    const defs = sec.items.filter(it => it.default);
+    if (defs.length) S.menuSel[sec.title] = defs.map(it => ({ item:it.label, subOptions:[] }));
+  });
 }
-const totalPrice = () => parseFloat((ppp()*S.persons).toFixed(2));
+
+function getRecommendation(persons) {
+  if (!persons || persons <= 0) return null;
+  if (persons < 30) return { fleisch:'1 Fleischgericht',  fisch:'1 Fischgericht', beilagen:'1–2 Beilagen', gemuese:'1 Gemüsebeilage' };
+  if (persons < 50) return { fleisch:'2 Fleischgerichte', fisch:'1 Fischgericht', beilagen:'2–3 Beilagen', gemuese:'1 Gemüsebeilage' };
+  return                   { fleisch:'3 Fleischgerichte', fisch:'2 Fischgerichte', beilagen:'3 Beilagen',   gemuese:'1 Gemüsebeilage' };
+}
+
+function htmlRecommendation(persons) {
+  const r = getRecommendation(persons);
+  if (!r) return '';
+  return `<div class="bm-reco-box">
+    <span class="bm-reco-label">ℹ Empfehlung für ${persons} Personen</span>
+    <div class="bm-reco-rows">
+      <span><strong>${r.fleisch}</strong></span>
+      <span><strong>${r.fisch}</strong></span>
+      <span><strong>${r.beilagen}</strong></span>
+      <span><strong>${r.gemuese}</strong></span>
+    </div>
+  </div>`;
+}
 
 function refreshProgress() {
   const bar = document.getElementById('bmProgressBar');
@@ -485,19 +641,6 @@ function refreshProgress() {
   }).join('');
 }
 
-function refreshPrice() {
-  const bar = document.getElementById('bmPriceBar');
-  if (!bar) return;
-  if (S.step>=2 && S.category) {
-    bar.classList.add('visible');
-    document.getElementById('bmPPP').textContent = fmt(ppp());
-    document.getElementById('bmTotal').textContent = fmt(totalPrice());
-    document.getElementById('bmPersText').textContent = S.persons;
-  } else {
-    bar.classList.remove('visible');
-  }
-}
-
 function render() {
   document.getElementById('bmStepTitle').textContent = S.step===0 ? 'Willkommen' : TITLES[S.step];
   document.getElementById('bmStepLabel').textContent = S.step===0 ? 'Interaktive Banketmappe' : `Schritt ${S.step} von ${TOTAL_STEPS}`;
@@ -506,7 +649,6 @@ function render() {
   S.step===0 ? back.classList.remove('bm-visible') : back.classList.add('bm-visible');
   next.textContent = S.step===0 ? 'Jetzt konfigurieren →' : S.step===TOTAL_STEPS ? '✉ Anfrage absenden' : 'Weiter →';
   refreshProgress();
-  refreshPrice();
   const body = document.getElementById('bmBody');
   switch(S.step) {
     case 0: body.innerHTML = htmlWelcome(); break;
@@ -522,10 +664,10 @@ function render() {
 function htmlWelcome() {
   return `<div class="bm-welcome">
     <div class="bm-welcome-headline">Ihr Catering, Ihre Wahl.</div>
-    <p>Kategorien wählen, Gerichte kombinieren, Preis live berechnen — und direkt anfragen. In wenigen Schritten zu Ihrem individuellen Angebot.</p>
+    <p>Kategorien wählen, Gerichte zusammenstellen und direkt anfragen — in wenigen Schritten zu Ihrem individuellen Angebot.</p>
     <div class="bm-feature-row">
       <div class="bm-feature-item"><div class="bm-feature-bubble">4</div><span class="bm-feature-label">Kategorien</span></div>
-      <div class="bm-feature-item"><div class="bm-feature-bubble">€</div><span class="bm-feature-label">Live-Kalkulation</span></div>
+      <div class="bm-feature-item"><div class="bm-feature-bubble">6</div><span class="bm-feature-label">Schritte</span></div>
       <div class="bm-feature-item"><div class="bm-feature-bubble">✉</div><span class="bm-feature-label">Direkt anfragen</span></div>
     </div>
   </div>`;
@@ -538,7 +680,6 @@ function htmlCategory() {
       <span class="bm-cat-tag">${c.tag}</span>
       <div class="bm-cat-name">${c.name}</div>
       <div class="bm-cat-desc">${c.desc}</div>
-      <div class="bm-cat-price">ab ${c.price.toFixed(2).replace('.',',')} € / Person</div>
     </div>`).join('')}</div>`;
 }
 
@@ -546,7 +687,7 @@ function bindCat() {
   document.querySelectorAll('.bm-cat-card').forEach(el=>{
     el.addEventListener('click',()=>{
       const id=el.getAttribute('data-id');
-      if(S.category!==id){S.category=id;S.warm=[];S.cold=[];}
+      if(S.category!==id){ S.category=id; initDefaults(id); }
       document.querySelectorAll('.bm-cat-card').forEach(c=>c.classList.remove('bm-selected'));
       el.classList.add('bm-selected');
     });
@@ -568,66 +709,131 @@ function htmlDetails() {
       <div class="bm-field"><label>E-Mail *</label><input type="email" id="bfEmail" value="${S.email}" placeholder="ihre@email.de"></div>
     </div>
     <div class="bm-field"><label>Telefon (optional)</label><input type="tel" id="bfPhone" value="${S.phone}" placeholder="+49 ..."></div>
-  </div>`;
+  </div>
+  <div id="bmRecoWrap">${htmlRecommendation(S.persons)}</div>`;
 }
 
 function bindDetails() {
-  const on=(id,key,parse)=>document.getElementById(id)?.addEventListener('input',e=>{
-    S[key]=parse?parseInt(e.target.value)||1:e.target.value; refreshPrice();
+  document.getElementById('bfPersons')?.addEventListener('input', e => {
+    S.persons = parseInt(e.target.value) || 1;
+    const wrap = document.getElementById('bmRecoWrap');
+    if (wrap) wrap.innerHTML = htmlRecommendation(S.persons);
   });
-  on('bfPersons','persons',true); on('bfDate','date'); on('bfLocation','location');
+  const on=(id,key)=>document.getElementById(id)?.addEventListener('input',e=>{ S[key]=e.target.value; });
+  on('bfDate','date'); on('bfLocation','location');
   on('bfName','name'); on('bfEmail','email'); on('bfPhone','phone');
 }
 
-function htmlMenu() {
-  const menu=MENU[S.category]; if(!menu) return '';
-  const total=S.warm.length+S.cold.length;
-  const extra=Math.max(0,total-menu.included);
-  return `<div class="bm-menu-status">
-    <span>Im Paket enthalten: <strong>${menu.included} Gerichte</strong></span>
-    <span>Ausgewählt: <strong>${total}</strong>${extra>0?`<span class="bm-extra-badge">+${extra} extra (+${(extra*EXTRA).toFixed(2).replace('.',',')} €/Pers.)</span>`:''}</span>
-  </div>
-  ${menu.sections.map(sec=>`
-    <div class="bm-dish-group">
-      <div class="bm-dish-group-title">${sec.title}</div>
-      <div class="bm-dish-grid">${sec.items.map(item=>{
-        const active=(sec.type==='warm'?S.warm:S.cold).includes(item);
-        return `<div class="bm-dish${active?' bm-active':''}" data-item="${item}" data-type="${sec.type}">
-          <div class="bm-dish-dot"><div class="bm-dish-dot-inner"></div></div>${item}
-        </div>`;
-      }).join('')}</div>
-    </div>`).join('')}`;
+function getSecSel(secTitle) {
+  return S.menuSel[secTitle] || [];
 }
+
+function toggleItem(secTitle, itemLabel) {
+  if (!S.menuSel[secTitle]) S.menuSel[secTitle] = [];
+  const arr = S.menuSel[secTitle];
+  const idx = arr.findIndex(x=>x.item===itemLabel);
+  if (idx>=0) arr.splice(idx,1);
+  else arr.push({ item:itemLabel, subOptions:[] });
+}
+
+function toggleSub(secTitle, itemLabel, sub) {
+  if (!S.menuSel[secTitle]) return;
+  const entry = S.menuSel[secTitle].find(x=>x.item===itemLabel);
+  if (!entry) return;
+  const idx = entry.subOptions.indexOf(sub);
+  if (idx>=0) entry.subOptions.splice(idx,1);
+  else entry.subOptions.push(sub);
+}
+
+function badgeClass(badge) {
+  if (badge === 'Inklusive')      return 'bm-badge-incl';
+  if (badge === 'Grundsortiment') return 'bm-badge-base';
+  return 'bm-badge-extra';
+}
+
+function htmlMenu() {
+  const menu = MENU[S.category]; if (!menu) return '';
+  const totalSel = Object.values(S.menuSel).reduce((a,arr)=>a+arr.length,0);
+
+  const infoBoxHtml = menu.infoBox
+    ? `<div class="bm-info-box"><span class="bm-info-icon">ℹ</span><span>${menu.infoBox}</span></div>`
+    : '';
+
+  const sectionsHtml = menu.sections.map(sec=>{
+    const secSel   = getSecSel(sec.title);
+    const itemsHtml = sec.items.map(it=>{
+      const active    = secSel.some(x=>x.item===it.label);
+      const entry     = secSel.find(x=>x.item===it.label);
+      const badgeHtml = it.badge
+        ? `<span class="bm-item-badge ${badgeClass(it.badge)}">${it.badge}</span>`
+        : '';
+      let subHtml = '';
+      if (active && it.subs) {
+        subHtml = `<div class="bm-sub-chips" data-sec="${esc(sec.title)}" data-item="${esc(it.label)}">
+          ${it.subs.map(s=>{
+            const subActive = entry?.subOptions.includes(s);
+            return `<span class="bm-sub-chip${subActive?' bm-active':''}" data-sub="${esc(s)}">${s}</span>`;
+          }).join('')}
+        </div>`;
+      }
+      return `<div class="bm-dish-wrap">
+        <div class="bm-dish${active?' bm-active':''}" data-sec="${esc(sec.title)}" data-item="${esc(it.label)}">
+          <div class="bm-dish-dot"><div class="bm-dish-dot-inner"></div></div>
+          <span class="bm-dish-label">${it.label}</span>
+          ${badgeHtml}
+        </div>
+        ${subHtml}
+      </div>`;
+    }).join('');
+    return `<div class="bm-dish-group">
+      <div class="bm-dish-group-title">${sec.title}</div>
+      <div class="bm-dish-list">${itemsHtml}</div>
+    </div>`;
+  }).join('');
+
+  return `<p class="bm-step-desc">Wählen Sie Ihre gewünschten Speisen aus.</p>
+    ${infoBoxHtml}
+    <div class="bm-menu-status"><span>Ausgewählt: <strong>${totalSel} Gericht${totalSel!==1?'e':''}</strong></span></div>
+    ${sectionsHtml}`;
+}
+
+function esc(s) { return s.replace(/"/g,'&quot;'); }
 
 function bindMenu() {
   document.querySelectorAll('.bm-dish').forEach(el=>{
     el.addEventListener('click',()=>{
-      const item=el.getAttribute('data-item'), type=el.getAttribute('data-type');
-      const arr=type==='warm'?S.warm:S.cold;
-      arr.includes(item)?arr.splice(arr.indexOf(item),1):arr.push(item);
-      document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu(); refreshPrice();
+      const sec=el.getAttribute('data-sec'), item=el.getAttribute('data-item');
+      toggleItem(sec,item);
+      document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu();
+    });
+  });
+  document.querySelectorAll('.bm-sub-chip').forEach(el=>{
+    el.addEventListener('click', e=>{
+      e.stopPropagation();
+      const wrap=el.closest('.bm-sub-chips');
+      const sec=wrap.getAttribute('data-sec'), item=wrap.getAttribute('data-item');
+      const sub=el.getAttribute('data-sub');
+      toggleSub(sec,item,sub);
+      document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu();
     });
   });
 }
 
 function htmlDrinks() {
   return `<p class="bm-step-desc">Möchten Sie eine Getränkepauschale dazubuchen?</p>
-  <div class="bm-drink-grid">${DRINKS.map(d=>`
-    <div class="bm-drink${S.drink===d.id?' bm-active':''}" data-id="${d.id}">
-      <div class="bm-drink-head">
-        <div class="bm-drink-name">${d.name}</div>
-        ${d.price>0?`<div class="bm-drink-badge">+${d.price.toFixed(2).replace('.',',')} €</div>`:''}
-      </div>
-      <div class="bm-drink-desc">${d.desc}</div>
+  <div class="bm-drink-cards">${DRINKS.map(d=>`
+    <div class="bm-cat-card${S.drink===d.id?' bm-selected':''}" data-drink="${d.id}">
+      <div class="bm-cat-name">${d.name}</div>
+      <div class="bm-cat-desc">${d.desc}</div>
     </div>`).join('')}</div>`;
 }
 
 function bindDrinks() {
-  document.querySelectorAll('.bm-drink').forEach(el=>{
+  document.querySelectorAll('.bm-drink-cards .bm-cat-card').forEach(el=>{
     el.addEventListener('click',()=>{
-      S.drink=el.getAttribute('data-id');
-      document.querySelectorAll('.bm-drink').forEach(d=>d.classList.remove('bm-active'));
-      el.classList.add('bm-active'); refreshPrice();
+      S.drink = el.getAttribute('data-drink');
+      document.querySelectorAll('.bm-drink-cards .bm-cat-card').forEach(c=>c.classList.remove('bm-selected'));
+      el.classList.add('bm-selected');
     });
   });
 }
@@ -645,37 +851,33 @@ function bindWishes() {
 }
 
 function htmlSummary() {
-  const cat=CATS.find(c=>c.id===S.category);
-  const menu=MENU[S.category];
-  const drinkObj=DRINKS.find(d=>d.id===S.drink);
-  const extraDishes=Math.max(0,S.warm.length+S.cold.length-menu.included);
-  const p=ppp(), t=totalPrice();
-  const row=(k,v)=>`<div class="bm-summary-row"><span class="bm-row-key">${k}</span><span class="bm-row-val">${v}</span></div>`;
-  const allDishes=[...S.warm,...S.cold];
+  const cat  = CATS.find(c=>c.id===S.category);
+  const menu = MENU[S.category];
+  const row  = (k,v)=>`<div class="bm-summary-row"><span class="bm-row-key">${k}</span><span class="bm-row-val">${v}</span></div>`;
+
+  const menuHtml = Object.entries(S.menuSel).filter(([,arr])=>arr.length>0).map(([sec,arr])=>{
+    const secDef = menu?.sections.find(s=>s.title===sec);
+    const lines  = arr.map(e=>{
+      const itDef     = secDef?.items.find(i=>i.label===e.item);
+      const badgePart = itDef?.badge ? ` <span style="color:#488d94;font-size:0.72rem">(${itDef.badge})</span>` : '';
+      const subPart   = e.subOptions.length ? ` → ${e.subOptions.join(', ')}` : '';
+      return `<div class="bm-summary-row"><span class="bm-row-key">—</span><span class="bm-row-val">${e.item}${subPart}${badgePart}</span></div>`;
+    }).join('');
+    return `<div class="bm-summary-block"><div class="bm-summary-title">${sec}</div>${lines}</div>`;
+  }).join('');
+
   return `
     <div class="bm-summary-block"><div class="bm-summary-title">Veranstaltung</div>
       ${row('Catering-Art',cat.name)}${row('Datum',S.date||'–')}${row('Ort',S.location||'–')}${row('Personen',S.persons+' Personen')}
     </div>
-    <div class="bm-summary-block"><div class="bm-summary-title">Ausgewählte Speisen</div>
-      ${allDishes.length?allDishes.map(d=>row('—',d)).join(''):row('—','Keine ausgewählt')}
+    ${menuHtml || `<div class="bm-summary-block"><div class="bm-summary-title">Menü</div>${row('—','Keine Auswahl getroffen')}</div>`}
+    <div class="bm-summary-block"><div class="bm-summary-title">Getränke</div>
+      ${row('Getränkepauschale', DRINKS.find(d=>d.id===S.drink)?.name || '–')}
     </div>
-    <div class="bm-summary-block"><div class="bm-summary-title">Extras</div>${row('Getränke',drinkObj?.name||'–')}</div>
     <div class="bm-summary-block"><div class="bm-summary-title">Kontakt</div>
       ${row('Name',S.name||'–')}${row('E-Mail',S.email||'–')}${S.phone?row('Telefon',S.phone):''}
     </div>
-    ${S.wishes?`<div class="bm-summary-block"><div class="bm-summary-title">Individuelle Wünsche</div><div class="bm-summary-row"><span class="bm-row-val" style="text-align:left">${S.wishes}</span></div></div>`:''}
-    <div class="bm-price-box">
-      <div class="bm-summary-title">Kalkulation (Orientierungswerte)</div>
-      <div class="bm-price-line"><span>Basispreis (${cat.name})</span><b>${cat.price.toFixed(2).replace('.',',')} € / Pers.</b></div>
-      ${extraDishes>0?`<div class="bm-price-line"><span>Zusatzgerichte (${extraDishes}×)</span><b>+${(extraDishes*EXTRA).toFixed(2).replace('.',',')} € / Pers.</b></div>`:''}
-      ${drinkObj?.price>0?`<div class="bm-price-line"><span>${drinkObj.name}</span><b>+${drinkObj.price.toFixed(2).replace('.',',')} € / Pers.</b></div>`:''}
-      <hr class="bm-price-sep">
-      <div class="bm-price-grand">
-        <span class="bm-price-grand-label">Gesamtpreis (${S.persons} Pers.)</span>
-        <span class="bm-price-grand-value">${fmt(t)}</span>
-      </div>
-      <p class="bm-disclaimer">* Orientierungswerte — das finale Angebot erhalten Sie nach individueller Rücksprache mit Willi Vollack.</p>
-    </div>`;
+    ${S.wishes?`<div class="bm-summary-block"><div class="bm-summary-title">Individuelle Wünsche</div><div class="bm-summary-row"><span class="bm-row-val" style="text-align:left">${S.wishes}</span></div></div>`:''}`;
 }
 
 function validate() {
@@ -687,16 +889,29 @@ function validate() {
     if(!S.name){alert('Bitte Namen angeben.');return false;}
     if(!S.email||!S.email.includes('@')){alert('Bitte gültige E-Mail angeben.');return false;}
   }
-  if(S.step===3&&S.warm.length+S.cold.length<1){alert('Bitte mindestens ein Gericht auswählen.');return false;}
+  if(S.step===3){
+    const total=Object.values(S.menuSel).reduce((a,arr)=>a+arr.length,0);
+    if(total<1){alert('Bitte mindestens ein Gericht auswählen.');return false;}
+  }
   return true;
 }
 
 async function submit() {
-  const cat     = CATS.find(c => c.id === S.category);
-  const menu    = MENU[S.category];
-  const drinkObj= DRINKS.find(d => d.id === S.drink);
-  const extraDishes = Math.max(0, S.warm.length + S.cold.length - menu.included);
-  const p = ppp(), t = totalPrice();
+  const cat  = CATS.find(c => c.id === S.category);
+  const menu = MENU[S.category];
+
+  const menuText = Object.entries(S.menuSel)
+    .filter(([,arr])=>arr.length>0)
+    .map(([sec,arr])=>{
+      const secDef = menu?.sections.find(s=>s.title===sec);
+      const lines  = arr.map(e=>{
+        const itDef     = secDef?.items.find(i=>i.label===e.item);
+        const badgePart = itDef?.badge ? ` (${itDef.badge})` : '';
+        const subPart   = e.subOptions.length ? ` → ${e.subOptions.join(', ')}` : '';
+        return `  — ${e.item}${subPart}${badgePart}`;
+      }).join('\n');
+      return `${sec}:\n${lines}`;
+    }).join('\n') || '–';
 
   const payload = new URLSearchParams({
     'form-name':       'banketmappe',
@@ -704,11 +919,9 @@ async function submit() {
     'datum':           S.date,
     'personen':        String(S.persons),
     'ort':             S.location,
-    'gerichte':        [...S.warm, ...S.cold].join(', ') || '–',
-    'getraenke':       drinkObj?.name || '–',
+    'menu_auswahl':    menuText,
+    'getraenke':       DRINKS.find(d=>d.id===S.drink)?.name || '–',
     'wuensche':        S.wishes || 'Keine',
-    'preis_pro_person': fmt(p),
-    'gesamtpreis':     fmt(t),
     'kontakt_name':    S.name,
     'kontakt_email':   S.email,
     'kontakt_telefon': S.phone || '–',
@@ -744,7 +957,7 @@ document.getElementById('bmBack')?.addEventListener('click',()=>{
 });
 
 document.getElementById('bmReset')?.addEventListener('click',()=>{
-  Object.assign(S,{step:0,category:'',persons:30,date:'',location:'',name:'',email:'',phone:'',warm:[],cold:[],drink:'none',wishes:''});
+  Object.assign(S,{step:0,category:'',persons:30,date:'',location:'',name:'',email:'',phone:'',menuSel:{},drink:'none',wishes:''});
   document.getElementById('bmCard').style.display='';
   document.getElementById('bmSuccess').classList.remove('bm-visible');
   render();
