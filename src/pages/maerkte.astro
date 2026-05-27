@@ -2,14 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// Datumsgrenzen berechnen
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 const twoWeeksAgo = new Date(today);
 twoWeeksAgo.setDate(today.getDate() - 14);
 
-// Alle Märkte laden, filtern & sortieren
 type MarktItem = {
   name: string; datum: string; uhrzeit: string;
   ort: string; adresse: string; dateObj: Date;
@@ -25,15 +23,13 @@ const processed: MarktItem[] = alleMarkte
 const kommendeMarkte = processed.filter(m => m.dateObj >= today);
 const vergangeneMarkte = processed.filter(m => m.dateObj < today);
 
-
-function formatDate(d: Date): string {
-  return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+function formatDay(d: Date): string  { return d.getDate().toString().padStart(2, '0'); }
+function formatMonYear(d: Date): string {
+  return d.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
 }
-
 function formatWeekday(d: Date): string {
   return d.toLocaleDateString('de-DE', { weekday: 'long' });
 }
-
 function mapsUrl(adresse: string): string {
   return `https://maps.google.com/?q=${encodeURIComponent(adresse)}`;
 }
@@ -42,149 +38,201 @@ function mapsUrl(adresse: string): string {
 <Layout title="Märkte – Velaro Catering & Foodtruckservice">
 
   <!-- ═══════════ PAGE HERO ═══════════ -->
-  <section class="page-hero">
-    <div class="container">
-      <p class="page-label">Unsere Termine</p>
-      <h1>Märkte &amp;<br /><span class="text-accent">Veranstaltungen</span></h1>
-      <p class="page-desc">
-        Findet uns auf regionalen Märkten und Veranstaltungen in der Region. 
-        Frisch zubereitet, direkt zu euch.
-      </p>
+  <section class="ph">
+    <div class="container ph-grid">
+      <div class="reveal">
+        <span class="eyebrow">Unsere Termine</span>
+        <h1>Märkte &amp;<br /><span class="it">Veranstaltungen</span></h1>
+        <p class="ph-lead">
+          Findet uns auf regionalen Märkten und Veranstaltungen in der
+          Region — frisch zubereitet, direkt zu euch. Stadtfeste,
+          Bauernmärkte, Open-Air-Events.
+        </p>
+        <a href="#termine" class="btn btn-primary">Termine ansehen <span class="arrow">↓</span></a>
+      </div>
+      <div class="ph-image reveal parallax">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1400&auto=format&fit=crop" alt="Food Truck" />
+        <span class="badge"><span class="dot"></span> Aktuell unterwegs</span>
+        <div class="ph-stats">
+          <div><div class="k">{kommendeMarkte.length || alleMarkte.length}</div><div class="l">Termine</div></div>
+          <div><div class="k">2</div><div class="l">Städte</div></div>
+          <div><div class="k">10h</div><div class="l">Service / Tag</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ═══════════ OFFEN FÜR ALLE ═══════════ -->
- <div class="offen-card">
-  <div class="offen-text">
-    <h2>Offen für alles und jeden</h2>
-    <p>
-      Unsere Foodtrucks und Marktstände sind mehr als nur Verpflegung — sie sind Begegnungsorte.
-      Ob Familien, Freunde oder Geschäftspartner: Bei uns ist jeder willkommen.
-      Wir bringen frische, hochwertige Speisen direkt zu Ihnen auf den Markt.
-    </p>
-    <p>
-      Von herzhaften Gerichten bis zu vegetarischen Köstlichkeiten — unsere Auswahl ist vielfältig
-      und wird täglich frisch zubereitet. Genießen Sie die besondere Atmosphäre und lassen Sie sich 
-      verwöhnen.
-    </p>
-  </div>
-  <div class="offen-image">
-    <img 
-      src="https://images.unsplash.com/photo-1636224601323-550e96f10d66?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-        alt="Food Truck auf dem Markt" 
-      />
-  </div>
-</div>
-
-  <!-- ═══════════ KOMMENDE MÄRKTE ═══════════ -->
-  <section class="maerkte-section section container">
-
-    <div class="section-header">
-      <h2>Kommende Märkte</h2>
-      <p>Wo ihr uns als Nächstes findet</p>
-    </div>
-
-    {kommendeMarkte.length > 0 ? (
-      <div class="maerkte-list">
-        {kommendeMarkte.map(markt => (
-          <div class="markt-card">
-
-            <!-- Datum-Badge links -->
-            <div class="mc-date">
-              <span class="mc-weekday">{formatWeekday(markt.dateObj)}</span>
-              <span class="mc-datestr">{formatDate(markt.dateObj)}</span>
-            </div>
-
-            <div class="mc-divider"></div>
-
-            <!-- Infos Mitte -->
-            <div class="mc-body">
-              <h3>{markt.name}</h3>
-              <div class="mc-meta">
-                <span class="mc-chip">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  {markt.uhrzeit}
-                </span>
-                <span class="mc-chip">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                  {markt.ort}
-                </span>
-              </div>
-              <p class="mc-adresse">{markt.adresse}</p>
-            </div>
-
-            <!-- Maps Button rechts -->
-            <a
-              href={mapsUrl(markt.adresse)}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-outline mc-maps-btn"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Auf Karte
-            </a>
-
-          </div>
-        ))}
+  <section class="offen-section">
+    <div class="container offen">
+      <div class="offen-text reveal">
+        <span class="eyebrow">Mehr als nur Verpflegung</span>
+        <h2>Offen für alles und <span class="it">jeden</span>.</h2>
+        <p>
+          Unsere Foodtrucks und Marktstände sind mehr als nur Verpflegung —
+          sie sind Begegnungsorte. Ob Familien, Freunde oder
+          Geschäftspartner: Bei uns ist jeder willkommen.
+        </p>
+        <p>
+          Von herzhaften Gerichten bis zu vegetarischen Köstlichkeiten —
+          unsere Auswahl ist vielfältig und wird täglich frisch zubereitet.
+          Genießen Sie die besondere Atmosphäre und lassen Sie sich verwöhnen.
+        </p>
+        <blockquote class="offen-quote">
+          "Wir kommen wegen des Essens — und bleiben wegen der Stimmung."
+        </blockquote>
       </div>
-    ) : (
-      <!-- Leerer Zustand wenn keine Märkte eingetragen -->
-      <div class="empty-state">
-        <div class="empty-icon">📅</div>
-        <h3>Neue Termine folgen in Kürze</h3>
-        <p>Folgt uns auf Instagram — dort kündigen wir neue Termine als Erstes an.</p>
-        <a href="https://instagram.com/velaro_catering" target="_blank" rel="noopener" class="btn-primary">
-          Instagram folgen →
+      <div class="offen-media reveal parallax">
+        <img src="https://images.unsplash.com/photo-1636224601323-550e96f10d66?q=80&w=1200&auto=format&fit=crop" alt="Food Truck im Einsatz" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TIMELINE ═══════════ -->
+  <section class="timeline-section" id="termine">
+    <div class="container">
+      <div class="timeline-head reveal">
+        <div>
+          <span class="eyebrow">Kommende Märkte</span>
+          <h2>Wo ihr uns als <span class="it">Nächstes</span> findet.</h2>
+        </div>
+        <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-outline">
+          Updates auf Instagram <span class="arrow">→</span>
         </a>
       </div>
-    )}
 
-    <!-- Vergangene Märkte (max. 2 Wochen zurück, ausgegraut) -->
-    {vergangeneMarkte.length > 0 && (
-      <div class="vergangene">
-        <p class="vergangene-label">Zuletzt dabei</p>
-        <div class="maerkte-list">
-          {vergangeneMarkte.map(markt => (
-            <div class="markt-card markt-card--past">
-              <div class="mc-date">
-                <span class="mc-weekday">{formatWeekday(markt.dateObj)}</span>
-                <span class="mc-datestr">{formatDate(markt.dateObj)}</span>
+      <div class="timeline reveal-stagger">
+        {kommendeMarkte.length > 0 ? (
+          kommendeMarkte.map(markt => (
+            <div class="tl-row">
+              <div class="tl-date">
+                <span class="tl-weekday">{formatWeekday(markt.dateObj)}</span>
+                <span class="tl-day">{formatDay(markt.dateObj)}</span>
+                <span class="tl-monyear">{formatMonYear(markt.dateObj)}</span>
               </div>
-              <div class="mc-divider"></div>
-              <div class="mc-body">
-                <h3>{markt.name}</h3>
-                <div class="mc-meta">
-                  <span class="mc-chip">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    {markt.uhrzeit}
-                  </span>
-                  <span class="mc-chip">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                    {markt.ort}
-                  </span>
+              <div class="tl-card">
+                <div>
+                  <h3>{markt.name}</h3>
+                  <div class="tl-meta">
+                    <span>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      {markt.uhrzeit}
+                    </span>
+                    <span>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                      {markt.ort}
+                    </span>
+                  </div>
+                  <p class="tl-address">{markt.adresse}</p>
+                </div>
+                <a href={mapsUrl(markt.adresse)} target="_blank" rel="noopener noreferrer" class="tl-cta">
+                  Auf Karte
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div class="empty-state">
+            <div class="empty-icon">📅</div>
+            <h3>Neue Termine folgen in Kürze</h3>
+            <p>Folgt uns auf Instagram — dort kündigen wir neue Termine als Erstes an.</p>
+            <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-primary">
+              Instagram folgen <span class="arrow">→</span>
+            </a>
+          </div>
+        )}
+
+        {vergangeneMarkte.length > 0 && (
+          <div class="vergangene">
+            <p class="vergangene-label">Zuletzt dabei</p>
+            {vergangeneMarkte.map(markt => (
+              <div class="tl-row tl-row--past">
+                <div class="tl-date">
+                  <span class="tl-weekday">{formatWeekday(markt.dateObj)}</span>
+                  <span class="tl-day">{formatDay(markt.dateObj)}</span>
+                  <span class="tl-monyear">{formatMonYear(markt.dateObj)}</span>
+                </div>
+                <div class="tl-card">
+                  <div>
+                    <h3>{markt.name}</h3>
+                    <div class="tl-meta">
+                      <span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        {markt.uhrzeit}
+                      </span>
+                      <span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        {markt.ort}
+                      </span>
+                    </div>
+                  </div>
+                  <span class="past-badge">Vergangen</span>
                 </div>
               </div>
-              <span class="past-badge">Vergangen</span>
-            </div>
-          ))}
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ MAP ═══════════ -->
+  <section class="map-section">
+    <div class="container">
+      <div class="map-head reveal">
+        <div>
+          <span class="eyebrow">Einzugsgebiet</span>
+          <h2>Unsere <span class="it">Region</span>.</h2>
+        </div>
+        <p>
+          Wir sind regelmäßig in Haldensleben und der weiteren Region
+          unterwegs. Anfragen aus angrenzenden Städten sind jederzeit möglich.
+        </p>
+      </div>
+
+      <div class="map-card reveal">
+        <div class="map-overlay"></div>
+        <svg class="map-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M 50 350 Q 200 200 380 280 T 700 200 Q 850 180 950 250" />
+          <path d="M 100 100 Q 300 120 450 220 T 800 350" />
+          <path d="M 0 250 Q 250 300 500 250 T 1000 300" stroke-opacity="0.5" />
+          <path d="M 300 0 Q 350 200 380 400" stroke-opacity="0.4" />
+          <path d="M 700 0 Q 680 250 720 500" stroke-opacity="0.4" />
+        </svg>
+        <div class="map-pin" style="left: 38%; top: 40%;">
+          <div class="map-pin-marker"></div>
+          <div class="map-pin-tooltip">Haldensleben · Manufaktur</div>
+        </div>
+        <div class="map-pin" style="left: 58%; top: 55%;">
+          <div class="map-pin-marker"></div>
+          <div class="map-pin-tooltip">Heinsberg · Termine</div>
+        </div>
+        <div class="map-pin" style="left: 72%; top: 38%;">
+          <div class="map-pin-marker"></div>
+          <div class="map-pin-tooltip">Erkelenz · Bauernmarkt</div>
+        </div>
+        <div class="map-legend">
+          <h4>Aktuelle Standorte</h4>
+          <p>Wir kommen zu Ihnen — Anfragen aus der ganzen Region willkommen.</p>
         </div>
       </div>
-    )}
-
+    </div>
   </section>
 
   <!-- ═══════════ CTA ═══════════ -->
-  <section class="cta-section section container">
-    <div class="cta-card">
-      <div class="cta-text">
-        <h2>Immer auf dem Laufenden</h2>
-        <p>Neue Termine, frische Gerichte und Aktionen — zuerst auf Instagram.</p>
-      </div>
-      <div class="cta-buttons">
-        <a href="https://instagram.com/velaro_catering" target="_blank" rel="noopener" class="btn-primary">
-          Instagram folgen
-                </a>
-        <a href="/kontakt" class="btn-outline">Kontakt aufnehmen</a>
+  <section class="section">
+    <div class="container">
+      <div class="cta-card reveal">
+        <div>
+          <span class="eyebrow">Immer auf dem Laufenden</span>
+          <h2 style="margin-top: 1rem;">Neue Termine, <span class="it">frische</span> Gerichte.</h2>
+          <p>Aktionen und Standortwechsel — zuerst auf Instagram.</p>
+        </div>
+        <div class="btns">
+          <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-primary">Instagram folgen <span class="arrow">→</span></a>
+          <a href="/kontakt" class="btn btn-outline">Kontakt aufnehmen</a>
+        </div>
       </div>
     </div>
   </section>
@@ -193,367 +241,370 @@ function mapsUrl(adresse: string): string {
 
 <style>
   /* ── Page Hero ── */
-  .page-hero {
-    padding-block: 5rem 3rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .page-label {
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .page-hero h1 {
-    margin-bottom: 1.25rem;
-  }
-
-  .page-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 520px;
-  }
-
-  /* ── Offen für alle ── */
-  .offen-card {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 2.5rem;
-  }
-
-  .offen-icon {
-    font-size: 2.5rem;
-    flex-shrink: 0;
-    margin-top: 0.25rem;
-  }
-
-  .offen-text h2 {
-    margin-bottom: 1rem;
-  }
-
-  .offen-text p {
-    font-size: 0.95rem;
-    line-height: 1.75;
-    margin-bottom: 0.75rem;
-  }
-
-  .offen-text p:last-child {
-    margin-bottom: 0;
-  }
-
-  /* ── Sektion Header ── */
-  .section-header {
-    margin-bottom: 2rem;
-  }
-
-  .section-header h2 {
-    margin-bottom: 0.3rem;
-  }
-
-  .section-header p {
-    font-size: 0.9rem;
-  }
-
-  /* ── Markt-Liste ── */
-  .maerkte-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* ── Markt-Karte ── */
-  .markt-card {
-    display: flex;
+  .ph { padding-top: clamp(9rem, 16vw, 13rem); padding-bottom: clamp(3rem, 6vw, 5rem); }
+  .ph-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
     align-items: center;
-    gap: 1.75rem;
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 1.5rem 2rem;
-    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
-
-  .markt-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(72, 141, 148, 0.12);
+  .ph-grid h1 { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 0.98; margin: 1.5rem 0; }
+  .ph-lead { font-size: 1.05rem; line-height: 1.75; max-width: 50ch; margin-bottom: 2rem; }
+  .ph-image {
+    position: relative;
+    height: 540px;
+    border-radius: var(--r-lg);
+    overflow: hidden;
   }
-
-  /* Datum-Badge */
-  .mc-date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    min-width: 115px;
-    text-align: center;
-    padding: 0.8rem 1rem;
-    background-color: rgba(72, 141, 148, 0.1);
-    border: 1px solid rgba(72, 141, 148, 0.2);
-    border-radius: 0.6rem;
-    flex-shrink: 0;
-  }
-
-  .mc-weekday {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-  }
-
-  .mc-datestr {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--color-text);
-    line-height: 1.3;
-  }
-
-  /* Trennlinie */
-  .mc-divider {
-    width: 1px;
-    height: 50px;
-    background-color: var(--color-border);
-    flex-shrink: 0;
-  }
-
-  /* Body */
-  .mc-body {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .mc-body h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-  }
-
-  .mc-meta {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.4rem;
-  }
-
-  .mc-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 0.4rem;
-    padding: 0.25rem 0.6rem;
-  }
-
-  .mc-adresse {
+  .ph-image img { width: 100%; height: 100%; object-fit: cover; }
+  .ph-image .badge {
+    position: absolute;
+    top: 1.5rem; left: 1.5rem;
+    padding: 0.7rem 1.1rem;
+    background: rgba(8,17,29,0.78);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
     font-size: 0.78rem;
-    color: rgba(166, 166, 166, 0.55);
-    margin-top: 0.2rem;
-  }
-
-  /* Maps-Button */
-  .mc-maps-btn {
-    flex-shrink: 0;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.82rem;
-    padding: 0.6rem 1.1rem;
+    gap: 0.6rem;
+  }
+  .ph-image .badge .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .ph-stats {
+    position: absolute;
+    bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 1.25rem;
+    background: rgba(8,17,29,0.82);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--r);
+  }
+  .ph-stats > div { padding: 0 1rem; border-right: 1px solid var(--border-soft); }
+  .ph-stats > div:last-child { border-right: none; }
+  .ph-stats .k { font-family: var(--serif); font-size: 1.7rem; color: var(--accent); line-height: 1; }
+  .ph-stats .l { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mute); margin-top: 0.4rem; }
+
+  /* ── Offen section ── */
+  .offen-section { padding-block: clamp(4rem, 8vw, 7rem); }
+  .offen { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .offen-text h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem; margin-bottom: 1.5rem; }
+  .offen-text p  { font-size: 1rem; line-height: 1.8; margin-bottom: 1.25rem; max-width: 50ch; }
+  .offen-quote {
+    margin-top: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--accent);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .offen-media { position: relative; height: 540px; border-radius: var(--r-lg); overflow: hidden; }
+  .offen-media img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ── Timeline ── */
+  .timeline-section {
+    background: var(--bg-deep);
+    padding-block: clamp(4rem, 8vw, 7rem);
+    border-block: 1px solid var(--border-soft);
+  }
+  .timeline-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+  .timeline-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem; }
+
+  .timeline {
+    position: relative;
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-left: clamp(0px, 6vw, 80px);
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: clamp(28px, 5vw, 60px);
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--border), var(--border), transparent);
+  }
+
+  .tl-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 3rem;
+    padding: 2rem 0;
+    align-items: center;
+  }
+  .tl-row::before {
+    content: '';
+    position: absolute;
+    left: -52px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--bg-deep);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--bg-deep), 0 0 24px var(--accent-glow);
+    transition: transform var(--t);
+  }
+  .tl-row:hover::before { transform: translateY(-50%) scale(1.2); }
+  .tl-row--past::before { border-color: var(--text-mute); box-shadow: 0 0 0 4px var(--bg-deep); }
+
+  .tl-date { text-align: right; display: flex; flex-direction: column; gap: 0.2rem; }
+  .tl-day     { font-family: var(--serif); font-size: 3.5rem; line-height: 0.9; color: var(--accent); }
+  .tl-monyear { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); }
+  .tl-weekday { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-mute); }
+
+  .tl-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
+    padding: 1.75rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    transition: all var(--t-slow);
+  }
+  .tl-row:hover .tl-card {
+    border-color: rgba(90,195,207,0.35);
+    transform: translateX(6px);
+    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(90,195,207,0.15);
+  }
+  .tl-card h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1; margin-bottom: 0.75rem; }
+  .tl-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text-2);
+  }
+  .tl-meta span { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .tl-meta svg  { color: var(--accent); }
+  .tl-address   { font-size: 0.78rem; color: var(--text-mute); margin-top: 0.5rem; }
+
+  .tl-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+    transition: all var(--t);
     white-space: nowrap;
   }
-
-  /* ── Vergangene Märkte ── */
-  .vergangene {
-    margin-top: 3rem;
+  .tl-cta:hover {
+    background: var(--accent);
+    color: var(--bg-deep);
+    border-color: var(--accent);
+    transform: translateY(-2px);
   }
+  .tl-cta svg { transition: transform var(--t); }
+  .tl-cta:hover svg { transform: translateX(2px); }
 
+  .tl-row--past .tl-card { opacity: 0.55; }
+  .tl-row--past .tl-day  { color: var(--text-mute); }
+
+  .vergangene { margin-top: 3rem; }
   .vergangene-label {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-text-muted);
+    color: var(--text-mute);
     margin-bottom: 1rem;
     opacity: 0.7;
   }
-
-  .markt-card--past {
-    opacity: 0.45;
-  }
-
-  .markt-card--past:hover {
-    transform: none;
-    border-color: var(--color-border);
-    box-shadow: none;
-  }
-
   .past-badge {
     flex-shrink: 0;
     font-size: 0.72rem;
     font-weight: 600;
-    background-color: rgba(166, 166, 166, 0.08);
-    color: var(--color-text-muted);
-    border: 1px solid var(--color-border);
-    border-radius: 0.4rem;
-    padding: 0.3rem 0.65rem;
+    background-color: rgba(166,166,166,0.08);
+    color: var(--text-mute);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.9rem;
     white-space: nowrap;
   }
 
-  /* ── Empty State ── */
+  /* ── Empty state ── */
   .empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 4rem 2rem;
-    background-color: var(--color-bg-card);
-    border: 1px dashed var(--color-border);
-    border-radius: var(--radius-card);
+    background: var(--bg-card);
+    border: 1px dashed var(--border);
+    border-radius: var(--r-lg);
     gap: 1rem;
+    max-width: 480px;
+    margin-inline: auto;
   }
+  .empty-icon { font-size: 2.5rem; }
+  .empty-state h3 { color: var(--text); font-size: 1.1rem; }
+  .empty-state p  { font-size: 0.9rem; max-width: 360px; line-height: 1.6; }
 
-  .empty-icon {
-    font-size: 2.5rem;
-  }
-
-  .empty-state h3 {
-    color: var(--color-text);
-    font-size: 1.1rem;
-  }
-
-  .empty-state p {
-    font-size: 0.9rem;
-    max-width: 360px;
-    line-height: 1.6;
-  }
-
-  /* ── CTA ── */
-  .cta-card {
+  /* ── Map ── */
+  .map-section { padding-block: clamp(4rem, 8vw, 7rem); }
+  .map-head {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: end;
     gap: 2rem;
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 2rem 2.5rem;
-  }
-
-  .cta-text h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .cta-text p {
-    font-size: 0.9rem;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-shrink: 0;
     flex-wrap: wrap;
+    margin-bottom: 3rem;
   }
-
-  /* ── Mobile ── */
-  @media (max-width: 767px) {
-    .page-hero {
-      padding-block: 3rem 2rem;
-    }
-
-    .offen-card {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1.75rem;
-    }
-
-    .markt-card {
-      flex-wrap: wrap;
-      gap: 1rem;
-      padding: 1.25rem;
-    }
-
-    .mc-date {
-      min-width: 100%;
-      flex-direction: row;
-      justify-content: center;
-      gap: 0.75rem;
-    }
-
-    .mc-divider {
-      display: none;
-    }
-
-    .mc-maps-btn {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .cta-card {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .cta-buttons {
-      width: 100%;
-      justify-content: center;
-    }
+  .map-head h2 { margin-top: 1rem; font-size: clamp(2rem, 4vw, 3rem); }
+  .map-head p  { max-width: 38ch; font-size: 0.95rem; }
+  .map-card {
+    position: relative;
+    height: 480px;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
   }
-
-  /* ── Hero Animation ── */
-@keyframes heroFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.page-hero .container {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.15s;
-  opacity: 0;
-}
-
-.offen-image {
-  flex-shrink: 0;
-  width: 320px;    /* etwas breiter */
-}
-
-.offen-image img {
-  width: 100%;
-  height: 260px;   /* etwas höher */
-  object-fit: cover;
-  object-position: center;
-  border-radius: 0.75rem;
-  border: 1px solid var(--color-border);
-}
-
-.offen-text {
-  max-width: 620px;
-}
-
-.offen-card {
-  max-width: 900px;
-  margin-inline: auto;
-  margin-top: 3rem;
-}
-
-@media (max-width: 767px) {
-  .offen-image {
-    width: 100%;
+  .map-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 50%, rgba(90,195,207,0.15) 0%, transparent 40%),
+      radial-gradient(circle at 70% 35%, rgba(90,195,207,0.1) 0%, transparent 30%),
+      radial-gradient(circle at 50% 70%, rgba(90,195,207,0.12) 0%, transparent 35%);
   }
-
-  .offen-image img {
-    height: 200px;
+  .map-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0.45;
   }
-}
+  .map-svg path { stroke: var(--accent); stroke-width: 0.5; fill: none; }
+  .map-pin {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .map-pin-marker {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border: 3px solid var(--bg-deep);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 8px 24px rgba(90,195,207,0.4);
+    transition: transform var(--t);
+    position: relative;
+  }
+  .map-pin-marker::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--bg-deep);
+  }
+  .map-pin:hover .map-pin-marker { transform: rotate(-45deg) scale(1.15); }
+  .map-pin-tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0.85rem;
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    white-space: nowrap;
+    font-size: 0.78rem;
+    color: var(--text);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--t), transform var(--t);
+  }
+  .map-pin:hover .map-pin-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  .map-legend {
+    position: absolute;
+    bottom: 1.5rem; left: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: rgba(8,17,29,0.85);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-sm);
+    max-width: 280px;
+  }
+  .map-legend h4 {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .map-legend p { color: var(--text-2); line-height: 1.55; font-size: 0.85rem; }
+
+  /* ── CTA card ── */
+  .cta-card {
+    display: grid;
+    grid-template-columns: 1.4fr auto;
+    gap: 2rem;
+    align-items: center;
+    padding: 3rem 3.5rem;
+    background: linear-gradient(135deg, rgba(90,195,207,0.08), rgba(90,195,207,0.02));
+    border: 1px solid rgba(90,195,207,0.25);
+    border-radius: var(--r-lg);
+  }
+  .cta-card h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 0.6rem; }
+  .cta-card p  { font-size: 0.95rem; }
+  .cta-card .btns { display: flex; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap; }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .ph-grid   { grid-template-columns: 1fr; gap: 2.5rem; }
+    .ph-image  { height: 380px; }
+    .offen     { grid-template-columns: 1fr; gap: 3rem; }
+    .offen-media { height: 380px; }
+    .timeline  { padding-left: 50px; }
+    .timeline::before { left: 18px; }
+    .tl-row    { grid-template-columns: 1fr; gap: 0.75rem; padding: 1.5rem 0; }
+    .tl-row::before { left: -36px; top: 24px; transform: none; }
+    .tl-row:hover::before { transform: scale(1.2); }
+    .tl-date   { text-align: left; flex-direction: row; align-items: baseline; gap: 0.6rem; }
+    .tl-day    { font-size: 2.5rem; }
+    .tl-card   { grid-template-columns: 1fr; padding: 1.25rem 1.5rem; }
+    .cta-card  { grid-template-columns: 1fr; padding: 2rem; }
+  }
 </style>

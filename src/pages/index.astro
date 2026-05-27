@@ -6,317 +6,600 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- ═══════════ HERO ═══════════ -->
   <section class="hero">
+    <div class="hero-bg parallax">
+      <img src="/images/buffet-hero.jpeg" alt="Velaro Buffet" />
+    </div>
     <div class="container hero-inner">
-
-      <!-- Links: Text + Buttons -->
       <div class="hero-text">
-        <p class="hero-label">Catering & Foodtruckservice</p>
+        <span class="tag"><span class="dot"></span> Catering & Foodtruckservice · Haldensleben</span>
         <h1>
-          Willkommen bei<br />
-          <span class="text-accent">Velaro</span>
+          <span class="line"><span>Frisch gekocht.</span></span>
+          <span class="line"><span>Stilvoll&nbsp;serviert.</span></span>
+          <span class="line"><span class="accent">Unvergesslich.</span></span>
         </h1>
         <p class="hero-desc">
-          Ihr professioneller Partner für unvergessliche kulinarische Erlebnisse. 
-          Von exklusiven Events bis zu regionalen Märkten.
+          Ihr professioneller Partner für unvergessliche kulinarische
+          Erlebnisse — von exklusiven Events bis zu regionalen Märkten.
         </p>
-        <div class="hero-buttons">
-          <a href="/catering" class="btn-primary">Catering entdecken</a>
-          <a href="/kontakt" class="btn-outline">Kontakt aufnehmen</a>
+        <div class="hero-cta">
+          <a href="/catering" class="btn btn-primary">Catering entdecken <span class="arrow">→</span></a>
+          <a href="/kontakt" class="btn btn-outline">Kontakt aufnehmen</a>
         </div>
       </div>
 
-      <!-- Rechts: Platzhalterbild -->
-      <div class="hero-image">
-        <img
-          src="/images/buffet-hero.jpeg"
-          alt="Leckeres Essen von Velaro Catering & Foodtruckservice"
-        />
+      <div class="hero-meta">
+        <div class="hero-meta-card">
+          <div class="k">12+</div>
+          <div class="v">Jahre Erfahrung</div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="k">400+</div>
+          <div class="v">Events &amp; Märkte</div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="k">100%</div>
+          <div class="v">Regionale Zutaten</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      Entdecken
+      <span class="scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ═══════════ MARQUEE ═══════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Klassisches Buffet <span class="dot"></span> Grillbuffet <span class="dot"></span> Food&nbsp;Truck <span class="dot"></span> Canapés &amp; Fingerfood <span class="dot"></span> Hochzeiten <span class="dot"></span> Firmenfeiern <span class="dot"></span> Regionale Märkte <span class="dot"></span></span>
+      <span>Klassisches Buffet <span class="dot"></span> Grillbuffet <span class="dot"></span> Food&nbsp;Truck <span class="dot"></span> Canapés &amp; Fingerfood <span class="dot"></span> Hochzeiten <span class="dot"></span> Firmenfeiern <span class="dot"></span> Regionale Märkte <span class="dot"></span></span>
+    </div>
+  </div>
+
+  <!-- ═══════════ FEATURE CARDS ═══════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 3rem; max-width: 720px;">
+        <span class="eyebrow">Unsere Welten</span>
+        <h2 style="margin-top: 1rem; font-size: clamp(2rem, 4vw, 3rem);">
+          Zwei Wege, ein Anspruch — <span class="it">Genuss</span>.
+        </h2>
       </div>
 
+      <div class="feature-grid reveal-stagger">
+        <a href="/catering" class="feat-card">
+          <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1600&auto=format&fit=crop" alt="Catering Buffet" />
+          <div class="feat-body">
+            <div class="feat-num">01 — Catering</div>
+            <h3>Catering &amp; <span class="it">Buffet</span></h3>
+            <p>Klassisches Buffet, Grillbuffet, Foodtruck &amp; Canapés — individuell auf Ihren Anlass abgestimmt.</p>
+            <span class="feat-link">Banketmappe öffnen →</span>
+          </div>
+        </a>
+        <a href="/maerkte" class="feat-card">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1600&auto=format&fit=crop" alt="Food Truck auf dem Markt" />
+          <div class="feat-body">
+            <div class="feat-num">02 — Märkte</div>
+            <h3>Märkte &amp; <span class="it">Truck</span></h3>
+            <p>Findet uns auf regionalen Märkten und Veranstaltungen — frisch zubereitet, direkt zu euch.</p>
+            <span class="feat-link">Termine ansehen →</span>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ KARTEN ═══════════ -->
-  <section class="cards-section container">
-
-    <a href="/catering" class="feature-card">
-  <div class="card-header">
-    <h3>Catering</h3>
-    <img src="/icons/besteck.png" alt="Catering" class="card-icon" />
-  </div>
-  <p>Klassisches Buffet, Grillbuffet, Foodtruck & Canapés — für jeden Anlass das Richtige.</p>
-  <span class="card-link">Mehr erfahren →</span>
-</a>
-
-<a href="/maerkte" class="feature-card">
-  <div class="card-header">
-    <h3>Märkte</h3>
-    <img src="/icons/imbiss-stand.png" alt="Märkte" class="card-icon" />
-  </div>
-  <p>Findet uns auf regionalen Märkten und Veranstaltungen in der Region.</p>
-  <span class="card-link">Mehr erfahren →</span>
-</a>
-
+  <!-- ═══════════ ABOUT SPLIT ═══════════ -->
+  <section class="section">
+    <div class="container about">
+      <div class="about-text reveal">
+        <span class="eyebrow">Über Velaro</span>
+        <h2 style="margin-top: 1.25rem;">
+          Kulinarik mit <span class="it">Charakter</span> — seit Tag eins.
+        </h2>
+        <p>
+          Velaro steht für ein Catering, das mehr will als nur satt machen.
+          Wir kombinieren die Geradlinigkeit moderner Streetfood-Küche mit
+          dem Anspruch eleganter Bankett-Tradition.
+        </p>
+        <p>
+          Jedes Gericht — vom Canapé bis zum Festtagsbuffet — wird frisch
+          in unserer Manufaktur in Haldensleben zubereitet und am Eventtag
+          persönlich von uns serviert.
+        </p>
+        <div class="about-cols">
+          <div>
+            <div class="num">100%</div>
+            <div class="lbl">Frisch zubereitet</div>
+          </div>
+          <div>
+            <div class="num">2012</div>
+            <div class="lbl">Seit über 12 Jahren</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-media reveal parallax">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1400&auto=format&fit=crop" alt="Köche bei der Arbeit" />
+        <div class="about-badge">
+          <span class="star">"</span>
+          <p>Ein Catering, das Persönlichkeit hat — und es schmeckt man in jedem Bissen.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-<!-- ═══════════ TRUST ═══════════ -->
-<section class="trust section">
-  <div class="container trust-inner">
-
-    <div class="trust-item">
-      <div class="trust-icon">🌿</div>
-      <h3>Frisch & Regional</h3>
-      <p>Wir verwenden frische, regionale Zutaten — zubereitet mit Leidenschaft direkt für Ihr Event.</p>
+  <!-- ═══════════ VALUES ═══════════ -->
+  <section class="values section">
+    <div class="container">
+      <div class="values-head reveal">
+        <h2>Was Sie von uns <span class="it">erwarten</span> dürfen.</h2>
+        <p>
+          Drei Versprechen, die wir bei jedem Auftrag halten — vom ersten
+          Briefing bis zum Abbau am Eventabend.
+        </p>
+      </div>
+      <div class="values-grid reveal-stagger">
+        <div class="value">
+          <div class="index">— 01</div>
+          <h3>Frisch &amp; <span class="it">regional</span></h3>
+          <p>Wir verwenden Zutaten von Erzeugern aus der Region — frisch zubereitet direkt für Ihr Event, ohne Kompromisse.</p>
+        </div>
+        <div class="value">
+          <div class="index">— 02</div>
+          <h3>Individuell <span class="it">abgestimmt</span></h3>
+          <p>Kein Event gleicht dem anderen. Wir passen Menü, Setup und Service genau auf Ihre Wünsche und Gästezahl an.</p>
+        </div>
+        <div class="value">
+          <div class="index">— 03</div>
+          <h3>Zuverlässig &amp; <span class="it">pünktlich</span></h3>
+          <p>Von der Planung bis zum Service — wir sind dabei. Auf den Punkt, mit Charme und der Ruhe der Routine.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="trust-item">
-      <div class="trust-icon">🍽️</div>
-      <h3>Individuell abgestimmt</h3>
-      <p>Kein Event ist gleich. Wir passen unser Angebot genau auf Ihre Wünsche und Gästezahl an.</p>
+  <!-- ═══════════ INSTAGRAM ═══════════ -->
+  <section class="section ig-section">
+    <div class="container">
+      <div class="ig-head reveal">
+        <div class="left">
+          <span class="eyebrow">@velaro_cateringundfoodtruck</span>
+          <h2 style="margin-top: 1.25rem;">Folgt uns auf <span class="it">Instagram</span>.</h2>
+          <div class="ig-handle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            Neue Termine, frische Gerichte &amp; Behind-the-Scenes — zuerst auf Instagram.
+          </div>
+        </div>
+        <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-outline">
+          Profil ansehen <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <!-- Elfsight Widget -->
+      <script is:inline src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-f5197244-2f87-4ce1-abcb-b3effb647ce1" data-elfsight-app-lazy></div>
     </div>
+  </section>
 
-    <div class="trust-item">
-      <div class="trust-icon">✅</div>
-      <h3>Zuverlässig & pünktlich</h3>
-      <p>Von der Planung bis zum Service — Sie können sich auf uns verlassen. Versprochen.</p>
+  <!-- ═══════════ BIG CTA ═══════════ -->
+  <section class="cta-band">
+    <div class="container reveal">
+      <span class="eyebrow" style="justify-content: center;">Bereit für Ihr Event?</span>
+      <h2>Lassen Sie uns Ihre Idee <span class="it">servieren</span>.</h2>
+      <p>
+        Erzählen Sie uns von Ihrem Anlass — wir melden uns innerhalb von
+        24 Stunden mit einem maßgeschneiderten Vorschlag.
+      </p>
+      <div class="btns">
+        <a href="/catering" class="btn btn-primary">Banketmappe öffnen <span class="arrow">→</span></a>
+        <a href="/kontakt" class="btn btn-outline">Direkt anfragen</a>
+      </div>
     </div>
-
-  </div>
-</section>
-
-<!-- ═══════════ INSTAGRAM ═══════════ -->
-<section class="instagram section">
-  <div class="container">
-    <h2 style="text-align: center; margin-bottom: 2.5rem; font-weight: 500; font-size: 2rem;">Folgt uns gerne auf Instagram</h2>
-  
-    <!-- Elfsight Widget -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div class="elfsight-app-f5197244-2f87-4ce1-abcb-b3effb647ce1" data-elfsight-app-lazy></div>
-  </div>
-</section>
+  </section>
 
 </Layout>
 
 <style>
   /* ── Hero ── */
   .hero {
-    padding-block: 6rem;
-    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+    overflow: hidden;
+    isolation: isolate;
   }
-
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 75% 45%;
+    animation: kenburns 26s var(--ease) infinite alternate;
+    transform: scale(1.08); /* initial parallax base */
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.06) translate(-0.5%, 0.5%); }
+    to   { transform: scale(1.16) translate(0.5%, -0.5%); }
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(8,17,29,0.7) 0%, rgba(8,17,29,0.5) 35%, rgba(8,17,29,0.88) 75%, rgba(8,17,29,0.98) 100%),
+      linear-gradient(90deg, rgba(8,17,29,0.92) 0%, rgba(8,17,29,0.78) 35%, rgba(8,17,29,0.55) 65%, rgba(8,17,29,0.7) 100%);
+  }
   .hero-inner {
+    position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.3fr 1fr;
     gap: 4rem;
-    align-items: center;
+    align-items: end;
+    width: 100%;
   }
+  .hero-text .tag { margin-bottom: 2rem; display: inline-flex; }
+  .hero h1 {
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+  .hero h1 .line { display: block; overflow: hidden; }
+  .hero h1 .line span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: rise 1.1s var(--ease) forwards;
+  }
+  .hero h1 .line:nth-child(1) span { animation-delay: 0.25s; }
+  .hero h1 .line:nth-child(2) span { animation-delay: 0.4s; }
+  .hero h1 .line:nth-child(3) span { animation-delay: 0.55s; }
+  @keyframes rise { to { transform: translateY(0); } }
 
-  .hero-label {
-    color: var(--color-accent);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .hero-text h1 {
-    margin-bottom: 1.25rem;
-  }
+  .hero h1 .accent { font-style: italic; color: var(--accent); font-weight: 500; }
 
   .hero-desc {
+    max-width: 460px;
     font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    max-width: 480px;
+    line-height: 1.75;
+    color: var(--text-2);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeIn 1s var(--ease) 0.9s forwards;
   }
+  @keyframes fadeIn { to { opacity: 1; } }
 
-  .hero-buttons {
+  .hero-cta {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeIn 1s var(--ease) 1.05s forwards;
   }
 
-  /* Bild */
-  .hero-image img {
-    width: 100%;
-    height: 420px;
-    object-fit: cover;
-    border-radius: 1rem;
-    border: 1px solid var(--color-border);
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    align-self: end;
+    padding-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s var(--ease) 1.2s forwards;
+  }
+  .hero-meta-card {
+    padding: 1.5rem 1.6rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--r);
+    background: rgba(8,17,29,0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .hero-meta-card .k {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .hero-meta-card .v {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-mute);
   }
 
-  /* ── Karten ── */
-  .cards-section {
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    opacity: 0;
+    animation: fadeIn 1s var(--ease) 1.6s forwards;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    animation: drip 2.2s ease-in-out infinite;
+  }
+  @keyframes drip {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-meta  { flex-direction: row; flex-wrap: wrap; }
+    .hero-meta-card { flex: 1 1 140px; }
+    .scroll-hint { display: none; }
+  }
+
+  /* ── Marquee ── */
+  .marquee {
+    padding: 1.5rem 0;
+    border-block: 1px solid var(--border-soft);
+    background: var(--bg-deep);
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    width: max-content;
+    animation: scroll 38s linear infinite;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--text-2);
+  }
+  .marquee-track span  { display: flex; align-items: center; gap: 4rem; white-space: nowrap; }
+  .marquee-track .dot  { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ── Feature Cards ── */
+  .feature-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    padding-block: 5rem;
   }
-
-  .feature-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 2rem;
+  .feat-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    transition: border-color var(--transition), transform var(--transition);
+    justify-content: flex-end;
+    height: 480px;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    isolation: isolate;
     cursor: pointer;
+    transition: transform 600ms var(--ease);
   }
-
-  .feature-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-3px);
+  .feat-card:hover { transform: translateY(-6px); }
+  .feat-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    transition: transform 1.6s var(--ease);
   }
-
-  .card-icon {
-    font-size: 2rem;
+  .feat-card:hover img { transform: scale(1.08); }
+  .feat-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(8,17,29,0.05) 0%, rgba(8,17,29,0.45) 55%, rgba(8,17,29,0.95) 100%);
   }
-
-  .feature-card h3 {
-    color: var(--color-text);
+  .feat-body { padding: 2.5rem; }
+  .feat-num {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
   }
-
-  .feature-card p {
-    font-size: 0.95rem;
-    flex: 1;
+  .feat-card h3 {
+    font-size: clamp(2.2rem, 3.4vw, 3rem);
+    line-height: 1;
+    color: #fff;
   }
-
-  .card-link {
-    color: var(--color-accent);
+  .feat-card p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: rgba(246,242,234,0.78);
+    max-width: 36ch;
+    margin: 1rem 0 1.5rem;
+  }
+  .feat-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    transition: gap var(--t), border-color var(--t), color var(--t);
+    width: fit-content;
+  }
+  .feat-card:hover .feat-link {
+    gap: 1.2rem;
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
-  /* ── Mobile ── */
-  @media (max-width: 767px) {
-    .hero-inner {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    .hero-image img {
-      height: 260px;
-    }
-
-    .cards-section {
-      grid-template-columns: 1fr;
-    }
+  /* ── About Split ── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
   }
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-
-.card-icon {
-  width: 2rem;
-  height: 2rem;
-  object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(51%) sepia(29%) saturate(601%) hue-rotate(143deg) brightness(93%);
-  opacity: 0.9;
-  transition: filter var(--transition);
-}
-
-.feature-card:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(72, 141, 148, 0.2);
-}
-
-/* ── Trust ── */
-.trust {
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.trust-inner {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.trust-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 2rem;
-  border-radius: var(--radius-card);
-  transition: background-color var(--transition);
-}
-
-.trust-item:hover {
-  background-color: var(--color-bg-card);
-}
-
-.trust-icon {
-  font-size: 2rem;
-}
-
-.trust-item h3 {
-  color: var(--color-text);
-  font-size: 1.1rem;
-}
-
-.trust-item p {
-  font-size: 0.9rem;
-  line-height: 1.7;
-}
-
-@media (max-width: 767px) {
-  .trust-inner {
-    grid-template-columns: 1fr;
+  .about-text h2 { margin-bottom: 1.5rem; font-size: clamp(2rem, 4vw, 3.25rem); }
+  .about-text p  { font-size: 1rem; line-height: 1.8; margin-bottom: 1.25rem; max-width: 50ch; }
+  .about-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-soft);
   }
-}
-.instagram {
-  background-color: var(--color-bg-card);
-  border-radius: var(--radius-card);
-  border: 1px solid rgba(72, 141, 148, 0.3);    /* ← Akzentfarbe statt grau */
-  padding: 2rem;
-  max-width: 1000px;
-  margin-inline: auto;
-  margin-bottom: 3rem;
-  margin-top: 3rem;
-  box-shadow: 0 0 40px rgba(72, 141, 148, 0.08), 
-              0 8px 32px rgba(0, 0, 0, 0.3);    /* ← subtiler Glow */
-}
-/* ── Hero Einlauf-Animation ── */
-@keyframes heroFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+  .about-cols .num { font-family: var(--serif); font-size: 2.6rem; color: var(--accent); line-height: 1; }
+  .about-cols .lbl { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mute); margin-top: 0.4rem; }
+  .about-media {
+    position: relative;
+    height: 620px;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .about-media img { width: 100%; height: 100%; object-fit: cover; }
+  .about-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--r-lg);
+    pointer-events: none;
+  }
+  .about-badge {
+    position: absolute;
+    bottom: 2rem; left: 2rem; right: 2rem;
+    padding: 1.5rem 1.75rem;
+    background: rgba(8,17,29,0.78);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--r);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .about-badge .star { font-family: var(--serif); font-size: 2rem; color: var(--accent); }
+  .about-badge p { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--text); line-height: 1.4; }
 
-.hero-label {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.3s;
-  opacity: 0;
-}
+  /* ── Values ── */
+  .values {
+    background: var(--bg-deep);
+    border-block: 1px solid var(--border-soft);
+  }
+  .values-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+  .values-head h2 { font-size: clamp(2rem, 4vw, 3rem); }
+  .values-head p  { font-size: 1rem; line-height: 1.7; max-width: 46ch; }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .value {
+    padding: 2.5rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r);
+    transition: all var(--t-slow);
+    position: relative;
+    overflow: hidden;
+  }
+  .value::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 600ms var(--ease);
+  }
+  .value:hover { transform: translateY(-4px); background: var(--bg-card-2); border-color: rgba(90,195,207,0.25); }
+  .value:hover::before { width: 100%; }
+  .value .index { font-family: var(--serif); font-size: 1.4rem; color: var(--accent); margin-bottom: 2.5rem; letter-spacing: 0.05em; }
+  .value h3  { font-size: 1.6rem; margin-bottom: 0.75rem; }
+  .value p   { font-size: 0.92rem; line-height: 1.7; }
 
-.hero-text h1 {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.4s;
-  opacity: 0;
-}
+  /* ── Instagram ── */
+  .ig-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+  .ig-head .left h2 { font-size: clamp(2rem, 4vw, 3rem); }
+  .ig-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.75rem;
+    font-size: 0.92rem;
+    color: var(--text-2);
+  }
+  .ig-handle svg { color: var(--accent); }
 
-.hero-desc {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.6s;
-  opacity: 0;
-}
+  /* ── Big CTA ── */
+  .cta-band {
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2400&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+  }
+  .cta-band::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(8,17,29,0.92), rgba(8,17,29,0.7));
+  }
+  .cta-band .eyebrow { margin-bottom: 1.5rem; }
+  .cta-band h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 1.25rem; max-width: 16ch; margin-inline: auto; }
+  .cta-band p  { max-width: 50ch; margin: 0 auto 2.5rem; font-size: 1.05rem; }
+  .btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
-.hero-buttons {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.8s;
-  opacity: 0;
-}
-
-.hero-image {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
-}
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .about         { grid-template-columns: 1fr; gap: 3rem; }
+    .about-media   { height: 420px; }
+    .values-head   { grid-template-columns: 1fr; gap: 1.5rem; }
+    .values-grid   { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .feature-grid  { grid-template-columns: 1fr; }
+    .feat-card     { height: 380px; }
+  }
 </style>

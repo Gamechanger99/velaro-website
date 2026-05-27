@@ -5,197 +5,173 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Kontakt – Velaro Catering & Foodtruckservice">
 
   <!-- ═══════════ PAGE HERO ═══════════ -->
-  <section class="page-hero">
-    <div class="container">
-      <p class="page-label">Schreib uns</p>
-      <h1>Kontakt<br /><span class="text-accent">aufnehmen</span></h1>
-      <p class="page-desc">
-        Fragen, Wünsche oder einfach Hallo sagen — wir freuen uns von Ihnen zu hören 
-        und melden uns schnellstmöglich zurück.
-      </p>
+  <section class="ph">
+    <div class="container ph-grid">
+      <div class="reveal">
+        <span class="eyebrow">Schreib uns</span>
+        <h1>Kontakt<br /><span class="it">aufnehmen</span>.</h1>
+        <p class="ph-lead">
+          Fragen, Wünsche oder einfach Hallo sagen — wir freuen uns von
+          Ihnen zu hören und melden uns schnellstmöglich zurück.
+        </p>
+      </div>
+      <div class="ph-side reveal">
+        <div class="ph-stat">
+          <div class="k">&lt; 24h</div>
+          <div class="l">Antwortzeit</div>
+        </div>
+        <div class="ph-stat">
+          <div class="k">100%</div>
+          <div class="l">Persönlich</div>
+        </div>
+        <div class="ph-stat">
+          <div class="k">DE</div>
+          <div class="l">Region Haldensleben</div>
+        </div>
+        <div class="ph-stat">
+          <div class="k">7 Tage</div>
+          <div class="l">Eventfähigkeit</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ KONTAKT MAIN ═══════════ -->
-  <section class="contact-section section container">
+  <!-- ═══════════ MAIN CONTACT ═══════════ -->
+  <section class="contact-section">
+    <div class="container contact-grid">
 
-    <!-- Linke Spalte: Formular -->
-    <div class="form-col">
-      <div class="form-card">
-        <h2>Nachricht senden</h2>
-        <p class="form-subtitle">Alle Felder mit * sind Pflichtfelder.</p>
+      <!-- Form -->
+      <div class="form-card reveal">
+        <h2>Nachricht <span class="it">senden</span></h2>
+        <p class="form-sub">Alle Felder mit * sind Pflichtfelder.</p>
 
-        <!-- Netlify Forms: name + data-netlify + hidden input -->
+        <!-- Netlify hidden form for bot detection -->
+        <form name="kontakt" data-netlify="true" netlify-honeypot="bot-field" hidden>
+          <input name="name" /><input name="email" /><input name="telefon" /><input name="nachricht" />
+        </form>
+
         <form
+          id="contactForm"
           name="kontakt"
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          class="contact-form"
-          id="contactForm"
+          class="form-stack"
         >
-          <!-- Netlify hidden fields -->
           <input type="hidden" name="form-name" value="kontakt" />
-          <p class="hidden"><label>Nicht ausfüllen: <input name="bot-field" /></label></p>
+          <p class="hidden-field"><label>Nicht ausfüllen: <input name="bot-field" /></label></p>
 
-          <!-- Name + Email nebeneinander -->
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Max Mustermann"
-                required
-                autocomplete="name"
-              />
+              <input type="text" id="name" name="name" placeholder="Max Mustermann" required autocomplete="name" />
             </div>
             <div class="form-group">
               <label for="email">E-Mail *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="max@beispiel.de"
-                required
-                autocomplete="email"
-              />
+              <input type="email" id="email" name="email" placeholder="max@beispiel.de" required autocomplete="email" />
             </div>
           </div>
 
-          <!-- Telefon -->
           <div class="form-group">
-            <label for="telefon">
-              Telefon
-              <span class="optional-badge">optional</span>
-            </label>
-            <input
-              type="tel"
-              id="telefon"
-              name="telefon"
-              placeholder="+49 160 00000000"
-              autocomplete="tel"
-            />
+            <label for="telefon">Telefon <span class="optional">optional</span></label>
+            <input type="tel" id="telefon" name="telefon" placeholder="+49 160 00 00 00 00" autocomplete="tel" />
           </div>
 
-          <!-- Nachricht -->
           <div class="form-group">
             <label for="nachricht">Ihr Anliegen *</label>
-            <textarea
-              id="nachricht"
-              name="nachricht"
-              rows="6"
-              placeholder="Was liegt Ihnen auf dem Herzen? Erzählen Sie uns von Ihrem Event, Ihren Wünschen oder stellen Sie einfach eine Frage…"
-              required
-            ></textarea>
+            <textarea id="nachricht" name="nachricht" rows="6" placeholder="Was liegt Ihnen auf dem Herzen? Erzählen Sie uns von Ihrem Event, Ihren Wünschen oder stellen Sie einfach eine Frage…" required></textarea>
           </div>
 
-          <!-- Submit -->
-          <button type="submit" class="btn-primary submit-btn">
-            Nachricht absenden
-          </button>
-
-          <!-- Datenschutz Hinweis -->
-          <p class="privacy-note">
-            Mit dem Absenden stimmen Sie unserer 
-            <a href="/datenschutz">Datenschutzerklärung</a> zu.
-          </p>
+          <div class="form-bottom">
+            <p class="privacy-note">
+              Mit dem Absenden stimmen Sie unserer
+              <a href="/datenschutz">Datenschutzerklärung</a> zu.
+            </p>
+            <button type="submit" class="btn btn-primary submit-btn">
+              Nachricht absenden <span class="arrow">→</span>
+            </button>
+          </div>
         </form>
 
-        <!-- Erfolgs-Nachricht (via JS ein/ausgeblendet) -->
         <div class="success-msg" id="successMsg">
-          <div class="success-icon">✓</div>
-          <h3>Danke für Ihre Nachricht!</h3>
+          <div class="check">✓</div>
+          <h3>Danke für Ihre <span class="it">Nachricht</span>!</h3>
           <p>Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden zurück.</p>
         </div>
       </div>
-    </div>
 
-    <!-- Rechte Spalte: Kontaktinfos -->
-    <div class="info-col">
+      <!-- Sidebar -->
+      <aside class="info-stack reveal-stagger">
 
-      <!-- Response-Hinweis -->
-      <div class="response-hint">
-        <span class="response-dot"></span>
-        <p>Wir antworten in der Regel <strong>innerhalb von 24 Stunden</strong> — montags bis freitags.</p>
-      </div>
-
-      <!-- Kontaktkarten -->
-      <div class="contact-cards">
+        <div class="response-hint">
+          <span class="rh-dot"></span>
+          <p>Wir antworten in der Regel <strong>innerhalb von 24 Stunden</strong> — montags bis freitags.</p>
+        </div>
 
         <a href="mailto:kontakt@velaro-catering.de" class="contact-card">
           <div class="cc-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           </div>
           <div class="cc-text">
             <span class="cc-label">E-Mail</span>
             <span class="cc-value">kontakt@velaro-catering.de</span>
           </div>
-          <svg class="cc-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <svg class="cc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
 
         <a href="tel:+4916094839906" class="contact-card">
           <div class="cc-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
           </div>
           <div class="cc-text">
             <span class="cc-label">Telefon</span>
-            <span class="cc-value">0160 94839906</span>
+            <span class="cc-value">0160 9483 9906</span>
           </div>
-          <svg class="cc-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <svg class="cc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
 
         <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="contact-card">
           <div class="cc-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
           </div>
           <div class="cc-text">
             <span class="cc-label">Instagram</span>
             <span class="cc-value">@velaro_cateringundfoodtruck</span>
           </div>
-          <svg class="cc-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <svg class="cc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
 
-      </div>
+        <div class="hours-card">
+          <h4>Erreichbarkeit</h4>
+          <ul class="hours-list">
+            <li>
+              <span class="day">Mo – Fr</span>
+              <span class="dotline"></span>
+              <span class="time">08 — 18 Uhr</span>
+            </li>
+            <li>
+              <span class="day">Samstag</span>
+              <span class="dotline"></span>
+              <span class="time">09 — 14 Uhr</span>
+            </li>
+            <li>
+              <span class="day">Sonntag</span>
+              <span class="dotline"></span>
+              <span class="time closed">Geschlossen</span>
+            </li>
+          </ul>
+        </div>
 
-      <!-- Erreichbarkeit -->
-      <div class="availability-card">
-        <h4>Erreichbarkeit</h4>
-        <ul class="hours-list">
-          <li>
-            <span class="day">Mo – Fr</span>
-            <span class="dot-line"></span>
-            <span class="time">08:00 – 18:00 Uhr</span>
-          </li>
-          <li>
-            <span class="day">Samstag</span>
-            <span class="dot-line"></span>
-            <span class="time">09:00 – 14:00 Uhr</span>
-          </li>
-          <li>
-            <span class="day">Sonntag</span>
-            <span class="dot-line"></span>
-            <span class="time closed">Geschlossen</span>
-          </li>
-        </ul>
-      </div>
+        <div class="addr-card">
+          <h4>Manufaktur</h4>
+          <p>Freischützstraße 10<br /><span style="color: var(--accent); font-style: italic;">39340 Haldensleben</span></p>
+          <a href="https://maps.google.com/?q=Freischützstraße+10+Haldensleben" target="_blank" rel="noopener">
+            Auf Karte ansehen
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
 
+      </aside>
     </div>
   </section>
 
@@ -203,381 +179,292 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   /* ── Page Hero ── */
-  .page-hero {
-    padding-block: 5rem 3rem;
-    border-bottom: 1px solid var(--color-border);
+  .ph {
+    position: relative;
+    padding-top: clamp(9rem, 16vw, 13rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+    overflow: hidden;
+    isolation: isolate;
   }
-
-  .page-label {
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+  .ph::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(90,195,207,0.18), transparent 65%);
+    filter: blur(20px);
+    z-index: -1;
   }
-
-  .page-hero h1 {
-    margin-bottom: 1.25rem;
-  }
-
-  .page-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 520px;
-  }
-
-  /* ── Layout ── */
-  .contact-section {
+  .ph-grid {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 3rem;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: end;
+  }
+  .ph-grid h1 { font-size: clamp(3.2rem, 8vw, 6rem); line-height: 0.98; margin: 1.5rem 0; }
+  .ph-lead { font-size: 1.05rem; line-height: 1.75; max-width: 50ch; }
+  .ph-side { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .ph-stat {
+    padding: 1.5rem 1.4rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r);
+  }
+  .ph-stat .k { font-family: var(--serif); font-size: 2.4rem; color: var(--accent); line-height: 1; margin-bottom: 0.5rem; }
+  .ph-stat .l { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mute); }
+
+  /* ── Contact section ── */
+  .contact-section { padding-block: clamp(2rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
     align-items: start;
   }
 
-  /* ── Formular-Karte ── */
+  /* ── Form card ── */
   .form-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 2.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
+    padding: clamp(2rem, 4vw, 3rem);
   }
+  .form-card h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 0.5rem; }
+  .form-sub { font-size: 0.88rem; color: var(--text-mute); margin-bottom: 2rem; }
+  .hidden-field { display: none; }
 
-  .form-card h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.4rem;
-  }
+  .form-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-  .form-subtitle {
-    font-size: 0.85rem;
-    margin-bottom: 2rem;
-  }
-
-  .hidden { display: none; }
-
-  /* Formular-Felder */
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
   .form-group label {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    color: var(--color-text);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-mute);
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-
-  .optional-badge {
-    font-size: 0.7rem;
-    font-weight: 500;
-    background-color: rgba(72, 141, 148, 0.15);
-    color: var(--color-accent);
-    border: 1px solid rgba(72, 141, 148, 0.3);
-    border-radius: 0.3rem;
+  .optional {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: rgba(90,195,207,0.12);
+    color: var(--accent);
     padding: 0.15rem 0.5rem;
-    letter-spacing: 0.02em;
+    border-radius: 999px;
   }
-
   .form-group input,
   .form-group textarea {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-btn);
-    color: var(--color-text);
-    font-family: "Montserrat", sans-serif;
-    font-size: 0.9rem;
-    padding: 0.75rem 1rem;
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    font: 400 0.95rem var(--sans);
+    padding: 0.85rem 1rem;
     width: 100%;
-    transition: border-color var(--transition), box-shadow var(--transition);
     outline: none;
+    transition: border-color var(--t), box-shadow var(--t), background var(--t);
   }
-
   .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: rgba(166, 166, 166, 0.5);
-  }
-
+  .form-group textarea::placeholder { color: rgba(166,166,166,0.4); }
   .form-group input:focus,
   .form-group textarea:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(72, 141, 148, 0.15);
+    border-color: var(--accent);
+    background: var(--bg);
+    box-shadow: 0 0 0 4px var(--accent-glow);
   }
+  .form-group textarea { resize: vertical; min-height: 160px; line-height: 1.6; }
 
-  .form-group textarea {
-    resize: vertical;
-    min-height: 140px;
-    line-height: 1.6;
+  .form-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
   }
+  .privacy-note { font-size: 0.78rem; color: var(--text-mute); flex: 1; min-width: 240px; }
+  .privacy-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
-  /* Submit */
-  .submit-btn {
-    align-self: flex-start;
-    margin-top: 0.25rem;
-  }
-
-  .privacy-note {
-    font-size: 0.78rem;
-    color: rgba(166, 166, 166, 0.7);
-  }
-
-  .privacy-note a {
-    color: var(--color-accent);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  /* Erfolgs-Nachricht */
   .success-msg {
     display: none;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 3rem 2rem;
     gap: 1rem;
+    padding: 3rem 1rem;
   }
-
   .success-msg.visible { display: flex; }
-
-  .success-icon {
-    width: 56px;
-    height: 56px;
-    background-color: rgba(72, 141, 148, 0.15);
-    border: 1px solid rgba(72, 141, 148, 0.4);
+  .success-msg .check {
+    width: 64px; height: 64px;
+    background: rgba(90,195,207,0.12);
+    border: 1px solid rgba(90,195,207,0.4);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-size: 1.5rem;
-    color: var(--color-accent);
+    color: var(--accent);
   }
+  .success-msg h3 { font-size: 1.8rem; }
+  .success-msg p  { max-width: 360px; font-size: 0.95rem; line-height: 1.7; }
 
-  .success-msg h3 { color: var(--color-text); font-size: 1.2rem; }
-  .success-msg p  { font-size: 0.9rem; max-width: 320px; line-height: 1.6; }
+  /* ── Sidebar ── */
+  .info-stack { display: flex; flex-direction: column; gap: 1rem; }
 
-  /* ── Rechte Spalte ── */
-  .info-col {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  /* Response-Hinweis */
   .response-hint {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    background-color: rgba(72, 141, 148, 0.08);
-    border: 1px solid rgba(72, 141, 148, 0.25);
-    border-radius: var(--radius-card);
-    padding: 1rem 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(90,195,207,0.08), rgba(90,195,207,0.02));
+    border: 1px solid rgba(90,195,207,0.25);
+    border-radius: var(--r);
   }
-
-  .response-dot {
+  .rh-dot {
+    width: 10px; height: 10px;
     flex-shrink: 0;
-    width: 8px;
-    height: 8px;
-    background-color: var(--color-accent);
+    margin-top: 0.4rem;
+    background: var(--accent);
     border-radius: 50%;
-    margin-top: 0.35rem;
-    box-shadow: 0 0 8px rgba(72, 141, 148, 0.6);
-    animation: pulse 2s infinite;
+    animation: ping 2.4s ease-out infinite;
   }
-
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 6px rgba(72, 141, 148, 0.5); }
-    50%       { box-shadow: 0 0 14px rgba(72, 141, 148, 0.9); }
+  @keyframes ping {
+    0%   { box-shadow: 0 0 0 0 rgba(90,195,207,0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(90,195,207,0); }
+    100% { box-shadow: 0 0 0 0 rgba(90,195,207,0); }
   }
-
-  .response-hint p {
-    font-size: 0.85rem;
-    line-height: 1.6;
-  }
-
-  .response-hint strong {
-    color: var(--color-text);
-    font-weight: 600;
-  }
-
-  /* Kontaktkarten */
-  .contact-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+  .response-hint p  { font-size: 0.92rem; line-height: 1.6; color: var(--text); }
+  .response-hint strong { color: var(--accent); font-weight: 600; }
 
   .contact-card {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 1rem 1.25rem;
-    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    cursor: pointer;
+    gap: 1.1rem;
+    padding: 1.4rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r);
+    transition: all var(--t-slow);
   }
-
   .contact-card:hover {
-    border-color: var(--color-accent);
+    border-color: rgba(90,195,207,0.35);
     transform: translateX(4px);
-    box-shadow: 0 4px 16px rgba(72, 141, 148, 0.1);
+    box-shadow: 0 18px 40px -20px rgba(0,0,0,0.4);
   }
-
   .cc-icon {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(72, 141, 148, 0.12);
-    border: 1px solid rgba(72, 141, 148, 0.25);
-    border-radius: 0.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-accent);
+    width: 48px; height: 48px;
     flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(90,195,207,0.1);
+    border: 1px solid rgba(90,195,207,0.25);
+    border-radius: 50%;
+    color: var(--accent);
+    transition: all var(--t);
   }
-
-  .cc-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    flex: 1;
-    min-width: 0;
-  }
-
+  .contact-card:hover .cc-icon { background: var(--accent); color: var(--bg-deep); }
+  .cc-text { flex: 1; min-width: 0; }
   .cc-label {
-    font-size: 0.72rem;
+    display: block;
+    font-size: 0.7rem;
     font-weight: 600;
-    color: var(--color-accent);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
   }
-
   .cc-value {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-text);
+    display: block;
+    font-size: 1rem;
+    color: var(--text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .cc-arrow { color: var(--text-mute); flex-shrink: 0; transition: all var(--t); }
+  .contact-card:hover .cc-arrow { color: var(--accent); transform: translateX(4px); }
 
-  .cc-arrow {
-    color: var(--color-text-muted);
-    flex-shrink: 0;
-    transition: color var(--transition), transform var(--transition);
+  /* ── Hours card ── */
+  .hours-card {
+    padding: 1.75rem 1.75rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r);
   }
-
-  .contact-card:hover .cc-arrow {
-    color: var(--color-accent);
-    transform: translateX(3px);
-  }
-
-  /* Erreichbarkeit */
-  .availability-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
-  }
-
-  .availability-card h4 {
-    font-size: 0.85rem;
+  .hours-card h4 {
+    font-family: var(--sans);
+    font-size: 0.7rem;
     font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
+    color: var(--accent);
     margin-bottom: 1.25rem;
   }
-
-  .hours-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
+  .hours-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
   .hours-list li {
-    display: flex;
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+  }
+  .hours-list .day  { font-size: 0.95rem; color: var(--text); }
+  .dotline { height: 1px; background: repeating-linear-gradient(90deg, var(--border) 0 4px, transparent 4px 8px); }
+  .hours-list .time { font-family: var(--serif); font-size: 1.05rem; color: var(--accent); }
+  .hours-list .time.closed { color: var(--text-mute); font-family: var(--sans); font-size: 0.92rem; font-style: italic; }
+
+  /* ── Address card ── */
+  .addr-card {
+    padding: 1.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r);
+    position: relative;
+    overflow: hidden;
+  }
+  .addr-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(90,195,207,0.08), transparent 70%);
+    filter: blur(20px);
+  }
+  .addr-card h4 {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .addr-card p { font-family: var(--serif); font-size: 1.3rem; line-height: 1.4; color: var(--text); }
+  .addr-card a {
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    transition: gap var(--t);
   }
+  .addr-card a:hover { gap: 0.85rem; }
 
-  .day {
-    font-size: 0.875rem;
-    color: var(--color-text);
-    font-weight: 500;
-    min-width: 75px;
-  }
-
-  .dot-line {
-    flex: 1;
-    border-bottom: 1px dashed var(--color-border);
-    opacity: 0.5;
-  }
-
-  .time {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    text-align: right;
-  }
-
-  .time.closed {
-    color: rgba(166, 166, 166, 0.5);
-    font-style: italic;
-  }
-
-  /* ── Mobile ── */
-  @media (max-width: 900px) {
-    .contact-section {
-      grid-template-columns: 1fr;
-    }
-
-    .info-col {
-      order: -1;
-    }
-  }
-
+  /* ── Responsive ── */
+  @media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .ph-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
   @media (max-width: 600px) {
-    .form-card {
-      padding: 1.5rem;
-    }
-
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-
-    .page-hero {
-      padding-block: 3rem 2rem;
-    }
+    .form-row  { grid-template-columns: 1fr; }
+    .ph-side   { grid-template-columns: 1fr 1fr; }
+    .form-bottom { flex-direction: column; }
+    .submit-btn  { width: 100%; justify-content: center; }
   }
-
-  /* ── Hero Animation ── */
-@keyframes heroFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.page-hero .container {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.15s;
-  opacity: 0;
-}
 </style>
 
 <script>
@@ -599,7 +486,6 @@ import Layout from '../layouts/Layout.astro';
       if (res.ok) {
         form.style.display = 'none';
         successMsg?.classList.add('visible');
-        // Zum Erfolg-Block scrollen
         successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         alert('Es gab ein Problem beim Senden. Bitte versuche es nochmal.');

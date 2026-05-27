@@ -63,192 +63,181 @@
 <style is:global>
 
   .bm-section {
-    padding-block: 4rem 5rem;
-    border-top: 1px solid var(--color-border);
+    padding-block: clamp(4rem, 8vw, 7rem);
   }
 
-  .bm-intro { text-align: center; margin-bottom: 2.5rem; }
-  .bm-intro h2 { margin-bottom: 0.4rem; }
-  .bm-intro p { font-size: 0.93rem; color: var(--color-text-muted); }
+  .bm-intro {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3.5rem;
+  }
+  .bm-intro h2 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin-top: 1rem; }
+  .bm-intro p { margin-top: 1rem; font-size: 1rem; line-height: 1.7; color: var(--text-2); }
 
   /* ── Karte ── */
   .bm-card {
-    max-width: 720px;
+    max-width: 900px;
     margin-inline: auto;
-    background-color: #1a2840;
-    border: 1px solid #1e2d42;
-    border-radius: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
     overflow: hidden;
   }
 
   /* ── Header ── */
   .bm-card-header {
-    padding: 1.5rem 2rem 1.25rem;
-    border-bottom: 1px solid #1e2d42;
+    padding: 1.75rem 2.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-soft);
   }
 
-  .bm-progress-bar { display: flex; gap: 5px; margin-bottom: 1rem; }
+  .bm-progress-bar { display: flex; gap: 4px; margin-bottom: 1.1rem; }
 
   .bm-seg {
-    flex: 1; height: 3px; border-radius: 2px;
-    background-color: #1e2d42;
-    transition: background-color 0.3s, flex 0.3s;
+    width: 28px; height: 3px; border-radius: 2px;
+    background: var(--border);
+    transition: all 0.4s var(--ease);
   }
-  .bm-seg.done   { background-color: #3a7880; }
-  .bm-seg.active { background-color: #488d94; flex: 2; }
+  .bm-seg.done   { background: var(--accent-deep); }
+  .bm-seg.active { background: var(--accent); width: 44px; }
 
-  .bm-header-text { display: flex; flex-direction: column; gap: 0.2rem; }
+  .bm-header-text { display: flex; flex-direction: column; gap: 0.25rem; }
 
   .bm-step-label {
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #a6a6a6;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--sans);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-mute);
   }
 
   .bm-step-title {
-    font-size: 1.25rem; font-weight: 700; color: #ffffff;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--serif);
+    font-size: 1.6rem; line-height: 1.1; color: var(--text);
   }
-
-  /* ── Preis-Leiste ── */
-  .bm-price-bar {
-    display: none; justify-content: space-between; align-items: center;
-    padding: 0.8rem 2rem;
-    background-color: rgba(72,141,148,0.07);
-    border-bottom: 1px solid rgba(72,141,148,0.18);
-  }
-  .bm-price-bar.visible { display: flex; }
-
-  .bm-price-label {
-    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.08em; color: #a6a6a6; margin-bottom: 0.2rem;
-    font-family: "Montserrat", sans-serif;
-  }
-  .bm-price-ppp  { font-size: 1.15rem; font-weight: 800; color: #488d94; font-family: "Montserrat", sans-serif; }
-  .bm-price-total{ font-size: 1.55rem; font-weight: 800; color: #488d94; font-family: "Montserrat", sans-serif; }
 
   /* ── Body ── */
-  .bm-body { padding: 1.75rem 2rem; min-height: 280px; }
+  .bm-body { padding: 2rem 2.25rem; min-height: 280px; }
 
   .bm-step-desc {
-    font-size: 0.85rem; color: #a6a6a6; margin-bottom: 1.25rem;
-    line-height: 1.5; font-family: "Montserrat", sans-serif;
+    font-size: 0.95rem; line-height: 1.65;
+    color: var(--text-2); margin-bottom: 1.5rem;
   }
 
   /* ── Nav ── */
   .bm-nav {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1.1rem 2rem; border-top: 1px solid #1e2d42;
+    padding: 1.25rem 2.25rem; border-top: 1px solid var(--border-soft); gap: 1rem;
   }
-  .bm-btn-back { visibility: hidden; }
+  .bm-btn-back, .bm-btn-next {
+    font-family: var(--sans);
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.85rem 1.4rem; border-radius: 999px;
+    transition: all var(--t); border: 1px solid transparent; cursor: pointer;
+  }
+  .bm-btn-back {
+    background: transparent; color: var(--text-mute);
+    border-color: var(--border); visibility: hidden;
+  }
   .bm-btn-back.bm-visible { visibility: visible; }
+  .bm-btn-back:hover { color: var(--text); border-color: rgba(255,255,255,0.3); }
+  .bm-btn-next {
+    background: var(--accent); color: var(--bg-deep); border-color: transparent;
+  }
+  .bm-btn-next:hover {
+    background: var(--cream); transform: translateY(-2px);
+    box-shadow: 0 10px 24px -8px var(--accent-glow);
+  }
 
   /* ══ STEP 0: Willkommen ══ */
   .bm-welcome {
-    display: flex; flex-direction: column; align-items: center;
-    text-align: center; gap: 1.25rem; padding: 0.75rem 0 0.25rem;
+    text-align: center; padding: 1.5rem 1rem;
   }
   .bm-welcome-headline {
-    font-size: 1.05rem; font-weight: 700; color: #ffffff;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--serif);
+    font-size: 1.8rem; margin-bottom: 1rem; color: var(--text);
   }
   .bm-welcome p {
-    max-width: 440px; font-size: 0.88rem; line-height: 1.7;
-    color: #a6a6a6; font-family: "Montserrat", sans-serif;
+    max-width: 460px; margin: 0 auto 2.5rem;
+    font-size: 0.95rem; line-height: 1.7; color: var(--text-2);
   }
   .bm-feature-row {
-    display: flex; gap: 2rem; flex-wrap: wrap;
-    justify-content: center; margin-top: 0.5rem;
+    display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
   }
-  .bm-feature-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .bm-feature-item { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
   .bm-feature-bubble {
-    width: 44px; height: 44px; border-radius: 50%;
-    background-color: rgba(72,141,148,0.1);
-    border: 1px solid rgba(72,141,148,0.3);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(90,195,207,0.08);
+    border: 1px solid rgba(90,195,207,0.3);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; color: #488d94; font-weight: 700;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--serif); font-size: 1.5rem; color: var(--accent);
   }
   .bm-feature-label {
-    font-size: 0.75rem; color: #a6a6a6; font-family: "Montserrat", sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-mute);
   }
 
   /* ══ STEP 1: Kategorie ══ */
-  .bm-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+  .bm-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
 
   .bm-cat-card {
     position: relative;
-    background-color: #0e1927;
-    border: 1.5px solid #1e2d42;
-    border-radius: 0.75rem;
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
     padding: 1.25rem;
     cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    transition: all var(--t);
     display: flex; flex-direction: column; gap: 0.3rem;
     user-select: none;
   }
   .bm-cat-card:hover {
-    border-color: #488d94;
-    background-color: rgba(72,141,148,0.05);
+    border-color: var(--accent);
+    background: rgba(90,195,207,0.05);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(72,141,148,0.12);
   }
   .bm-cat-card.bm-selected {
-    border-color: #488d94;
-    background-color: rgba(72,141,148,0.1);
-    box-shadow: 0 0 0 1px #488d94;
+    border-color: var(--accent);
+    background: rgba(90,195,207,0.08);
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 24px -6px var(--accent-glow);
   }
   .bm-cat-card.bm-selected::after {
     content: '✓';
-    position: absolute; top: 0.75rem; right: 0.875rem;
-    width: 20px; height: 20px;
-    background-color: #488d94; border-radius: 50%;
+    position: absolute; top: 0.85rem; right: 0.95rem;
+    width: 22px; height: 22px;
+    background: var(--accent); color: var(--bg-deep); border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.65rem; color: #fff; font-weight: 700;
-    line-height: 20px; text-align: center;
+    font-size: 0.75rem; font-weight: 700;
   }
   .bm-cat-tag {
-    display: inline-block; font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase; color: #488d94;
-    background-color: rgba(72,141,148,0.15); border-radius: 0.3rem;
-    padding: 0.2rem 0.5rem; margin-bottom: 0.35rem; width: fit-content;
-    font-family: "Montserrat", sans-serif;
+    display: inline-block; font-size: 0.62rem; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.5rem;
   }
   .bm-cat-name {
-    font-size: 0.95rem; font-weight: 700; color: #ffffff;
-    font-family: "Montserrat", sans-serif; line-height: 1.2;
+    font-family: var(--serif);
+    font-size: 1.25rem; line-height: 1.1; color: var(--text); margin-bottom: 0.35rem;
   }
-  .bm-cat-desc {
-    font-size: 0.78rem; color: #a6a6a6; line-height: 1.45;
-    font-family: "Montserrat", sans-serif;
-  }
-  .bm-cat-price {
-    font-size: 0.78rem; font-weight: 700; color: #488d94;
-    margin-top: 0.4rem; font-family: "Montserrat", sans-serif;
-  }
+  .bm-cat-desc { font-size: 0.82rem; color: var(--text-mute); line-height: 1.5; }
 
   /* ══ STEP 2: Eckdaten ══ */
-  .bm-form { display: flex; flex-direction: column; gap: 1rem; }
-  .bm-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+  .bm-form { display: flex; flex-direction: column; gap: 1.1rem; }
+  .bm-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
 
   .bm-field { display: flex; flex-direction: column; gap: 0.4rem; }
   .bm-field label {
-    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.07em; color: #a6a6a6;
-    font-family: "Montserrat", sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-mute);
   }
   .bm-field input,
   .bm-field textarea {
-    background-color: #0e1927 !important;
-    border: 1.5px solid #1e2d42 !important;
-    border-radius: 0.5rem !important;
-    color: #ffffff !important;
-    font-family: "Montserrat", sans-serif !important;
-    font-size: 0.875rem !important;
-    padding: 0.65rem 0.9rem !important;
+    background: var(--bg-deep) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--r-sm) !important;
+    color: var(--text) !important;
+    font: 400 0.9rem var(--sans) !important;
+    padding: 0.75rem 0.9rem !important;
     width: 100% !important;
     outline: none !important;
-    transition: border-color 0.15s, box-shadow 0.15s !important;
+    transition: border-color var(--t), box-shadow var(--t) !important;
     -webkit-appearance: none; appearance: none;
     box-sizing: border-box !important;
   }
@@ -258,207 +247,183 @@
   }
   .bm-field input:focus,
   .bm-field textarea:focus {
-    border-color: #488d94 !important;
-    box-shadow: 0 0 0 3px rgba(72,141,148,0.15) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px var(--accent-glow) !important;
   }
-  /* date input calendar icon color fix */
   .bm-field input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(0.6);
-    cursor: pointer;
+    filter: invert(0.7); cursor: pointer;
   }
 
-  .bm-field-divider { border: none; border-top: 1px solid #1e2d42; margin: 0.25rem 0; }
+  .bm-field-divider { border: none; border-top: 1px solid var(--border-soft); margin: 0.5rem 0; }
   .bm-field-group-label {
-    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.08em; color: #a6a6a6; margin-bottom: -0.3rem;
-    font-family: "Montserrat", sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent);
   }
 
   /* ══ STEP 3: Menü ══ */
   .bm-menu-status {
     display: flex; justify-content: space-between; align-items: center;
-    background-color: #0e1927; border: 1px solid #1e2d42;
-    border-radius: 0.5rem; padding: 0.65rem 1rem; margin-bottom: 1.25rem;
-    font-size: 0.8rem; font-family: "Montserrat", sans-serif;
+    background: var(--bg-deep); border: 1px solid var(--border);
+    border-radius: var(--r-sm); padding: 0.75rem 1.1rem;
+    margin-bottom: 1.5rem; font-size: 0.85rem;
   }
-  .bm-menu-status span { color: #a6a6a6; }
-  .bm-menu-status strong { color: #ffffff; }
+  .bm-menu-status span { color: var(--text-mute); }
+  .bm-menu-status strong { color: var(--text); }
 
-  .bm-dish-group { margin-bottom: 1.5rem; }
+  .bm-dish-group { margin-bottom: 1.75rem; }
   .bm-dish-group-title {
-    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.09em; color: #a6a6a6; margin-bottom: 0.65rem;
-    font-family: "Montserrat", sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.75rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-soft);
   }
   .bm-dish-list { display: flex; flex-direction: column; gap: 0.4rem; }
-  .bm-dish-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
+  .bm-dish-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
 
   .bm-dish {
-    display: flex; align-items: center; gap: 0.6rem;
-    padding: 0.55rem 0.85rem;
-    background-color: #0e1927; border: 1.5px solid #1e2d42;
-    border-radius: 0.5rem; cursor: pointer;
-    font-size: 0.82rem; color: #a6a6a6;
-    font-family: "Montserrat", sans-serif;
-    transition: border-color 0.15s, color 0.15s, background-color 0.15s;
-    user-select: none; line-height: 1.3;
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    background: var(--bg-deep); border: 1px solid var(--border);
+    border-radius: var(--r-sm); cursor: pointer;
+    font-size: 0.88rem; color: var(--text-2);
+    transition: all var(--t); user-select: none;
   }
-  .bm-dish:hover { border-color: #488d94; color: #ffffff; background-color: rgba(72,141,148,0.05); }
-  .bm-dish.bm-active { border-color: #488d94; background-color: rgba(72,141,148,0.1); color: #ffffff; }
+  .bm-dish:hover { border-color: var(--accent); color: var(--text); }
+  .bm-dish.bm-active {
+    border-color: var(--accent); background: rgba(90,195,207,0.08); color: var(--text);
+  }
 
   .bm-dish-dot {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 1.5px solid #1e2d42; flex-shrink: 0;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1.5px solid var(--border); flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    transition: border-color 0.15s, background-color 0.15s;
+    transition: all var(--t);
   }
-  .bm-dish.bm-active .bm-dish-dot { border-color: #488d94; background-color: #488d94; }
+  .bm-dish.bm-active .bm-dish-dot { border-color: var(--accent); background: var(--accent); }
   .bm-dish-dot-inner {
-    width: 6px; height: 6px; border-radius: 50%;
-    background-color: transparent; transition: background-color 0.15s;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: transparent; transition: background var(--t);
   }
-  .bm-dish.bm-active .bm-dish-dot-inner { background-color: #ffffff; }
+  .bm-dish.bm-active .bm-dish-dot-inner { background: var(--bg-deep); }
+  .bm-dish-label { flex: 1; }
 
   .bm-sub-chips {
     display: flex; flex-wrap: wrap; gap: 0.4rem;
-    padding: 0.4rem 0.85rem 0.2rem 2.1rem;
+    padding: 0.25rem 0.25rem 0.25rem 2.4rem;
   }
   .bm-sub-chip {
-    font-size: 0.75rem; padding: 0.3rem 0.7rem;
-    background-color: #0e1927; border: 1.5px solid #1e2d42;
-    border-radius: 999px; color: #a6a6a6; cursor: pointer;
-    font-family: "Montserrat", sans-serif;
-    transition: border-color 0.15s, color 0.15s, background-color 0.15s;
-    user-select: none;
+    font-size: 0.75rem; padding: 0.35rem 0.75rem;
+    background: var(--bg-deep); border: 1px solid var(--border);
+    border-radius: 999px; color: var(--text-mute); cursor: pointer;
+    transition: all var(--t); user-select: none;
   }
-  .bm-sub-chip:hover { border-color: #488d94; color: #ffffff; background-color: rgba(72,141,148,0.05); }
-  .bm-sub-chip.bm-active { border-color: #488d94; background-color: rgba(72,141,148,0.15); color: #488d94; font-weight: 700; }
+  .bm-sub-chip:hover { border-color: var(--accent); color: var(--text); }
+  .bm-sub-chip.bm-active {
+    border-color: var(--accent); background: rgba(90,195,207,0.15);
+    color: var(--accent); font-weight: 600;
+  }
 
-  .bm-included-box {
-    margin-top: 1.25rem; padding: 0.875rem 1rem;
-    background-color: rgba(72,141,148,0.05); border: 1px solid rgba(72,141,148,0.18);
-    border-radius: 0.5rem;
+  /* ── Item-Badge ── */
+  .bm-item-badge {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 0.2rem 0.55rem;
+    border-radius: 999px; white-space: nowrap; flex-shrink: 0;
   }
-  .bm-included-list { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 0.5rem; }
-  .bm-incl-item {
-    font-size: 0.78rem; color: #488d94; font-family: "Montserrat", sans-serif;
+  .bm-badge-incl, .bm-badge-base { background: rgba(90,195,207,0.15); color: var(--accent); }
+  .bm-badge-extra { background: rgba(166,166,166,0.1); color: var(--text-mute); }
+
+  /* ── Food-Truck Info-Box ── */
+  .bm-info-box {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    padding: 0.9rem 1.1rem; margin-bottom: 1.5rem;
+    background: rgba(90,195,207,0.05);
+    border: 1px solid rgba(90,195,207,0.2); border-radius: var(--r-sm);
+    font-size: 0.85rem; line-height: 1.6; color: var(--text-2);
   }
+  .bm-info-icon { color: var(--accent); flex-shrink: 0; margin-top: 0.1rem; }
+
+  /* ── Empfehlungsbox ── */
+  .bm-reco-box {
+    margin-top: 1.25rem; padding: 1rem 1.25rem;
+    background: rgba(90,195,207,0.05);
+    border-left: 2px solid var(--accent); border-radius: var(--r-sm);
+  }
+  .bm-reco-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    display: block; margin-bottom: 0.6rem;
+  }
+  .bm-reco-rows {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem;
+    font-size: 0.85rem; color: var(--text-2);
+  }
+  .bm-reco-rows strong { color: var(--text); }
 
   /* ══ STEP 4: Wünsche ══ */
   .bm-wishes-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
   .bm-wishes-wrap textarea {
-    width: 100% !important; min-height: 135px !important;
-    background-color: #0e1927 !important; border: 1.5px solid #1e2d42 !important;
-    border-radius: 0.5rem !important; color: #ffffff !important;
-    font-family: "Montserrat", sans-serif !important; font-size: 0.875rem !important;
-    padding: 0.75rem 1rem !important; resize: vertical !important;
-    outline: none !important; line-height: 1.6 !important;
-    transition: border-color 0.15s, box-shadow 0.15s !important;
+    width: 100% !important; min-height: 150px !important;
+    background: var(--bg-deep) !important; border: 1px solid var(--border) !important;
+    border-radius: var(--r-sm) !important; color: var(--text) !important;
+    font: 400 0.9rem var(--sans) !important; padding: 0.85rem 1rem !important;
+    resize: vertical !important; outline: none !important; line-height: 1.6 !important;
+    transition: border-color var(--t), box-shadow var(--t) !important;
     box-sizing: border-box !important;
   }
   .bm-wishes-wrap textarea::placeholder { color: rgba(166,166,166,0.35) !important; }
-  .bm-wishes-wrap textarea:focus { border-color: #488d94 !important; box-shadow: 0 0 0 3px rgba(72,141,148,0.15) !important; }
-  .bm-hint { font-size: 0.75rem; color: rgba(166,166,166,0.5); line-height: 1.5; font-family: "Montserrat", sans-serif; }
+  .bm-wishes-wrap textarea:focus {
+    border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-glow) !important;
+  }
+  .bm-hint { font-size: 0.78rem; color: var(--text-mute); margin-top: 0.6rem; line-height: 1.5; }
 
   /* ══ STEP 5: Zusammenfassung ══ */
-  .bm-summary-block { margin-bottom: 1.25rem; }
+  .bm-summary-block { margin-bottom: 1.5rem; }
   .bm-summary-title {
-    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.09em; color: #a6a6a6; margin-bottom: 0.5rem;
-    font-family: "Montserrat", sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
   }
   .bm-summary-row {
     display: flex; justify-content: space-between; align-items: baseline;
-    padding: 0.4rem 0; border-bottom: 1px solid #1e2d42;
-    font-size: 0.84rem; gap: 1rem; font-family: "Montserrat", sans-serif;
+    padding: 0.55rem 0; border-bottom: 1px solid var(--border-soft);
+    font-size: 0.9rem; gap: 1rem;
   }
-  .bm-row-key { color: #a6a6a6; flex-shrink: 0; }
-  .bm-row-val { color: #ffffff; text-align: right; }
-
-  .bm-price-box {
-    background-color: rgba(72,141,148,0.07);
-    border: 1px solid rgba(72,141,148,0.2);
-    border-radius: 0.75rem; padding: 1rem 1.25rem; margin-top: 1.25rem;
-  }
-  .bm-price-line {
-    display: flex; justify-content: space-between;
-    font-size: 0.82rem; color: #a6a6a6; padding: 0.3rem 0;
-    font-family: "Montserrat", sans-serif;
-  }
-  .bm-price-line b { color: #ffffff; }
-  .bm-price-sep { border: none; border-top: 1px solid rgba(72,141,148,0.25); margin: 0.5rem 0; }
-  .bm-price-grand { display: flex; justify-content: space-between; align-items: baseline; padding-top: 0.25rem; font-family: "Montserrat", sans-serif; }
-  .bm-price-grand-label { font-size: 0.9rem; font-weight: 700; color: #ffffff; }
-  .bm-price-grand-value { font-size: 1.5rem; font-weight: 800; color: #488d94; }
-  .bm-disclaimer { font-size: 0.7rem; color: rgba(166,166,166,0.4); margin-top: 0.65rem; line-height: 1.5; font-family: "Montserrat", sans-serif; }
+  .bm-row-key { color: var(--text-mute); flex-shrink: 0; }
+  .bm-row-val { color: var(--text); text-align: right; }
 
   /* ══ Erfolg ══ */
   .bm-success {
     display: none; flex-direction: column; align-items: center;
-    text-align: center; gap: 1rem; padding: 3.5rem 2rem;
-    max-width: 720px; margin-inline: auto;
-    background-color: #1a2840; border: 1px solid #1e2d42; border-radius: 1rem;
+    text-align: center; gap: 1.25rem; padding: 4rem 2rem;
+    max-width: 900px; margin-inline: auto;
+    background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--r-lg);
   }
   .bm-success.bm-visible { display: flex; }
   .bm-success-check {
-    width: 58px; height: 58px;
-    background-color: rgba(72,141,148,0.15); border: 1px solid rgba(72,141,148,0.4);
+    width: 64px; height: 64px;
+    background: rgba(90,195,207,0.12); border: 1px solid rgba(90,195,207,0.4);
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; color: #488d94; font-weight: 700;
+    font-size: 1.5rem; color: var(--accent);
   }
-  .bm-success h3 { color: #ffffff; font-family: "Montserrat", sans-serif; }
-  .bm-success p { max-width: 360px; line-height: 1.7; color: #a6a6a6; font-family: "Montserrat", sans-serif; font-size: 0.9rem; }
+  .bm-success h3 { font-size: 2rem; color: var(--text); }
+  .bm-success p { max-width: 380px; font-size: 0.95rem; line-height: 1.7; color: var(--text-2); }
+  .bm-success button {
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.9rem 1.6rem; border-radius: 999px;
+    background: var(--accent); color: var(--bg-deep); border: none;
+    transition: all var(--t); cursor: pointer;
+  }
+  .bm-success button:hover { background: var(--cream); transform: translateY(-2px); }
 
   /* ── Getränke-Step ── */
   .bm-drink-cards { display: flex; flex-direction: column; gap: 0.875rem; }
 
-  /* ── Dish label ── */
-  .bm-dish-label { flex: 1; }
-
-  /* ── Item-Badge ── */
-  .bm-item-badge {
-    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.06em; border-radius: 0.25rem;
-    padding: 0.15rem 0.45rem; white-space: nowrap; flex-shrink: 0;
-    font-family: "Montserrat", sans-serif;
-  }
-  .bm-badge-incl  { background-color: rgba(72,141,148,0.15); color: #488d94; }
-  .bm-badge-base  { background-color: rgba(72,141,148,0.15); color: #488d94; }
-  .bm-badge-extra { background-color: rgba(166,166,166,0.1); color: #a6a6a6; }
-
-  /* ── Empfehlungsbox ── */
-  .bm-reco-box {
-    margin-top: 1rem; padding: 0.75rem 1rem;
-    background-color: rgba(72,141,148,0.05);
-    border-left: 3px solid #488d94; border-radius: 0.25rem;
-    display: flex; flex-direction: column; gap: 0.45rem;
-  }
-  .bm-reco-label {
-    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.07em; color: #488d94; font-family: "Montserrat", sans-serif;
-  }
-  .bm-reco-rows {
-    display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem;
-    font-size: 0.8rem; color: #a6a6a6; font-family: "Montserrat", sans-serif;
-  }
-  .bm-reco-rows strong { color: #ffffff; }
-
-  /* ── Food-Truck Info-Box ── */
-  .bm-info-box {
-    display: flex; align-items: flex-start; gap: 0.5rem;
-    padding: 0.75rem 1rem; margin-bottom: 1.25rem;
-    background-color: rgba(72,141,148,0.05);
-    border: 1px solid rgba(72,141,148,0.2); border-radius: 0.5rem;
-    font-size: 0.8rem; color: #a6a6a6; line-height: 1.55;
-    font-family: "Montserrat", sans-serif;
-  }
-  .bm-info-icon { color: #488d94; flex-shrink: 0; margin-top: 0.05rem; }
-
   /* ── Responsive ── */
   @media (max-width: 640px) {
-    .bm-body, .bm-card-header { padding: 1.25rem; }
-    .bm-nav { padding: 0.9rem 1.25rem; }
-    .bm-price-bar { padding: 0.7rem 1.25rem; }
+    .bm-card-header { padding: 1.25rem; flex-wrap: wrap; }
+    .bm-body { padding: 1.5rem 1.25rem; }
+    .bm-nav { padding: 1rem 1.25rem; flex-direction: column-reverse; }
+    .bm-btn-back, .bm-btn-next { width: 100%; text-align: center; justify-content: center; }
     .bm-cat-grid, .bm-drink-grid, .bm-dish-grid { grid-template-columns: 1fr; }
     .bm-form-row { grid-template-columns: 1fr; }
   }

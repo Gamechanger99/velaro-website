@@ -6,66 +6,228 @@ import Banketmappe from '../components/Banketmappe.astro';
 <Layout title="Catering – Velaro Catering & Foodtruckservice">
 
   <!-- ═══════════ PAGE HERO ═══════════ -->
-  <section class="page-hero">
+  <section class="ph">
+    <div class="container ph-grid">
+      <div class="reveal">
+        <span class="eyebrow">Menüangebote</span>
+        <h1>Catering &amp;<br /><span class="it">Buffet</span></h1>
+        <p class="ph-lead">
+          Vielen Dank für Ihr Interesse an unserem Catering-Service.
+          Wir bieten individuell abgestimmte Speisenkonzepte für jeden
+          Anlass — ob private Feier, Firmenveranstaltung oder Großevent.
+          Unsere Menüs werden frisch zubereitet und auf Ihre Wünsche angepasst.
+        </p>
+        <a href="#banketmappe" class="btn btn-primary">Zur interaktiven Banketmappe <span class="arrow">→</span></a>
+      </div>
+
+      <div class="ph-side reveal">
+        <h4>Im Service enthalten</h4>
+        <ul>
+          <li><span class="ck">✓</span> Liefergebiet Haldensleben &amp; Umgebung — individuelle Anfragen möglich</li>
+          <li><span class="ck">✓</span> Aufbau &amp; Servicepersonal nach Absprache</li>
+          <li><span class="ck">✓</span> Geschirr &amp; Equipment optional buchbar</li>
+          <li><span class="ck">✓</span> Beratung &amp; individuelles Angebot binnen 24h</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CATEGORY CARDS (FLIP) ═══════════ -->
+  <section class="cat-section">
     <div class="container">
-      <p class="page-label">Menüangebote</p>
-      <h1>Catering &<br /><span class="text-accent">Buffet</span></h1>
-      <p class="page-desc">
-        Vielen Dank für Ihr Interesse an unserem Catering-Service.
-        Wir bieten individuell abgestimmte Speisenkonzepte für jeden Anlass —
-        ob private Feier, Firmenveranstaltung oder Großevent.
-        Unsere Menüs werden frisch zubereitet und auf Ihre Wünsche angepasst.
-      </p>
-      <a href="#banketmappe" class="btn-primary" style="margin-top:1rem; display:inline-flex; align-items:center; gap:0.5rem;">Zur interaktiven Banketmappe →</a>
+      <div class="cat-head reveal">
+        <h2>Vier Kategorien, <span class="it">unendlich</span> viele Möglichkeiten.</h2>
+        <p style="max-width: 36ch; font-size: 0.95rem;">
+          Tippen Sie auf eine Karte, um einen Auszug aus dem Sortiment zu sehen.
+        </p>
+      </div>
+
+      <div class="cat-grid reveal-stagger">
+
+        <div class="cat-card">
+          <div class="cat-inner">
+            <div class="cat-face cat-front">
+              <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=900&auto=format&fit=crop" alt="" />
+              <span class="num">— 01</span>
+              <h3>Klassisches <span class="it">Buffet</span></h3>
+              <p class="tease">Warme Gerichte &amp; Beilagen für jeden Anlass. Pasta, Fleisch, Salate &amp; mehr.</p>
+              <span class="flip-hint">
+                Karte umdrehen
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              </span>
+            </div>
+            <div class="cat-face cat-back">
+              <h4>Klassisches <span class="it">Buffet</span></h4>
+              <ul>
+                <li>Suppen — Hochzeitssuppe, Tomatencreme</li>
+                <li>Schnitzel- &amp; Bratenvariation</li>
+                <li>Hähnchenbrust in 3 Variationen</li>
+                <li>Schweinefilet in Pfefferrahm</li>
+                <li>Lachsfilet auf Spargel</li>
+                <li>Vegetarisch: Gnocchi, Falafel</li>
+                <li>Beilagen-Auswahl (Reis, Spätzle, Gratin…)</li>
+                <li>Dessertvariation &amp; Kuchen</li>
+              </ul>
+              <button class="back-btn">← Zurück</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <div class="cat-inner">
+            <div class="cat-face cat-front">
+              <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=900&auto=format&fit=crop" alt="" />
+              <span class="num">— 02</span>
+              <h3><span class="it">Grill</span>buffet</h3>
+              <p class="tease">Frisch vom Grill — Steaks, Bratwurst, vegetarische Optionen, herzhaft &amp; gesellig.</p>
+              <span class="flip-hint">
+                Karte umdrehen
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              </span>
+            </div>
+            <div class="cat-face cat-back">
+              <h4><span class="it">Grill</span>buffet</h4>
+              <ul>
+                <li>Bratwurst &amp; Boulette vom Grill</li>
+                <li>Steak — Schwein oder Hühnchen</li>
+                <li>Grillgemüse &amp; Tomaten-Feta-Pfännchen</li>
+                <li>Fackeln &amp; Spieße</li>
+                <li>Suppen-Vorspeisen</li>
+                <li>Vegetarische Hauptgänge</li>
+                <li>Komplettes Beilagen-Sortiment</li>
+                <li>Dessert &amp; Kuchen-Auswahl</li>
+              </ul>
+              <button class="back-btn">← Zurück</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <div class="cat-inner">
+            <div class="cat-face cat-front">
+              <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=900&auto=format&fit=crop" alt="" />
+              <span class="num">— 03</span>
+              <h3>Kleine <span class="it">Speisen</span></h3>
+              <p class="tease">Wraps, Canapés, Spieße &amp; Brötchen — perfekt für Empfänge ab 10 Personen.</p>
+              <span class="flip-hint">
+                Karte umdrehen
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              </span>
+            </div>
+            <div class="cat-face cat-back">
+              <h4>Kleine <span class="it">Speisen</span></h4>
+              <ul>
+                <li>Belegte Brötchen-Variation</li>
+                <li>Crostinis &amp; Bruschetta</li>
+                <li>Fingerfood — herzhaft &amp; süß</li>
+                <li>Canapés mit Lachs, Roastbeef, Veggie</li>
+                <li>Frische Obstplatten</li>
+                <li>Obstsalat im Glas</li>
+                <li>Suppen-Shots</li>
+                <li>Ab 10 Personen buchbar</li>
+              </ul>
+              <button class="back-btn">← Zurück</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <div class="cat-inner">
+            <div class="cat-face cat-front">
+              <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=900&auto=format&fit=crop" alt="" />
+              <span class="num">— 04</span>
+              <h3>Food <span class="it">Truck</span></h3>
+              <p class="tease">Saftige Burger direkt zu Ihrem Event — Beef, Chicken &amp; vegetarische Varianten.</p>
+              <span class="flip-hint">
+                Karte umdrehen
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+              </span>
+            </div>
+            <div class="cat-face cat-back">
+              <h4>Food <span class="it">Truck</span></h4>
+              <ul>
+                <li>Cheeseburger &amp; Hamburger</li>
+                <li>Chili-Cheese Burger</li>
+                <li>Onion Overload</li>
+                <li>Veggie Burger</li>
+                <li>Pommes Frites &amp; Loaded Fries</li>
+                <li>Aufpreis: Pulled Pork, Teriyaki, BBQ…</li>
+                <li>Aufpreis: Apfel-Camembert, Mexiko-Style</li>
+                <li>Vor Ort frisch zubereitet</li>
+              </ul>
+              <button class="back-btn">← Zurück</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ ÜBERSICHTS-KARTEN ═══════════ -->
-  <section class="overview section container">
-    <div class="overview-grid">
-
-      <div class="overview-card">
-        <div class="ov-icon">🍽️</div>
-        <h3>Klassisches Buffet</h3>
-        <p>Warme Gerichte & Beilagen für jeden Anlass. Pasta, Fleisch, Salate und mehr.</p>
+  <!-- ═══════════ PRICING TIERS ═══════════ -->
+  <section class="tiers">
+    <div class="container">
+      <div class="tiers-head reveal">
+        <span class="eyebrow" style="justify-content: center;">Pakete &amp; Richtwerte</span>
+        <h2>Drei Wege zu Ihrem <span class="it">perfekten</span> Event.</h2>
+        <p>Alle Pakete sind individuell anpassbar — Preise verstehen sich pro Person, inklusive Aufbau und Equipment.</p>
       </div>
 
-      <div class="overview-card">
-        <div class="ov-icon">🔥</div>
-        <h3>Grillbuffet</h3>
-        <p>Frisch vom Grill — Steaks, Bratwurst, vegetarische Optionen und leckere Beilagen.</p>
-      </div>
+      <div class="tier-grid reveal-stagger">
 
-      <div class="overview-card">
-        <div class="ov-icon">🥐</div>
-        <h3>Kleine Speisen</h3>
-        <p>Wraps, Canapés, Spieße und Brötchen — perfekt für Empfänge ab 10 Personen.</p>
-      </div>
+        <div class="tier">
+          <h3>Empfang <span class="it">Light</span></h3>
+          <div class="tprice">
+            <span class="from">ab</span>
+            <span class="price">18€</span>
+            <span class="pp">/ Person</span>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Canapés &amp; Fingerfood</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 3 Variationen zur Auswahl</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Lieferung &amp; Anrichten</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ab 10 Personen</li>
+          </ul>
+          <a href="#banketmappe" class="btn btn-outline">Auswählen</a>
+        </div>
 
-      <div class="overview-card">
-        <div class="ov-icon">🚚</div>
-        <h3>Food Truck</h3>
-        <p>Saftige Burger direkt zu Ihrem Event — Beef, Chicken und vegetarische Varianten.</p>
-      </div>
+        <div class="tier tier--featured">
+          <h3>Bankett <span class="it">Klassik</span></h3>
+          <div class="tprice">
+            <span class="from">ab</span>
+            <span class="price">42€</span>
+            <span class="pp">/ Person</span>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Komplettes Buffet inkl. Suppe</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 2 Hauptgänge + 3 Beilagen</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dessertvariation</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Servicepersonal &amp; Aufbau</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Geschirr &amp; Equipment</li>
+          </ul>
+          <a href="#banketmappe" class="btn btn-primary">Auswählen</a>
+        </div>
 
+        <div class="tier">
+          <h3>Food Truck <span class="it">Event</span></h3>
+          <div class="tprice">
+            <span class="from">ab</span>
+            <span class="price">28€</span>
+            <span class="pp">/ Person</span>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Burger-Grundsortiment</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Pommes &amp; Loaded Fries</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Frisch vor Ort zubereitet</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Inkl. Truck &amp; Team</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ab 30 Personen</li>
+          </ul>
+          <a href="#banketmappe" class="btn btn-outline">Auswählen</a>
+        </div>
+
+      </div>
     </div>
   </section>
-
-  <!-- ═══════════ INFO-LEISTE ═══════════ -->
-  <div class="info-strip container">
-    <div class="info-item">
-      <span class="info-dot"></span>
-      <p>Liefergebiet: <strong>Haldensleben und Umgebung</strong> — individuelle Anfragen möglich</p>
-    </div>
-    <div class="info-item">
-      <span class="info-dot"></span>
-      <p>Aufbau &amp; Servicepersonal nach Absprache</p>
-    </div>
-    <div class="info-item">
-      <span class="info-dot"></span>
-      <p>Geschirr &amp; Equipment optional buchbar</p>
-    </div>
-  </div>
 
   <!-- ═══════════ INTERAKTIVE BANKETMAPPE ═══════════ -->
   <Banketmappe />
@@ -74,122 +236,311 @@ import Banketmappe from '../components/Banketmappe.astro';
 
 <style>
   /* ── Page Hero ── */
-  .page-hero {
-    padding-block: 5rem 3rem;
-    border-bottom: 1px solid var(--color-border);
+  .ph {
+    position: relative;
+    padding-top: clamp(9rem, 16vw, 13rem);
+    padding-bottom: clamp(5rem, 9vw, 8rem);
+    overflow: hidden;
+    isolation: isolate;
   }
-
-  .page-label {
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+  .ph::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2400&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 40%;
+    filter: brightness(0.5) saturate(1.1);
+    transform: scale(1.05);
+  }
+  .ph::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(8,17,29,0.85) 0%, rgba(8,17,29,0.6) 30%, rgba(8,17,29,0.85) 80%, var(--bg) 100%);
+  }
+  .ph-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+  .ph-grid h1 {
+    font-size: clamp(3.2rem, 8vw, 6.5rem);
+    line-height: 0.96;
+    margin: 1.5rem 0;
+  }
+  .ph-lead {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-2);
+    margin-bottom: 2rem;
+    max-width: 50ch;
+  }
+  .ph-side {
+    padding: 2rem;
+    background: rgba(8,17,29,0.6);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--r);
+  }
+  .ph-side h4 {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .ph-side ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .ph-side li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .ph-side li .ck {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    background: rgba(90,195,207,0.15);
+    border: 1px solid rgba(90,195,207,0.4);
+    color: var(--accent);
+    font-size: 0.75rem;
+    margin-top: 0.05rem;
   }
 
-  .page-hero h1 { margin-bottom: 1.25rem; }
-
-  .page-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 560px;
+  /* ── Category Cards ── */
+  .cat-section { padding-block: clamp(4rem, 8vw, 7rem); }
+  .cat-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
   }
-
-  /* ── Übersichts-Karten ── */
-  .overview-grid {
+  .cat-head h2 { font-size: clamp(2rem, 4vw, 3.2rem); max-width: 18ch; }
+  .cat-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
   }
-
-  .overview-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
+  .cat-card {
+    position: relative;
+    height: 480px;
+    perspective: 1200px;
+    cursor: pointer;
+  }
+  .cat-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transition: transform 0.9s var(--ease);
+    transform-style: preserve-3d;
+  }
+  .cat-card.flipped .cat-inner { transform: rotateY(180deg); }
+  .cat-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .cat-front {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    transition: border-color var(--transition), transform var(--transition);
+    justify-content: flex-end;
+    padding: 1.75rem;
+    isolation: isolate;
   }
-
-  .overview-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-3px);
+  .cat-front img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    transition: transform 1.6s var(--ease);
   }
-
-  .ov-icon { font-size: 1.8rem; }
-
-  .overview-card h3 {
+  .cat-front::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(8,17,29,0) 25%, rgba(8,17,29,0.55) 60%, rgba(8,17,29,0.95) 100%);
+  }
+  .cat-card:hover .cat-front img { transform: scale(1.08); }
+  .cat-front .num {
+    position: absolute;
+    top: 1.5rem; left: 1.75rem;
+    font-family: var(--serif);
     font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text);
+    letter-spacing: 0.05em;
+    color: var(--accent);
   }
-
-  .overview-card p {
+  .cat-front h3 { font-size: 1.8rem; line-height: 1; color: #fff; }
+  .cat-front .tease {
     font-size: 0.85rem;
-    line-height: 1.6;
-    flex: 1;
+    line-height: 1.55;
+    color: rgba(246,242,234,0.8);
+    margin-top: 0.6rem;
+    max-width: 28ch;
   }
-
-  .ov-price {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    margin-top: 0.25rem;
+  .cat-front .flip-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
+  .cat-front .flip-hint svg { transition: transform var(--t); }
+  .cat-card:hover .cat-front .flip-hint svg { transform: rotate(90deg); }
 
-  /* ── Info-Leiste ── */
-  .info-strip {
+  .cat-back {
+    transform: rotateY(180deg);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
     display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    padding: 1rem 1.5rem;
-    background-color: rgba(72, 141, 148, 0.06);
-    border: 1px solid rgba(72, 141, 148, 0.2);
-    border-radius: var(--radius-card);
-    margin-bottom: 2rem;
+    flex-direction: column;
   }
-
-  .info-item {
+  .cat-back h4 { font-family: var(--serif); font-size: 1.5rem; line-height: 1; margin-bottom: 1.25rem; }
+  .cat-back ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  .cat-back ul::-webkit-scrollbar { width: 4px; }
+  .cat-back ul::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .cat-back li {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-2);
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--border-soft);
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 0.83rem;
   }
-
-  .info-dot {
-    width: 6px;
-    height: 6px;
-    background-color: var(--color-accent);
-    border-radius: 50%;
-    flex-shrink: 0;
+  .cat-back li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .cat-back .back-btn {
+    margin-top: 1.25rem;
+    align-self: flex-start;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
   }
+  .cat-back .back-btn:hover { color: var(--accent); }
 
-  .info-item p { color: var(--color-text-muted); }
-  .info-item strong { color: var(--color-text); font-weight: 600; }
-
-  /* ── Animationen ── */
-  @keyframes heroFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+  /* ── Pricing Tiers ── */
+  .tiers {
+    background: var(--bg-deep);
+    padding-block: clamp(4rem, 8vw, 7rem);
+    border-block: 1px solid var(--border-soft);
   }
+  .tiers-head { text-align: center; margin-bottom: 4rem; }
+  .tiers-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1.25rem; }
+  .tiers-head p  { max-width: 50ch; margin: 1rem auto 0; }
 
-  .page-hero .container {
-    animation: heroFadeIn 0.9s ease forwards;
-    animation-delay: 0.1s;
-    opacity: 0;
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin-inline: auto;
   }
+  .tier {
+    position: relative;
+    padding: 2.5rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all var(--t-slow);
+  }
+  .tier:hover {
+    border-color: rgba(90,195,207,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4);
+  }
+  .tier--featured {
+    background: linear-gradient(180deg, rgba(90,195,207,0.08), rgba(90,195,207,0.02)), var(--bg-card-2);
+    border-color: rgba(90,195,207,0.3);
+  }
+  .tier--featured::before {
+    content: 'Beliebt';
+    position: absolute;
+    top: -10px; right: 2rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--accent);
+    color: var(--bg-deep);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .tier h3 { font-size: 1.8rem; line-height: 1; }
+  .tprice {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--border-soft);
+  }
+  .tprice .from  { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mute); }
+  .tprice .price { font-family: var(--serif); font-size: 2.8rem; color: var(--accent); line-height: 1; }
+  .tprice .pp    { font-size: 0.85rem; color: var(--text-mute); }
+  .tier ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
+  .tier li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--text-2);
+  }
+  .tier li svg { color: var(--accent); flex-shrink: 0; margin-top: 0.2rem; }
+  .tier .btn { margin-top: 0.5rem; justify-content: center; }
 
   /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .overview-grid { grid-template-columns: 1fr 1fr; }
-  }
-
+  @media (max-width: 860px) { .ph-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  @media (max-width: 1100px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px) {
-    .page-hero { padding-block: 3rem 2rem; }
-    .overview-grid { grid-template-columns: 1fr; }
-    .info-strip { flex-direction: column; gap: 0.75rem; }
+    .cat-grid  { grid-template-columns: 1fr; }
+    .cat-card  { height: 420px; }
   }
+  @media (max-width: 900px) { .tier-grid { grid-template-columns: 1fr; } }
 </style>
+
+<script>
+  document.querySelectorAll('.cat-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('.back-btn')) {
+        card.classList.remove('flipped');
+        return;
+      }
+      card.classList.toggle('flipped');
+    });
+  });
+</script>
