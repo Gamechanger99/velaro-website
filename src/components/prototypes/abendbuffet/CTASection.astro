@@ -1,0 +1,209 @@
+---
+// CTASection.astro — Abendbuffet Prototype
+// Quelle: src/pages/index.astro (Big CTA / cta-band)
+---
+
+<section class="ab-cta-section" id="kontakt" aria-label="Anfrage stellen">
+
+  <!-- Background: food photo with dark overlay -->
+  <div class="ab-cta-bg" aria-hidden="true">
+    <img
+      src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2000&auto=format&fit=crop"
+      alt=""
+      loading="lazy"
+      width="2000"
+      height="1200"
+    />
+  </div>
+  <div class="ab-cta-overlay" aria-hidden="true"></div>
+
+  <!-- Content -->
+  <div class="ab-container ab-cta-inner ab-reveal">
+    <span class="ab-eyebrow" style="justify-content: center;">Bereit für Ihr Event?</span>
+
+    <h2 class="ab-h2 ab-cta-headline">
+      Lassen Sie uns Ihre<br>Idee <em>servieren.</em>
+    </h2>
+
+    <p class="ab-body ab-cta-body">
+      Erzählen Sie uns von Ihrem Anlass — wir melden uns innerhalb von
+      24 Stunden mit einem maßgeschneiderten Vorschlag.
+    </p>
+
+    <!-- Contact details -->
+    <div class="ab-cta-contacts">
+      <a href="mailto:kontakt@velaro-catering.de" class="ab-cta-contact">
+        <span class="ab-label">E-Mail</span>
+        <span class="ab-cta-contact-val">kontakt@velaro-catering.de</span>
+      </a>
+      <div class="ab-cta-contact-divider" aria-hidden="true"></div>
+      <a href="tel:+4916094839906" class="ab-cta-contact">
+        <span class="ab-label">Telefon</span>
+        <span class="ab-cta-contact-val">0160 9483 9906</span>
+      </a>
+    </div>
+
+    <div class="ab-cta-btns">
+      <a href="/catering" class="ab-btn ab-btn-primary">
+        Banketmappe öffnen →
+      </a>
+      <a href="mailto:kontakt@velaro-catering.de" class="ab-btn ab-btn-secondary">
+        Direkt anfragen
+      </a>
+    </div>
+
+    <!-- Response time note -->
+    <p class="ab-cta-note">
+      <span class="ab-cta-dot" aria-hidden="true"></span>
+      Wir antworten in der Regel <strong>innerhalb von 24 Stunden</strong> — montags bis freitags.
+    </p>
+  </div>
+
+</section>
+
+<style>
+  .ab-cta-section {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-block: clamp(8rem, 15vw, 14rem);
+    text-align: center;
+  }
+
+  /* Background photo */
+  .ab-cta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+  .ab-cta-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    filter: saturate(0.7);
+  }
+
+  /* Dark overlay — deeper in center, lighter at edges */
+  .ab-cta-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 100% 100% at 50% 50%, rgba(8,17,29,0.72) 0%, rgba(8,17,29,0.92) 100%),
+      linear-gradient(180deg, rgba(8,17,29,0.75), rgba(8,17,29,0.65));
+  }
+
+  /* Warm cream radial — centered, like a single candle on a table */
+  .ab-cta-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(243,235,220,0.06), transparent 65%);
+  }
+
+  /* ── Content ── */
+  .ab-cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .ab-cta-headline {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .ab-cta-body {
+    margin-top: 1.5rem;
+    max-width: 50ch;
+    text-align: center;
+    font-size: 1.05rem;
+  }
+
+  /* Contact detail pills */
+  .ab-cta-contacts {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ab-cta-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: center;
+    transition: opacity var(--ab-t);
+  }
+  .ab-cta-contact:hover { opacity: 0.75; }
+
+  .ab-cta-contact-val {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--ab-cream);
+    letter-spacing: 0;
+  }
+
+  .ab-cta-contact-divider {
+    width: 1px;
+    height: 2.5rem;
+    background: rgba(243,235,220,0.15);
+  }
+
+  /* Buttons */
+  .ab-cta-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  /* Response note */
+  .ab-cta-note {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 2rem;
+    font-family: var(--ab-sans);
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--ab-text-2);
+    opacity: 0.75;
+  }
+
+  .ab-cta-note strong {
+    color: var(--ab-text);
+    font-weight: 500;
+  }
+
+  .ab-cta-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ab-accent);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(90,195,207,0.5);
+    animation: ab-pulse 2.6s ease-out infinite;
+  }
+
+  @keyframes ab-pulse {
+    0%   { box-shadow: 0 0 0 0   rgba(90,195,207,0.5); }
+    70%  { box-shadow: 0 0 0 9px rgba(90,195,207,0);   }
+    100% { box-shadow: 0 0 0 0   rgba(90,195,207,0);   }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .ab-cta-btns { flex-direction: column; width: 100%; max-width: 320px; }
+    .ab-cta-btns .ab-btn { justify-content: center; }
+    .ab-cta-contacts { gap: 1.5rem; }
+    .ab-cta-contact-divider { display: none; }
+  }
+</style>

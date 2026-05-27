@@ -1,0 +1,227 @@
+---
+// Referenzen.astro — Abendbuffet Prototype
+// Quelle: src/pages/index.astro (Values section)
+
+const werte = [
+  {
+    idx: '— 01',
+    titel: 'Frisch & regional',
+    text: 'Wir verwenden Zutaten von Erzeugern aus der Region — frisch zubereitet direkt für Ihr Event, ohne Kompromisse.',
+  },
+  {
+    idx: '— 02',
+    titel: 'Individuell abgestimmt',
+    text: 'Kein Event gleicht dem anderen. Wir passen Menü, Setup und Service genau auf Ihre Wünsche und Gästezahl an.',
+  },
+  {
+    idx: '— 03',
+    titel: 'Zuverlässig & pünktlich',
+    text: 'Von der Planung bis zum Service — wir sind dabei. Auf den Punkt, mit Charme und der Ruhe der Routine.',
+  },
+];
+---
+
+<section class="ab-section ab-ref" id="referenzen" aria-label="Unsere Werte">
+  <div class="ab-container">
+
+    <!-- Section header: two-column split -->
+    <div class="ab-reveal ab-ref-header">
+      <div class="ab-ref-header-left">
+        <span class="ab-eyebrow">Unser Versprechen</span>
+        <h2 class="ab-h2" style="margin-top: 1.25rem;">
+          Was Sie von uns<br><em>erwarten dürfen.</em>
+        </h2>
+      </div>
+      <p class="ab-body ab-ref-header-right">
+        Drei Versprechen, die wir bei jedem Auftrag halten — vom ersten
+        Briefing bis zum Abbau am Eventabend.
+      </p>
+    </div>
+
+    <!-- Values -->
+    <div class="ab-ref-grid ab-reveal-stagger">
+      {werte.map((w) => (
+        <div class="ab-ref-wert">
+          <div class="ab-ref-idx">{w.idx}</div>
+          <h3 class="ab-h3" style="margin-bottom: 1rem;">{w.titel}</h3>
+          <p class="ab-body">{w.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Featured quote / Kundenstimme -->
+    <div class="ab-reveal ab-ref-quote-wrap">
+      <blockquote class="ab-ref-quote">
+        <span class="ab-ref-quote-mark">"</span>
+        <p class="ab-ref-quote-text">
+          Ein Catering, das Persönlichkeit hat — und das schmeckt man in jedem Bissen.
+        </p>
+        <footer class="ab-ref-quote-footer">
+          <span class="ab-label ab-ref-quote-who">
+            [TODO: Name, Anlass — z. B. Geburtstagsfeier Haldensleben]
+          </span>
+        </footer>
+      </blockquote>
+
+      <!-- Decorative cream line -->
+      <div class="ab-ref-quote-line" aria-hidden="true"></div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .ab-ref {
+    background: var(--ab-bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Left-side candlelight */
+  .ab-ref::before {
+    content: '';
+    position: absolute;
+    left: -8%;
+    top: 0%;
+    width: 40%;
+    height: 70%;
+    background: radial-gradient(ellipse, rgba(243,235,220,0.05), transparent 65%);
+    pointer-events: none;
+  }
+
+  /* ── Header ── */
+  .ab-ref-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: end;
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .ab-ref-header-right {
+    max-width: 48ch;
+    font-size: 1.05rem;
+    padding-bottom: 0.4rem;
+  }
+
+  /* ── Values grid ── */
+  .ab-ref-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: clamp(5rem, 9vw, 8rem);
+  }
+
+  .ab-ref-wert {
+    padding: 2.5rem 2rem 3rem;
+    background: var(--ab-bg-card);
+    border-radius: var(--ab-r-lg);
+    box-shadow:
+      0 4px 24px rgba(0,0,0,0.3),
+      0 0 0 1px var(--ab-glow-xs);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--ab-t-slow), box-shadow var(--ab-t-slow);
+  }
+
+  .ab-ref-wert:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 48px rgba(0,0,0,0.45),
+      0 0 0 1px var(--ab-glow-sm);
+  }
+
+  /* cream top-edge accent on hover */
+  .ab-ref-wert::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--ab-cream), transparent);
+    opacity: 0.4;
+    transition: width 600ms var(--ab-ease);
+  }
+  .ab-ref-wert:hover::before { width: 100%; }
+
+  .ab-ref-idx {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--ab-cream);
+    opacity: 0.45;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0;
+  }
+
+  /* ── Quote block ── */
+  .ab-ref-quote-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: clamp(3rem, 5vw, 4.5rem);
+  }
+
+  .ab-ref-quote-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 3rem;
+    background: linear-gradient(180deg, rgba(243,235,220,0.12), transparent);
+  }
+
+  .ab-ref-quote {
+    max-width: 780px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .ab-ref-quote-mark {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-size: 5rem;
+    line-height: 0.7;
+    color: var(--ab-cream);
+    opacity: 0.25;
+    display: block;
+  }
+
+  .ab-ref-quote-text {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.35;
+    color: var(--ab-cream);
+    letter-spacing: 0;
+    max-width: 22ch;
+  }
+
+  .ab-ref-quote-footer {
+    margin-top: 0.5rem;
+  }
+
+  .ab-ref-quote-who {
+    opacity: 0.45;
+    font-size: 0.65rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .ab-ref-header {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+    .ab-ref-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .ab-ref-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,370 @@
+---
+// Hero.astro — Abendbuffet Prototype
+// Quelle: src/pages/index.astro (Hero/Intro)
+---
+
+<header class="ab-hero-section">
+
+  <!-- ── Nav ── -->
+  <nav class="ab-nav">
+    <div class="ab-container ab-nav-inner">
+      <a href="/prototypes/abendbuffet" class="ab-nav-logo">
+        <span class="ab-logo-mark">Velaro</span>
+        <span class="ab-logo-sub">Catering & Foodtruckservice</span>
+      </a>
+
+      <ul class="ab-nav-links" role="list">
+        <li><a href="#leistungen">Catering</a></li>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#referenzen">Werte</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+
+      <a href="#kontakt" class="ab-btn ab-btn-secondary ab-nav-cta">
+        Anfrage stellen
+      </a>
+
+      <button
+        class="ab-burger"
+        id="ab-burger"
+        aria-label="Navigation öffnen"
+        aria-expanded="false"
+        aria-controls="ab-mobile-nav"
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Mobile nav drawer ── -->
+  <div class="ab-mobile-nav" id="ab-mobile-nav" role="dialog" aria-label="Navigation">
+    <ul role="list">
+      <li><a href="#leistungen">Catering</a></li>
+      <li><a href="#ueber-uns">Über uns</a></li>
+      <li><a href="#referenzen">Werte</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="#kontakt" class="ab-btn ab-btn-primary">Anfrage stellen</a>
+  </div>
+
+  <!-- ── Candlelight glow (Kerzenlicht von links) ── -->
+  <div class="ab-hero-glow" aria-hidden="true"></div>
+
+  <!-- ── Hero grid ── -->
+  <div class="ab-container ab-hero-grid">
+
+    <!-- Left: Text -->
+    <div class="ab-hero-text">
+      <span class="ab-eyebrow">Catering & Foodtruckservice · Haldensleben</span>
+      <h1 class="ab-display ab-hero-headline">
+        Frisch<br>
+        gekocht.<br>
+        Stilvoll<br>
+        serviert.
+      </h1>
+      <p class="ab-hero-sub ab-body">
+        Ihr professioneller Partner für unvergessliche kulinarische
+        Erlebnisse — von exklusiven Events bis zu regionalen Märkten.
+      </p>
+      <div class="ab-hero-cta">
+        <a href="#leistungen" class="ab-btn ab-btn-primary">Catering entdecken →</a>
+        <a href="#kontakt"    class="ab-btn ab-btn-secondary">Kontakt aufnehmen</a>
+      </div>
+    </div>
+
+    <!-- Right: Portrait photo — zieht nach oben in die Headline -->
+    <div class="ab-hero-photo" aria-hidden="true">
+      <img
+        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900&auto=format&fit=crop&crop=center"
+        alt="Velaro — frisch zubereitetes Catering"
+        loading="eager"
+        fetchpriority="high"
+        width="900"
+        height="1200"
+      />
+      <div class="ab-hero-photo-edge"></div>
+    </div>
+
+  </div>
+
+  <!-- ── Scroll hint ── -->
+  <div class="ab-scroll-hint" aria-hidden="true">
+    <span>Entdecken</span>
+    <span class="ab-scroll-line"></span>
+  </div>
+
+</header>
+
+<style>
+  /* ── Hero wrapper ── */
+  .ab-hero-section {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    background: var(--ab-bg-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* ── Candlelight: cream radial glow from left ── */
+  .ab-hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 75% 90% at -8% 55%,  rgba(243,235,220,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 55% at 28%  80%,  rgba(243,235,220,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 40% at  5%  25%,  rgba(243,235,220,0.04) 0%, transparent 60%);
+  }
+
+  /* ── Nav ── */
+  .ab-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .ab-nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .ab-nav-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-right: auto;
+  }
+
+  .ab-logo-mark {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--ab-cream);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .ab-logo-sub {
+    font-family: var(--ab-sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ab-text-2);
+    opacity: 0.65;
+  }
+
+  .ab-nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.25rem;
+  }
+
+  .ab-nav-links a {
+    font-family: var(--ab-sans);
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--ab-text-2);
+    transition: color var(--ab-t);
+    letter-spacing: 0;
+  }
+  .ab-nav-links a:hover { color: var(--ab-cream); }
+
+  .ab-nav-cta { font-size: 0.82rem; padding: 0.65rem 1.4rem; }
+
+  /* Hamburger */
+  .ab-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid rgba(243,235,220,0.22);
+    border-radius: var(--ab-r-sm);
+    padding: 0 8px;
+    cursor: pointer;
+    transition: border-color var(--ab-t);
+  }
+  .ab-burger:hover { border-color: rgba(243,235,220,0.5); }
+  .ab-burger span {
+    display: block;
+    height: 1px;
+    background: var(--ab-cream);
+    border-radius: 1px;
+    transition: transform var(--ab-t), opacity var(--ab-t);
+  }
+
+  /* Mobile drawer */
+  .ab-mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: var(--ab-bg-deep);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 2rem;
+    transform: translateX(100%);
+    transition: transform 380ms var(--ab-ease);
+  }
+  .ab-mobile-nav.ab-nav-open {
+    transform: translateX(0);
+  }
+  .ab-mobile-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  .ab-mobile-nav a {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-size: 2.4rem;
+    color: var(--ab-cream);
+    transition: opacity var(--ab-t);
+  }
+  .ab-mobile-nav a:hover { opacity: 0.7; }
+
+  /* ── Hero grid ── */
+  .ab-hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: end;
+    width: 100%;
+  }
+
+  /* ── Left: text ── */
+  .ab-hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .ab-hero-headline {
+    margin-top: 1.5rem;
+  }
+
+  .ab-hero-sub {
+    max-width: 46ch;
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .ab-hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Right: portrait photo ── */
+  .ab-hero-photo {
+    position: relative;
+    /* pulls photo up so top overlaps into the headline area */
+    margin-top: -22vh;
+    border-radius: var(--ab-r-lg) var(--ab-r-lg) 0 0;
+    overflow: hidden;
+  }
+
+  .ab-hero-photo img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+
+  /* Warm cream edge glow — candlelight spilling from left */
+  .ab-hero-photo-edge {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg,  rgba(243,235,220,0.07) 0%, transparent 40%),
+      linear-gradient(180deg, rgba(8,17,29,0.25) 0%, transparent 30%);
+  }
+
+  /* ── Scroll hint ── */
+  .ab-scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--ab-sans);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(243,235,220,0.35);
+    pointer-events: none;
+  }
+
+  .ab-scroll-line {
+    display: block;
+    width: 1px;
+    height: 42px;
+    background: linear-gradient(180deg, rgba(243,235,220,0.5), transparent);
+    animation: ab-drip 2.6s ease-in-out infinite;
+  }
+
+  @keyframes ab-drip {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    48%  { transform: scaleY(1); transform-origin: top; }
+    52%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .ab-nav-links, .ab-nav-cta { display: none; }
+    .ab-burger { display: flex; }
+    .ab-mobile-nav { display: flex; }
+
+    .ab-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .ab-hero-photo {
+      margin-top: 0;
+      border-radius: var(--ab-r-lg);
+      order: -1;
+    }
+
+    .ab-hero-photo img {
+      height: 52vw;
+      min-height: 260px;
+    }
+
+    .ab-scroll-hint { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .ab-hero-cta { flex-direction: column; }
+    .ab-hero-cta .ab-btn { justify-content: center; }
+  }
+</style>

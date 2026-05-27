@@ -1,0 +1,323 @@
+---
+// Footer.astro — Abendbuffet Prototype
+// Quelle: src/pages/kontakt.astro (Kontaktdaten) + src/components/Footer.astro
+---
+
+<footer class="ab-footer">
+
+  <!-- Top gradient line — cream, not teal -->
+  <div class="ab-footer-topline" aria-hidden="true"></div>
+
+  <div class="ab-container ab-footer-grid">
+
+    <!-- Brand column -->
+    <div class="ab-footer-brand">
+      <a href="/prototypes/abendbuffet" class="ab-footer-logo" aria-label="Velaro — zur Startseite">
+        <span class="ab-footer-wordmark">Velaro</span>
+        <span class="ab-footer-tagline">Catering & Foodtruckservice</span>
+      </a>
+      <p class="ab-footer-desc">
+        Professioneller Catering-Service aus Haldensleben —
+        frisch, regional, mit Leidenschaft zubereitet für jeden Anlass.
+      </p>
+      <a
+        href="https://instagram.com/velaro_cateringundfoodtruck"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ab-footer-ig"
+        aria-label="Velaro auf Instagram"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect width="20" height="20" x="2" y="2" rx="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+        </svg>
+        @velaro_cateringundfoodtruck
+      </a>
+    </div>
+
+    <!-- Navigation column -->
+    <div class="ab-footer-col">
+      <h5 class="ab-footer-col-title ab-label">Navigation</h5>
+      <ul class="ab-footer-list" role="list">
+        <li><a href="/prototypes/abendbuffet">Start</a></li>
+        <li><a href="#leistungen">Catering</a></li>
+        <li><a href="/maerkte">Märkte</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact column -->
+    <div class="ab-footer-col">
+      <h5 class="ab-footer-col-title ab-label">Kontakt</h5>
+      <ul class="ab-footer-list" role="list">
+        <li>
+          <a href="mailto:kontakt@velaro-catering.de">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            kontakt@velaro-catering.de
+          </a>
+        </li>
+        <li>
+          <a href="tel:+4916094839906">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+            0160 9483 9906
+          </a>
+        </li>
+        <li>
+          <a href="https://maps.google.com/?q=Freischützstraße+10+Haldensleben" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Freischützstraße 10, Haldensleben
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Hours column -->
+    <div class="ab-footer-col">
+      <h5 class="ab-footer-col-title ab-label">Erreichbarkeit</h5>
+      <ul class="ab-footer-hours" role="list">
+        <li>
+          <span class="ab-footer-day">Mo – Fr</span>
+          <span class="ab-footer-time">08 — 18 Uhr</span>
+        </li>
+        <li>
+          <span class="ab-footer-day">Samstag</span>
+          <span class="ab-footer-time">09 — 14 Uhr</span>
+        </li>
+        <li>
+          <span class="ab-footer-day">Sonntag</span>
+          <span class="ab-footer-time ab-footer-closed">Geschlossen</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="ab-container ab-footer-bottom">
+    <p>© 2026 Velaro Catering & Foodtruckservice</p>
+    <div class="ab-footer-legal">
+      <a href="/impressum">Impressum</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <span class="ab-footer-proto-badge">Prototype — Abendbuffet</span>
+    </div>
+  </div>
+
+</footer>
+
+<style>
+  .ab-footer {
+    background: var(--ab-bg-deep);
+    padding-top: 5rem;
+    padding-bottom: 1.75rem;
+    margin-top: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Cream top line — not teal */
+  .ab-footer-topline {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(243,235,220,0.18), transparent);
+  }
+
+  /* Subtle warm ambiance */
+  .ab-footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: -10%;
+    width: 40%;
+    height: 60%;
+    background: radial-gradient(ellipse, rgba(243,235,220,0.03), transparent 65%);
+    pointer-events: none;
+  }
+
+  /* Grid */
+  .ab-footer-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(243,235,220,0.06);
+    position: relative;
+  }
+
+  /* Brand */
+  .ab-footer-logo {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ab-footer-wordmark {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--ab-cream);
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .ab-footer-tagline {
+    font-family: var(--ab-sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ab-text-2);
+    opacity: 0.55;
+  }
+
+  .ab-footer-desc {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ab-text-2);
+    opacity: 0.7;
+    max-width: 300px;
+    margin-bottom: 1.5rem;
+  }
+
+  .ab-footer-ig {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--ab-text-2);
+    opacity: 0.6;
+    transition: opacity var(--ab-t), color var(--ab-t);
+  }
+  .ab-footer-ig:hover {
+    opacity: 1;
+    color: var(--ab-cream);
+  }
+
+  /* Columns */
+  .ab-footer-col-title {
+    display: block;
+    color: var(--ab-cream);
+    opacity: 0.45;
+    margin-bottom: 1.25rem;
+    font-size: 0.65rem;
+  }
+
+  .ab-footer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .ab-footer-list li a,
+  .ab-footer-list li span {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--ab-text-2);
+    opacity: 0.75;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    transition: opacity var(--ab-t), color var(--ab-t);
+    line-height: 1.5;
+  }
+  .ab-footer-list li a:hover {
+    opacity: 1;
+    color: var(--ab-cream);
+  }
+  .ab-footer-list svg { flex-shrink: 0; margin-top: 0.2rem; opacity: 0.5; }
+
+  /* Hours */
+  .ab-footer-hours {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .ab-footer-hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.88rem;
+  }
+  .ab-footer-day {
+    font-weight: 400;
+    color: var(--ab-text);
+    opacity: 0.75;
+  }
+  .ab-footer-time {
+    font-family: var(--ab-serif);
+    font-style: italic;
+    color: var(--ab-cream);
+    opacity: 0.55;
+    font-size: 1rem;
+  }
+  .ab-footer-closed {
+    font-family: var(--ab-sans);
+    font-style: normal;
+    color: var(--ab-text-2);
+    opacity: 0.4;
+    font-size: 0.82rem;
+    font-weight: 300;
+  }
+
+  /* Bottom bar */
+  .ab-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.75rem;
+    font-size: 0.78rem;
+    color: var(--ab-text-2);
+    opacity: 0.45;
+  }
+  .ab-footer-bottom p { font-weight: 300; }
+
+  .ab-footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .ab-footer-legal a {
+    font-weight: 300;
+    color: var(--ab-text-2);
+    transition: color var(--ab-t), opacity var(--ab-t);
+  }
+  .ab-footer-legal a:hover {
+    color: var(--ab-cream);
+    opacity: 1;
+  }
+
+  .ab-footer-proto-badge {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(243,235,220,0.15);
+    border-radius: 999px;
+    color: rgba(243,235,220,0.3);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .ab-footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .ab-footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .ab-footer-grid { grid-template-columns: 1fr; }
+    .ab-footer-bottom { flex-direction: column; text-align: center; }
+    .ab-footer-legal { justify-content: center; flex-wrap: wrap; gap: 1.25rem; }
+  }
+</style>

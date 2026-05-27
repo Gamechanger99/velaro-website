@@ -1,0 +1,71 @@
+---
+import '../styles/prototype-abendbuffet.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Velaro Catering & Foodtruckservice — Prototype',
+  description = 'Velaro Catering & Foodtruckservice aus Haldensleben.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+
+    <!-- Google Fonts: Cormorant Garamond (upright + italic, 400–700) + Montserrat (300–500) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS loaded via frontmatter import above -->
+  </head>
+  <body>
+    <slot />
+
+    <script is:inline>
+      (() => {
+        // Scroll-reveal
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+        document.querySelectorAll('.ab-reveal, .ab-reveal-stagger').forEach((el) =>
+          io.observe(el)
+        );
+
+        // Mobile nav toggle
+        const burger = document.getElementById('ab-burger');
+        const mobileNav = document.getElementById('ab-mobile-nav');
+        burger?.addEventListener('click', () => {
+          mobileNav?.classList.toggle('ab-nav-open');
+          burger.setAttribute(
+            'aria-expanded',
+            burger.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+          );
+        });
+        mobileNav?.querySelectorAll('a').forEach((a) =>
+          a.addEventListener('click', () => mobileNav.classList.remove('ab-nav-open'))
+        );
+      })();
+    </script>
+  </body>
+</html>
