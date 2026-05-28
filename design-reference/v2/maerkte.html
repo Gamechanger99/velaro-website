@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Märkte — Velaro</title>
+  <link rel="icon" href="assets/logo.svg" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .ph {
+      padding-top: clamp(8rem, 14vw, 11rem);
+      padding-bottom: clamp(3rem, 6vw, 5rem);
+      background: var(--cream);
+    }
+    .ph-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .ph h1 {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      line-height: 0.88;
+      margin: 1.25rem 0 1.5rem;
+    }
+    .ph h1 .hand { color: var(--hot); font-size: 0.78em; }
+    .ph-lead {
+      font-size: 1.1rem;
+      line-height: 1.55;
+      max-width: 50ch;
+      margin-bottom: 2rem;
+    }
+    .ph-image {
+      position: relative;
+      aspect-ratio: 4/5;
+      border: 4px solid var(--ink);
+      overflow: hidden;
+      transform: rotate(2deg);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+    .ph-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: contrast(1.1) saturate(1.2);
+    }
+    .ph-image .badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      padding: 0.55rem 0.95rem;
+      background: var(--hot);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 3px solid var(--cream);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      transform: rotate(-3deg);
+    }
+    .ph-image .badge .dot {
+      width: 10px; height: 10px;
+      background: var(--cream);
+      border-radius: 50%;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+
+    .ph-stats {
+      position: absolute;
+      bottom: -1.25rem;
+      left: 1rem;
+      right: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      padding: 0;
+      background: var(--ink);
+      border: 4px solid var(--cream);
+      box-shadow: 6px 6px 0 var(--hot);
+    }
+    .ph-stats > div { padding: 0.85rem 0.75rem; border-right: 2px solid rgba(243,235,220,0.18); }
+    .ph-stats > div:last-child { border-right: none; }
+    .ph-stats .k {
+      font-family: var(--display);
+      font-size: 2rem;
+      color: var(--hot);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .ph-stats .l {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-top: 0.3rem;
+    }
+    @media (max-width: 900px) {
+      .ph-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* "Offen für alle" feature */
+    .offen-section { padding-block: clamp(4rem, 9vw, 8rem); background: var(--cream); }
+    .offen {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .offen-text h2 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .offen-text h2 .hand { color: var(--hot); }
+    .offen-text p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      max-width: 50ch;
+    }
+    .offen-quote {
+      margin-top: 2rem;
+      padding: 1.4rem 1.5rem;
+      background: var(--hot);
+      color: var(--cream);
+      border: 3px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--ink);
+      font-family: var(--display);
+      font-size: 1.4rem;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      transform: rotate(-1deg);
+    }
+    .offen-quote::before {
+      content: '"';
+      font-family: var(--hand);
+      font-size: 3rem;
+      line-height: 0.6;
+      display: block;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+    .offen-media {
+      position: relative;
+      aspect-ratio: 1;
+      border: 4px solid var(--ink);
+      overflow: hidden;
+      transform: rotate(-1.5deg);
+      box-shadow: 10px 10px 0 var(--hot);
+    }
+    .offen-media img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.08) saturate(1.15); }
+    .offen-media .sticker-corner {
+      position: absolute;
+      top: -1rem; right: -1rem;
+      width: 100px; height: 100px;
+      background: var(--mustard);
+      color: var(--ink);
+      border: 4px solid var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--display);
+      font-size: 0.9rem;
+      line-height: 0.95;
+      text-transform: uppercase;
+      transform: rotate(12deg);
+      animation: wobbleSticker 4s ease-in-out infinite;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    @keyframes wobbleSticker {
+      0%,100% { transform: rotate(12deg); }
+      50%     { transform: rotate(-6deg) scale(1.05); }
+    }
+    @media (max-width: 900px) {
+      .offen { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* Timeline of upcoming markets */
+    .timeline-section {
+      background: var(--navy);
+      color: var(--cream);
+      padding-block: clamp(4rem, 9vw, 8rem);
+    }
+    .timeline-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .timeline-head h2 {
+      color: var(--cream);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-top: 1rem;
+    }
+    .timeline-head h2 .hand { color: var(--hot); }
+
+    .timeline {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 1080px;
+      margin-inline: auto;
+    }
+    .tl-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    .tl-date {
+      background: var(--hot);
+      color: var(--cream);
+      border: 4px solid var(--cream);
+      padding: 1.25rem 0.85rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.2rem;
+      box-shadow: 6px 6px 0 var(--cream);
+      transform: rotate(-2deg);
+      transition: transform var(--t-snap);
+    }
+    .tl-row:hover .tl-date { transform: rotate(2deg) scale(1.05); }
+    .tl-row:nth-child(even) .tl-date { background: var(--accent); color: var(--navy-deep); transform: rotate(2deg); }
+    .tl-row:nth-child(even):hover .tl-date { transform: rotate(-2deg) scale(1.05); }
+    .tl-row:nth-child(3n) .tl-date { background: var(--mustard); color: var(--ink); }
+    .tl-day {
+      font-family: var(--display);
+      font-size: 4rem;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+    }
+    .tl-monyear {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+    .tl-weekday {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .tl-card {
+      background: var(--cream);
+      color: var(--ink);
+      border: 4px solid var(--cream);
+      padding: 1.5rem 1.85rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.25rem;
+      align-items: center;
+      transition: transform var(--t-snap), box-shadow var(--t-snap);
+    }
+    .tl-row:hover .tl-card {
+      transform: translate(-3px,-3px);
+      box-shadow: 8px 8px 0 var(--hot);
+    }
+    .tl-cat-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.65rem;
+    }
+    .tl-type-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--ink);
+      color: var(--hot);
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .tl-card h3 {
+      color: var(--ink);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 0.92;
+      margin-bottom: 0.6rem;
+    }
+    .tl-card h3 .hand { color: var(--hot); font-size: 0.85em; }
+    .tl-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .tl-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tl-meta svg { color: var(--hot); }
+    .tl-card .tl-address {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      color: var(--ink);
+      opacity: 0.7;
+      margin-top: 0.4rem;
+    }
+    .tl-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.9rem 1.3rem;
+      background: var(--hot);
+      color: var(--cream);
+      border: 3px solid var(--ink);
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: all var(--t);
+    }
+    .tl-cta:hover {
+      background: var(--ink);
+      transform: translate(-2px,-2px);
+      box-shadow: 4px 4px 0 var(--hot);
+    }
+    @media (max-width: 760px) {
+      .tl-row { grid-template-columns: 1fr; gap: 0.75rem; }
+      .tl-date { transform: rotate(0); flex-direction: row; align-items: baseline; justify-content: center; gap: 0.6rem; }
+      .tl-row:nth-child(even) .tl-date { transform: rotate(0); }
+      .tl-day { font-size: 2.5rem; }
+      .tl-card { grid-template-columns: 1fr; }
+    }
+
+    /* Map section */
+    .map-section {
+      padding-block: clamp(4rem, 9vw, 8rem);
+      background: var(--cream);
+    }
+    .map-head {
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .map-head h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-top: 1rem; }
+    .map-head h2 .hand { color: var(--hot); }
+    .map-head p { max-width: 38ch; font-size: 1rem; }
+    .map-card {
+      position: relative;
+      height: 500px;
+      background: var(--ink);
+      border: 4px solid var(--ink);
+      box-shadow: 10px 10px 0 var(--hot);
+      overflow: hidden;
+    }
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 50%, rgba(255,87,34,0.18) 0%, transparent 40%),
+        radial-gradient(circle at 70% 35%, rgba(90,195,207,0.15) 0%, transparent 30%),
+        radial-gradient(circle at 50% 70%, rgba(232,179,65,0.12) 0%, transparent 35%);
+    }
+    .map-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+    }
+    .map-svg path { stroke: var(--accent); stroke-width: 0.6; fill: none; }
+    .map-pin {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .map-pin-marker {
+      width: 40px; height: 40px;
+      background: var(--hot);
+      border: 4px solid var(--cream);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 4px 0 var(--ink);
+      transition: transform var(--t-snap);
+      position: relative;
+    }
+    .map-pin-marker::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      background: var(--cream);
+    }
+    .map-pin:hover .map-pin-marker { transform: rotate(-45deg) scale(1.2); }
+    .map-pin-tooltip {
+      position: absolute;
+      bottom: calc(100% + 14px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.55rem 0.9rem;
+      background: var(--cream);
+      color: var(--ink);
+      border: 3px solid var(--ink);
+      white-space: nowrap;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--t);
+    }
+    .map-pin:hover .map-pin-tooltip { opacity: 1; }
+
+    .map-legend {
+      position: absolute;
+      bottom: 1.25rem; left: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: var(--cream);
+      color: var(--ink);
+      border: 3px solid var(--ink);
+      max-width: 280px;
+    }
+    .map-legend h4 {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: var(--hot);
+      margin-bottom: 0.4rem;
+    }
+    .map-legend p { font-size: 0.88rem; color: var(--ink); line-height: 1.45; }
+
+    /* CTA card */
+    .cta-card {
+      display: grid;
+      grid-template-columns: 1.4fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 3rem 3rem;
+      background: var(--hot);
+      color: var(--cream);
+      border: 4px solid var(--ink);
+      box-shadow: 12px 12px 0 var(--ink);
+    }
+    .cta-card h2 {
+      color: var(--cream);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 0.6rem;
+    }
+    .cta-card h2 .hand { color: var(--cream); font-size: 0.85em; }
+    .cta-card p { color: var(--cream); font-size: 1rem; }
+    .cta-card .btns { display: flex; gap: 0.85rem; flex-shrink: 0; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .cta-card { grid-template-columns: 1fr; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header-slot"></div>
+
+  <main data-screen-label="03 Märkte">
+
+    <!-- ═══════════ PAGE HERO ═══════════ -->
+    <section class="ph">
+      <div class="container ph-grid">
+        <div class="reveal">
+          <span class="eyebrow">Unsere Termine</span>
+          <h1>Märkte &amp;<br/><span class="hand">Veranstaltungen</span></h1>
+          <p class="ph-lead">
+            Wir sind unterwegs — auf Stadtfesten, Bauernmärkten und Sommerfesten.
+            Kommt vorbei, holt euch was Frisches, schaut uns über die Schulter.
+            Wir freuen uns auf euch.
+          </p>
+          <a href="#termine" class="btn btn-primary">Termine ansehen <span class="arrow">↓</span></a>
+        </div>
+        <div class="ph-image reveal">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1400&auto=format&fit=crop" alt="Food Truck im Einsatz" />
+          <span class="badge"><span class="dot"></span> Gerade unterwegs</span>
+          <div class="ph-stats">
+            <div><div class="k">3</div><div class="l">Termine</div></div>
+            <div><div class="k">2</div><div class="l">Städte</div></div>
+            <div><div class="k">10h</div><div class="l">Service/Tag</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ MARQUEE ═══════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>★ Stadtfest Heinsberg ★ Altstadtfest HDL ★ Bauernmarkt Erkelenz ★ Hochzeitsmarkt ★ Sommerfest ★</span>
+        <span>★ Stadtfest Heinsberg ★ Altstadtfest HDL ★ Bauernmarkt Erkelenz ★ Hochzeitsmarkt ★ Sommerfest ★</span>
+      </div>
+    </div>
+
+    <!-- ═══════════ OFFEN FÜR ALLE ═══════════ -->
+    <section class="offen-section">
+      <div class="container offen">
+        <div class="offen-text reveal">
+          <span class="eyebrow eyebrow--teal">Mehr als Essen</span>
+          <h2>Offen für alle.<br/>Auch für <span class="hand">euch</span>.</h2>
+          <p>
+            Unsere Foodtrucks und Marktstände sind keine Restaurants im
+            Kleinformat — sie sind Treffpunkte. Familien, Freunde, Kollegen,
+            Hunde. Wer kommt, kommt.
+          </p>
+          <p>
+            Von herzhaft bis vegetarisch, von Boulette bis Falafel — bei uns
+            findet jeder was. Hauptsache, ihr habt Hunger.
+          </p>
+          <blockquote class="offen-quote">
+            Wir kommen wegen des Essens — und bleiben wegen der Stimmung.
+          </blockquote>
+        </div>
+        <div class="offen-media reveal">
+          <img src="https://images.unsplash.com/photo-1636224601323-550e96f10d66?q=80&w=1200&auto=format&fit=crop" alt="Food Truck im Einsatz" />
+          <div class="sticker-corner">Frisch<br/>vom<br/>Grill</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ TIMELINE ═══════════ -->
+    <section class="timeline-section" id="termine">
+      <div class="container">
+        <div class="timeline-head reveal">
+          <div>
+            <span class="eyebrow eyebrow--teal">Kommende Termine</span>
+            <h2>Wo ihr uns als<br/><span class="hand">Nächstes</span> findet.</h2>
+          </div>
+          <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn">
+            Auf Instagram folgen <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <div class="timeline reveal-stagger">
+
+          <div class="tl-row">
+            <div class="tl-date">
+              <span class="tl-weekday">Samstag</span>
+              <span class="tl-day">13</span>
+              <span class="tl-monyear">Juni · 26</span>
+            </div>
+            <div class="tl-card">
+              <div>
+                <div class="tl-cat-title">
+                  <span class="tl-type-tag">Stadtfest</span>
+                </div>
+                <h3>Altstadtfest <span class="hand">HDL</span></h3>
+                <div class="tl-meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 08:00 – 14:00</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Hauptplatz Heinsberg</span>
+                </div>
+                <p class="tl-address">Hauptplatz 1 · 52525 Heinsberg</p>
+              </div>
+              <a href="https://maps.google.com/?q=Hauptplatz+1+Heinsberg" target="_blank" rel="noopener" class="tl-cta">
+                Auf Karte
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="tl-row">
+            <div class="tl-date">
+              <span class="tl-weekday">Samstag</span>
+              <span class="tl-day">27</span>
+              <span class="tl-monyear">Juni · 26</span>
+            </div>
+            <div class="tl-card">
+              <div>
+                <div class="tl-cat-title">
+                  <span class="tl-type-tag">Großevent</span>
+                </div>
+                <h3>Stadtfest <span class="hand">Heinsberg</span></h3>
+                <div class="tl-meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 – 20:00</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Marktstraße Heinsberg</span>
+                </div>
+                <p class="tl-address">Marktstraße · 52525 Heinsberg</p>
+              </div>
+              <a href="https://maps.google.com/?q=Marktstraße+Heinsberg" target="_blank" rel="noopener" class="tl-cta">
+                Auf Karte
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="tl-row">
+            <div class="tl-date">
+              <span class="tl-weekday">Samstag</span>
+              <span class="tl-day">11</span>
+              <span class="tl-monyear">Juli · 26</span>
+            </div>
+            <div class="tl-card">
+              <div>
+                <div class="tl-cat-title">
+                  <span class="tl-type-tag">Bauernmarkt</span>
+                </div>
+                <h3>Bauernmarkt <span class="hand">Altstadt</span></h3>
+                <div class="tl-meta">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 09:00 – 15:00</span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Altstadt Erkelenz</span>
+                </div>
+                <p class="tl-address">Alter Markt · 41812 Erkelenz</p>
+              </div>
+              <a href="https://maps.google.com/?q=Alter+Markt+Erkelenz" target="_blank" rel="noopener" class="tl-cta">
+                Auf Karte
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ MAP ═══════════ -->
+    <section class="map-section">
+      <div class="container">
+        <div class="map-head reveal">
+          <div>
+            <span class="eyebrow">Einzugsgebiet</span>
+            <h2>Unsere <span class="hand">Region</span>.</h2>
+          </div>
+          <p>Regelmäßig in Haldensleben, Heinsberg, Erkelenz und Umgebung. Anfragen aus anderen Städten sind jederzeit willkommen.</p>
+        </div>
+
+        <div class="map-card reveal">
+          <div class="map-overlay"></div>
+          <svg class="map-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <path d="M 50 350 Q 200 200 380 280 T 700 200 Q 850 180 950 250" />
+            <path d="M 100 100 Q 300 120 450 220 T 800 350" />
+            <path d="M 0 250 Q 250 300 500 250 T 1000 300" stroke-opacity="0.5"/>
+            <path d="M 300 0 Q 350 200 380 400" stroke-opacity="0.4"/>
+            <path d="M 700 0 Q 680 250 720 500" stroke-opacity="0.4"/>
+          </svg>
+
+          <div class="map-pin" style="left: 28%; top: 38%;">
+            <div class="map-pin-marker"></div>
+            <div class="map-pin-tooltip">Haldensleben · Manufaktur</div>
+          </div>
+          <div class="map-pin" style="left: 52%; top: 58%;">
+            <div class="map-pin-marker"></div>
+            <div class="map-pin-tooltip">Heinsberg · 13. + 27. Juni</div>
+          </div>
+          <div class="map-pin" style="left: 72%; top: 42%;">
+            <div class="map-pin-marker"></div>
+            <div class="map-pin-tooltip">Erkelenz · 11. Juli</div>
+          </div>
+
+          <div class="map-legend">
+            <h4>Aktuelle Standorte</h4>
+            <p>Über die Markierungen findet ihr unsere nächsten Termine.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CTA ═══════════ -->
+    <section class="section" style="background: var(--cream);">
+      <div class="container">
+        <div class="cta-card reveal">
+          <div>
+            <span class="eyebrow" style="background: var(--cream); color: var(--ink); box-shadow: 3px 3px 0 var(--ink);">Auf dem Laufenden</span>
+            <h2 style="margin-top: 1rem;">Neue Termine, frische<br/><span class="hand">Gerichte</span>.</h2>
+            <p>Standortwechsel und Sonderaktionen — zuerst auf Instagram. Schaut vorbei.</p>
+          </div>
+          <div class="btns">
+            <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-cream">Instagram folgen <span class="arrow">→</span></a>
+            <a href="kontakt.html" class="btn btn-outline" style="color: var(--cream); border-color: var(--cream); box-shadow: 5px 5px 0 var(--ink);">Kontakt</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-slot"></div>
+
+  <script src="assets/partials.js"></script>
+  <script src="assets/script.js"></script>
+</body>
+</html>

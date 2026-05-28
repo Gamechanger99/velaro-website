@@ -1,0 +1,298 @@
+---
+---
+
+<header class="mkn">
+  <div class="mk-container mkn-inner">
+    <a href="/" class="mkn-logo"><span class="mkn-v">V</span>elaro</a>
+    <nav class="mkn-links" aria-label="Hauptnavigation">
+      <a href="#mk-leistungen">Leistungen</a>
+      <a href="#mk-ueber-uns">Über uns</a>
+      <a href="/kontakt">Kontakt</a>
+    </nav>
+    <a href="/catering" class="mk-btn mk-btn-secondary mkn-cta">Banketmappe</a>
+    <button class="mkn-burger" id="mk-burger" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mkn-mobile" id="mk-mobile-nav" aria-label="Mobile Navigation">
+    <a href="#mk-leistungen">Leistungen</a>
+    <a href="#mk-ueber-uns">Über uns</a>
+    <a href="/kontakt">Kontakt</a>
+    <a href="/catering">Banketmappe →</a>
+  </nav>
+</header>
+
+<section class="mkh">
+  <div class="mk-container mkh-grid">
+
+    <div class="mkh-text mk-reveal">
+      <span class="mk-eyebrow" style="margin-bottom: 1.25rem;">
+        Catering &amp; Foodtruckservice · Haldensleben
+      </span>
+      <h1 class="mkh-h1">
+        Frisch<br />gekocht.<br />
+        <span class="mkh-accent">Stilvoll<br />serviert.</span>
+      </h1>
+      <p class="mkh-body">
+        Ihr professioneller Partner für unvergessliche kulinarische
+        Erlebnisse — von exklusiven Events bis zu regionalen Märkten.
+      </p>
+      <div class="mkh-cta">
+        <a href="/catering" class="mk-btn mk-btn-primary">Catering entdecken →</a>
+        <a href="/kontakt" class="mk-btn mk-btn-secondary">Kontakt aufnehmen</a>
+      </div>
+    </div>
+
+    <div class="mkh-media mk-reveal">
+      <img
+        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop"
+        alt="Velaro — Küche in Aktion"
+        class="mkh-img"
+        loading="eager"
+        width="600"
+        height="750"
+      />
+      <div class="mkh-stats">
+        <div class="mkh-stat">
+          <div class="mkh-stat-k">12+</div>
+          <div class="mkh-stat-v">Jahre Erfahrung</div>
+        </div>
+        <div class="mkh-stat">
+          <div class="mkh-stat-k">400+</div>
+          <div class="mkh-stat-v">Events &amp; Märkte</div>
+        </div>
+        <div class="mkh-stat">
+          <div class="mkh-stat-k">100%</div>
+          <div class="mkh-stat-v">Regionale Zutaten</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Marquee strip: dark band connecting hero to Leistungen -->
+<div class="mkm" aria-hidden="true">
+  <div class="mkm-track">
+    <span>
+      Klassisches Buffet <span class="mkm-dot"></span>
+      Grillbuffet <span class="mkm-dot"></span>
+      Food Truck <span class="mkm-dot"></span>
+      Canapés &amp; Fingerfood <span class="mkm-dot"></span>
+      Hochzeiten <span class="mkm-dot"></span>
+      Firmenfeiern <span class="mkm-dot"></span>
+      Regionale Märkte <span class="mkm-dot"></span>
+    </span>
+    <span>
+      Klassisches Buffet <span class="mkm-dot"></span>
+      Grillbuffet <span class="mkm-dot"></span>
+      Food Truck <span class="mkm-dot"></span>
+      Canapés &amp; Fingerfood <span class="mkm-dot"></span>
+      Hochzeiten <span class="mkm-dot"></span>
+      Firmenfeiern <span class="mkm-dot"></span>
+      Regionale Märkte <span class="mkm-dot"></span>
+    </span>
+  </div>
+</div>
+
+<style is:global>
+/* ── Nav ── */
+.mkn {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--mk-bg-deep);
+  border-bottom: 1px solid rgba(243,235,220,0.08);
+}
+.mkn-inner {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 2rem;
+}
+.mkn-logo {
+  font-family: var(--mk-serif);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.4rem;
+  color: var(--mk-cream);
+  letter-spacing: 0.04em;
+  margin-right: auto;
+}
+.mkn-v { color: var(--mk-accent); }
+.mkn-links {
+  display: flex;
+  gap: 2.5rem;
+}
+.mkn-links a {
+  font-family: var(--mk-sans);
+  font-weight: 700;
+  font-size: 0.67rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243,235,220,0.6);
+  transition: color var(--mk-t);
+}
+.mkn-links a:hover { color: var(--mk-cream); }
+.mkn-cta {
+  font-size: 0.65rem !important;
+  padding: 0.6rem 1.1rem !important;
+}
+.mkn-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+}
+.mkn-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--mk-cream);
+}
+.mkn-mobile {
+  display: none;
+  flex-direction: column;
+  background: var(--mk-bg-deep);
+  border-top: 1px solid rgba(243,235,220,0.07);
+}
+.mkn-mobile.mk-nav-open { display: flex; }
+.mkn-mobile a {
+  padding: 0.875rem 1.5rem;
+  font-family: var(--mk-sans);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(243,235,220,0.75);
+  border-bottom: 1px solid rgba(243,235,220,0.06);
+  transition: color var(--mk-t);
+}
+.mkn-mobile a:hover { color: var(--mk-accent); }
+
+/* ── Hero ── */
+.mkh {
+  background: var(--mk-cream);
+  padding-block: clamp(3.5rem, 7vw, 5.5rem) clamp(3rem, 5vw, 4.5rem);
+}
+.mkh-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+.mkh-h1 {
+  font-family: var(--mk-serif);
+  font-weight: 600;
+  font-style: normal;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: 0.92;
+  color: var(--mk-bg-deep);
+  margin-bottom: 1.75rem;
+  letter-spacing: -0.01em;
+}
+.mkh-accent { color: var(--mk-accent); }
+.mkh-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(8,17,29,0.65);
+  max-width: 46ch;
+  margin-bottom: 2rem;
+}
+.mkh-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.mkh-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--mk-bg-deep);
+  border-radius: 0;
+  display: block;
+}
+.mkh-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: -1px;
+  border: 1px solid var(--mk-bg-deep);
+  border-top: none;
+}
+.mkh-stat {
+  padding: 1rem 0.875rem;
+  background: var(--mk-cream);
+  border-right: 1px solid var(--mk-bg-deep);
+}
+.mkh-stat:last-child { border-right: none; }
+.mkh-stat-k {
+  font-family: var(--mk-serif);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--mk-bg-deep);
+}
+.mkh-stat-v {
+  font-family: var(--mk-sans);
+  font-weight: 700;
+  font-size: 0.57rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(8,17,29,0.45);
+  margin-top: 0.3rem;
+}
+
+/* ── Marquee ── */
+.mkm {
+  background: var(--mk-bg-deep);
+  padding-block: 1.125rem;
+  overflow: hidden;
+  border-top: 1px solid rgba(243,235,220,0.06);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.mkm-track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: mk-scroll 44s linear infinite;
+  font-family: var(--mk-serif);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.1rem;
+  color: rgba(243,235,220,0.6);
+}
+.mkm-track > span {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  white-space: nowrap;
+}
+.mkm-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--mk-accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+@keyframes mk-scroll { to { transform: translateX(-50%); } }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .mkh-grid    { grid-template-columns: 1fr; gap: 2.5rem; }
+  .mkh-media   { order: -1; }
+  .mkn-links   { display: none; }
+  .mkn-cta     { display: none !important; }
+  .mkn-burger  { display: flex; }
+}
+@media (max-width: 480px) {
+  .mkh-cta { flex-direction: column; }
+  .mkh-cta .mk-btn { justify-content: center; }
+}
+</style>

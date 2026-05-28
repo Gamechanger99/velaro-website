@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catering — Velaro</title>
+  <link rel="icon" href="assets/logo.svg" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    /* ─── Page hero with image overlay ─── */
+    .ph {
+      position: relative;
+      padding-top: clamp(9rem, 16vw, 13rem);
+      padding-bottom: clamp(5rem, 9vw, 8rem);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .ph::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2400&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.5) saturate(1.1);
+      transform: scale(1.05);
+    }
+    .ph::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(8,17,29,0.85) 0%, rgba(8,17,29,0.6) 30%, rgba(8,17,29,0.85) 80%, var(--bg) 100%);
+    }
+    .ph-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .ph-grid h1 {
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      line-height: 0.96;
+      margin: 1.5rem 0;
+    }
+    .ph-grid h1 .it { font-style: italic; color: var(--accent); }
+    .ph-lead {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      max-width: 50ch;
+    }
+    .ph-side {
+      padding: 2rem;
+      background: rgba(8,17,29,0.6);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--r);
+    }
+    .ph-side h4 {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .ph-side ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .ph-side li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .ph-side li .ck {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: rgba(90,195,207,0.15);
+      border: 1px solid rgba(90,195,207,0.4);
+      color: var(--accent);
+      font-size: 0.75rem;
+      margin-top: 0.05rem;
+    }
+    @media (max-width: 860px) { .ph-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* ─── Category cards (flip-on-hover, 4 categories) ─── */
+    .cat-section { padding-block: clamp(4rem, 8vw, 7rem); }
+    .cat-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .cat-head h2 { font-size: clamp(2rem, 4vw, 3.2rem); max-width: 18ch; }
+    .cat-head h2 .it { font-style: italic; color: var(--accent); }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .cat-card {
+      position: relative;
+      height: 480px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+    .cat-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.9s var(--ease);
+      transform-style: preserve-3d;
+    }
+    .cat-card.flipped .cat-inner { transform: rotateY(180deg); }
+    .cat-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .cat-front {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.75rem;
+      isolation: isolate;
+    }
+    .cat-front img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      transition: transform 1.6s var(--ease);
+    }
+    .cat-front::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(8,17,29,0) 25%, rgba(8,17,29,0.55) 60%, rgba(8,17,29,0.95) 100%);
+    }
+    .cat-card:hover .cat-front img { transform: scale(1.08); }
+    .cat-front .num {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.75rem;
+      font-family: var(--serif);
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+    .cat-front h3 {
+      font-size: 1.8rem;
+      line-height: 1;
+      color: #fff;
+    }
+    .cat-front h3 .it { font-style: italic; color: var(--accent); }
+    .cat-front .tease {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: rgba(246,242,234,0.8);
+      margin-top: 0.6rem;
+      max-width: 28ch;
+    }
+    .cat-front .flip-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .cat-front .flip-hint svg {
+      transition: transform var(--t);
+    }
+    .cat-card:hover .cat-front .flip-hint svg { transform: rotate(90deg); }
+
+    .cat-back {
+      transform: rotateY(180deg);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .cat-back h4 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .cat-back h4 .it { font-style: italic; color: var(--accent); }
+    .cat-back ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    .cat-back ul::-webkit-scrollbar { width: 4px; }
+    .cat-back ul::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .cat-back li {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-2);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .cat-back li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .cat-back .back-btn {
+      margin-top: 1.25rem;
+      align-self: flex-start;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .cat-back .back-btn:hover { color: var(--accent); }
+
+    @media (max-width: 1100px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .cat-grid { grid-template-columns: 1fr; }
+      .cat-card { height: 420px; }
+    }
+
+    /* ─── Pricing tiers ─── */
+    .tiers {
+      background: var(--bg-deep);
+      padding-block: clamp(4rem, 8vw, 7rem);
+      border-block: 1px solid var(--border-soft);
+    }
+    .tiers-head { text-align: center; margin-bottom: 4rem; }
+    .tiers-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1.25rem; }
+    .tiers-head h2 .it { font-style: italic; color: var(--accent); }
+    .tiers-head p { max-width: 50ch; margin: 1rem auto 0; }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 1100px;
+      margin-inline: auto;
+    }
+    .tier {
+      position: relative;
+      padding: 2.5rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--r-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all var(--t-slow);
+    }
+    .tier:hover {
+      border-color: rgba(90,195,207,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4);
+    }
+    .tier--featured {
+      background: linear-gradient(180deg, rgba(90,195,207,0.08), rgba(90,195,207,0.02)), var(--bg-card-2);
+      border-color: rgba(90,195,207,0.3);
+    }
+    .tier--featured::before {
+      content: 'Beliebt';
+      position: absolute;
+      top: -10px;
+      right: 2rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--accent);
+      color: var(--bg-deep);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border-radius: 999px;
+    }
+    .tier h3 {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .tier h3 .it { font-style: italic; color: var(--accent); }
+    .tier .tprice {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding-block: 1rem;
+      border-block: 1px solid var(--border-soft);
+    }
+    .tier .tprice .from {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+    .tier .tprice .price {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .tier .tprice .pp {
+      font-size: 0.85rem;
+      color: var(--text-mute);
+    }
+    .tier ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; flex: 1; }
+    .tier li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-2);
+    }
+    .tier li svg { color: var(--accent); flex-shrink: 0; margin-top: 0.2rem; }
+    .tier .btn { margin-top: 0.5rem; justify-content: center; }
+    @media (max-width: 900px) { .tier-grid { grid-template-columns: 1fr; } }
+
+    /* ─── Banketmappe (re-styled wizard) ─── */
+    .bm-section {
+      padding-block: clamp(4rem, 8vw, 7rem);
+    }
+    .bm-intro {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+    .bm-intro h2 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin-top: 1rem; }
+    .bm-intro h2 .it { font-style: italic; color: var(--accent); }
+    .bm-intro p { margin-top: 1rem; font-size: 1rem; line-height: 1.7; }
+
+    .bm-card {
+      max-width: 900px;
+      margin-inline: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .bm-card-header {
+      padding: 1.75rem 2.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .bm-num {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--accent);
+      background: rgba(90,195,207,0.08);
+      border: 1px solid rgba(90,195,207,0.25);
+      border-radius: 50%;
+    }
+    .bm-header-text { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+    .bm-step-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+    .bm-step-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      line-height: 1.1;
+    }
+    .bm-progress-bar {
+      display: flex;
+      gap: 4px;
+    }
+    .bm-seg {
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--border);
+      transition: all 0.4s var(--ease);
+    }
+    .bm-seg.done   { background: var(--accent-deep); }
+    .bm-seg.active { background: var(--accent); width: 44px; }
+
+    .bm-body { padding: 2rem 2.25rem; min-height: 280px; }
+    .bm-step-desc {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-2);
+      margin-bottom: 1.5rem;
+    }
+
+    .bm-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.25rem;
+      border-top: 1px solid var(--border-soft);
+      gap: 1rem;
+    }
+    .bm-btn-back, .bm-btn-next {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border-radius: 999px;
+      transition: all var(--t);
+      border: 1px solid transparent;
+    }
+    .bm-btn-back {
+      background: transparent;
+      color: var(--text-mute);
+      border-color: var(--border);
+      visibility: hidden;
+    }
+    .bm-btn-back.bm-visible { visibility: visible; }
+    .bm-btn-back:hover { color: var(--text); border-color: rgba(255,255,255,0.3); }
+    .bm-btn-next {
+      background: var(--accent);
+      color: var(--bg-deep);
+    }
+    .bm-btn-next:hover {
+      background: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -8px var(--accent-glow);
+    }
+
+    /* Welcome step */
+    .bm-welcome {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .bm-welcome-headline {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .bm-welcome-headline .it { font-style: italic; color: var(--accent); }
+    .bm-welcome p {
+      max-width: 460px;
+      margin: 0 auto 2.5rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .bm-feature-row {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .bm-feature-item { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+    .bm-feature-bubble {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(90,195,207,0.08);
+      border: 1px solid rgba(90,195,207,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .bm-feature-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+
+    /* Category step */
+    .bm-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .bm-cat-card {
+      position: relative;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all var(--t);
+      user-select: none;
+    }
+    .bm-cat-card:hover {
+      border-color: var(--accent);
+      background: rgba(90,195,207,0.05);
+      transform: translateY(-2px);
+    }
+    .bm-cat-card.bm-selected {
+      border-color: var(--accent);
+      background: rgba(90,195,207,0.08);
+      box-shadow: 0 0 0 1px var(--accent), 0 8px 24px -6px var(--accent-glow);
+    }
+    .bm-cat-card.bm-selected::after {
+      content: '✓';
+      position: absolute;
+      top: 0.85rem; right: 0.95rem;
+      width: 22px; height: 22px;
+      background: var(--accent);
+      color: var(--bg-deep);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .bm-cat-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .bm-cat-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+    .bm-cat-desc { font-size: 0.82rem; color: var(--text-mute); line-height: 1.5; }
+
+    /* Form fields */
+    .bm-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .bm-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .bm-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .bm-field label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+    .bm-field input, .bm-field textarea {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      color: var(--text);
+      font: 400 0.9rem var(--sans);
+      padding: 0.75rem 0.9rem;
+      width: 100%;
+      outline: none;
+      transition: border-color var(--t), box-shadow var(--t);
+    }
+    .bm-field input::placeholder, .bm-field textarea::placeholder {
+      color: rgba(166,166,166,0.35);
+    }
+    .bm-field input:focus, .bm-field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .bm-field input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.7); cursor: pointer; }
+    .bm-field-divider { border: none; border-top: 1px solid var(--border-soft); margin: 0.5rem 0; }
+    .bm-field-group-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* Menu */
+    .bm-menu-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 0.75rem 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .bm-menu-status span { color: var(--text-mute); }
+    .bm-menu-status strong { color: var(--text); }
+
+    .bm-dish-group { margin-bottom: 1.75rem; }
+    .bm-dish-group-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .bm-dish-list { display: flex; flex-direction: column; gap: 0.4rem; }
+    .bm-dish-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
+    .bm-dish {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 1rem;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      font-size: 0.88rem;
+      color: var(--text-2);
+      transition: all var(--t);
+      user-select: none;
+    }
+    .bm-dish:hover { border-color: var(--accent); color: #fff; }
+    .bm-dish.bm-active {
+      border-color: var(--accent);
+      background: rgba(90,195,207,0.08);
+      color: #fff;
+    }
+    .bm-dish-dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--t);
+    }
+    .bm-dish.bm-active .bm-dish-dot { border-color: var(--accent); background: var(--accent); }
+    .bm-dish-dot-inner {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: transparent;
+      transition: background var(--t);
+    }
+    .bm-dish.bm-active .bm-dish-dot-inner { background: var(--bg-deep); }
+    .bm-dish-label { flex: 1; }
+    .bm-item-badge {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .bm-badge-incl, .bm-badge-base { background: rgba(90,195,207,0.15); color: var(--accent); }
+    .bm-badge-extra { background: rgba(166,166,166,0.1); color: var(--text-mute); }
+    .bm-sub-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0.25rem 0.25rem 0.25rem 2.4rem;
+    }
+    .bm-sub-chip {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-mute);
+      cursor: pointer;
+      transition: all var(--t);
+    }
+    .bm-sub-chip:hover { border-color: var(--accent); color: #fff; }
+    .bm-sub-chip.bm-active {
+      border-color: var(--accent);
+      background: rgba(90,195,207,0.15);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .bm-info-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.5rem;
+      background: rgba(90,195,207,0.05);
+      border: 1px solid rgba(90,195,207,0.2);
+      border-radius: var(--r-sm);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-2);
+    }
+    .bm-info-icon { color: var(--accent); flex-shrink: 0; margin-top: 0.1rem; }
+
+    .bm-reco-box {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: rgba(90,195,207,0.05);
+      border-left: 2px solid var(--accent);
+      border-radius: var(--r-sm);
+    }
+    .bm-reco-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .bm-reco-rows {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-2);
+    }
+    .bm-reco-rows strong { color: var(--text); }
+
+    /* Wishes */
+    .bm-wishes-wrap textarea {
+      width: 100%;
+      min-height: 150px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      color: var(--text);
+      font: 400 0.9rem var(--sans);
+      padding: 0.85rem 1rem;
+      resize: vertical;
+      line-height: 1.6;
+      outline: none;
+      transition: border-color var(--t), box-shadow var(--t);
+    }
+    .bm-wishes-wrap textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .bm-hint {
+      font-size: 0.78rem;
+      color: var(--text-mute);
+      margin-top: 0.6rem;
+      line-height: 1.5;
+    }
+
+    /* Summary */
+    .bm-summary-block { margin-bottom: 1.5rem; }
+    .bm-summary-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .bm-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 0.9rem;
+      gap: 1rem;
+    }
+    .bm-row-key { color: var(--text-mute); flex-shrink: 0; }
+    .bm-row-val { color: var(--text); text-align: right; }
+
+    /* Success */
+    .bm-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.25rem;
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin-inline: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--r-lg);
+    }
+    .bm-success.bm-visible { display: flex; }
+    .bm-success-check {
+      width: 64px; height: 64px;
+      background: rgba(90,195,207,0.12);
+      border: 1px solid rgba(90,195,207,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .bm-success h3 { font-size: 2rem; }
+    .bm-success h3 .it { font-style: italic; color: var(--accent); }
+    .bm-success p { max-width: 380px; font-size: 0.95rem; line-height: 1.7; }
+    .bm-success button {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 1.6rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--bg-deep);
+      border: none;
+      transition: all var(--t);
+    }
+    .bm-success button:hover {
+      background: var(--cream);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .bm-card-header { padding: 1.25rem; flex-wrap: wrap; }
+      .bm-body { padding: 1.5rem 1.25rem; }
+      .bm-nav { padding: 1rem 1.25rem; flex-direction: column-reverse; }
+      .bm-btn-back, .bm-btn-next { width: 100%; text-align: center; justify-content: center; }
+      .bm-cat-grid { grid-template-columns: 1fr; }
+      .bm-form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header-slot"></div>
+
+  <main data-screen-label="02 Catering">
+
+    <!-- ═══════════ PAGE HERO ═══════════ -->
+    <section class="ph">
+      <div class="container ph-grid">
+        <div class="reveal">
+          <span class="eyebrow">Menüangebote</span>
+          <h1>Catering &amp;<br/><span class="it">Buffet</span></h1>
+          <p class="ph-lead">
+            Vielen Dank für Ihr Interesse an unserem Catering-Service.
+            Wir bieten individuell abgestimmte Speisenkonzepte für jeden
+            Anlass — ob private Feier, Firmenveranstaltung oder Großevent.
+            Unsere Menüs werden frisch zubereitet und auf Ihre Wünsche angepasst.
+          </p>
+          <a href="#banketmappe" class="btn btn-primary">Zur interaktiven Banketmappe <span class="arrow">→</span></a>
+        </div>
+
+        <div class="ph-side reveal">
+          <h4>Im Service enthalten</h4>
+          <ul>
+            <li><span class="ck">✓</span> Liefergebiet Haldensleben &amp; Umgebung — individuelle Anfragen möglich</li>
+            <li><span class="ck">✓</span> Aufbau &amp; Servicepersonal nach Absprache</li>
+            <li><span class="ck">✓</span> Geschirr &amp; Equipment optional buchbar</li>
+            <li><span class="ck">✓</span> Beratung &amp; individuelles Angebot binnen 24h</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CATEGORY CARDS ═══════════ -->
+    <section class="cat-section">
+      <div class="container">
+        <div class="cat-head reveal">
+          <h2>Vier Kategorien, <span class="it">unendlich</span> viele Möglichkeiten.</h2>
+          <p style="max-width: 36ch; font-size: 0.95rem;">
+            Tippen Sie auf eine Karte, um ein Auszug aus dem Sortiment zu sehen.
+          </p>
+        </div>
+
+        <div class="cat-grid reveal-stagger">
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num">— 01</span>
+                <h3>Klassisches <span class="it">Buffet</span></h3>
+                <p class="tease">Warme Gerichte &amp; Beilagen für jeden Anlass. Pasta, Fleisch, Salate &amp; mehr.</p>
+                <span class="flip-hint">
+                  Karte umdrehen
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+                </span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4>Klassisches <span class="it">Buffet</span></h4>
+                <ul>
+                  <li>Suppen — Hochzeitssuppe, Tomatencreme</li>
+                  <li>Schnitzel- &amp; Bratenvariation</li>
+                  <li>Hähnchenbrust in 3 Variationen</li>
+                  <li>Schweinefilet in Pfefferrahm</li>
+                  <li>Lachsfilet auf Spargel</li>
+                  <li>Vegetarisch: Gnocchi, Falafel</li>
+                  <li>Beilagen-Auswahl (Reis, Spätzle, Gratin…)</li>
+                  <li>Dessertvariation &amp; Kuchen</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num">— 02</span>
+                <h3><span class="it">Grill</span>buffet</h3>
+                <p class="tease">Frisch vom Grill — Steaks, Bratwurst, vegetarische Optionen, herzhaft &amp; gesellig.</p>
+                <span class="flip-hint">
+                  Karte umdrehen
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+                </span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4><span class="it">Grill</span>buffet</h4>
+                <ul>
+                  <li>Bratwurst &amp; Boulette vom Grill</li>
+                  <li>Steak — Schwein oder Hühnchen</li>
+                  <li>Grillgemüse &amp; Tomaten-Feta-Pfännchen</li>
+                  <li>Fackeln &amp; Spieße</li>
+                  <li>Suppen-Vorspeisen</li>
+                  <li>Vegetarische Hauptgänge</li>
+                  <li>Komplettes Beilagen-Sortiment</li>
+                  <li>Dessert &amp; Kuchen-Auswahl</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num">— 03</span>
+                <h3>Kleine <span class="it">Speisen</span></h3>
+                <p class="tease">Wraps, Canapés, Spieße &amp; Brötchen — perfekt für Empfänge ab 10 Personen.</p>
+                <span class="flip-hint">
+                  Karte umdrehen
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+                </span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4>Kleine <span class="it">Speisen</span></h4>
+                <ul>
+                  <li>Belegte Brötchen-Variation</li>
+                  <li>Crostinis &amp; Bruschetta</li>
+                  <li>Fingerfood — herzhaft &amp; süß</li>
+                  <li>Canapés mit Lachs, Roastbeef, Veggie</li>
+                  <li>Frische Obstplatten</li>
+                  <li>Obstsalat im Glas</li>
+                  <li>Suppen-Shots</li>
+                  <li>Ab 10 Personen buchbar</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num">— 04</span>
+                <h3>Food <span class="it">Truck</span></h3>
+                <p class="tease">Saftige Burger direkt zu Ihrem Event — Beef, Chicken &amp; vegetarische Varianten.</p>
+                <span class="flip-hint">
+                  Karte umdrehen
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+                </span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4>Food <span class="it">Truck</span></h4>
+                <ul>
+                  <li>Cheeseburger &amp; Hamburger</li>
+                  <li>Chili-Cheese Burger</li>
+                  <li>Onion Overload</li>
+                  <li>Veggie Burger</li>
+                  <li>Pommes Frites &amp; Loaded Fries</li>
+                  <li>Aufpreis: Pulled Pork, Teriyaki, BBQ…</li>
+                  <li>Aufpreis: Apfel-Camembert, Mexiko-Style</li>
+                  <li>Vor Ort frisch zubereitet</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PRICING TIERS ═══════════ -->
+    <section class="tiers">
+      <div class="container">
+        <div class="tiers-head reveal">
+          <span class="eyebrow" style="justify-content: center;">Pakete &amp; Richtwerte</span>
+          <h2>Drei Wege zu Ihrem <span class="it">perfekten</span> Event.</h2>
+          <p>Alle Pakete sind individuell anpassbar — Preise verstehen sich pro Person, inklusive Aufbau und Equipment.</p>
+        </div>
+
+        <div class="tier-grid reveal-stagger">
+
+          <div class="tier">
+            <h3>Empfang <span class="it">Light</span></h3>
+            <div class="tprice">
+              <span class="from">ab</span>
+              <span class="price">18€</span>
+              <span class="pp">/ Person</span>
+            </div>
+            <ul>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Canapés &amp; Fingerfood</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 3 Variationen zur Auswahl</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Lieferung &amp; Anrichten</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ab 10 Personen</li>
+            </ul>
+            <a href="#banketmappe" class="btn btn-outline">Auswählen</a>
+          </div>
+
+          <div class="tier tier--featured">
+            <h3>Bankett <span class="it">Klassik</span></h3>
+            <div class="tprice">
+              <span class="from">ab</span>
+              <span class="price">42€</span>
+              <span class="pp">/ Person</span>
+            </div>
+            <ul>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Komplettes Buffet inkl. Suppe</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 2 Hauptgänge + 3 Beilagen</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dessertvariation</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Servicepersonal &amp; Aufbau</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Geschirr &amp; Equipment</li>
+            </ul>
+            <a href="#banketmappe" class="btn btn-primary">Auswählen</a>
+          </div>
+
+          <div class="tier">
+            <h3>Food Truck <span class="it">Event</span></h3>
+            <div class="tprice">
+              <span class="from">ab</span>
+              <span class="price">28€</span>
+              <span class="pp">/ Person</span>
+            </div>
+            <ul>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Burger-Grundsortiment</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Pommes &amp; Loaded Fries</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Frisch vor Ort zubereitet</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Inkl. Truck &amp; Team</li>
+              <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ab 30 Personen</li>
+            </ul>
+            <a href="#banketmappe" class="btn btn-outline">Auswählen</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ BANKETMAPPE (Wizard) ═══════════ -->
+    <section class="bm-section" id="banketmappe">
+      <div class="container">
+        <div class="bm-intro reveal">
+          <span class="eyebrow" style="justify-content: center;">Interaktive Banketmappe</span>
+          <h2>Stellen Sie Ihr Catering <span class="it">zusammen</span>.</h2>
+          <p>In wenigen Schritten zum individuellen Angebot — Kategorie wählen, Gerichte zusammenstellen und direkt anfragen.</p>
+        </div>
+
+        <div class="bm-card reveal" id="bmCard">
+          <div class="bm-card-header">
+            <div class="bm-num" id="bmNum">0</div>
+            <div class="bm-header-text">
+              <span class="bm-step-label" id="bmStepLabel">Willkommen</span>
+              <div class="bm-step-title" id="bmStepTitle">Ihre Anfrage in wenigen Klicks</div>
+            </div>
+            <div class="bm-progress-bar" id="bmProgressBar"></div>
+          </div>
+          <div class="bm-body" id="bmBody"></div>
+          <div class="bm-nav">
+            <button class="bm-btn-back" id="bmBack">← Zurück</button>
+            <button class="bm-btn-next" id="bmNext">Jetzt konfigurieren →</button>
+          </div>
+        </div>
+
+        <div class="bm-success" id="bmSuccess">
+          <div class="bm-success-check">✓</div>
+          <h3>Anfrage <span class="it">erfolgreich</span> gesendet!</h3>
+          <p>Vielen Dank — wir melden uns innerhalb von 24 Stunden bei Ihnen mit einem maßgeschneiderten Angebot.</p>
+          <button id="bmReset">Neue Anfrage starten</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-slot"></div>
+
+  <script src="assets/partials.js"></script>
+  <script src="assets/script.js"></script>
+  <script src="assets/banketmappe.js"></script>
+  <script>
+    // Flip cards
+    document.querySelectorAll('.cat-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.back-btn')) {
+          card.classList.remove('flipped');
+          return;
+        }
+        card.classList.toggle('flipped');
+      });
+    });
+  </script>
+</body>
+</html>

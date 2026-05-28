@@ -25,7 +25,8 @@ const vergangeneMarkte = processed.filter(m => m.dateObj < today);
 
 function formatDay(d: Date): string  { return d.getDate().toString().padStart(2, '0'); }
 function formatMonYear(d: Date): string {
-  return d.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
+  const mo = d.toLocaleDateString('de-DE', { month: 'long' });
+  return `${mo} · ${d.getFullYear().toString().slice(2)}`;
 }
 function formatWeekday(d: Date): string {
   return d.toLocaleDateString('de-DE', { weekday: 'long' });
@@ -35,55 +36,63 @@ function mapsUrl(adresse: string): string {
 }
 ---
 
-<Layout title="Märkte – Velaro Catering & Foodtruckservice">
+<Layout title="Märkte – Velaro Catering & Foodtruckservice" description="Velaro auf regionalen Märkten und Stadtfesten — kommende Termine und Standorte.">
 
   <!-- ═══════════ PAGE HERO ═══════════ -->
   <section class="ph">
     <div class="container ph-grid">
       <div class="reveal">
         <span class="eyebrow">Unsere Termine</span>
-        <h1>Märkte &amp;<br /><span class="it">Veranstaltungen</span></h1>
+        <h1>Märkte &amp;<br/><span class="hand">Veranstaltungen</span></h1>
         <p class="ph-lead">
-          Findet uns auf regionalen Märkten und Veranstaltungen in der
-          Region — frisch zubereitet, direkt zu euch. Stadtfeste,
-          Bauernmärkte, Open-Air-Events.
+          Wir sind unterwegs — auf Stadtfesten, Bauernmärkten und Sommerfesten.
+          Kommt vorbei, holt euch was Frisches, schaut uns über die Schulter.
+          Wir freuen uns auf euch.
         </p>
         <a href="#termine" class="btn btn-primary">Termine ansehen <span class="arrow">↓</span></a>
       </div>
-      <div class="ph-image reveal parallax">
-        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1400&auto=format&fit=crop" alt="Food Truck" />
-        <span class="badge"><span class="dot"></span> Aktuell unterwegs</span>
+      <div class="ph-image reveal">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1400&auto=format&fit=crop" alt="Food Truck im Einsatz" />
+        <span class="badge"><span class="dot"></span> Gerade unterwegs</span>
         <div class="ph-stats">
           <div><div class="k">{kommendeMarkte.length || alleMarkte.length}</div><div class="l">Termine</div></div>
           <div><div class="k">2</div><div class="l">Städte</div></div>
-          <div><div class="k">10h</div><div class="l">Service / Tag</div></div>
+          <div><div class="k">10h</div><div class="l">Service/Tag</div></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ═══════════ MARQUEE ═══════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>★ Stadtfest Heinsberg ★ Altstadtfest HDL ★ Bauernmarkt Erkelenz ★ Hochzeitsmarkt ★ Sommerfest ★</span>
+      <span>★ Stadtfest Heinsberg ★ Altstadtfest HDL ★ Bauernmarkt Erkelenz ★ Hochzeitsmarkt ★ Sommerfest ★</span>
+    </div>
+  </div>
+
   <!-- ═══════════ OFFEN FÜR ALLE ═══════════ -->
   <section class="offen-section">
     <div class="container offen">
       <div class="offen-text reveal">
-        <span class="eyebrow">Mehr als nur Verpflegung</span>
-        <h2>Offen für alles und <span class="it">jeden</span>.</h2>
+        <span class="eyebrow eyebrow--teal">Mehr als Essen</span>
+        <h2>Offen für alle.<br/>Auch für <span class="hand">euch</span>.</h2>
         <p>
-          Unsere Foodtrucks und Marktstände sind mehr als nur Verpflegung —
-          sie sind Begegnungsorte. Ob Familien, Freunde oder
-          Geschäftspartner: Bei uns ist jeder willkommen.
+          Unsere Foodtrucks und Marktstände sind keine Restaurants im
+          Kleinformat — sie sind Treffpunkte. Familien, Freunde, Kollegen,
+          Hunde. Wer kommt, kommt.
         </p>
         <p>
-          Von herzhaften Gerichten bis zu vegetarischen Köstlichkeiten —
-          unsere Auswahl ist vielfältig und wird täglich frisch zubereitet.
-          Genießen Sie die besondere Atmosphäre und lassen Sie sich verwöhnen.
+          Von herzhaft bis vegetarisch, von Boulette bis Falafel — bei uns
+          findet jeder was. Hauptsache, ihr habt Hunger.
         </p>
         <blockquote class="offen-quote">
-          "Wir kommen wegen des Essens — und bleiben wegen der Stimmung."
+          Wir kommen wegen des Essens — und bleiben wegen der Stimmung.
         </blockquote>
       </div>
-      <div class="offen-media reveal parallax">
+      <div class="offen-media reveal">
         <img src="https://images.unsplash.com/photo-1636224601323-550e96f10d66?q=80&w=1200&auto=format&fit=crop" alt="Food Truck im Einsatz" />
+        <div class="sticker-corner">Frisch<br/>vom<br/>Grill</div>
       </div>
     </div>
   </section>
@@ -93,11 +102,11 @@ function mapsUrl(adresse: string): string {
     <div class="container">
       <div class="timeline-head reveal">
         <div>
-          <span class="eyebrow">Kommende Märkte</span>
-          <h2>Wo ihr uns als <span class="it">Nächstes</span> findet.</h2>
+          <span class="eyebrow eyebrow--teal">Kommende Termine</span>
+          <h2>Wo ihr uns als<br/><span class="hand">Nächstes</span> findet.</h2>
         </div>
-        <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-outline">
-          Updates auf Instagram <span class="arrow">→</span>
+        <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn">
+          Auf Instagram folgen <span class="arrow">→</span>
         </a>
       </div>
 
@@ -112,14 +121,17 @@ function mapsUrl(adresse: string): string {
               </div>
               <div class="tl-card">
                 <div>
+                  <div class="tl-cat-title">
+                    <span class="tl-type-tag">Markt</span>
+                  </div>
                   <h3>{markt.name}</h3>
                   <div class="tl-meta">
                     <span>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                       {markt.uhrzeit}
                     </span>
                     <span>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                       {markt.ort}
                     </span>
                   </div>
@@ -127,7 +139,7 @@ function mapsUrl(adresse: string): string {
                 </div>
                 <a href={mapsUrl(markt.adresse)} target="_blank" rel="noopener noreferrer" class="tl-cta">
                   Auf Karte
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
               </div>
             </div>
@@ -158,11 +170,11 @@ function mapsUrl(adresse: string): string {
                     <h3>{markt.name}</h3>
                     <div class="tl-meta">
                       <span>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         {markt.uhrzeit}
                       </span>
                       <span>
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                         {markt.ort}
                       </span>
                     </div>
@@ -183,12 +195,9 @@ function mapsUrl(adresse: string): string {
       <div class="map-head reveal">
         <div>
           <span class="eyebrow">Einzugsgebiet</span>
-          <h2>Unsere <span class="it">Region</span>.</h2>
+          <h2>Unsere <span class="hand">Region</span>.</h2>
         </div>
-        <p>
-          Wir sind regelmäßig in Haldensleben und der weiteren Region
-          unterwegs. Anfragen aus angrenzenden Städten sind jederzeit möglich.
-        </p>
+        <p>Regelmäßig in Haldensleben, Heinsberg, Erkelenz und Umgebung. Anfragen aus anderen Städten sind jederzeit willkommen.</p>
       </div>
 
       <div class="map-card reveal">
@@ -196,10 +205,11 @@ function mapsUrl(adresse: string): string {
         <svg class="map-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <path d="M 50 350 Q 200 200 380 280 T 700 200 Q 850 180 950 250" />
           <path d="M 100 100 Q 300 120 450 220 T 800 350" />
-          <path d="M 0 250 Q 250 300 500 250 T 1000 300" stroke-opacity="0.5" />
-          <path d="M 300 0 Q 350 200 380 400" stroke-opacity="0.4" />
-          <path d="M 700 0 Q 680 250 720 500" stroke-opacity="0.4" />
+          <path d="M 0 250 Q 250 300 500 250 T 1000 300" stroke-opacity="0.5"/>
+          <path d="M 300 0 Q 350 200 380 400" stroke-opacity="0.4"/>
+          <path d="M 700 0 Q 680 250 720 500" stroke-opacity="0.4"/>
         </svg>
+
         <div class="map-pin" style="left: 38%; top: 40%;">
           <div class="map-pin-marker"></div>
           <div class="map-pin-tooltip">Haldensleben · Manufaktur</div>
@@ -212,26 +222,27 @@ function mapsUrl(adresse: string): string {
           <div class="map-pin-marker"></div>
           <div class="map-pin-tooltip">Erkelenz · Bauernmarkt</div>
         </div>
+
         <div class="map-legend">
           <h4>Aktuelle Standorte</h4>
-          <p>Wir kommen zu Ihnen — Anfragen aus der ganzen Region willkommen.</p>
+          <p>Über die Markierungen findet ihr unsere nächsten Termine.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════ CTA ═══════════ -->
-  <section class="section">
+  <section class="section" style="background: var(--bg);">
     <div class="container">
       <div class="cta-card reveal">
         <div>
-          <span class="eyebrow">Immer auf dem Laufenden</span>
-          <h2 style="margin-top: 1rem;">Neue Termine, <span class="it">frische</span> Gerichte.</h2>
-          <p>Aktionen und Standortwechsel — zuerst auf Instagram.</p>
+          <span class="eyebrow" style="background: var(--ink); color: var(--cream); box-shadow: 3px 3px 0 var(--hot);">Auf dem Laufenden</span>
+          <h2 style="margin-top: 1rem;">Neue Termine, frische<br/><span class="hand">Gerichte</span>.</h2>
+          <p>Standortwechsel und Sonderaktionen — zuerst auf Instagram. Schaut vorbei.</p>
         </div>
         <div class="btns">
-          <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-primary">Instagram folgen <span class="arrow">→</span></a>
-          <a href="/kontakt" class="btn btn-outline">Kontakt aufnehmen</a>
+          <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="btn btn-cream">Instagram folgen <span class="arrow">→</span></a>
+          <a href="/kontakt" class="btn btn-outline" style="color: var(--cream); border-color: var(--cream); box-shadow: 5px 5px 0 var(--ink);">Kontakt</a>
         </div>
       </div>
     </div>
@@ -241,198 +252,352 @@ function mapsUrl(adresse: string): string {
 
 <style>
   /* ── Page Hero ── */
-  .ph { padding-top: clamp(9rem, 16vw, 13rem); padding-bottom: clamp(3rem, 6vw, 5rem); }
+  .ph {
+    padding-top: clamp(8rem, 14vw, 11rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+    background: var(--bg);
+    color: var(--cream);
+  }
   .ph-grid {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
-    gap: 5rem;
+    gap: 4rem;
     align-items: center;
   }
-  .ph-grid h1 { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 0.98; margin: 1.5rem 0; }
-  .ph-lead { font-size: 1.05rem; line-height: 1.75; max-width: 50ch; margin-bottom: 2rem; }
+  .ph h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 0.9;
+    margin: 1.25rem 0 1.5rem;
+    color: var(--cream);
+  }
+  .ph h1 .hand { font-style: normal; color: var(--hot); font-size: 0.82em; }
+  .ph-lead {
+    font-size: 1.1rem;
+    line-height: 1.55;
+    max-width: 50ch;
+    margin-bottom: 2rem;
+    color: var(--text-2);
+  }
   .ph-image {
     position: relative;
-    height: 540px;
-    border-radius: var(--r-lg);
+    aspect-ratio: 4/5;
+    border: 4px solid var(--ink);
     overflow: hidden;
+    transform: rotate(2deg);
+    box-shadow: 10px 10px 0 var(--ink);
   }
-  .ph-image img { width: 100%; height: 100%; object-fit: cover; }
+  .ph-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: contrast(1.1) saturate(1.2);
+  }
   .ph-image .badge {
     position: absolute;
-    top: 1.5rem; left: 1.5rem;
-    padding: 0.7rem 1.1rem;
-    background: rgba(8,17,29,0.78);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 999px;
-    font-size: 0.78rem;
+    top: 1rem; left: 1rem;
+    padding: 0.55rem 0.95rem;
+    background: var(--hot);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #fff;
+    border: 3px solid var(--cream);
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.55rem;
+    transform: rotate(-3deg);
   }
   .ph-image .badge .dot {
-    width: 8px; height: 8px;
-    background: var(--accent);
+    width: 10px; height: 10px;
+    background: var(--cream);
     border-radius: 50%;
-    box-shadow: 0 0 12px var(--accent);
-    animation: pulse-dot 1.8s ease-in-out infinite;
+    animation: pulse 1.6s ease-in-out infinite;
   }
-  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
   .ph-stats {
     position: absolute;
-    bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    bottom: -1.25rem;
+    left: 1rem;
+    right: 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
-    padding: 1.25rem;
-    background: rgba(8,17,29,0.82);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--r);
+    padding: 0;
+    background: var(--ink);
+    border: 4px solid var(--cream);
+    box-shadow: 6px 6px 0 var(--hot);
   }
-  .ph-stats > div { padding: 0 1rem; border-right: 1px solid var(--border-soft); }
+  .ph-stats > div { padding: 0.85rem 0.75rem; border-right: 2px solid rgba(243,235,220,0.18); }
   .ph-stats > div:last-child { border-right: none; }
-  .ph-stats .k { font-family: var(--serif); font-size: 1.7rem; color: var(--accent); line-height: 1; }
-  .ph-stats .l { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mute); margin-top: 0.4rem; }
+  .ph-stats .k {
+    font-family: var(--display);
+    font-size: 2rem;
+    color: var(--hot);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .ph-stats .l {
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-top: 0.3rem;
+  }
+  @media (max-width: 900px) {
+    .ph-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
 
-  /* ── Offen section ── */
-  .offen-section { padding-block: clamp(4rem, 8vw, 7rem); }
-  .offen { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .offen-text h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem; margin-bottom: 1.5rem; }
-  .offen-text p  { font-size: 1rem; line-height: 1.8; margin-bottom: 1.25rem; max-width: 50ch; }
+  /* ── Offen ── */
+  .offen-section { padding-block: clamp(4rem, 9vw, 8rem); background: var(--bg); }
+  .offen {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .offen-text h2 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--cream);
+  }
+  .offen-text h2 .hand { color: var(--hot); }
+  .offen-text p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    max-width: 50ch;
+    color: var(--text-2);
+  }
   .offen-quote {
     margin-top: 2rem;
-    padding-left: 1.5rem;
-    border-left: 2px solid var(--accent);
+    padding: 1.6rem 1.75rem;
+    background: var(--hot);
+    color: var(--cream);
+    border: 3px solid rgba(243,235,220,0.25);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.35);
     font-family: var(--serif);
     font-style: italic;
-    font-size: 1.3rem;
-    line-height: 1.5;
-    color: var(--text);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    text-transform: none;
+    letter-spacing: 0;
+    transform: rotate(-1deg);
   }
-  .offen-media { position: relative; height: 540px; border-radius: var(--r-lg); overflow: hidden; }
-  .offen-media img { width: 100%; height: 100%; object-fit: cover; }
+  .offen-quote::before {
+    content: '"';
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 4rem;
+    line-height: 0.5;
+    display: block;
+    color: rgba(243,235,220,0.55);
+    margin-bottom: 0.5rem;
+  }
+  .offen-media {
+    position: relative;
+    aspect-ratio: 1;
+    border: 4px solid var(--ink);
+    overflow: hidden;
+    transform: rotate(-1.5deg);
+    box-shadow: 10px 10px 0 var(--hot);
+  }
+  .offen-media img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.08) saturate(1.15); }
+  .offen-media .sticker-corner {
+    position: absolute;
+    top: -1rem; right: -1rem;
+    width: 100px; height: 100px;
+    background: var(--mustard);
+    color: var(--ink);
+    border: 4px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--display);
+    font-size: 0.9rem;
+    line-height: 0.95;
+    text-transform: uppercase;
+    transform: rotate(12deg);
+    animation: wobbleSticker 4s ease-in-out infinite;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  @keyframes wobbleSticker {
+    0%,100% { transform: rotate(12deg); }
+    50%     { transform: rotate(-6deg) scale(1.05); }
+  }
+  @media (max-width: 900px) {
+    .offen { grid-template-columns: 1fr; gap: 3rem; }
+  }
 
   /* ── Timeline ── */
   .timeline-section {
-    background: var(--bg-deep);
-    padding-block: clamp(4rem, 8vw, 7rem);
-    border-block: 1px solid var(--border-soft);
+    background: var(--navy);
+    color: var(--cream);
+    padding-block: clamp(4rem, 9vw, 8rem);
   }
   .timeline-head {
     display: flex;
     justify-content: space-between;
     align-items: end;
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3.5rem;
     flex-wrap: wrap;
   }
-  .timeline-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem; }
+  .timeline-head h2 {
+    color: var(--cream);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin-top: 1rem;
+  }
+  .timeline-head h2 .hand { color: var(--hot); }
 
   .timeline {
-    position: relative;
+    display: grid;
+    gap: 1.5rem;
     max-width: 1080px;
     margin-inline: auto;
-    padding-left: clamp(0px, 6vw, 80px);
   }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: clamp(28px, 5vw, 60px);
-    top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, var(--border), var(--border), transparent);
-  }
-
   .tl-row {
-    position: relative;
     display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 3rem;
-    padding: 2rem 0;
-    align-items: center;
+    grid-template-columns: 160px 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
   }
-  .tl-row::before {
-    content: '';
-    position: absolute;
-    left: -52px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    background: var(--bg-deep);
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 0 4px var(--bg-deep), 0 0 24px var(--accent-glow);
-    transition: transform var(--t);
+  .tl-date {
+    background: var(--hot);
+    color: var(--cream);
+    border: 4px solid var(--cream);
+    padding: 1.25rem 0.85rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    box-shadow: 6px 6px 0 var(--cream);
+    transform: rotate(-2deg);
+    transition: transform var(--t-snap);
   }
-  .tl-row:hover::before { transform: translateY(-50%) scale(1.2); }
-  .tl-row--past::before { border-color: var(--text-mute); box-shadow: 0 0 0 4px var(--bg-deep); }
-
-  .tl-date { text-align: right; display: flex; flex-direction: column; gap: 0.2rem; }
-  .tl-day     { font-family: var(--serif); font-size: 3.5rem; line-height: 0.9; color: var(--accent); }
-  .tl-monyear { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); }
-  .tl-weekday { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-mute); }
-
+  .tl-row:hover .tl-date { transform: rotate(2deg) scale(1.05); }
+  .tl-row:nth-child(even) .tl-date { background: var(--accent); color: var(--navy-deep); transform: rotate(2deg); }
+  .tl-row:nth-child(even):hover .tl-date { transform: rotate(-2deg) scale(1.05); }
+  .tl-row:nth-child(3n) .tl-date { background: var(--mustard); color: var(--ink); }
+  .tl-day {
+    font-family: var(--display);
+    font-size: 4rem;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+  }
+  .tl-monyear {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+  .tl-weekday {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
   .tl-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--r-lg);
-    padding: 1.75rem 2rem;
+    background: var(--cream);
+    color: var(--ink);
+    border: 4px solid var(--cream);
+    padding: 1.5rem 1.85rem;
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 1.5rem;
+    gap: 1.25rem;
     align-items: center;
-    transition: all var(--t-slow);
+    transition: transform var(--t-snap), box-shadow var(--t-snap);
   }
   .tl-row:hover .tl-card {
-    border-color: rgba(90,195,207,0.35);
-    transform: translateX(6px);
-    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(90,195,207,0.15);
+    transform: translate(-3px,-3px);
+    box-shadow: 8px 8px 0 var(--hot);
   }
-  .tl-card h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1; margin-bottom: 0.75rem; }
+  .tl-cat-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.65rem;
+  }
+  .tl-type-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--ink);
+    color: var(--hot);
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .tl-card h3 {
+    color: var(--ink);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 0.92;
+    margin-bottom: 0.6rem;
+  }
+  .tl-card h3 .hand { color: var(--hot); font-size: 0.85em; }
   .tl-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem;
-    font-size: 0.88rem;
-    color: var(--text-2);
+    gap: 1rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
   }
-  .tl-meta span { display: inline-flex; align-items: center; gap: 0.5rem; }
-  .tl-meta svg  { color: var(--accent); }
-  .tl-address   { font-size: 0.78rem; color: var(--text-mute); margin-top: 0.5rem; }
-
+  .tl-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .tl-meta svg { color: var(--hot); }
+  .tl-address {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--ink);
+    opacity: 0.7;
+    margin-top: 0.4rem;
+  }
   .tl-cta {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.4rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
+    gap: 0.4rem;
+    padding: 0.9rem 1.3rem;
+    background: var(--hot);
+    color: var(--cream);
+    border: 3px solid var(--ink);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text);
-    transition: all var(--t);
     white-space: nowrap;
+    transition: all var(--t);
   }
   .tl-cta:hover {
-    background: var(--accent);
-    color: var(--bg-deep);
-    border-color: var(--accent);
-    transform: translateY(-2px);
+    background: var(--ink);
+    transform: translate(-2px,-2px);
+    box-shadow: 4px 4px 0 var(--hot);
   }
-  .tl-cta svg { transition: transform var(--t); }
-  .tl-cta:hover svg { transform: translateX(2px); }
-
   .tl-row--past .tl-card { opacity: 0.55; }
-  .tl-row--past .tl-day  { color: var(--text-mute); }
-
   .vergangene { margin-top: 3rem; }
   .vergangene-label {
+    font-family: var(--sans);
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -443,69 +608,79 @@ function mapsUrl(adresse: string): string {
   }
   .past-badge {
     flex-shrink: 0;
+    font-family: var(--sans);
     font-size: 0.72rem;
     font-weight: 600;
-    background-color: rgba(166,166,166,0.08);
+    background: rgba(243,235,220,0.1);
     color: var(--text-mute);
-    border: 1px solid var(--border);
-    border-radius: 999px;
+    border: 2px solid rgba(243,235,220,0.2);
     padding: 0.3rem 0.9rem;
     white-space: nowrap;
   }
-
-  /* ── Empty state ── */
   .empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 4rem 2rem;
-    background: var(--bg-card);
-    border: 1px dashed var(--border);
-    border-radius: var(--r-lg);
+    background: rgba(243,235,220,0.05);
+    border: 3px dashed rgba(243,235,220,0.2);
     gap: 1rem;
     max-width: 480px;
     margin-inline: auto;
   }
   .empty-icon { font-size: 2.5rem; }
-  .empty-state h3 { color: var(--text); font-size: 1.1rem; }
-  .empty-state p  { font-size: 0.9rem; max-width: 360px; line-height: 1.6; }
+  .empty-state h3 { color: var(--cream); font-size: 1.1rem; }
+  .empty-state p  { font-size: 0.9rem; max-width: 360px; line-height: 1.6; color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .tl-row { grid-template-columns: 1fr; gap: 0.75rem; }
+    .tl-date { transform: rotate(0); flex-direction: row; align-items: baseline; justify-content: center; gap: 0.6rem; }
+    .tl-row:nth-child(even) .tl-date { transform: rotate(0); }
+    .tl-day { font-size: 2.5rem; }
+    .tl-card { grid-template-columns: 1fr; }
+  }
 
   /* ── Map ── */
-  .map-section { padding-block: clamp(4rem, 8vw, 7rem); }
+  .map-section {
+    padding-block: clamp(4rem, 9vw, 8rem);
+    background: var(--bg);
+  }
   .map-head {
+    margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: end;
     gap: 2rem;
     flex-wrap: wrap;
-    margin-bottom: 3rem;
   }
-  .map-head h2 { margin-top: 1rem; font-size: clamp(2rem, 4vw, 3rem); }
-  .map-head p  { max-width: 38ch; font-size: 0.95rem; }
+  .map-head h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-top: 1rem; color: var(--cream); }
+  .map-head h2 .hand { color: var(--hot); }
+  .map-head p { max-width: 38ch; font-size: 1rem; color: var(--text-2); }
   .map-card {
     position: relative;
-    height: 480px;
-    border-radius: var(--r-lg);
+    height: 500px;
+    background: var(--ink);
+    border: 4px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--hot);
     overflow: hidden;
-    background: var(--bg-card);
-    border: 1px solid var(--border-soft);
   }
   .map-overlay {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 30% 50%, rgba(90,195,207,0.15) 0%, transparent 40%),
-      radial-gradient(circle at 70% 35%, rgba(90,195,207,0.1) 0%, transparent 30%),
-      radial-gradient(circle at 50% 70%, rgba(90,195,207,0.12) 0%, transparent 35%);
+      radial-gradient(circle at 30% 50%, rgba(255,87,34,0.18) 0%, transparent 40%),
+      radial-gradient(circle at 70% 35%, rgba(90,195,207,0.15) 0%, transparent 30%),
+      radial-gradient(circle at 50% 70%, rgba(232,179,65,0.12) 0%, transparent 35%);
   }
   .map-svg {
     position: absolute;
     inset: 0;
-    width: 100%; height: 100%;
-    opacity: 0.45;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
   }
-  .map-svg path { stroke: var(--accent); stroke-width: 0.5; fill: none; }
+  .map-svg path { stroke: var(--accent); stroke-width: 0.6; fill: none; }
   .map-pin {
     position: absolute;
     transform: translate(-50%, -100%);
@@ -516,13 +691,13 @@ function mapsUrl(adresse: string): string {
     z-index: 2;
   }
   .map-pin-marker {
-    width: 36px; height: 36px;
-    background: var(--accent);
-    border: 3px solid var(--bg-deep);
+    width: 40px; height: 40px;
+    background: var(--hot);
+    border: 4px solid var(--cream);
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
-    box-shadow: 0 8px 24px rgba(90,195,207,0.4);
-    transition: transform var(--t);
+    box-shadow: 0 4px 0 var(--ink);
+    transition: transform var(--t-snap);
     position: relative;
   }
   .map-pin-marker::after {
@@ -530,51 +705,45 @@ function mapsUrl(adresse: string): string {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--bg-deep);
+    width: 12px; height: 12px;
+    background: var(--cream);
   }
-  .map-pin:hover .map-pin-marker { transform: rotate(-45deg) scale(1.15); }
+  .map-pin:hover .map-pin-marker { transform: rotate(-45deg) scale(1.2); }
   .map-pin-tooltip {
     position: absolute;
-    bottom: calc(100% + 12px);
+    bottom: calc(100% + 14px);
     left: 50%;
     transform: translateX(-50%);
-    padding: 0.5rem 0.85rem;
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: var(--r-sm);
+    padding: 0.55rem 0.9rem;
+    background: var(--cream);
+    color: var(--ink);
+    border: 3px solid var(--ink);
     white-space: nowrap;
-    font-size: 0.78rem;
-    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 700;
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--t), transform var(--t);
+    transition: opacity var(--t);
   }
-  .map-pin:hover .map-pin-tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-4px);
-  }
+  .map-pin:hover .map-pin-tooltip { opacity: 1; }
   .map-legend {
     position: absolute;
-    bottom: 1.5rem; left: 1.5rem;
+    bottom: 1.25rem; left: 1.25rem;
     padding: 1rem 1.25rem;
-    background: rgba(8,17,29,0.85);
-    backdrop-filter: blur(14px);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--r-sm);
+    background: var(--cream);
+    color: var(--ink);
+    border: 3px solid var(--ink);
     max-width: 280px;
   }
   .map-legend h4 {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-family: var(--display);
+    font-size: 1.2rem;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
+    color: var(--hot);
+    margin-bottom: 0.4rem;
   }
-  .map-legend p { color: var(--text-2); line-height: 1.55; font-size: 0.85rem; }
+  .map-legend p { font-size: 0.88rem; color: var(--ink); line-height: 1.45; }
 
   /* ── CTA card ── */
   .cta-card {
@@ -582,29 +751,21 @@ function mapsUrl(adresse: string): string {
     grid-template-columns: 1.4fr auto;
     gap: 2rem;
     align-items: center;
-    padding: 3rem 3.5rem;
-    background: linear-gradient(135deg, rgba(90,195,207,0.08), rgba(90,195,207,0.02));
-    border: 1px solid rgba(90,195,207,0.25);
-    border-radius: var(--r-lg);
+    padding: 3rem 3rem;
+    background: var(--hot);
+    color: var(--cream);
+    border: 4px solid var(--ink);
+    box-shadow: 12px 12px 0 var(--ink);
   }
-  .cta-card h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 0.6rem; }
-  .cta-card p  { font-size: 0.95rem; }
-  .cta-card .btns { display: flex; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap; }
-
-  /* ── Responsive ── */
-  @media (max-width: 860px) {
-    .ph-grid   { grid-template-columns: 1fr; gap: 2.5rem; }
-    .ph-image  { height: 380px; }
-    .offen     { grid-template-columns: 1fr; gap: 3rem; }
-    .offen-media { height: 380px; }
-    .timeline  { padding-left: 50px; }
-    .timeline::before { left: 18px; }
-    .tl-row    { grid-template-columns: 1fr; gap: 0.75rem; padding: 1.5rem 0; }
-    .tl-row::before { left: -36px; top: 24px; transform: none; }
-    .tl-row:hover::before { transform: scale(1.2); }
-    .tl-date   { text-align: left; flex-direction: row; align-items: baseline; gap: 0.6rem; }
-    .tl-day    { font-size: 2.5rem; }
-    .tl-card   { grid-template-columns: 1fr; padding: 1.25rem 1.5rem; }
-    .cta-card  { grid-template-columns: 1fr; padding: 2rem; }
+  .cta-card h2 {
+    color: var(--cream);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 0.6rem;
+  }
+  .cta-card h2 .hand { color: var(--cream); font-size: 0.85em; }
+  .cta-card p { color: var(--cream); font-size: 1rem; }
+  .cta-card .btns { display: flex; gap: 0.85rem; flex-shrink: 0; flex-wrap: wrap; }
+  @media (max-width: 760px) {
+    .cta-card { grid-template-columns: 1fr; padding: 2rem; }
   }
 </style>

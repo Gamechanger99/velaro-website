@@ -1,0 +1,202 @@
+---
+---
+
+<footer class="mkf">
+  <div class="mk-container">
+
+    <div class="mkf-grid">
+
+      <div class="mkf-brand">
+        <div class="mkf-logo"><span class="mkf-v">V</span>elaro</div>
+        <p class="mkf-tagline">
+          Catering &amp; Foodtruckservice<br />aus Haldensleben.
+        </p>
+        <a
+          href="https://instagram.com/velaro_cateringundfoodtruck"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mkf-ig"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect width="20" height="20" x="2" y="2" rx="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+          </svg>
+          @velaro_cateringundfoodtruck
+        </a>
+      </div>
+
+      <div class="mkf-col">
+        <div class="mkf-col-head">Kontakt</div>
+        <ul class="mkf-list">
+          <li>
+            <a href="mailto:kontakt@velaro-catering.de">
+              kontakt@velaro-catering.de
+            </a>
+          </li>
+          <li>
+            <a href="tel:+4916094839906">0160 9483 9906</a>
+          </li>
+          <li class="mkf-addr">
+            Freischützstraße 10<br />39340 Haldensleben
+          </li>
+        </ul>
+      </div>
+
+      <div class="mkf-col">
+        <div class="mkf-col-head">Erreichbarkeit</div>
+        <ul class="mkf-hours">
+          <li>
+            <span class="mkf-day">Mo – Fr</span>
+            <span class="mkf-time">08 – 18 Uhr</span>
+          </li>
+          <li>
+            <span class="mkf-day">Samstag</span>
+            <span class="mkf-time">09 – 14 Uhr</span>
+          </li>
+          <li>
+            <span class="mkf-day">Sonntag</span>
+            <span class="mkf-time mkf-closed">Geschlossen</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mkf-col">
+        <div class="mkf-col-head">Navigation</div>
+        <ul class="mkf-list">
+          <li><a href="/catering">Catering &amp; Buffet</a></li>
+          <li><a href="/maerkte">Märkte &amp; Termine</a></li>
+          <li><a href="/kontakt">Kontakt</a></li>
+          <li><a href="/datenschutz">Datenschutz</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="mkf-bottom">
+      <p class="mkf-copy">© 2025 Velaro Catering &amp; Foodtruckservice. Alle Rechte vorbehalten.</p>
+      <p class="mkf-proto">— Prototype Direction 2: Marktstand</p>
+    </div>
+
+  </div>
+</footer>
+
+<style is:global>
+.mkf {
+  background: var(--mk-bg-deep);
+  padding-block: 4rem 2rem;
+  border-top: 1px solid rgba(243,235,220,0.07);
+}
+.mkf-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(243,235,220,0.07);
+  margin-bottom: 2rem;
+}
+.mkf-logo {
+  font-family: var(--mk-serif);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.5rem;
+  color: var(--mk-cream);
+  margin-bottom: 0.875rem;
+}
+.mkf-v { color: var(--mk-accent); }
+.mkf-tagline {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgba(243,235,220,0.45);
+  margin-bottom: 1.25rem;
+}
+.mkf-ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mk-sans);
+  font-weight: 700;
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
+  color: var(--mk-accent);
+  transition: opacity var(--mk-t);
+}
+.mkf-ig:hover { opacity: 0.7; }
+
+.mkf-col-head {
+  font-family: var(--mk-sans);
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(243,235,220,0.35);
+  margin-bottom: 1.25rem;
+}
+.mkf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.mkf-list li { }
+.mkf-list a {
+  font-size: 0.9rem;
+  color: rgba(243,235,220,0.6);
+  transition: color var(--mk-t);
+}
+.mkf-list a:hover { color: var(--mk-accent); }
+.mkf-addr {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(243,235,220,0.45);
+  margin-top: 0.25rem;
+}
+.mkf-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.mkf-hours li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.875rem;
+}
+.mkf-day { color: rgba(243,235,220,0.6); }
+.mkf-time {
+  font-family: var(--mk-serif);
+  font-weight: 500;
+  font-style: normal;
+  color: var(--mk-accent);
+}
+.mkf-closed {
+  font-family: var(--mk-sans);
+  font-size: 0.8rem;
+  color: var(--mk-text-mute);
+}
+.mkf-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.mkf-copy {
+  font-size: 0.78rem;
+  color: rgba(243,235,220,0.25);
+}
+.mkf-proto {
+  font-family: var(--mk-serif);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.875rem;
+  color: rgba(243,235,220,0.2);
+}
+
+@media (max-width: 900px) {
+  .mkf-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 540px) {
+  .mkf-grid   { grid-template-columns: 1fr; gap: 1.75rem; }
+  .mkf-bottom { flex-direction: column; text-align: center; }
+}
+</style>

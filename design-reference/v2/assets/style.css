@@ -2,7 +2,7 @@
    VELARO — V2 · Street Food Festival
    ============================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
 
 :root {
   /* SAME brand palette — used boldly */
@@ -36,19 +36,18 @@
 
   --display: "Alfa Slab One", "Georgia", serif;
   --display-2: "Alfa Slab One", "Georgia", serif;
-  --serif:   "Cormorant Garamond", "Georgia", serif;
   --hand:    "Caveat", "Brush Script MT", cursive;
   --sans:    "Manrope", system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; background: var(--bg); }
+html { scroll-behavior: smooth; background: var(--cream); }
 
 body {
   font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
+  background: var(--cream);
+  color: var(--ink);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -105,7 +104,7 @@ h2 .it, h3 .it, .it {
   font-style: normal;
 }
 
-p  { color: var(--text-2); font-size: 1rem; }
+p  { color: var(--ink); font-size: 1rem; }
 
 /* Eyebrow / tag — looks like a price-tag sticker */
 .eyebrow {
@@ -151,8 +150,6 @@ p  { color: var(--text-2); font-size: 1rem; }
 .bg-navy p { color: var(--text-2); }
 
 .bg-cream  { background: var(--cream); color: var(--ink); }
-.bg-cream h1, .bg-cream h2, .bg-cream h3, .bg-cream h4 { color: var(--ink); }
-.bg-cream p { color: var(--ink); }
 .bg-teal   { background: var(--accent); color: var(--navy-deep); }
 .bg-teal h1, .bg-teal h2, .bg-teal h3 { color: var(--navy-deep); }
 .bg-teal p { color: var(--navy-deep); }
@@ -278,7 +275,7 @@ p  { color: var(--text-2); font-size: 1rem; }
   padding-block: 0.6rem;
 }
 .logo-link { display: flex; align-items: center; gap: 0.8rem; }
-.logo-img  { height: 52px; width: auto; transition: transform var(--t-snap); }
+.logo-img  { height: 52px; width: auto; filter: invert(1) brightness(1.5); transition: transform var(--t-snap); }
 .logo-link:hover .logo-img { transform: rotate(-6deg) scale(1.08); }
 
 .nav-list {
@@ -396,7 +393,7 @@ p  { color: var(--text-2); font-size: 1rem; }
   color: var(--text-2);
   max-width: 320px;
 }
-.footer-logo { height: 64px; width: auto; }
+.footer-logo { height: 64px; width: auto; filter: invert(1) brightness(1.5); }
 .footer-col h5 {
   font-family: var(--display);
   font-size: 1.4rem;

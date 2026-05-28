@@ -1,0 +1,275 @@
+---
+---
+
+<section class="mkl" id="mk-leistungen">
+  <div class="mk-container">
+
+    <div class="mkl-intro mk-reveal">
+      <span class="mk-eyebrow">Unsere Welten</span>
+      <h2 class="mkl-h2">Zwei Wege,<br />ein Anspruch — Genuss.</h2>
+    </div>
+
+    <div class="mkl-grid mk-reveal-stagger">
+
+      <a href="/catering" class="mkl-card">
+        <div class="mkl-stripe"></div>
+        <img
+          src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1200&auto=format&fit=crop"
+          alt="Catering Buffet"
+          class="mkl-card-img"
+          loading="lazy"
+          width="600"
+          height="338"
+        />
+        <div class="mkl-card-body">
+          <div class="mkl-card-num">01 — Catering</div>
+          <h3 class="mkl-card-h3">Catering &amp; Buffet</h3>
+          <p class="mkl-card-p">
+            Klassisches Buffet, Grillbuffet, Foodtruck &amp; Canapés —
+            individuell auf Ihren Anlass abgestimmt.
+          </p>
+          <span class="mkl-card-link">Banketmappe öffnen →</span>
+        </div>
+      </a>
+
+      <a href="/maerkte" class="mkl-card">
+        <div class="mkl-stripe"></div>
+        <img
+          src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop"
+          alt="Food Truck auf dem Markt"
+          class="mkl-card-img"
+          loading="lazy"
+          width="600"
+          height="338"
+        />
+        <div class="mkl-card-body">
+          <div class="mkl-card-num">02 — Märkte</div>
+          <h3 class="mkl-card-h3">Märkte &amp; Truck</h3>
+          <p class="mkl-card-p">
+            Findet uns auf regionalen Märkten und Veranstaltungen —
+            frisch zubereitet, direkt zu euch.
+          </p>
+          <span class="mkl-card-link">Termine ansehen →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <hr class="mkl-rule" />
+
+    <div class="mkl-vals-head mk-reveal">
+      <span class="mk-eyebrow">Unser Versprechen</span>
+      <h2 class="mkl-h2-sm">Was Sie von uns erwarten dürfen.</h2>
+    </div>
+
+    <div class="mkl-vals mk-reveal-stagger">
+
+      <div class="mkl-val">
+        <div class="mkl-val-num">— 01</div>
+        <div>
+          <h3 class="mkl-val-h3">Frisch &amp; regional</h3>
+          <p class="mkl-val-p">
+            Wir verwenden Zutaten von Erzeugern aus der Region —
+            frisch zubereitet direkt für Ihr Event, ohne Kompromisse.
+          </p>
+        </div>
+      </div>
+
+      <div class="mkl-val">
+        <div class="mkl-val-num">— 02</div>
+        <div>
+          <h3 class="mkl-val-h3">Individuell abgestimmt</h3>
+          <p class="mkl-val-p">
+            Kein Event gleicht dem anderen. Wir passen Menü, Setup und
+            Service genau auf Ihre Wünsche und Gästezahl an.
+          </p>
+        </div>
+      </div>
+
+      <div class="mkl-val">
+        <div class="mkl-val-num">— 03</div>
+        <div>
+          <h3 class="mkl-val-h3">Zuverlässig &amp; pünktlich</h3>
+          <p class="mkl-val-p">
+            Von der Planung bis zum Service — wir sind dabei. Auf den
+            Punkt, mit Charme und der Ruhe der Routine.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style is:global>
+.mkl {
+  background: var(--mk-cream);
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+.mkl-intro { margin-bottom: 2.5rem; }
+.mkl-h2 {
+  font-family: var(--mk-serif);
+  font-weight: 500;
+  font-style: normal;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.05;
+  color: var(--mk-bg-deep);
+  margin-top: 0.75rem;
+}
+
+/* ── Service cards ── */
+.mkl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+.mkl-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--mk-bg-deep);
+  box-shadow: 4px 4px 0 var(--mk-bg-deep);
+  background: var(--mk-cream);
+  overflow: hidden;
+  transition: transform var(--mk-t), box-shadow var(--mk-t);
+  cursor: pointer;
+}
+.mkl-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--mk-bg-deep);
+}
+.mkl-stripe {
+  height: 3px;
+  background: var(--mk-accent);
+  flex-shrink: 0;
+}
+.mkl-card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--mk-bg-deep);
+  display: block;
+  transition: transform 600ms ease;
+}
+.mkl-card:hover .mkl-card-img { transform: scale(1.03); }
+.mkl-card-body {
+  padding: 1.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.mkl-card-num {
+  font-family: var(--mk-sans);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mk-accent);
+  margin-bottom: 0.625rem;
+}
+.mkl-card-h3 {
+  font-family: var(--mk-serif);
+  font-weight: 600;
+  font-style: normal;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  line-height: 1;
+  color: var(--mk-bg-deep);
+  margin-bottom: 0.75rem;
+}
+.mkl-card-p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(8,17,29,0.6);
+  max-width: 40ch;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+.mkl-card-link {
+  font-family: var(--mk-sans);
+  font-weight: 700;
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mk-bg-deep);
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--mk-bg-deep);
+  width: fit-content;
+  transition: color var(--mk-t), border-color var(--mk-t);
+}
+.mkl-card:hover .mkl-card-link {
+  color: var(--mk-accent);
+  border-color: var(--mk-accent);
+}
+
+/* ── Divider ── */
+.mkl-rule {
+  border: none;
+  border-top: 1px solid rgba(8,17,29,0.14);
+  margin-bottom: 4rem;
+}
+
+/* ── Values ── */
+.mkl-vals-head { margin-bottom: 2rem; }
+.mkl-h2-sm {
+  font-family: var(--mk-serif);
+  font-weight: 500;
+  font-style: normal;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--mk-bg-deep);
+  margin-top: 0.625rem;
+}
+.mkl-vals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(8,17,29,0.14);
+}
+.mkl-val {
+  display: flex;
+  gap: 1.125rem;
+  padding: 2rem 1.75rem;
+  border-right: 1px solid rgba(8,17,29,0.14);
+  border-top: 3px solid transparent;
+  background: rgba(8,17,29,0.03);
+  transition: background var(--mk-t), border-top-color var(--mk-t);
+}
+.mkl-val:last-child { border-right: none; }
+.mkl-val:hover {
+  background: rgba(8,17,29,0.06);
+  border-top-color: var(--mk-accent);
+}
+.mkl-val-num {
+  font-family: var(--mk-serif);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.2rem;
+  color: var(--mk-accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+.mkl-val-h3 {
+  font-family: var(--mk-serif);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: var(--mk-bg-deep);
+  margin-bottom: 0.625rem;
+}
+.mkl-val-p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: rgba(8,17,29,0.6);
+}
+
+@media (max-width: 860px) {
+  .mkl-grid { grid-template-columns: 1fr; }
+  .mkl-vals  { grid-template-columns: 1fr; }
+  .mkl-val   { border-right: none; border-bottom: 1px solid rgba(8,17,29,0.14); }
+  .mkl-val:last-child { border-bottom: none; }
+}
+</style>

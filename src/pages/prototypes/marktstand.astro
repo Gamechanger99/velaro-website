@@ -1,0 +1,71 @@
+---
+import '../../styles/prototype-marktstand.css';
+import Hero       from '../../components/prototypes/marktstand/Hero.astro';
+import Leistungen from '../../components/prototypes/marktstand/Leistungen.astro';
+import UeberUns   from '../../components/prototypes/marktstand/UeberUns.astro';
+import Referenzen from '../../components/prototypes/marktstand/Referenzen.astro';
+import CTASection  from '../../components/prototypes/marktstand/CTASection.astro';
+import Footer      from '../../components/prototypes/marktstand/Footer.astro';
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Velaro Catering & Foodtruckservice — Prototype Direction 2: Marktstand" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Velaro — Prototype: Marktstand</title>
+
+    <!-- Cormorant Garamond: NUR upright (kein ital, kein font-style: italic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+
+    <Hero />
+    <Leistungen />
+    <UeberUns />
+    <Referenzen />
+    <CTASection />
+    <Footer />
+
+    <script is:inline>
+      (() => {
+        // Scroll reveal
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+        );
+        document
+          .querySelectorAll('.mk-reveal, .mk-reveal-stagger')
+          .forEach((el) => io.observe(el));
+
+        // Mobile nav
+        const burger    = document.getElementById('mk-burger');
+        const mobileNav = document.getElementById('mk-mobile-nav');
+        burger?.addEventListener('click', () => {
+          const isOpen = mobileNav?.classList.toggle('mk-nav-open');
+          burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        mobileNav?.querySelectorAll('a').forEach((a) =>
+          a.addEventListener('click', () => {
+            mobileNav.classList.remove('mk-nav-open');
+            burger.setAttribute('aria-expanded', 'false');
+          })
+        );
+      })();
+    </script>
+
+  </body>
+</html>

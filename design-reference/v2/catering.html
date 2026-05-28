@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catering — Velaro</title>
+  <link rel="icon" href="assets/logo.svg" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    /* ─── Page hero ─── */
+    .ph {
+      position: relative;
+      padding-top: clamp(8rem, 14vw, 11rem);
+      padding-bottom: clamp(3rem, 6vw, 5rem);
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--cream);
+    }
+    .ph-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .ph h1 {
+      font-size: clamp(3.5rem, 10vw, 9rem);
+      line-height: 0.86;
+      margin: 1.25rem 0 1.5rem;
+    }
+    .ph h1 .hand { color: var(--hot); font-size: 0.8em; }
+    .ph-lead {
+      font-size: 1.1rem;
+      line-height: 1.55;
+      max-width: 50ch;
+      margin-bottom: 2rem;
+    }
+    .ph-side {
+      padding: 2rem;
+      background: var(--ink);
+      color: var(--cream);
+      border: 4px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--hot);
+      transform: rotate(1.5deg);
+    }
+    .ph-side h4 {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+      color: var(--hot);
+      margin-bottom: 1.25rem;
+    }
+    .ph-side ul { list-style: none; display: flex; flex-direction: column; gap: 0.95rem; }
+    .ph-side li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.96rem;
+      line-height: 1.45;
+      color: var(--cream);
+    }
+    .ph-side li .ck {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--hot);
+      color: var(--cream);
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-top: 0.1rem;
+    }
+    @media (max-width: 900px) {
+      .ph-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .ph-side { transform: rotate(0); }
+    }
+
+    /* ─── CATEGORY CARDS (4) ─── */
+    .cats {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--cream);
+    }
+    .cats-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 3rem;
+    }
+    .cats-head h2 { font-size: clamp(2.5rem, 6vw, 5rem); max-width: 16ch; }
+    .cats-head h2 .hand { color: var(--hot); }
+    .cats-head .helper {
+      font-family: var(--hand);
+      font-size: 1.2rem;
+      color: var(--hot);
+      transform: rotate(-3deg);
+      max-width: 24ch;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .cat-card {
+      position: relative;
+      min-height: 480px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+    .cat-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      transition: transform 0.6s cubic-bezier(.5,1.2,.3,1);
+      transform-style: preserve-3d;
+    }
+    .cat-card.flipped .cat-inner { transform: rotateY(180deg); }
+    .cat-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border: 4px solid var(--ink);
+      overflow: hidden;
+    }
+    .cat-front {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.75rem;
+      isolation: isolate;
+      background: var(--ink);
+    }
+    .cat-front img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: contrast(1.08) saturate(1.15);
+      transition: transform var(--t-snap);
+    }
+    .cat-front::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(8,17,29,0.05) 30%, rgba(8,17,29,0.55) 65%, rgba(8,17,29,0.95));
+    }
+    .cat-card:hover .cat-front img { transform: scale(1.07); }
+    .cat-front .num-tag {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      padding: 0.4rem 0.75rem;
+      background: var(--hot);
+      color: var(--cream);
+      font-family: var(--display);
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      transform: rotate(3deg);
+      border: 3px solid var(--cream);
+    }
+    .cat-card:nth-child(2) .cat-front .num-tag { background: var(--accent); color: var(--navy-deep); }
+    .cat-card:nth-child(3) .cat-front .num-tag { background: var(--mustard); color: var(--ink); }
+    .cat-card:nth-child(4) .cat-front .num-tag { background: var(--cream); color: var(--ink); border-color: var(--ink); }
+    .cat-front h3 {
+      color: var(--cream);
+      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+      line-height: 0.92;
+    }
+    .cat-front h3 .hand { color: var(--hot); }
+    .cat-front .tease {
+      font-size: 0.92rem;
+      line-height: 1.45;
+      color: var(--cream);
+      margin-top: 0.6rem;
+      opacity: 0.92;
+    }
+    .cat-front .flip-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cream);
+      padding: 0.6rem 0.9rem;
+      background: var(--hot);
+      width: fit-content;
+    }
+    .cat-card:nth-child(2) .flip-hint { background: var(--accent); color: var(--navy-deep); }
+    .cat-card:nth-child(3) .flip-hint { background: var(--mustard); color: var(--ink); }
+    .cat-card:nth-child(4) .flip-hint { background: var(--cream); color: var(--ink); }
+
+    .cat-back {
+      transform: rotateY(180deg);
+      background: var(--cream);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .cat-back h4 {
+      font-size: 1.7rem;
+      line-height: 0.95;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+    .cat-back h4 .hand { color: var(--hot); font-size: 0.9em; }
+    .cat-back ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      flex: 1;
+    }
+    .cat-back li {
+      font-size: 0.88rem;
+      line-height: 1.4;
+      color: var(--ink);
+      padding: 0.4rem 0.5rem 0.4rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+    }
+    .cat-back li::before {
+      content: '★';
+      position: absolute;
+      left: 0.25rem;
+      top: 0.4rem;
+      color: var(--hot);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .cat-back .back-btn {
+      margin-top: 1rem;
+      align-self: flex-start;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--hot);
+      border: 3px solid var(--ink);
+      padding: 0.55rem 0.95rem;
+      cursor: pointer;
+      transition: transform var(--t);
+    }
+    .cat-back .back-btn:hover { transform: translate(-1px,-1px); }
+
+    @media (max-width: 1100px) {
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .cat-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PRICING TIERS — chunky poster cards ─── */
+    .tiers {
+      background: var(--navy);
+      color: var(--cream);
+      padding-block: clamp(4rem, 9vw, 8rem);
+    }
+    .tiers-head { text-align: center; margin-bottom: 4rem; }
+    .tiers-head h2 { color: var(--cream); font-size: clamp(2.5rem, 6vw, 4.5rem); margin-top: 1.25rem; }
+    .tiers-head h2 .hand { color: var(--hot); }
+    .tiers-head p { color: var(--text-2); max-width: 52ch; margin: 1rem auto 0; font-size: 1rem; }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin-inline: auto;
+    }
+    .tier {
+      position: relative;
+      padding: 2.25rem 1.75rem;
+      background: var(--cream);
+      color: var(--ink);
+      border: 4px solid var(--cream);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: transform var(--t-snap), box-shadow var(--t-snap);
+      box-shadow: 8px 8px 0 var(--hot);
+    }
+    .tier:hover {
+      transform: translate(-3px,-3px) rotate(-0.5deg);
+      box-shadow: 14px 14px 0 var(--hot);
+    }
+    .tier--featured {
+      background: var(--hot);
+      color: var(--cream);
+      border-color: var(--ink);
+      box-shadow: 8px 8px 0 var(--cream);
+    }
+    .tier--featured:hover { box-shadow: 14px 14px 0 var(--cream); }
+    .tier--featured h3 { color: var(--cream); }
+    .tier--featured .from { color: var(--cream); }
+    .tier--featured .price { color: var(--cream); }
+    .tier--featured li { color: var(--cream); }
+    .tier--featured .check { background: var(--cream); color: var(--hot); }
+    .tier--featured::before {
+      content: 'Beliebt';
+      position: absolute;
+      top: -16px; right: 1.5rem;
+      padding: 0.4rem 0.9rem;
+      background: var(--mustard);
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 3px solid var(--ink);
+      transform: rotate(4deg);
+    }
+    .tier h3 {
+      font-size: 2rem;
+      line-height: 0.92;
+      color: var(--ink);
+    }
+    .tier h3 .hand { color: var(--hot); font-size: 0.8em; }
+    .tier--featured h3 .hand { color: var(--cream); }
+    .tier .tprice {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding-block: 0.85rem;
+      border-block: 3px dashed var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .tier .from {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .tier .price {
+      font-family: var(--display);
+      font-size: 3.5rem;
+      color: var(--hot);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+    .tier .pp {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .tier ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+      margin: 0.5rem 0;
+    }
+    .tier li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.93rem;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+    .tier .check {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: var(--ink);
+      color: var(--hot);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-top: 0.05rem;
+    }
+    .tier .btn { margin-top: 0.5rem; justify-content: center; }
+    .tier--featured .btn { background: var(--cream); color: var(--ink); border-color: var(--cream); box-shadow: 5px 5px 0 var(--ink); }
+    .tier--featured .btn:hover { box-shadow: 8px 8px 0 var(--ink); }
+
+    @media (max-width: 900px) { .tier-grid { grid-template-columns: 1fr; } }
+
+    /* ─── BANKETMAPPE WIZARD ─── */
+    .bm-section {
+      padding-block: clamp(4rem, 9vw, 8rem);
+      background: var(--cream);
+    }
+    .bm-intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3rem;
+    }
+    .bm-intro h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-top: 1rem; }
+    .bm-intro h2 .hand { color: var(--hot); }
+    .bm-intro p { margin-top: 1rem; font-size: 1rem; line-height: 1.55; max-width: 50ch; margin-inline: auto; }
+
+    .bm-card {
+      max-width: 900px;
+      margin-inline: auto;
+      background: var(--cream);
+      border: 4px solid var(--ink);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+    .bm-card-header {
+      padding: 1.5rem 2rem;
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .bm-num {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display);
+      font-size: 2rem;
+      color: var(--cream);
+      background: var(--hot);
+      border: 3px solid var(--cream);
+    }
+    .bm-header-text { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+    .bm-step-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hot);
+    }
+    .bm-step-title {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--cream);
+    }
+    .bm-progress-bar { display: flex; gap: 4px; }
+    .bm-seg {
+      width: 28px;
+      height: 6px;
+      background: rgba(243,235,220,0.18);
+      transition: all 0.3s cubic-bezier(.5,1.4,.3,1);
+    }
+    .bm-seg.done   { background: var(--accent); }
+    .bm-seg.active { background: var(--hot); width: 44px; }
+
+    .bm-body {
+      padding: 2rem;
+      min-height: 280px;
+      background: var(--cream);
+      color: var(--ink);
+    }
+    .bm-step-desc {
+      font-size: 0.96rem;
+      line-height: 1.55;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .bm-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      background: var(--ink);
+      gap: 1rem;
+    }
+    .bm-btn-back, .bm-btn-next {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.4rem;
+      border: 3px solid var(--cream);
+      cursor: pointer;
+      transition: transform var(--t);
+    }
+    .bm-btn-back {
+      background: transparent;
+      color: var(--cream);
+      visibility: hidden;
+    }
+    .bm-btn-back.bm-visible { visibility: visible; }
+    .bm-btn-back:hover { background: var(--cream); color: var(--ink); }
+    .bm-btn-next {
+      background: var(--hot);
+      color: var(--cream);
+      border-color: var(--cream);
+    }
+    .bm-btn-next:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--cream); }
+
+    /* Welcome step */
+    .bm-welcome { text-align: center; padding: 1rem; }
+    .bm-welcome-headline {
+      font-family: var(--display);
+      font-size: 2rem;
+      line-height: 0.95;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+    .bm-welcome-headline .hand { color: var(--hot); font-size: 0.85em; }
+    .bm-welcome p {
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .bm-feature-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .bm-feature-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .bm-feature-bubble {
+      width: 56px; height: 56px;
+      background: var(--hot);
+      color: var(--cream);
+      border: 3px solid var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display);
+      font-size: 1.5rem;
+      transform: rotate(-4deg);
+    }
+    .bm-feature-item:nth-child(2) .bm-feature-bubble { background: var(--accent); color: var(--navy-deep); transform: rotate(4deg); }
+    .bm-feature-item:nth-child(3) .bm-feature-bubble { background: var(--mustard); color: var(--ink); transform: rotate(-2deg); }
+    .bm-feature-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    /* Category step */
+    .bm-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .bm-cat-card {
+      position: relative;
+      background: var(--cream);
+      border: 3px solid var(--ink);
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      transition: all var(--t);
+      user-select: none;
+    }
+    .bm-cat-card:hover {
+      background: var(--ink);
+      color: var(--cream);
+      transform: translate(-2px,-2px);
+      box-shadow: 4px 4px 0 var(--hot);
+    }
+    .bm-cat-card.bm-selected {
+      background: var(--hot);
+      color: var(--cream);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .bm-cat-card.bm-selected::after {
+      content: '✓';
+      position: absolute;
+      top: -10px; right: -10px;
+      width: 28px; height: 28px;
+      background: var(--ink);
+      color: var(--hot);
+      border: 3px solid var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+    }
+    .bm-cat-card.bm-selected .bm-cat-tag { color: var(--cream); }
+    .bm-cat-card.bm-selected .bm-cat-desc { color: var(--cream); }
+    .bm-cat-tag {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--hot);
+      margin-bottom: 0.5rem;
+    }
+    .bm-cat-card:hover .bm-cat-tag { color: var(--cream); }
+    .bm-cat-name {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+    .bm-cat-desc { font-size: 0.85rem; color: var(--ink); line-height: 1.45; }
+
+    /* Forms */
+    .bm-form { display: flex; flex-direction: column; gap: 1rem; }
+    .bm-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .bm-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .bm-field label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .bm-field input, .bm-field textarea {
+      background: var(--cream);
+      border: 3px solid var(--ink);
+      color: var(--ink);
+      font: 500 0.95rem var(--sans);
+      padding: 0.75rem 0.85rem;
+      width: 100%;
+      outline: none;
+      transition: box-shadow var(--t);
+    }
+    .bm-field input::placeholder, .bm-field textarea::placeholder { color: rgba(10,14,21,0.4); }
+    .bm-field input:focus, .bm-field textarea:focus { box-shadow: 4px 4px 0 var(--hot); }
+    .bm-field input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; }
+    .bm-field-divider { border: none; border-top: 2px dashed var(--ink); margin: 0.5rem 0; }
+    .bm-field-group-label {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: var(--hot);
+    }
+
+    /* Menu step */
+    .bm-menu-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 0.85rem 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      border: 3px solid var(--ink);
+    }
+    .bm-menu-status span { color: var(--cream); opacity: 0.7; }
+    .bm-menu-status strong { color: var(--hot); font-weight: 800; }
+
+    .bm-dish-group { margin-bottom: 1.6rem; }
+    .bm-dish-group-title {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--hot);
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid var(--ink);
+    }
+    .bm-dish-list { display: flex; flex-direction: column; gap: 0.35rem; }
+    .bm-dish-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
+    .bm-dish {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0.9rem;
+      background: var(--cream);
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--ink);
+      transition: all var(--t);
+      user-select: none;
+    }
+    .bm-dish:hover { background: var(--ink); color: var(--cream); }
+    .bm-dish.bm-active {
+      background: var(--hot);
+      color: var(--cream);
+    }
+    .bm-dish-dot {
+      width: 18px; height: 18px;
+      border: 2px solid var(--ink);
+      background: var(--cream);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--t);
+    }
+    .bm-dish:hover .bm-dish-dot { border-color: var(--cream); }
+    .bm-dish.bm-active .bm-dish-dot { background: var(--cream); border-color: var(--cream); }
+    .bm-dish-dot-inner {
+      width: 8px; height: 8px;
+      background: transparent;
+      transition: background var(--t);
+    }
+    .bm-dish.bm-active .bm-dish-dot-inner { background: var(--hot); }
+    .bm-dish-label { flex: 1; }
+    .bm-item-badge {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.55rem;
+      white-space: nowrap;
+      border: 2px solid currentColor;
+    }
+    .bm-badge-incl, .bm-badge-base { background: var(--accent); color: var(--navy-deep); border-color: var(--navy-deep); }
+    .bm-badge-extra { background: var(--mustard); color: var(--ink); border-color: var(--ink); }
+    .bm-sub-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding: 0.2rem 0.25rem 0.25rem 2.5rem;
+    }
+    .bm-sub-chip {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      background: var(--cream);
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      cursor: pointer;
+      transition: all var(--t);
+    }
+    .bm-sub-chip:hover { background: var(--ink); color: var(--cream); }
+    .bm-sub-chip.bm-active {
+      background: var(--hot);
+      color: var(--cream);
+      border-color: var(--hot);
+    }
+    .bm-info-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.5rem;
+      background: var(--mustard);
+      border: 3px solid var(--ink);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .bm-info-icon { color: var(--ink); flex-shrink: 0; margin-top: 0.1rem; font-weight: 800; }
+
+    .bm-reco-box {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: var(--ink);
+      color: var(--cream);
+      border: 3px solid var(--ink);
+    }
+    .bm-reco-label {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--hot);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .bm-reco-rows {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.5rem;
+      font-size: 0.88rem;
+      color: var(--cream);
+    }
+    .bm-reco-rows strong { color: var(--accent); font-weight: 700; }
+
+    /* Wishes */
+    .bm-wishes-wrap textarea {
+      width: 100%;
+      min-height: 150px;
+      background: var(--cream);
+      border: 3px solid var(--ink);
+      color: var(--ink);
+      font: 500 0.95rem var(--sans);
+      padding: 0.85rem 1rem;
+      resize: vertical;
+      line-height: 1.55;
+      outline: none;
+      transition: box-shadow var(--t);
+    }
+    .bm-wishes-wrap textarea:focus { box-shadow: 4px 4px 0 var(--hot); }
+    .bm-hint {
+      font-family: var(--hand);
+      font-size: 1rem;
+      color: var(--hot);
+      margin-top: 0.6rem;
+      line-height: 1.4;
+      transform: rotate(-1deg);
+      display: inline-block;
+    }
+
+    /* Summary */
+    .bm-summary-block { margin-bottom: 1.5rem; }
+    .bm-summary-title {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--hot);
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 3px solid var(--ink);
+    }
+    .bm-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0;
+      border-bottom: 2px dotted var(--ink);
+      font-size: 0.92rem;
+      gap: 1rem;
+    }
+    .bm-row-key {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .bm-row-val { color: var(--ink); font-weight: 600; text-align: right; }
+
+    /* Success */
+    .bm-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.25rem;
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 2rem auto 0;
+      background: var(--hot);
+      color: var(--cream);
+      border: 4px solid var(--ink);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+    .bm-success.bm-visible { display: flex; }
+    .bm-success-check {
+      width: 80px; height: 80px;
+      background: var(--cream);
+      color: var(--hot);
+      border: 4px solid var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      transform: rotate(-6deg);
+    }
+    .bm-success h3 { color: var(--cream); font-size: 2.5rem; }
+    .bm-success h3 .hand { color: var(--cream); font-size: 0.85em; }
+    .bm-success p { max-width: 400px; font-size: 1rem; line-height: 1.55; color: var(--cream); }
+    .bm-success button {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.95rem 1.6rem;
+      background: var(--cream);
+      color: var(--ink);
+      border: 3px solid var(--ink);
+      cursor: pointer;
+      transition: transform var(--t);
+    }
+    .bm-success button:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); }
+
+    @media (max-width: 640px) {
+      .bm-card-header { padding: 1.25rem; flex-wrap: wrap; }
+      .bm-body { padding: 1.5rem 1.25rem; }
+      .bm-nav { padding: 1rem 1.25rem; flex-direction: column-reverse; }
+      .bm-btn-back, .bm-btn-next { width: 100%; text-align: center; justify-content: center; }
+      .bm-cat-grid { grid-template-columns: 1fr; }
+      .bm-form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header-slot"></div>
+
+  <main data-screen-label="02 Catering">
+
+    <!-- ═══════════ PAGE HERO ═══════════ -->
+    <section class="ph">
+      <div class="container ph-grid">
+        <div class="reveal">
+          <span class="eyebrow">Menü &amp; Pakete</span>
+          <h1>Catering &amp;<br/><span class="hand">Buffet</span></h1>
+          <p class="ph-lead">
+            Vom Canapé-Empfang bis zum 200-Personen-Buffet — wir stellen euch
+            ein Catering zusammen, das schmeckt und sitzt. Frisch zubereitet,
+            direkt am Eventtag, mit Aufmerksamkeit fürs Detail.
+          </p>
+          <a href="#banketmappe" class="btn btn-primary">Banketmappe öffnen <span class="arrow">↓</span></a>
+        </div>
+
+        <div class="ph-side reveal">
+          <h4>Bei uns inklusive</h4>
+          <ul>
+            <li><span class="ck">✓</span> Liefergebiet Haldensleben &amp; Umgebung — sonst nach Absprache</li>
+            <li><span class="ck">✓</span> Aufbau und Servicepersonal nach Wunsch</li>
+            <li><span class="ck">✓</span> Geschirr &amp; Equipment optional buchbar</li>
+            <li><span class="ck">✓</span> Persönliches Angebot innerhalb von 24h</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ MARQUEE ═══════════ -->
+    <div class="marquee marquee--teal" aria-hidden="true">
+      <div class="marquee-track">
+        <span>★ Burger ★ Grillbuffet ★ Canapés ★ Foodtruck ★ Suppen ★ Bratwurst ★ Pasta ★ Pulled Pork ★ Wraps ★ Hausgemacht ★ Salate ★</span>
+        <span>★ Burger ★ Grillbuffet ★ Canapés ★ Foodtruck ★ Suppen ★ Bratwurst ★ Pasta ★ Pulled Pork ★ Wraps ★ Hausgemacht ★ Salate ★</span>
+      </div>
+    </div>
+
+    <!-- ═══════════ CATEGORY CARDS ═══════════ -->
+    <section class="cats">
+      <div class="container">
+        <div class="cats-head reveal">
+          <h2>Vier <span class="hand">Kategorien</span>,<br/>kein langweiliger Teller.</h2>
+          <p class="helper">Tippt auf eine Karte — die andere Seite zeigt das Sortiment.</p>
+        </div>
+
+        <div class="cat-grid reveal-stagger">
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num-tag">— 01</span>
+                <h3>Klassisches <span class="hand">Buffet</span></h3>
+                <p class="tease">Warme Gerichte und Beilagen für jeden Anlass.</p>
+                <span class="flip-hint">Umblättern</span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4>Klassisches <span class="hand">Buffet</span></h4>
+                <ul>
+                  <li>Suppen — Hochzeitssuppe, Tomatencreme</li>
+                  <li>Schnitzel- &amp; Bratenvariation</li>
+                  <li>Hähnchenbrust 3-fach</li>
+                  <li>Schweinefilet, Pfefferrahm</li>
+                  <li>Lachsfilet auf Spargel</li>
+                  <li>Veggie: Gnocchi, Falafel</li>
+                  <li>Beilagen (Reis, Spätzle, Gratin)</li>
+                  <li>Dessert &amp; Kuchen</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num-tag">— 02</span>
+                <h3><span class="hand">Grill</span>buffet</h3>
+                <p class="tease">Frisch vom Grill — Steaks, Bratwurst, Vegetarisch.</p>
+                <span class="flip-hint">Umblättern</span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4><span class="hand">Grill</span>buffet</h4>
+                <ul>
+                  <li>Bratwurst &amp; Boulette vom Grill</li>
+                  <li>Steak — Schwein oder Hühnchen</li>
+                  <li>Grillgemüse &amp; Tomaten-Feta</li>
+                  <li>Fackeln &amp; Spieße</li>
+                  <li>Suppen als Vorspeise</li>
+                  <li>Veggie-Hauptgänge</li>
+                  <li>Komplettes Beilagen-Set</li>
+                  <li>Dessert &amp; Kuchen</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num-tag">— 03</span>
+                <h3>Kleine <span class="hand">Speisen</span></h3>
+                <p class="tease">Wraps, Canapés und Brötchen — ab 10 Personen.</p>
+                <span class="flip-hint">Umblättern</span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4>Kleine <span class="hand">Speisen</span></h4>
+                <ul>
+                  <li>Belegte Brötchen-Variation</li>
+                  <li>Crostinis &amp; Bruschetta</li>
+                  <li>Fingerfood — herzhaft &amp; süß</li>
+                  <li>Canapés — Lachs, Roastbeef, Veggie</li>
+                  <li>Frische Obstplatten</li>
+                  <li>Obstsalat im Glas</li>
+                  <li>Suppen-Shots</li>
+                  <li>Ab 10 Personen buchbar</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-card">
+            <div class="cat-inner">
+              <div class="cat-face cat-front">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=900&auto=format&fit=crop" alt="" />
+                <span class="num-tag">— 04</span>
+                <h3>Food <span class="hand">Truck</span></h3>
+                <p class="tease">Burger frisch vom Truck — direkt zu euch.</p>
+                <span class="flip-hint">Umblättern</span>
+              </div>
+              <div class="cat-face cat-back">
+                <h4>Food <span class="hand">Truck</span></h4>
+                <ul>
+                  <li>Cheeseburger &amp; Hamburger</li>
+                  <li>Chili-Cheese Burger</li>
+                  <li>Onion Overload</li>
+                  <li>Veggie Burger</li>
+                  <li>Pommes &amp; Loaded Fries</li>
+                  <li>Aufpreis: Pulled Pork, Teriyaki, BBQ</li>
+                  <li>Aufpreis: Apfel-Camembert, Mexiko</li>
+                  <li>Vor Ort frisch zubereitet</li>
+                </ul>
+                <button class="back-btn">← Zurück</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PRICING TIERS ═══════════ -->
+    <section class="tiers">
+      <div class="container">
+        <div class="tiers-head reveal">
+          <span class="eyebrow eyebrow--teal">Pakete und Richtwerte</span>
+          <h2>Drei Pakete<br/>für <span class="hand">euer</span> Event.</h2>
+          <p>Alle Pakete sind individuell anpassbar — Preise verstehen sich pro Person, inklusive Aufbau und Equipment.</p>
+        </div>
+
+        <div class="tier-grid reveal-stagger">
+
+          <div class="tier">
+            <h3>Empfang <span class="hand">Light</span></h3>
+            <div class="tprice">
+              <span class="from">ab</span>
+              <span class="price">18€</span>
+              <span class="pp">/ Person</span>
+            </div>
+            <ul>
+              <li><span class="check">✓</span> Canapés &amp; Fingerfood</li>
+              <li><span class="check">✓</span> 3 Variationen zur Auswahl</li>
+              <li><span class="check">✓</span> Lieferung &amp; Anrichten</li>
+              <li><span class="check">✓</span> Ab 10 Personen</li>
+            </ul>
+            <a href="#banketmappe" class="btn btn-outline" style="color: var(--ink); border-color: var(--ink); box-shadow: 5px 5px 0 var(--hot);">Auswählen <span class="arrow">→</span></a>
+          </div>
+
+          <div class="tier tier--featured">
+            <h3>Bankett <span class="hand">Klassik</span></h3>
+            <div class="tprice">
+              <span class="from">ab</span>
+              <span class="price">42€</span>
+              <span class="pp">/ Person</span>
+            </div>
+            <ul>
+              <li><span class="check">✓</span> Komplettes Buffet inkl. Suppe</li>
+              <li><span class="check">✓</span> 2 Hauptgänge + 3 Beilagen</li>
+              <li><span class="check">✓</span> Dessertvariation</li>
+              <li><span class="check">✓</span> Servicepersonal + Aufbau</li>
+              <li><span class="check">✓</span> Geschirr &amp; Equipment</li>
+            </ul>
+            <a href="#banketmappe" class="btn">Auswählen <span class="arrow">→</span></a>
+          </div>
+
+          <div class="tier">
+            <h3>Foodtruck <span class="hand">Event</span></h3>
+            <div class="tprice">
+              <span class="from">ab</span>
+              <span class="price">28€</span>
+              <span class="pp">/ Person</span>
+            </div>
+            <ul>
+              <li><span class="check">✓</span> Burger-Grundsortiment</li>
+              <li><span class="check">✓</span> Pommes &amp; Loaded Fries</li>
+              <li><span class="check">✓</span> Frisch vor Ort zubereitet</li>
+              <li><span class="check">✓</span> Inkl. Truck &amp; Team</li>
+              <li><span class="check">✓</span> Ab 30 Personen</li>
+            </ul>
+            <a href="#banketmappe" class="btn btn-outline" style="color: var(--ink); border-color: var(--ink); box-shadow: 5px 5px 0 var(--hot);">Auswählen <span class="arrow">→</span></a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ BANKETMAPPE (Wizard) ═══════════ -->
+    <section class="bm-section" id="banketmappe">
+      <div class="container">
+        <div class="bm-intro reveal">
+          <span class="eyebrow">Interaktive Banketmappe</span>
+          <h2>Stellt euer Catering<br/><span class="hand">zusammen</span>.</h2>
+          <p>Schritt für Schritt zum individuellen Angebot — Kategorie wählen, Gerichte auswählen, anfragen.</p>
+        </div>
+
+        <div class="bm-card reveal" id="bmCard">
+          <div class="bm-card-header">
+            <div class="bm-num" id="bmNum">0</div>
+            <div class="bm-header-text">
+              <span class="bm-step-label" id="bmStepLabel">Willkommen</span>
+              <div class="bm-step-title" id="bmStepTitle">Eure Anfrage — Schritt für Schritt</div>
+            </div>
+            <div class="bm-progress-bar" id="bmProgressBar"></div>
+          </div>
+          <div class="bm-body" id="bmBody"></div>
+          <div class="bm-nav">
+            <button class="bm-btn-back" id="bmBack">← Zurück</button>
+            <button class="bm-btn-next" id="bmNext">Los geht's →</button>
+          </div>
+        </div>
+
+        <div class="bm-success" id="bmSuccess">
+          <div class="bm-success-check">✓</div>
+          <h3>Anfrage <span class="hand">versendet</span>!</h3>
+          <p>Wir melden uns innerhalb von 24 Stunden mit einem persönlichen Angebot.</p>
+          <button id="bmReset">Weitere Anfrage starten</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-slot"></div>
+
+  <script src="assets/partials.js"></script>
+  <script src="assets/script.js"></script>
+  <script src="assets/banketmappe.js"></script>
+  <script>
+    // Flip cards
+    document.querySelectorAll('.cat-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.back-btn')) {
+          card.classList.remove('flipped');
+          return;
+        }
+        card.classList.toggle('flipped');
+      });
+    });
+  </script>
+</body>
+</html>
