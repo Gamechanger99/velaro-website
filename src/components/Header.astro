@@ -7,35 +7,31 @@ const navLinks = [
 ];
 
 const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
 ---
 
-
-
 <header class="site-header">
-  <div class="container header-inner">
+  <div class="wrap nav-inner">
 
-    <!-- Logo -->
-    <a href="/" class="logo-link" aria-label="Velaro Startseite">
-      <img src="/logo.svg" alt="Velaro Catering Logo" class="logo-img" />
+    <a href="/" class="brand" aria-label="Velaro Startseite">
+      <img src="/logo.svg" alt="Velaro Logo" class="brand-logo" />
     </a>
 
-    <!-- Desktop Navigation -->
-    <nav>
-      <ul class="nav-list">
-        {navLinks.map(link => (
-          <li>
-            <a
-              href={link.href}
-              class:list={['nav-link', { 'nav-link--active': currentPath === link.href }]}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <nav class="navlinks">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={['navlink', { 'navlink--active': isActive(link.href) }]}
+        >
+          {link.label}
+        </a>
+      ))}
     </nav>
 
-    <!-- Hamburger Button (nur Mobile sichtbar) -->
     <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
       <span></span>
       <span></span>
@@ -44,7 +40,6 @@ const currentPath = Astro.url.pathname;
 
   </div>
 
-  <!-- Mobile Menü (versteckt bis Hamburger geklickt) -->
   <nav class="mobile-nav" id="mobileNav">
     <ul>
       {navLinks.map(link => (
@@ -56,170 +51,90 @@ const currentPath = Astro.url.pathname;
   </nav>
 </header>
 
-
 <style>
   .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: var(--color-bg-nav);
-    border-bottom: 1px solid var(--color-border);
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(14,24,39,.78); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+    transition: box-shadow .2s, background .2s;
+  }
+  .site-header.scrolled {
+    background: rgba(14,24,39,.92);
+    box-shadow: 0 1px 20px rgba(0,0,0,.4);
   }
 
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 6rem;
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between; height: 110px;
   }
 
-  /* Logo */
-  .logo-img {
-    height: 4.5rem;
-    width: auto;
-    mix-blend-mode: screen; /* schwarzer Hintergrund verschwindet */
-    transition: opacity var(--transition);
+  /* Brand */
+  .brand { display: flex; align-items: center; }
+  .brand-logo {
+    height: 64px; width: auto; display: block;
+    filter: brightness(1.4);
+    transition: filter .25s;
+  }
+  .brand:hover .brand-logo {
+    filter: brightness(1.6);
   }
 
-  .logo-img:hover { opacity: 0.85; }
-
-  /* Desktop Nav */
-  .nav-list {
-    display: flex;
-    gap: 0.25rem;
-    list-style: none;
+  /* Desktop nav */
+  .navlinks { display: flex; align-self: stretch; align-items: center; gap: 38px; }
+  .navlink {
+    font-size: 15.5px; font-weight: 500; color: var(--ink-2);
+    transition: color .2s; position: relative;
+    display: flex; align-items: center; height: 100%;
   }
-
-
-/* NEU */
-.nav-link {
-  display: block;
-  padding: 0.4rem 0.9rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  border-radius: var(--radius-btn);
-  position: relative;
-  transition: color var(--transition);
-}
-
-/* Linie unter jedem Link — erstmal unsichtbar */
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -1.15rem;
-  left: 0.9rem;
-  right: 0.9rem;
-  height: 2px;
-  background-color: var(--color-accent);
-  border-radius: 1px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 200ms ease;
-}
-
-/* Beim Hover: Linie fährt von links nach rechts rein */
-.nav-link:hover::after {
-  transform: scaleX(1);
-}
-
-.nav-link:hover { color: var(--color-text); }
+  .navlink::after {
+    content: ""; position: absolute; left: 0; right: 100%; bottom: 0;
+    height: 2px; background: var(--accent);
+    border-radius: 2px 2px 0 0;
+    transition: right .32s cubic-bezier(.4,0,.2,1);
+  }
+  .navlink:hover { color: var(--ink); }
+  .navlink:hover::after { right: 0; }
+  .navlink--active { color: var(--ink); }
+  .navlink--active::after { right: 0; }
 
   /* Hamburger */
   .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: .5rem;
   }
-
   .hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background-color: var(--color-text);
-    border-radius: 1px;
-    transition: transform 200ms ease, opacity 200ms ease;
+    display: block; width: 22px; height: 2px;
+    background: var(--ink); border-radius: 1px;
+    transition: transform .2s ease, opacity .2s ease;
   }
 
-  /* Mobile Nav */
+  /* Mobile nav */
   .mobile-nav {
-    display: none;
-    padding: 1rem 1.5rem 1.5rem;
-    border-top: 1px solid var(--color-border);
+    display: none; padding: 1rem 1.5rem 1.5rem;
+    border-top: 1px solid var(--line-soft);
+    background: rgba(14,24,39,.95);
   }
-
-  .mobile-nav ul { list-style: none; }
-
+  .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
   .mobile-nav-link {
-    display: block;
-    padding: 1.1rem 0;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-text-muted);
-    border-bottom: 1px solid var(--color-border);
-    transition: color var(--transition);
+    display: block; padding: 1rem 0; font-size: 1rem; font-weight: 500;
+    color: var(--ink-2); border-bottom: 1px solid var(--line-soft);
+    transition: color .2s;
   }
+  .mobile-nav-link:hover { color: var(--accent-2); }
 
-  .mobile-nav-link:hover { color: var(--color-accent); }
-
-  /* Responsive */
   @media (max-width: 767px) {
-    .nav-list  { display: none; }
+    .navlinks { display: none; }
     .hamburger { display: flex; }
     .mobile-nav.is-open { display: block; }
   }
-  .site-header {
-  transition: box-shadow var(--transition), background-color var(--transition);
-}
-
-.site-header.scrolled {
-  background-color: rgba(14, 25, 39, 0.95);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.4);
-
-
-}
-
-.nav-link--active {
-  color: var(--color-accent);
-}
-
-.nav-link--active::after {
-  transform: scaleX(1);
-  background-color: var(--color-accent);
-}
 </style>
 
-<!-- Hamburger Logik -->
 <script>
   const btn = document.getElementById('hamburger');
   const nav = document.getElementById('mobileNav');
+  btn?.addEventListener('click', () => { nav?.classList.toggle('is-open'); });
 
-  btn?.addEventListener('click', () => {
-    nav?.classList.toggle('is-open');
-  });
-</script>
-
-<script>
-  const btn = document.getElementById('hamburger');
-  const nav = document.getElementById('mobileNav');
-
-  btn?.addEventListener('click', () => {
-    nav?.classList.toggle('is-open');
-  });
-
-  // Header Scroll-Effekt
   const header = document.querySelector('.site-header');
-
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
-  });
+    header?.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
 </script>

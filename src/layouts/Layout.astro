@@ -17,32 +17,88 @@ const {
 <!DOCTYPE html>
 <html lang="de">
   <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content={description} />
-  <title>{title}</title>
-</head>
-<body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body>
     <Header />
     <main>
       <slot />
     </main>
     <Footer />
     <script is:inline>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('animate');
-        }, i * 80);
-        observer.unobserve(entry.target);
+    (function () {
+      "use strict";
+      function ready(fn) {
+        if (document.readyState !== "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
       }
-    });
-  }, { threshold: 0.1 });
+      ready(function () {
+        var reduce = false;
+        try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
 
-  document.querySelectorAll(
-    '.section, .feature-card, .trust-item, .markt-card, .offen-card, .form-card, .contact-card, .availability-card, .response-hint, .cta-card'
-  ).forEach(el => observer.observe(el));
-</script>
+        /* Hero word stagger */
+        document.querySelectorAll(".stagger").forEach(function (el) {
+          if (el.dataset.split !== "1") {
+            el.dataset.split = "1";
+            var nodes = Array.prototype.slice.call(el.childNodes);
+            var wordIndex = 0;
+            nodes.forEach(function (node) {
+              if (node.nodeType === 3) {
+                var frag = document.createDocumentFragment();
+                node.textContent.split(/(\s+)/).forEach(function (tok) {
+                  if (tok.trim() === "") {
+                    frag.appendChild(document.createTextNode(tok));
+                  } else {
+                    var s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = tok;
+                    s.style.transitionDelay = (wordIndex * 0.08) + "s";
+                    wordIndex++;
+                    frag.appendChild(s);
+                  }
+                });
+                el.replaceChild(frag, node);
+              } else if (node.nodeType === 1 && node.tagName !== "BR") {
+                node.classList.add("w");
+                node.style.transitionDelay = (wordIndex * 0.08) + "s";
+                wordIndex++;
+              }
+            });
+          }
+          if (reduce) { el.classList.add("in"); }
+          else { setTimeout(function () { el.classList.add("in"); }, 90); }
+        });
+
+        /* Scroll reveal */
+        var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+        if (reduce) {
+          reveals.forEach(function (el) { el.classList.add("in"); });
+          return;
+        }
+        function check() {
+          var h = window.innerHeight || document.documentElement.clientHeight;
+          for (var i = reveals.length - 1; i >= 0; i--) {
+            var r = reveals[i].getBoundingClientRect();
+            if (r.top < h * 0.92 && r.bottom > 0) {
+              reveals[i].classList.add("in");
+              reveals.splice(i, 1);
+            }
+          }
+        }
+        window.addEventListener("scroll", check, { passive: true });
+        window.addEventListener("resize", check);
+        check();
+        setTimeout(check, 120);
+        setTimeout(check, 450);
+        setTimeout(check, 1000);
+      });
+    })();
+    </script>
   </body>
 </html>

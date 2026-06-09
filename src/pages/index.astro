@@ -1,322 +1,283 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const alleMarkte = await getCollection('maerkte');
+const nextMarkte = alleMarkte
+  .map(m => ({ ...m.data, dateObj: new Date(m.data.datum) }))
+  .filter(m => m.dateObj >= today)
+  .sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime())
+  .slice(0, 3);
+
+function formatDay(d: Date) {
+  return d.toLocaleDateString('de-DE', { day: '2-digit' });
+}
+function formatMonth(d: Date) {
+  return d.toLocaleDateString('de-DE', { month: 'short' });
+}
+function mapsUrl(adresse: string) {
+  return `https://maps.google.com/?q=${encodeURIComponent(adresse)}`;
+}
 ---
 
 <Layout title="Velaro Catering & Foodtruckservice – Willkommen">
 
-  <!-- ═══════════ HERO ═══════════ -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="container hero-inner">
-
-      <!-- Links: Text + Buttons -->
-      <div class="hero-text">
-        <p class="hero-label">Catering & Foodtruckservice</p>
-        <h1>
-          Willkommen bei<br />
-          <span class="text-accent">Velaro</span>
-        </h1>
-        <p class="hero-desc">
-          Ihr professioneller Partner für unvergessliche kulinarische Erlebnisse. 
-          Von exklusiven Events bis zu regionalen Märkten.
-        </p>
-        <div class="hero-buttons">
-          <a href="/catering" class="btn-primary">Catering entdecken</a>
-          <a href="/kontakt" class="btn-outline">Kontakt aufnehmen</a>
+    <div class="wrap">
+      <div class="hero-top">
+        <h1 class="stagger">Frisch gekocht, dorthin <span class="it">gebracht,</span> wo ihr feiert.</h1>
+        <div class="hero-side reveal" data-d="3">
+          <p>Catering, Foodtruck und Marktstand aus einer Hand. Regional eingekauft, am Eventtag frisch zubereitet — von der Firmenfeier bis zum Bauernmarkt.</p>
+          <div class="hero-cta">
+            <a href="/kontakt" class="btn btn-primary"><span>Catering anfragen</span> <span class="arr">→</span></a>
+            <a href="/catering" class="btn btn-ghost"><span>Speisekarte ansehen</span></a>
+          </div>
         </div>
       </div>
 
-      <!-- Rechts: Platzhalterbild -->
-      <div class="hero-image">
-        <img
-          src="/images/buffet-hero.jpeg"
-          alt="Leckeres Essen von Velaro Catering & Foodtruckservice"
-        />
+      <div class="hero-strip reveal" data-d="4">
+        <div class="it2"><span class="n">2012</span><span class="l">im Einsatz seit</span></div>
+        <div class="it2"><span class="n">200</span><span class="l">Gäste pro Event</span></div>
+        <div class="it2"><span class="n">24<small>h</small></span><span class="l">Angebot verbindlich</span></div>
+        <div class="it2"><span class="n">100<small>%</small></span><span class="l">regional &amp; frisch</span></div>
       </div>
 
+      <!-- TODO: echtes Foto von Willi — Foodtruck-Klappe, warmes Abendlicht -->
+      <div class="ph hero-img reveal">
+        <div class="cap">
+          <div class="cam">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2L8 5h8l1.5 2h2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          </div>
+          <div class="cap-t">
+            <div class="l">Bildregie · Hero</div>
+            <div class="d">Foodtruck-Klappe geöffnet, frisch angerichteter Teller in der Hand, warmes Abendlicht. Lebendig, aber aufgeräumt — Fokus aufs Essen.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ KARTEN ═══════════ -->
-  <section class="cards-section container">
-
-    <a href="/catering" class="feature-card">
-  <div class="card-header">
-    <h3>Catering</h3>
-    <img src="/icons/besteck.png" alt="Catering" class="card-icon" />
-  </div>
-  <p>Klassisches Buffet, Grillbuffet, Foodtruck & Canapés — für jeden Anlass das Richtige.</p>
-  <span class="card-link">Mehr erfahren →</span>
-</a>
-
-<a href="/maerkte" class="feature-card">
-  <div class="card-header">
-    <h3>Märkte</h3>
-    <img src="/icons/imbiss-stand.png" alt="Märkte" class="card-icon" />
-  </div>
-  <p>Findet uns auf regionalen Märkten und Veranstaltungen in der Region.</p>
-  <span class="card-link">Mehr erfahren →</span>
-</a>
-
+  <!-- LEISTUNGEN -->
+  <section class="block" id="leistungen">
+    <div class="wrap">
+      <div class="label-row reveal"><span class="ix">01</span><span class="tt">Was wir anbieten</span><span class="ln"></span></div>
+      <div class="sec-head">
+        <h2 class="reveal">Drei Wege, wie wir <span class="it">zu euch</span> kommen.</h2>
+        <p class="aside reveal" data-d="1">Ob privat, geschäftlich oder mitten auf dem Marktplatz — Umfang und Aufbau passen wir an euren Anlass an.</p>
+      </div>
+      <div class="services">
+        <div class="svc lift reveal">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10h16M5 10l1 9h12l1-9M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+          </div>
+          <h3>Catering &amp; Buffet</h3>
+          <p>Vom Canapé-Empfang bis zum 200-Personen-Buffet — frisch zubereitet am Eventtag, inklusive Aufbau und Service nach Wunsch.</p>
+          <div class="tags"><span>Buffet</span><span>Fingerfood</span><span>Firmenfeier</span></div>
+        </div>
+        <div class="svc lift reveal" data-d="1">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 16V9h11v7M14 11h4l3 3v2h-7M3 16h18M6.5 18.5a1.5 1.5 0 1 0 0 0M17.5 18.5a1.5 1.5 0 1 0 0 0"/></svg>
+          </div>
+          <h3>Foodtruck</h3>
+          <p>Unser Truck rollt zu Hochzeiten, Festen und Firmenevents. Frisch gegrillt vor den Augen eurer Gäste — von der Bratwurst bis zum Streetfood.</p>
+          <div class="tags"><span>Grill</span><span>Streetfood</span><span>Events</span></div>
+        </div>
+        <div class="svc lift reveal" data-d="2">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16l-1 3H5zM5 11v8h14v-8M4 8l1-3h14l1 3M10 14h4"/></svg>
+          </div>
+          <h3>Marktstand</h3>
+          <p>Auf Stadt- und Bauernmärkten in der Region kocht ihr uns über die Schulter. Regional, saisonal und immer mit einem Gruß aus der Küche.</p>
+          <div class="tags"><span>Regional</span><span>Saisonal</span><span>Vor Ort</span></div>
+        </div>
+      </div>
+    </div>
   </section>
 
-<!-- ═══════════ TRUST ═══════════ -->
-<section class="trust section">
-  <div class="container trust-inner">
-
-    <div class="trust-item">
-      <div class="trust-icon">🌿</div>
-      <h3>Frisch & Regional</h3>
-      <p>Wir verwenden frische, regionale Zutaten — zubereitet mit Leidenschaft direkt für Ihr Event.</p>
+  <!-- ANSPRUCH -->
+  <section class="block approach-sec">
+    <div class="wrap">
+      <div class="label-row reveal"><span class="ix">02</span><span class="tt">Unser Anspruch</span><span class="ln"></span></div>
+      <div class="ap-grid">
+        <div class="reveal">
+          <h2 class="ap-h2">Regional eingekauft,<br />frisch gekocht, <span class="it">persönlich</span> serviert.</h2>
+          <p class="ap-p">Wir sind ein kleines Team aus Haldensleben und kochen so, wie wir auch zu Hause kochen würden: mit guten Zutaten, ohne Abkürzungen und mit Zeit für die Details.</p>
+          <ul class="pts">
+            <li><span class="ck">✓</span>Zutaten von Erzeugern aus der Region</li>
+            <li><span class="ck">✓</span>Alles frisch am Eventtag, nichts vorgefertigt</li>
+            <li><span class="ck">✓</span>Persönliches Angebot binnen 24 Stunden</li>
+          </ul>
+        </div>
+        <div class="stats">
+          <div class="st reveal"><div class="n">24<small>h</small></div><div class="lbl">Verbindliches Angebot</div></div>
+          <div class="st reveal" data-d="1"><div class="n">4,9</div><div class="lbl">Durchschnittliche Bewertung</div></div>
+          <div class="st reveal" data-d="2"><div class="n">200</div><div class="lbl">Gäste pro Event möglich</div></div>
+          <div class="st reveal" data-d="3"><div class="n">14<small>J.</small></div><div class="lbl">Erfahrung in der Region</div></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="trust-item">
-      <div class="trust-icon">🍽️</div>
-      <h3>Individuell abgestimmt</h3>
-      <p>Kein Event ist gleich. Wir passen unser Angebot genau auf Ihre Wünsche und Gästezahl an.</p>
+  <!-- MÄRKTE VORSCHAU -->
+  {nextMarkte.length > 0 && (
+    <section class="block" id="markte">
+      <div class="wrap">
+        <div class="label-row reveal"><span class="ix">03</span><span class="tt">Termine</span><span class="ln"></span></div>
+        <div class="sec-head">
+          <h2 class="reveal">Wo ihr uns als <span class="it">Nächstes</span> findet.</h2>
+          <p class="aside reveal" data-d="1">Kommt vorbei, sagt Hallo und probiert euch durch. Alle Termine pflegen wir laufend auf Instagram.</p>
+        </div>
+        <div class="markt-list">
+          {nextMarkte.map((markt, i) => (
+            <a class="mk lift reveal" data-d={String(i)} href={mapsUrl(markt.adresse)} target="_blank" rel="noopener noreferrer">
+              <div class="date">
+                <div class="d">{formatDay(markt.dateObj)}</div>
+                <div class="m">{formatMonth(markt.dateObj)}</div>
+              </div>
+              <div class="info">
+                <h4>{markt.name}</h4>
+                <div class="meta">
+                  <span><span class="mdot"></span>{markt.uhrzeit}</span>
+                  <span>{markt.ort}</span>
+                </div>
+              </div>
+              <span class="go">Auf Karte →</span>
+            </a>
+          ))}
+        </div>
+        <div style="margin-top: 28px; text-align: center;">
+          <a href="/maerkte" class="btn btn-ghost reveal" data-d="3"><span>Alle Termine ansehen</span></a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="cta-box reveal">
+        <h2>Erzählt uns von <span class="it">eurem</span> Anlass.</h2>
+        <p>Frage, Wunsch oder einfach „Hallo, könnt ihr nächsten Samstag?" — wir melden uns binnen 24 Stunden mit einem persönlichen Angebot.</p>
+        <div class="row">
+          <a href="/kontakt" class="btn btn-primary"><span>Anfrage senden</span> <span class="arr">→</span></a>
+          <a href="tel:+4916094839906" class="btn btn-ghost"><span>0160 94839906</span></a>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="trust-item">
-      <div class="trust-icon">✅</div>
-      <h3>Zuverlässig & pünktlich</h3>
-      <p>Von der Planung bis zum Service — Sie können sich auf uns verlassen. Versprochen.</p>
+  <!-- INSTAGRAM -->
+  <section class="ig-section">
+    <div class="wrap">
+      <h2 class="ig-title reveal">Folgt uns auf <span class="it">Instagram</span></h2>
+      <div class="ig-widget reveal" data-d="1">
+        <script is:inline src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-f5197244-2f87-4ce1-abcb-b3effb647ce1" data-elfsight-app-lazy></div>
+      </div>
     </div>
-
-  </div>
-</section>
-
-<!-- ═══════════ INSTAGRAM ═══════════ -->
-<section class="instagram section">
-  <div class="container">
-    <h2 style="text-align: center; margin-bottom: 2.5rem; font-weight: 500; font-size: 2rem;">Folgt uns gerne auf Instagram</h2>
-  
-    <!-- Elfsight Widget -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div class="elfsight-app-f5197244-2f87-4ce1-abcb-b3effb647ce1" data-elfsight-app-lazy></div>
-  </div>
-</section>
+  </section>
 
 </Layout>
 
 <style>
-  /* ── Hero ── */
-  .hero {
-    padding-block: 6rem;
-    border-bottom: 1px solid var(--color-border);
-  }
+  /* HERO */
+  .hero { padding: 96px 0 0; }
+  .hero-top { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: end; }
+  .hero h1 { font-size: 78px; font-weight: 700; line-height: 1.02; letter-spacing: -.025em; }
+  .hero-side { padding-bottom: 8px; }
+  .hero-side p { font-size: 16px; color: var(--ink-2); line-height: 1.62; }
+  .hero-cta { display: flex; flex-direction: column; gap: 11px; margin-top: 26px; }
+  .hero-cta .btn { justify-content: center; }
 
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  .hero-strip {
+    display: flex; margin-top: 46px;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
   }
-
-  .hero-label {
-    color: var(--color-accent);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+  .it2 {
+    flex: 1; padding: 22px 0; display: flex; align-items: baseline; gap: 12px;
+    border-right: 1px solid var(--line-soft);
   }
+  .it2:last-child { border-right: none; }
+  .it2 .n { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .it2 .n small { color: var(--accent-2); font-size: 18px; }
+  .it2 .l { font-size: 13px; color: var(--ink-3); }
 
-  .hero-text h1 {
-    margin-bottom: 1.25rem;
-  }
+  .hero-img { margin-top: 56px; height: 460px; }
 
-  .hero-desc {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    max-width: 480px;
-  }
+  /* SERVICES */
+  .services { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .svc { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 32px 30px 34px; min-height: 330px; display: flex; flex-direction: column; }
+  .svc .ic { width: 46px; height: 46px; border-radius: 10px; background: rgba(72,141,148,.13); border: 1px solid rgba(72,141,148,.3); display: grid; place-items: center; color: var(--accent-2); }
+  .svc h3 { font-size: 24px; font-weight: 700; margin-top: 26px; letter-spacing: -.01em; }
+  .svc p { font-size: 14.5px; color: var(--ink-2); margin-top: 12px; line-height: 1.6; }
+  .svc .tags { margin-top: auto; padding-top: 24px; display: flex; flex-wrap: wrap; gap: 7px; }
+  .svc .tags span { font-size: 11.5px; font-weight: 500; color: var(--ink-2); background: rgba(241,236,226,.05); padding: 5px 11px; border-radius: 100px; }
 
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  /* APPROACH */
+  .approach-sec { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .ap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .ap-h2 { font-size: 42px; font-weight: 700; line-height: 1.08; letter-spacing: -.02em; }
+  .ap-p { font-size: 16px; color: var(--ink-2); line-height: 1.65; margin-top: 20px; max-width: 44ch; }
+  .pts { margin-top: 30px; display: flex; flex-direction: column; gap: 14px; list-style: none; }
+  .pts li { display: flex; gap: 13px; align-items: flex-start; font-size: 15px; color: var(--ink); }
+  .ck { width: 20px; height: 20px; flex: none; border-radius: 50%; background: rgba(72,141,148,.18); color: var(--accent-2); display: grid; place-items: center; font-size: 11px; margin-top: 2px; }
+  .stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .st { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 30px 26px; }
+  .st .n { font-size: 46px; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
+  .st .n small { color: var(--accent-2); font-size: 28px; }
+  .st .lbl { font-size: 13px; color: var(--ink-2); margin-top: 12px; }
 
-  /* Bild */
-  .hero-image img {
-    width: 100%;
-    height: 420px;
-    object-fit: cover;
-    border-radius: 1rem;
-    border: 1px solid var(--color-border);
-  }
-
-  /* ── Karten ── */
-  .cards-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    padding-block: 5rem;
-  }
-
-  .feature-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    transition: border-color var(--transition), transform var(--transition);
+  /* MÄRKTE */
+  .markt-list { display: flex; flex-direction: column; gap: 12px; }
+  .mk {
+    display: grid; grid-template-columns: 96px 1fr auto; gap: 34px; align-items: center;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 24px 28px;
     cursor: pointer;
   }
+  .mk .date { text-align: center; border-right: 1px solid var(--line); padding-right: 20px; }
+  .mk .date .d { font-size: 34px; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
+  .mk .date .m { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-top: 6px; }
+  .mk .info h4 { font-size: 21px; font-weight: 700; }
+  .mk .info .meta { display: flex; gap: 20px; margin-top: 7px; font-size: 13.5px; color: var(--ink-2); }
+  .mk .info .meta span { display: inline-flex; align-items: center; gap: 7px; }
+  .mdot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-2); flex-shrink: 0; }
+  .mk .go { font-size: 13px; font-weight: 600; color: var(--ink-3); white-space: nowrap; transition: color .25s; }
+  .mk:hover .go { color: var(--accent-2); }
 
-  .feature-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-3px);
+  /* CTA */
+  .cta-band { padding: 118px 0; }
+  .cta-box { background: linear-gradient(140deg, var(--bg-3), var(--bg-2)); border: 1px solid var(--line); border-radius: 14px; padding: 80px 64px; text-align: center; position: relative; overflow: hidden; }
+  .cta-box::before { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(72,141,148,.22), transparent 70%); top: -180px; right: -80px; pointer-events: none; }
+  .cta-box h2 { font-size: 56px; font-weight: 700; line-height: 1.04; letter-spacing: -.025em; position: relative; }
+  .cta-box p { font-size: 17px; color: var(--ink-2); margin: 22px auto 36px; max-width: 48ch; position: relative; }
+  .cta-box .row { display: flex; gap: 13px; justify-content: center; position: relative; }
+
+  /* INSTAGRAM */
+  .ig-section { padding: 80px 0; border-top: 1px solid var(--line); }
+  .ig-title { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 40px; letter-spacing: -.02em; }
+  .ig-widget { max-width: 1000px; margin: 0 auto; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    .hero-top { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 52px; }
+    .services { grid-template-columns: 1fr 1fr; }
+    .ap-grid { grid-template-columns: 1fr; gap: 48px; }
+    .mk { grid-template-columns: 80px 1fr; }
+    .mk .go { display: none; }
   }
-
-  .card-icon {
-    font-size: 2rem;
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 38px; }
+    .hero-strip { flex-wrap: wrap; }
+    .it2 { flex: 1 1 45%; }
+    .services { grid-template-columns: 1fr; }
+    .ap-h2 { font-size: 32px; }
+    .cta-box { padding: 48px 24px; }
+    .cta-box h2 { font-size: 36px; }
+    .cta-box .row { flex-direction: column; align-items: center; }
   }
-
-  .feature-card h3 {
-    color: var(--color-text);
-  }
-
-  .feature-card p {
-    font-size: 0.95rem;
-    flex: 1;
-  }
-
-  .card-link {
-    color: var(--color-accent);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  /* ── Mobile ── */
-  @media (max-width: 767px) {
-    .hero-inner {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    .hero-image img {
-      height: 260px;
-    }
-
-    .cards-section {
-      grid-template-columns: 1fr;
-    }
-  }
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-
-.card-icon {
-  width: 2rem;
-  height: 2rem;
-  object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(51%) sepia(29%) saturate(601%) hue-rotate(143deg) brightness(93%);
-  opacity: 0.9;
-  transition: filter var(--transition);
-}
-
-.feature-card:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(72, 141, 148, 0.2);
-}
-
-/* ── Trust ── */
-.trust {
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.trust-inner {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.trust-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 2rem;
-  border-radius: var(--radius-card);
-  transition: background-color var(--transition);
-}
-
-.trust-item:hover {
-  background-color: var(--color-bg-card);
-}
-
-.trust-icon {
-  font-size: 2rem;
-}
-
-.trust-item h3 {
-  color: var(--color-text);
-  font-size: 1.1rem;
-}
-
-.trust-item p {
-  font-size: 0.9rem;
-  line-height: 1.7;
-}
-
-@media (max-width: 767px) {
-  .trust-inner {
-    grid-template-columns: 1fr;
-  }
-}
-.instagram {
-  background-color: var(--color-bg-card);
-  border-radius: var(--radius-card);
-  border: 1px solid rgba(72, 141, 148, 0.3);    /* ← Akzentfarbe statt grau */
-  padding: 2rem;
-  max-width: 1000px;
-  margin-inline: auto;
-  margin-bottom: 3rem;
-  margin-top: 3rem;
-  box-shadow: 0 0 40px rgba(72, 141, 148, 0.08), 
-              0 8px 32px rgba(0, 0, 0, 0.3);    /* ← subtiler Glow */
-}
-/* ── Hero Einlauf-Animation ── */
-@keyframes heroFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero-label {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.3s;
-  opacity: 0;
-}
-
-.hero-text h1 {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.4s;
-  opacity: 0;
-}
-
-.hero-desc {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.6s;
-  opacity: 0;
-}
-
-.hero-buttons {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.8s;
-  opacity: 0;
-}
-
-.hero-image {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.5s;
-  opacity: 0;
-}
 </style>

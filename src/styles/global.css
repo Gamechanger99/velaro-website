@@ -1,185 +1,169 @@
-@import "tailwindcss";
-
-/* ============================================
-   VELARO – Global Styles
-   ============================================ */
-
-/* mont-font */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
-
-/* Farbvariablen */
+/* ============================================================
+   VELARO — Design-System v3 (Grotesk-Minimal)
+   Fonts loaded in Layout.astro <head>
+   ============================================================ */
 
 :root {
-  --color-bg: #131e30;
-  --color-bg-card: #1a2840;
-  --color-bg-nav: #0e1927;
+  /* New tokens */
+  --bg: #0e1827;
+  --bg-2: #101d33;
+  --bg-3: #15233d;
+  --line: rgba(241,236,226,.13);
+  --line-soft: rgba(241,236,226,.07);
+  --ink: #f1ece2;
+  --ink-2: #9aabbb;
+  --ink-3: #67788a;
+  --accent: #488d94;
+  --accent-2: #7cc0c6;
+  --sans: "Schibsted Grotesk", system-ui, sans-serif;
+  --serif: "Newsreader", Georgia, serif;
 
+  /* Backward-compat aliases — Banketmappe.astro uses these */
+  --color-bg: #0e1827;
+  --color-bg-card: #101d33;
+  --color-bg-nav: #0e1827;
   --color-accent: #488d94;
   --color-accent-dark: #3a7880;
-
-  --color-text: #ffffff;
-  --color-text-muted: #a6a6a6;
-  --color-border: #1e2d42;
-
-  --max-width: 1100px;
-  --radius-card: 0.75rem;
-  --radius-btn: 0.5rem;
+  --color-text: #f1ece2;
+  --color-text-muted: #9aabbb;
+  --color-border: rgba(241,236,226,.13);
+  --radius-btn: 100px;
   --transition: 150ms ease;
 }
 
-/* Reset von Default-Styles  */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: "Montserrat", system-ui, sans-serif;
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.6;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+::selection { background: var(--accent); color: var(--bg); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
 
-/* Typografie mit automatischer Skalierung */
+/* Container/wrap */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
+/* Alias for Banketmappe.astro which uses .container */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
 
-h1,
-h2,
-h3,
-h4 {
-  line-height: 1.2;
-  font-weight: 700;
+/* ---------- TYPOGRAPHY ---------- */
+.eyebrow {
+  font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 600; display: inline-flex; align-items: center; gap: 10px;
 }
+.eyebrow b { color: var(--accent-2); font-weight: 600; }
+.text-accent { color: var(--accent); }
+.it { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent-2); }
 
-h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-}
-h2 {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-}
-h3 {
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-}
+/* ---------- BUTTONS ----------
+   Standalone .btn-primary / .btn-outline keep working in Banketmappe.
+   New pages use .btn.btn-primary / .btn.btn-ghost for the fill-animation. */
 
-p {
-  color: var(--color-text-muted);
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* Utility-Klassen */
-
-.container {
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
-
-.section {
-  padding-block: 5rem;
-}
-.text-accent {
-  color: var(--color-accent);
-}
-
-/* Buttons */
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: var(--color-accent);
-  color: #ffffff;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.03em;
-  padding: 0.8rem 1.75rem;
-  border-radius: var(--radius-btn);
-  border: none;
-  cursor: pointer;
-  transition:
-    background-color var(--transition),
-    transform var(--transition),
-    box-shadow var(--transition);
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+  padding: 12px 24px; border-radius: 100px;
+  background: var(--accent); color: #06121a;
+  border: none; cursor: pointer;
+  transition: background .25s;
 }
-
-.btn-primary:hover {
-  background-color: var(--color-accent-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(72, 141, 148, 0.3);
-}
+.btn-primary:hover { background: var(--accent-2); }
 
 .btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--color-text);
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.03em;
-  padding: 0.8rem 1.75rem;
-  border-radius: var(--radius-btn);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  transition: all var(--transition);
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+  padding: 12px 24px; border-radius: 100px;
+  border: 1px solid var(--line); color: var(--ink);
+  background: transparent; cursor: pointer;
+  transition: border-color .25s, color .25s;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent-2); }
+
+/* Enhanced .btn — new pages */
+.btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+  padding: 12px 24px; border-radius: 100px;
+  transition: color .25s ease, border-color .25s ease; cursor: pointer;
+  border: none;
+}
+.btn > * { position: relative; z-index: 2; }
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+}
+.btn:hover::before { transform: scaleX(1); }
+.btn.btn-primary { background: var(--accent); color: #06121a; }
+.btn.btn-primary::before { background: var(--accent-2); }
+.btn.btn-ghost { border: 1px solid var(--line); color: var(--ink); background: transparent; }
+.btn.btn-ghost::before { background: var(--accent); }
+.btn.btn-ghost:hover { color: #fff; border-color: var(--accent); }
+.btn .arr { transition: transform .25s ease; }
+.btn:hover .arr { transform: translateX(3px); }
+
+/* ---------- SECTIONS ---------- */
+section.block { padding: 118px 0; }
+.label-row { display: flex; align-items: center; gap: 16px; margin-bottom: 46px; }
+.label-row .ix { font-size: 13px; font-weight: 700; color: var(--accent-2); font-variant-numeric: tabular-nums; }
+.label-row .ln { flex: 1; height: 1px; background: var(--line); }
+.label-row .tt { font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+
+.sec-head { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: end; margin-bottom: 60px; }
+.sec-head h2 { font-size: 50px; font-weight: 700; line-height: 1.04; letter-spacing: -.025em; }
+.sec-head h2 .it { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent-2); }
+.sec-head .aside { font-size: 16px; color: var(--ink-2); line-height: 1.6; padding-bottom: 7px; }
+
+/* ---------- IMAGE PLACEHOLDER ---------- */
+.ph {
+  position: relative; background: linear-gradient(140deg, var(--bg-2), var(--bg-3));
+  border: 1px solid var(--line); overflow: hidden; display: flex; align-items: flex-end;
+  border-radius: 6px;
+}
+.ph::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(var(--line-soft) 1px, transparent 1px);
+  background-size: 26px 26px; opacity: .6;
+}
+.ph .cap { position: relative; z-index: 2; padding: 20px 22px; display: flex; align-items: center; gap: 13px; }
+.ph .cam { width: 32px; height: 32px; flex: none; border: 1px solid var(--accent); border-radius: 8px; display: grid; place-items: center; color: var(--accent-2); }
+.ph .cap-t .l { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent-2); font-weight: 700; }
+.ph .cap-t .d { font-size: 13px; color: var(--ink-2); margin-top: 3px; max-width: 48ch; }
+
+/* ---------- CARD LIFT ---------- */
+.lift { transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.lift:hover {
+  transform: translateY(-4px);
+  border-color: rgba(72,141,148,.55);
+  box-shadow: 0 18px 40px -22px rgba(72,141,148,.55), 0 0 0 1px rgba(72,141,148,.25);
 }
 
-.btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  transform: translateY(-2px);
+/* ---------- ANIMATIONS ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .4s ease-out, transform .4s ease-out; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-d="1"] { transition-delay: .07s; }
+.reveal[data-d="2"] { transition-delay: .14s; }
+.reveal[data-d="3"] { transition-delay: .21s; }
+.reveal[data-d="4"] { transition-delay: .28s; }
+.reveal[data-d="5"] { transition-delay: .35s; }
+
+.stagger .w { display: inline-block; opacity: 0; transform: translateY(22px); transition: opacity .5s ease-out, transform .5s ease-out; }
+.stagger.in .w { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .stagger .w { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
 }
 
-/* Karte */
-.card {
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  padding: 1.5rem;
-}
-
-/* ── Scroll Animationen ── */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate {
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.section,
-.feature-card,
-.trust-item,
-.markt-card,
-.offen-card,
-.form-card,
-.contact-card,
-.availability-card,
-.response-hint,
-.cta-card {
-  opacity: 0;
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 767px) {
+  .wrap, .container { padding: 0 24px; }
+  section.block { padding: 80px 0; }
+  .sec-head { grid-template-columns: 1fr; gap: 20px; }
+  .sec-head h2 { font-size: 36px; }
 }

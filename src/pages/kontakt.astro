@@ -4,580 +4,223 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Kontakt – Velaro Catering & Foodtruckservice">
 
-  <!-- ═══════════ PAGE HERO ═══════════ -->
+  <!-- HERO -->
   <section class="page-hero">
-    <div class="container">
-      <p class="page-label">Schreib uns</p>
-      <h1>Kontakt<br /><span class="text-accent">aufnehmen</span></h1>
-      <p class="page-desc">
-        Fragen, Wünsche oder einfach Hallo sagen — wir freuen uns von Ihnen zu hören 
-        und melden uns schnellstmöglich zurück.
-      </p>
+    <div class="wrap">
+      <div class="label-row reveal"><span class="ix">Schreib uns</span><span class="ln"></span></div>
+      <h1 class="stagger">Erzählt uns von <span class="it">eurem</span> Anlass.</h1>
+      <p class="hero-sub reveal" data-d="2">Fragen, Wünsche oder einfach Hallo sagen — wir melden uns innerhalb von 24 Stunden zurück.</p>
     </div>
   </section>
 
-  <!-- ═══════════ KONTAKT MAIN ═══════════ -->
-  <section class="contact-section section container">
+  <!-- KONTAKT GRID -->
+  <section class="kontakt-sec">
+    <div class="wrap">
+      <div class="k-grid">
 
-    <!-- Linke Spalte: Formular -->
-    <div class="form-col">
-      <div class="form-card">
-        <h2>Nachricht senden</h2>
-        <p class="form-subtitle">Alle Felder mit * sind Pflichtfelder.</p>
+        <!-- LINKE SPALTE: Formular -->
+        <div class="form-col reveal">
+          <div class="form-card">
+            <h2>Nachricht senden</h2>
+            <p class="form-sub">Alle Felder mit * sind Pflichtfelder.</p>
 
-        <!-- Netlify Forms: name + data-netlify + hidden input -->
-        <form
-          name="kontakt"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          class="contact-form"
-          id="contactForm"
-        >
-          <!-- Netlify hidden fields -->
-          <input type="hidden" name="form-name" value="kontakt" />
-          <p class="hidden"><label>Nicht ausfüllen: <input name="bot-field" /></label></p>
+            <form
+              name="kontakt"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              class="contact-form"
+              id="contactForm"
+            >
+              <input type="hidden" name="form-name" value="kontakt" />
+              <p class="hidden"><label>Nicht ausfüllen: <input name="bot-field" /></label></p>
 
-          <!-- Name + Email nebeneinander -->
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Name *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Max Mustermann"
-                required
-                autocomplete="name"
-              />
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" name="name" placeholder="Max Mustermann" required autocomplete="name" />
+                </div>
+                <div class="form-group">
+                  <label for="email">E-Mail *</label>
+                  <input type="email" id="email" name="email" placeholder="max@beispiel.de" required autocomplete="email" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="telefon">Telefon <span class="opt">optional</span></label>
+                <input type="tel" id="telefon" name="telefon" placeholder="+49 160 00000000" autocomplete="tel" />
+              </div>
+
+              <div class="form-group">
+                <label for="nachricht">Ihr Anliegen *</label>
+                <textarea id="nachricht" name="nachricht" rows="6" placeholder="Was liegt euch auf dem Herzen? Erzählt uns von eurem Event, euren Wünschen oder stellt einfach eine Frage…" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary sub-btn"><span>Nachricht absenden</span> <span class="arr">→</span></button>
+
+              <p class="privacy">Mit dem Absenden stimmt ihr unserer <a href="/datenschutz">Datenschutzerklärung</a> zu.</p>
+            </form>
+
+            <div class="success-msg" id="successMsg">
+              <div class="s-ic">✓</div>
+              <h3>Danke für eure Nachricht!</h3>
+              <p>Wir haben eure Anfrage erhalten und melden uns innerhalb von 24 Stunden zurück.</p>
             </div>
-            <div class="form-group">
-              <label for="email">E-Mail *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="max@beispiel.de"
-                required
-                autocomplete="email"
-              />
-            </div>
+          </div>
+        </div>
+
+        <!-- RECHTE SPALTE: Infos -->
+        <div class="info-col">
+
+          <div class="resp-hint reveal" data-d="1">
+            <span class="pulse-dot"></span>
+            <p>Wir antworten in der Regel <strong>innerhalb von 24 Stunden</strong> — montags bis freitags.</p>
           </div>
 
-          <!-- Telefon -->
-          <div class="form-group">
-            <label for="telefon">
-              Telefon
-              <span class="optional-badge">optional</span>
-            </label>
-            <input
-              type="tel"
-              id="telefon"
-              name="telefon"
-              placeholder="+49 160 00000000"
-              autocomplete="tel"
-            />
+          <div class="cc-list">
+            <a href="mailto:kontakt@velaro-catering.de" class="cc lift reveal" data-d="2">
+              <div class="cc-ic">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div class="cc-txt">
+                <span class="cc-lbl">E-Mail</span>
+                <span class="cc-val">kontakt@velaro-catering.de</span>
+              </div>
+              <svg class="cc-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+            <a href="tel:+4916094839906" class="cc lift reveal" data-d="3">
+              <div class="cc-ic">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+              </div>
+              <div class="cc-txt">
+                <span class="cc-lbl">Telefon</span>
+                <span class="cc-val">0160 94839906</span>
+              </div>
+              <svg class="cc-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+            <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="cc lift reveal" data-d="4">
+              <div class="cc-ic">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              </div>
+              <div class="cc-txt">
+                <span class="cc-lbl">Instagram</span>
+                <span class="cc-val">@velaro_cateringundfoodtruck</span>
+              </div>
+              <svg class="cc-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
           </div>
 
-          <!-- Nachricht -->
-          <div class="form-group">
-            <label for="nachricht">Ihr Anliegen *</label>
-            <textarea
-              id="nachricht"
-              name="nachricht"
-              rows="6"
-              placeholder="Was liegt Ihnen auf dem Herzen? Erzählen Sie uns von Ihrem Event, Ihren Wünschen oder stellen Sie einfach eine Frage…"
-              required
-            ></textarea>
+          <div class="avail-card reveal" data-d="5">
+            <h4>Erreichbarkeit</h4>
+            <ul class="hours">
+              <li><span class="dy">Mo – Fr</span><span class="dl"></span><span class="tm">08:00 – 18:00 Uhr</span></li>
+              <li><span class="dy">Samstag</span><span class="dl"></span><span class="tm">09:00 – 14:00 Uhr</span></li>
+              <li><span class="dy">Sonntag</span><span class="dl"></span><span class="tm closed">Geschlossen</span></li>
+            </ul>
           </div>
 
-          <!-- Submit -->
-          <button type="submit" class="btn-primary submit-btn">
-            Nachricht absenden
-          </button>
-
-          <!-- Datenschutz Hinweis -->
-          <p class="privacy-note">
-            Mit dem Absenden stimmen Sie unserer 
-            <a href="/datenschutz">Datenschutzerklärung</a> zu.
-          </p>
-        </form>
-
-        <!-- Erfolgs-Nachricht (via JS ein/ausgeblendet) -->
-        <div class="success-msg" id="successMsg">
-          <div class="success-icon">✓</div>
-          <h3>Danke für Ihre Nachricht!</h3>
-          <p>Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden zurück.</p>
         </div>
       </div>
-    </div>
-
-    <!-- Rechte Spalte: Kontaktinfos -->
-    <div class="info-col">
-
-      <!-- Response-Hinweis -->
-      <div class="response-hint">
-        <span class="response-dot"></span>
-        <p>Wir antworten in der Regel <strong>innerhalb von 24 Stunden</strong> — montags bis freitags.</p>
-      </div>
-
-      <!-- Kontaktkarten -->
-      <div class="contact-cards">
-
-        <a href="mailto:kontakt@velaro-catering.de" class="contact-card">
-          <div class="cc-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
-          </div>
-          <div class="cc-text">
-            <span class="cc-label">E-Mail</span>
-            <span class="cc-value">kontakt@velaro-catering.de</span>
-          </div>
-          <svg class="cc-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-
-        <a href="tel:+4916094839906" class="contact-card">
-          <div class="cc-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
-            </svg>
-          </div>
-          <div class="cc-text">
-            <span class="cc-label">Telefon</span>
-            <span class="cc-value">0160 94839906</span>
-          </div>
-          <svg class="cc-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-
-        <a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener" class="contact-card">
-          <div class="cc-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-            </svg>
-          </div>
-          <div class="cc-text">
-            <span class="cc-label">Instagram</span>
-            <span class="cc-value">@velaro_cateringundfoodtruck</span>
-          </div>
-          <svg class="cc-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-
-      </div>
-
-      <!-- Erreichbarkeit -->
-      <div class="availability-card">
-        <h4>Erreichbarkeit</h4>
-        <ul class="hours-list">
-          <li>
-            <span class="day">Mo – Fr</span>
-            <span class="dot-line"></span>
-            <span class="time">08:00 – 18:00 Uhr</span>
-          </li>
-          <li>
-            <span class="day">Samstag</span>
-            <span class="dot-line"></span>
-            <span class="time">09:00 – 14:00 Uhr</span>
-          </li>
-          <li>
-            <span class="day">Sonntag</span>
-            <span class="dot-line"></span>
-            <span class="time closed">Geschlossen</span>
-          </li>
-        </ul>
-      </div>
-
     </div>
   </section>
 
 </Layout>
 
 <style>
-  /* ── Page Hero ── */
-  .page-hero {
-    padding-block: 5rem 3rem;
-    border-bottom: 1px solid var(--color-border);
-  }
+  /* HERO */
+  .page-hero { padding: 96px 0 80px; border-bottom: 1px solid var(--line); }
+  .page-hero h1 { font-size: 64px; font-weight: 700; line-height: 1.04; letter-spacing: -.025em; margin-top: 16px; max-width: 14ch; }
+  .hero-sub { font-size: 17px; color: var(--ink-2); line-height: 1.65; max-width: 52ch; margin-top: 22px; }
 
-  .page-label {
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
+  /* KONTAKT GRID */
+  .kontakt-sec { padding: 80px 0 120px; }
+  .k-grid { display: grid; grid-template-columns: 1fr 380px; gap: 52px; align-items: start; }
 
-  .page-hero h1 {
-    margin-bottom: 1.25rem;
-  }
-
-  .page-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 520px;
-  }
-
-  /* ── Layout ── */
-  .contact-section {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 3rem;
-    align-items: start;
-  }
-
-  /* ── Formular-Karte ── */
-  .form-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 2.5rem;
-  }
-
-  .form-card h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .form-subtitle {
-    font-size: 0.85rem;
-    margin-bottom: 2rem;
-  }
-
+  /* FORM CARD */
+  .form-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 40px; }
+  .form-card h2 { font-size: 26px; font-weight: 700; letter-spacing: -.01em; }
+  .form-sub { font-size: 13.5px; color: var(--ink-3); margin-top: 6px; margin-bottom: 32px; }
   .hidden { display: none; }
 
-  /* Formular-Felder */
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .form-group label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-text);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .optional-badge {
-    font-size: 0.7rem;
-    font-weight: 500;
-    background-color: rgba(72, 141, 148, 0.15);
-    color: var(--color-accent);
-    border: 1px solid rgba(72, 141, 148, 0.3);
-    border-radius: 0.3rem;
-    padding: 0.15rem 0.5rem;
-    letter-spacing: 0.02em;
-  }
+  .contact-form { display: flex; flex-direction: column; gap: 22px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 13px; font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .opt { font-size: 10.5px; font-weight: 500; background: rgba(72,141,148,.14); color: var(--accent-2); border: 1px solid rgba(72,141,148,.3); border-radius: 100px; padding: 2px 8px; }
 
   .form-group input,
   .form-group textarea {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-btn);
-    color: var(--color-text);
-    font-family: "Montserrat", sans-serif;
-    font-size: 0.9rem;
-    padding: 0.75rem 1rem;
-    width: 100%;
-    transition: border-color var(--transition), box-shadow var(--transition);
-    outline: none;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+    color: var(--ink); font-family: var(--sans); font-size: 14.5px;
+    padding: 12px 16px; width: 100%; outline: none;
+    transition: border-color .2s, box-shadow .2s;
   }
-
   .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: rgba(166, 166, 166, 0.5);
-  }
-
+  .form-group textarea::placeholder { color: var(--ink-3); }
   .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(72, 141, 148, 0.15);
-  }
+  .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(72,141,148,.14); }
+  .form-group textarea { resize: vertical; min-height: 136px; line-height: 1.6; border-radius: 10px; }
 
-  .form-group textarea {
-    resize: vertical;
-    min-height: 140px;
-    line-height: 1.6;
-  }
+  .sub-btn { align-self: flex-start; }
+  .privacy { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+  .privacy a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
-  /* Submit */
-  .submit-btn {
-    align-self: flex-start;
-    margin-top: 0.25rem;
-  }
-
-  .privacy-note {
-    font-size: 0.78rem;
-    color: rgba(166, 166, 166, 0.7);
-  }
-
-  .privacy-note a {
-    color: var(--color-accent);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  /* Erfolgs-Nachricht */
+  /* SUCCESS */
   .success-msg {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 3rem 2rem;
-    gap: 1rem;
+    display: none; flex-direction: column; align-items: center; text-align: center;
+    padding: 52px 24px; gap: 14px;
   }
-
   .success-msg.visible { display: flex; }
+  .s-ic { width: 54px; height: 54px; border-radius: 50%; background: rgba(72,141,148,.14); border: 1px solid rgba(72,141,148,.38); display: grid; place-items: center; font-size: 22px; color: var(--accent-2); }
+  .success-msg h3 { font-size: 22px; font-weight: 700; }
+  .success-msg p { font-size: 15px; color: var(--ink-2); max-width: 34ch; line-height: 1.6; }
 
-  .success-icon {
-    width: 56px;
-    height: 56px;
-    background-color: rgba(72, 141, 148, 0.15);
-    border: 1px solid rgba(72, 141, 148, 0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--color-accent);
+  /* INFO COL */
+  .info-col { display: flex; flex-direction: column; gap: 16px; }
+
+  .resp-hint { display: flex; align-items: flex-start; gap: 12px; background: rgba(72,141,148,.07); border: 1px solid rgba(72,141,148,.22); border-radius: 8px; padding: 16px 18px; }
+  .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 4px; animation: glow 2s infinite; }
+  @keyframes glow { 0%,100% { box-shadow: 0 0 5px rgba(72,141,148,.5); } 50% { box-shadow: 0 0 14px rgba(72,141,148,.9); } }
+  .resp-hint p { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; }
+  .resp-hint strong { color: var(--ink); }
+
+  .cc-list { display: flex; flex-direction: column; gap: 10px; }
+  .cc {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 18px; cursor: pointer; text-decoration: none; color: inherit;
+    transition: border-color .25s, transform .25s, box-shadow .25s;
   }
+  .cc:hover { border-color: var(--accent); transform: translateX(4px); box-shadow: 0 4px 16px rgba(72,141,148,.1); }
+  .cc-ic { width: 38px; height: 38px; flex-shrink: 0; border-radius: 8px; background: rgba(72,141,148,.1); border: 1px solid rgba(72,141,148,.24); display: grid; place-items: center; color: var(--accent); }
+  .cc-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .cc-lbl { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent-2); }
+  .cc-val { font-size: 13.5px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cc-arr { color: var(--ink-3); flex-shrink: 0; transition: transform .25s, color .25s; }
+  .cc:hover .cc-arr { color: var(--accent-2); transform: translateX(3px); }
 
-  .success-msg h3 { color: var(--color-text); font-size: 1.2rem; }
-  .success-msg p  { font-size: 0.9rem; max-width: 320px; line-height: 1.6; }
+  .avail-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 22px 22px; }
+  .avail-card h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--ink-3); margin-bottom: 18px; }
+  .hours { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+  .hours li { display: flex; align-items: center; gap: 10px; }
+  .dy { font-size: 13.5px; font-weight: 500; min-width: 78px; }
+  .dl { flex: 1; border-bottom: 1px dashed var(--line); opacity: .6; }
+  .tm { font-size: 13.5px; color: var(--ink-2); }
+  .closed { color: var(--ink-3); font-style: italic; }
 
-  /* ── Rechte Spalte ── */
-  .info-col {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  /* Response-Hinweis */
-  .response-hint {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    background-color: rgba(72, 141, 148, 0.08);
-    border: 1px solid rgba(72, 141, 148, 0.25);
-    border-radius: var(--radius-card);
-    padding: 1rem 1.25rem;
-  }
-
-  .response-dot {
-    flex-shrink: 0;
-    width: 8px;
-    height: 8px;
-    background-color: var(--color-accent);
-    border-radius: 50%;
-    margin-top: 0.35rem;
-    box-shadow: 0 0 8px rgba(72, 141, 148, 0.6);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 6px rgba(72, 141, 148, 0.5); }
-    50%       { box-shadow: 0 0 14px rgba(72, 141, 148, 0.9); }
-  }
-
-  .response-hint p {
-    font-size: 0.85rem;
-    line-height: 1.6;
-  }
-
-  .response-hint strong {
-    color: var(--color-text);
-    font-weight: 600;
-  }
-
-  /* Kontaktkarten */
-  .contact-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .contact-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 1rem 1.25rem;
-    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-    cursor: pointer;
-  }
-
-  .contact-card:hover {
-    border-color: var(--color-accent);
-    transform: translateX(4px);
-    box-shadow: 0 4px 16px rgba(72, 141, 148, 0.1);
-  }
-
-  .cc-icon {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(72, 141, 148, 0.12);
-    border: 1px solid rgba(72, 141, 148, 0.25);
-    border-radius: 0.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-accent);
-    flex-shrink: 0;
-  }
-
-  .cc-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    flex: 1;
-    min-width: 0;
-  }
-
-  .cc-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .cc-value {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .cc-arrow {
-    color: var(--color-text-muted);
-    flex-shrink: 0;
-    transition: color var(--transition), transform var(--transition);
-  }
-
-  .contact-card:hover .cc-arrow {
-    color: var(--color-accent);
-    transform: translateX(3px);
-  }
-
-  /* Erreichbarkeit */
-  .availability-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
-  }
-
-  .availability-card h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
-    margin-bottom: 1.25rem;
-  }
-
-  .hours-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .hours-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .day {
-    font-size: 0.875rem;
-    color: var(--color-text);
-    font-weight: 500;
-    min-width: 75px;
-  }
-
-  .dot-line {
-    flex: 1;
-    border-bottom: 1px dashed var(--color-border);
-    opacity: 0.5;
-  }
-
-  .time {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    text-align: right;
-  }
-
-  .time.closed {
-    color: rgba(166, 166, 166, 0.5);
-    font-style: italic;
-  }
-
-  /* ── Mobile ── */
+  /* MOBILE */
   @media (max-width: 900px) {
-    .contact-section {
-      grid-template-columns: 1fr;
-    }
-
-    .info-col {
-      order: -1;
-    }
+    .k-grid { grid-template-columns: 1fr; }
+    .info-col { order: -1; }
+    .page-hero h1 { font-size: 44px; }
   }
-
   @media (max-width: 600px) {
-    .form-card {
-      padding: 1.5rem;
-    }
-
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-
-    .page-hero {
-      padding-block: 3rem 2rem;
-    }
+    .page-hero h1 { font-size: 32px; }
+    .form-card { padding: 24px; }
+    .form-row { grid-template-columns: 1fr; }
   }
-
-  /* ── Hero Animation ── */
-@keyframes heroFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.page-hero .container {
-  animation: heroFadeIn 1s ease forwards;
-  animation-delay: 0.15s;
-  opacity: 0;
-}
 </style>
 
 <script>
@@ -599,7 +242,6 @@ import Layout from '../layouts/Layout.astro';
       if (res.ok) {
         form.style.display = 'none';
         successMsg?.classList.add('visible');
-        // Zum Erfolg-Block scrollen
         successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         alert('Es gab ein Problem beim Senden. Bitte versuche es nochmal.');

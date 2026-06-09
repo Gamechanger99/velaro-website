@@ -5,191 +5,129 @@ import Banketmappe from '../components/Banketmappe.astro';
 
 <Layout title="Catering – Velaro Catering & Foodtruckservice">
 
-  <!-- ═══════════ PAGE HERO ═══════════ -->
+  <!-- HERO -->
   <section class="page-hero">
-    <div class="container">
-      <p class="page-label">Menüangebote</p>
-      <h1>Catering &<br /><span class="text-accent">Buffet</span></h1>
-      <p class="page-desc">
-        Vielen Dank für Ihr Interesse an unserem Catering-Service.
-        Wir bieten individuell abgestimmte Speisenkonzepte für jeden Anlass —
-        ob private Feier, Firmenveranstaltung oder Großevent.
-        Unsere Menüs werden frisch zubereitet und auf Ihre Wünsche angepasst.
-      </p>
-      <a href="#banketmappe" class="btn-primary" style="margin-top:1rem; display:inline-flex; align-items:center; gap:0.5rem;">Zur interaktiven Banketmappe →</a>
+    <div class="wrap">
+      <div class="label-row reveal"><span class="ix">Menüangebote</span><span class="ln"></span></div>
+      <h1 class="stagger">Catering &amp; Buffet für <span class="it">jeden</span> Anlass.</h1>
+      <p class="hero-sub reveal" data-d="2">Frisch zubereitet am Eventtag — individuell abgestimmt auf eure Wünsche, ob private Feier, Firmenveranstaltung oder Großevent in der Region Haldensleben.</p>
+      <div class="hero-cta reveal" data-d="3">
+        <a href="#banketmappe" class="btn btn-primary"><span>Zur Banketmappe</span> <span class="arr">→</span></a>
+        <a href="/kontakt" class="btn btn-ghost"><span>Direkt anfragen</span></a>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ ÜBERSICHTS-KARTEN ═══════════ -->
-  <section class="overview section container">
-    <div class="overview-grid">
-
-      <div class="overview-card">
-        <div class="ov-icon">🍽️</div>
-        <h3>Klassisches Buffet</h3>
-        <p>Warme Gerichte & Beilagen für jeden Anlass. Pasta, Fleisch, Salate und mehr.</p>
+  <!-- MENU KARTEN -->
+  <section class="block">
+    <div class="wrap">
+      <div class="label-row reveal"><span class="ix">01</span><span class="tt">Angebote</span><span class="ln"></span></div>
+      <div class="sec-head">
+        <h2 class="reveal">Was wir für <span class="it">euren</span> Tisch vorbereiten.</h2>
+        <p class="aside reveal" data-d="1">Alle Menüs sind flexibel — Umfang, Portionsgrößen und Extras besprechen wir gemeinsam.</p>
       </div>
+      <div class="mcards">
 
-      <div class="overview-card">
-        <div class="ov-icon">🔥</div>
-        <h3>Grillbuffet</h3>
-        <p>Frisch vom Grill — Steaks, Bratwurst, vegetarische Optionen und leckere Beilagen.</p>
+        <div class="mcard lift reveal">
+          <div class="mc-top">
+            <div class="mc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2" fill="currentColor" stroke="none" opacity=".4"/></svg>
+            </div>
+            <h3>Klassisches Buffet</h3>
+          </div>
+          <p>Warme Hauptgerichte, Beilagen und Salate — für Hochzeiten, Geburtstage und Familienfeiern. Pasta, Fleisch, Gemüsegerichte und mehr.</p>
+          <div class="mc-tags"><span>Hochzeit</span><span>Geburtstag</span><span>ab 20 Pers.</span></div>
+        </div>
+
+        <div class="mcard lift reveal" data-d="1">
+          <div class="mc-top">
+            <div class="mc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            </div>
+            <h3>Grillbuffet</h3>
+          </div>
+          <p>Frisch vom Grill — Steaks, Bratwurst, Hähnchen, Spieße und vegetarische Optionen. Dazu hausgemachte Soßen und knackige Beilagen.</p>
+          <div class="mc-tags"><span>Grill</span><span>Outdoor</span><span>Sommerfest</span></div>
+        </div>
+
+        <div class="mcard lift reveal" data-d="2">
+          <div class="mc-top">
+            <div class="mc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 6v2M12 16v2M6 12h2M16 12h2"/></svg>
+            </div>
+            <h3>Fingerfood &amp; Canapés</h3>
+          </div>
+          <p>Wraps, Canapés, Spieße und belegte Brötchen — perfekt für Empfänge, After-Work-Events und Stehpartys ab 10 Personen.</p>
+          <div class="mc-tags"><span>Empfang</span><span>Stehparty</span><span>ab 10 Pers.</span></div>
+        </div>
+
+        <div class="mcard lift reveal" data-d="3">
+          <div class="mc-top">
+            <div class="mc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 16V9h11v7M14 11h4l3 3v2h-7M3 16h18M6.5 18.5a1.5 1.5 0 1 0 0 0M17.5 18.5a1.5 1.5 0 1 0 0 0"/></svg>
+            </div>
+            <h3>Foodtruck</h3>
+          </div>
+          <p>Saftige Burger direkt zu eurem Event — Beef, Chicken und vegetarische Varianten. Der Truck kommt zu euch, grillt live vor Ort.</p>
+          <div class="mc-tags"><span>Burger</span><span>Live-Grill</span><span>Firmenevent</span></div>
+        </div>
+
       </div>
-
-      <div class="overview-card">
-        <div class="ov-icon">🥐</div>
-        <h3>Kleine Speisen</h3>
-        <p>Wraps, Canapés, Spieße und Brötchen — perfekt für Empfänge ab 10 Personen.</p>
-      </div>
-
-      <div class="overview-card">
-        <div class="ov-icon">🚚</div>
-        <h3>Food Truck</h3>
-        <p>Saftige Burger direkt zu Ihrem Event — Beef, Chicken und vegetarische Varianten.</p>
-      </div>
-
     </div>
   </section>
 
-  <!-- ═══════════ INFO-LEISTE ═══════════ -->
-  <div class="info-strip container">
-    <div class="info-item">
-      <span class="info-dot"></span>
-      <p>Liefergebiet: <strong>Haldensleben und Umgebung</strong> — individuelle Anfragen möglich</p>
-    </div>
-    <div class="info-item">
-      <span class="info-dot"></span>
-      <p>Aufbau &amp; Servicepersonal nach Absprache</p>
-    </div>
-    <div class="info-item">
-      <span class="info-dot"></span>
-      <p>Geschirr &amp; Equipment optional buchbar</p>
+  <!-- INFO-LEISTE -->
+  <div class="info-bar">
+    <div class="wrap">
+      <div class="info-inner">
+        <div class="ii"><span class="id"></span><p>Liefergebiet: <strong>Haldensleben &amp; Umgebung</strong> — individuelle Anfragen möglich</p></div>
+        <div class="ii"><span class="id"></span><p>Aufbau &amp; Servicepersonal nach Absprache</p></div>
+        <div class="ii"><span class="id"></span><p>Geschirr &amp; Equipment optional buchbar</p></div>
+      </div>
     </div>
   </div>
 
-  <!-- ═══════════ INTERAKTIVE BANKETMAPPE ═══════════ -->
+  <!-- BANKETMAPPE — untouched -->
   <Banketmappe />
 
 </Layout>
 
 <style>
-  /* ── Page Hero ── */
-  .page-hero {
-    padding-block: 5rem 3rem;
-    border-bottom: 1px solid var(--color-border);
-  }
+  /* HERO */
+  .page-hero { padding: 96px 0 88px; border-bottom: 1px solid var(--line); }
+  .page-hero h1 { font-size: 68px; font-weight: 700; line-height: 1.03; letter-spacing: -.025em; max-width: 14ch; margin-top: 16px; }
+  .hero-sub { font-size: 17px; color: var(--ink-2); line-height: 1.65; max-width: 54ch; margin-top: 24px; }
+  .hero-cta { display: flex; gap: 12px; margin-top: 32px; }
 
-  .page-label {
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
+  /* MENU CARDS */
+  .mcards { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+  .mcard { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 28px 26px 30px; display: flex; flex-direction: column; }
+  .mc-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .mc-ic { width: 42px; height: 42px; flex-shrink: 0; border-radius: 9px; background: rgba(72,141,148,.12); border: 1px solid rgba(72,141,148,.28); display: grid; place-items: center; color: var(--accent-2); }
+  .mcard h3 { font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+  .mcard p { font-size: 14px; color: var(--ink-2); line-height: 1.62; flex: 1; }
+  .mc-tags { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .mc-tags span { font-size: 11px; font-weight: 500; color: var(--ink-2); background: rgba(241,236,226,.05); padding: 4px 10px; border-radius: 100px; }
 
-  .page-hero h1 { margin-bottom: 1.25rem; }
+  /* INFO BAR */
+  .info-bar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(72,141,148,.04); }
+  .info-inner { display: flex; flex-wrap: wrap; gap: 0; }
+  .ii { display: flex; align-items: center; gap: 12px; padding: 18px 0; flex: 1 1 200px; font-size: 13.5px; color: var(--ink-2); border-right: 1px solid var(--line-soft); padding-right: 32px; margin-right: 32px; }
+  .ii:last-child { border-right: none; }
+  .id { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .ii strong { color: var(--ink); font-weight: 600; }
 
-  .page-desc {
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 560px;
-  }
-
-  /* ── Übersichts-Karten ── */
-  .overview-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-
-  .overview-card {
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    transition: border-color var(--transition), transform var(--transition);
-  }
-
-  .overview-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-3px);
-  }
-
-  .ov-icon { font-size: 1.8rem; }
-
-  .overview-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .overview-card p {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .ov-price {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    margin-top: 0.25rem;
-  }
-
-  /* ── Info-Leiste ── */
-  .info-strip {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    padding: 1rem 1.5rem;
-    background-color: rgba(72, 141, 148, 0.06);
-    border: 1px solid rgba(72, 141, 148, 0.2);
-    border-radius: var(--radius-card);
-    margin-bottom: 2rem;
-  }
-
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.83rem;
-  }
-
-  .info-dot {
-    width: 6px;
-    height: 6px;
-    background-color: var(--color-accent);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .info-item p { color: var(--color-text-muted); }
-  .info-item strong { color: var(--color-text); font-weight: 600; }
-
-  /* ── Animationen ── */
-  @keyframes heroFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .page-hero .container {
-    animation: heroFadeIn 0.9s ease forwards;
-    animation-delay: 0.1s;
-    opacity: 0;
-  }
-
-  /* ── Responsive ── */
+  /* RESPONSIVE */
   @media (max-width: 900px) {
-    .overview-grid { grid-template-columns: 1fr 1fr; }
+    .mcards { grid-template-columns: 1fr 1fr; }
+    .page-hero h1 { font-size: 48px; }
   }
-
   @media (max-width: 600px) {
-    .page-hero { padding-block: 3rem 2rem; }
-    .overview-grid { grid-template-columns: 1fr; }
-    .info-strip { flex-direction: column; gap: 0.75rem; }
+    .page-hero h1 { font-size: 36px; }
+    .hero-cta { flex-direction: column; }
+    .mcards { grid-template-columns: 1fr; }
+    .info-inner { flex-direction: column; gap: 0; }
+    .ii { border-right: none; padding-right: 0; margin-right: 0; border-bottom: 1px solid var(--line-soft); }
+    .ii:last-child { border-bottom: none; }
   }
 </style>
