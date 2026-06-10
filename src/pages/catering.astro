@@ -94,7 +94,23 @@ import Banketmappe from '../components/Banketmappe.astro';
 
 <style>
   /* HERO */
-  .page-hero { padding: 96px 0 88px; border-bottom: 1px solid var(--line); }
+  .page-hero {
+    position: relative;
+    padding: 96px 0 88px;
+    border-bottom: none;
+    background-image: url('https://images.unsplash.com/photo-1715692727322-ab4bd24c13af?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(14,24,39,0.95) 40%, rgba(14,24,39,0.55) 100%);
+    z-index: 0;
+  }
+  .page-hero .wrap { position: relative; z-index: 1; }
   .page-hero h1 { font-size: 68px; font-weight: 700; line-height: 1.03; letter-spacing: -.025em; max-width: 14ch; margin-top: 16px; }
   .hero-sub { font-size: 17px; color: var(--ink-2); line-height: 1.65; max-width: 54ch; margin-top: 24px; }
   .hero-cta { display: flex; gap: 12px; margin-top: 32px; }
