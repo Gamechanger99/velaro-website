@@ -2,47 +2,87 @@
   <div class="wrap">
     <div class="foot">
 
-      <div class="col">
-        <div class="brand">
-          <span class="dot"></span>
-          <span class="mark">Velaro</span>
-        </div>
-        <p>Frisch gekocht, regional eingekauft und mit Liebe serviert — aus Haldensleben für eure Feste.</p>
+      <!-- Col 1: Logo + Tagline -->
+      <div class="col col-brand">
+        <a href="/" aria-label="Velaro Startseite">
+          <img src="/logo.svg" alt="Velaro Logo" class="foot-logo" />
+        </a>
+        <p class="tagline">Frisch gekocht, regional eingekauft und mit Liebe serviert — aus Haldensleben für eure Feste.</p>
       </div>
 
-      <div class="col">
-        <h5>Seiten</h5>
-        <ul>
-          <li><a href="/">Start</a></li>
-          <li><a href="/catering">Catering</a></li>
-          <li><a href="/maerkte">Märkte</a></li>
-          <li><a href="/kontakt">Kontakt</a></li>
-        </ul>
-      </div>
-
+      <!-- Col 2: Kontakt -->
       <div class="col">
         <h5>Kontakt</h5>
-        <ul>
-          <li><a href="mailto:kontakt@velaro-catering.de">kontakt@velaro-catering.de</a></li>
-          <li><a href="tel:+4916094839906">0160 9483 9906</a></li>
-          <li>Region Haldensleben</li>
+        <ul class="contact-list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="4" width="16" height="12" rx="2" stroke="#488d94" stroke-width="1.5"/>
+              <path d="M2 7l8 5 8-5" stroke="#488d94" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <a href="mailto:kontakt@velaro-catering.de">kontakt@velaro-catering.de</a>
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5.5 3h2.3l1 3-1.5 1.5c.9 1.8 2.2 3.1 4 4L12.8 10l3 1v2.3c0 .9-.8 1.7-1.7 1.6C7.4 14.4 3.6 10.6 3.1 5.2 3 4.3 3.8 3 5.5 3z" stroke="#488d94" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            <a href="tel:+4916094839906">0160 9483 9906</a>
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0; margin-top:1px;">
+              <path d="M10 2a6 6 0 0 1 6 6c0 4-6 10-6 10S4 12 4 8a6 6 0 0 1 6-6z" stroke="#488d94" stroke-width="1.5"/>
+              <circle cx="10" cy="8" r="2" stroke="#488d94" stroke-width="1.5"/>
+            </svg>
+            <span>Freischützstraße 10, 39340 Haldensleben</span>
+          </li>
         </ul>
       </div>
 
+      <!-- Col 3: Anfragen -->
+      <div class="col">
+        <h5>Anfragen</h5>
+        <table class="hours">
+          <tbody>
+            <tr>
+              <td class="day">Mo – Fr</td>
+              <td class="time">08:00 – 18:00 Uhr</td>
+            </tr>
+            <tr>
+              <td class="day">Sa</td>
+              <td class="time">09:00 – 14:00 Uhr</td>
+            </tr>
+            <tr>
+              <td class="day">So</td>
+              <td class="time closed">Geschlossen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Col 4: Instagram -->
       <div class="col">
         <h5>Folgen</h5>
-        <ul>
-          <li><a href="https://instagram.com/velaro_cateringundfoodtruck" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="#">Facebook</a></li>
-        </ul>
+        <a
+          href="https://www.instagram.com/velaro_cateringundfoodtruck/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="insta-btn"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="#488d94" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="4.5" stroke="#488d94" stroke-width="1.6"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="#488d94"/>
+          </svg>
+          <span>@velaro_cateringundfoodtruck</span>
+        </a>
       </div>
 
     </div>
+
     <div class="foot-base">
       <span>© 2026 Velaro Catering & Foodtruckservice</span>
-      <span>
+      <span class="legal-links">
         <a href="/impressum">Impressum</a>
-        &nbsp;·&nbsp;
+        <span class="dot-sep">·</span>
         <a href="/datenschutz">Datenschutz</a>
       </span>
     </div>
@@ -51,82 +91,121 @@
 
 <style>
   footer {
-    border-top: 1px solid var(--line);
-    padding: 64px 0 46px;
+    background: #0e1827;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 2.5rem 0 2rem;
   }
 
   .foot {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 44px;
+    grid-template-columns: 1.6fr 1.2fr 1fr 1.2fr;
+    gap: 48px;
+    padding-bottom: 2rem;
   }
 
-  .foot .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  /* Col 1 */
+  .col-brand { display: flex; flex-direction: column; gap: 16px; }
+  .foot-logo {
+    height: 70px; width: auto; display: block;
+    filter: brightness(1.8) saturate(1.1);
+    transition: filter .25s;
+  }
+  .col-brand a:hover .foot-logo { filter: brightness(2.2) saturate(1.2); }
+  .tagline {
+    font-size: 13px;
+    color: #a6a6a6;
+    line-height: 1.65;
+    max-width: 36ch;
+  }
+
+  /* Section headings */
+  h5 {
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #488d94;
+    font-weight: 600;
     margin-bottom: 18px;
   }
-  .foot .brand .dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  .foot .brand .mark {
-    font-size: 22px;
-    font-weight: 700;
-  }
 
-  .foot .col p {
-    font-size: 14px;
-    color: var(--ink-2);
-    line-height: 1.6;
-    max-width: 32ch;
-  }
-
-  .foot h5 {
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-
-  .foot ul {
+  /* Kontakt list */
+  .contact-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: 12px;
   }
-  .foot ul a,
-  .foot ul li {
-    font-size: 14px;
-    color: var(--ink-2);
+  .contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+  .contact-list svg { flex-shrink: 0; margin-top: 2px; }
+  .contact-list a,
+  .contact-list span {
+    font-size: 13.5px;
+    color: #a6a6a6;
+    line-height: 1.4;
     transition: color .2s;
   }
-  .foot ul a:hover {
-    color: var(--accent-2);
-  }
+  .contact-list a:hover { color: #fff; }
 
+  /* Hours table */
+  .hours { border-collapse: collapse; }
+  .hours td { padding: 4px 0; font-size: 13.5px; vertical-align: top; }
+  .hours .day { color: #a6a6a6; padding-right: 18px; white-space: nowrap; }
+  .hours .time { color: #d8d8d8; white-space: nowrap; }
+  .hours .closed { color: #a6a6a6; }
+
+  /* Instagram button */
+  .insta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #1a2840;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 11px 14px;
+    text-decoration: none;
+    transition: border-color .2s, background .2s;
+  }
+  .insta-btn:hover {
+    border-color: #488d94;
+    background: #1e2f4a;
+  }
+  .insta-btn span {
+    font-size: 12px;
+    color: #a6a6a6;
+    line-height: 1.3;
+    word-break: break-all;
+    transition: color .2s;
+  }
+  .insta-btn:hover span { color: #fff; }
+
+  /* Bottom bar */
   .foot-base {
     display: flex;
     justify-content: space-between;
-    margin-top: 52px;
+    align-items: center;
     padding-top: 24px;
-    border-top: 1px solid var(--line-soft);
-    font-size: 12.5px;
-    color: var(--ink-3);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px;
+    color: #a6a6a6;
   }
-  .foot-base a { color: var(--ink-3); transition: color .2s; }
-  .foot-base a:hover { color: var(--accent-2); }
+  .legal-links { display: flex; align-items: center; gap: 8px; }
+  .dot-sep { opacity: 0.4; }
+  .foot-base a { color: #a6a6a6; transition: color .2s; }
+  .foot-base a:hover { color: #fff; }
 
-  @media (max-width: 900px) {
-    .foot { grid-template-columns: 1fr 1fr; gap: 32px; }
+  /* Responsive */
+  @media (max-width: 960px) {
+    .foot { grid-template-columns: 1fr 1fr; gap: 36px; }
   }
-  @media (max-width: 480px) {
-    .foot { grid-template-columns: 1fr; }
-    .foot-base { flex-direction: column; gap: 8px; text-align: center; }
+  @media (max-width: 520px) {
+    .foot { grid-template-columns: 1fr; gap: 32px; }
+    .col-brand { align-items: center; text-align: center; }
+    .tagline { max-width: 100%; }
+    .foot-base { flex-direction: column; gap: 10px; text-align: center; }
   }
 </style>

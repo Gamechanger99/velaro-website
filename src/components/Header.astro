@@ -18,7 +18,7 @@ function isActive(href: string): boolean {
   <div class="wrap nav-inner">
 
     <a href="/" class="brand" aria-label="Velaro Startseite">
-      <img src="/logo.svg" alt="Velaro Logo" class="brand-logo" />
+      <img src="/logoohnesubtext.svg" alt="Velaro Logo" class="brand-logo" />
     </a>
 
     <nav class="navlinks">
@@ -54,47 +54,47 @@ function isActive(href: string): boolean {
 <style>
   .site-header {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(14,24,39,.78); backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line-soft);
-    transition: box-shadow .2s, background .2s;
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
   }
   .site-header.scrolled {
-    background: rgba(14,24,39,.92);
-    box-shadow: 0 1px 20px rgba(0,0,0,.4);
+    background: rgba(14, 24, 39, 0.85);
+    backdrop-filter: blur(12px);
   }
 
   .nav-inner {
-    display: flex; align-items: center; justify-content: space-between; height: 110px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 0;
   }
 
   /* Brand */
   .brand { display: flex; align-items: center; }
   .brand-logo {
-    height: 64px; width: auto; display: block;
-    filter: brightness(1.4);
+    height: 52px; width: auto; display: block;
+    filter: brightness(2) saturate(1.1);
     transition: filter .25s;
   }
   .brand:hover .brand-logo {
-    filter: brightness(1.6);
+    filter: brightness(2.4) saturate(1.2);
   }
 
   /* Desktop nav */
-  .navlinks { display: flex; align-self: stretch; align-items: center; gap: 38px; }
+  .navlinks { display: flex; align-items: center; gap: 4px; }
   .navlink {
-    font-size: 15.5px; font-weight: 500; color: var(--ink-2);
-    transition: color .2s; position: relative;
-    display: flex; align-items: center; height: 100%;
+    font-size: 15px; font-weight: 500; color: var(--ink-2);
+    padding: 6px 14px; border-radius: 6px;
+    transition: color .2s, background .2s;
   }
-  .navlink::after {
-    content: ""; position: absolute; left: 0; right: 100%; bottom: 0;
-    height: 2px; background: var(--accent);
-    border-radius: 2px 2px 0 0;
-    transition: right .32s cubic-bezier(.4,0,.2,1);
+  .navlink:hover {
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.07);
   }
-  .navlink:hover { color: var(--ink); }
-  .navlink:hover::after { right: 0; }
-  .navlink--active { color: var(--ink); }
-  .navlink--active::after { right: 0; }
+  .navlink--active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
 
   /* Hamburger */
   .hamburger {
@@ -133,8 +133,12 @@ function isActive(href: string): boolean {
   const nav = document.getElementById('mobileNav');
   btn?.addEventListener('click', () => { nav?.classList.toggle('is-open'); });
 
-  const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => {
+  const header = document.querySelector('.site-header') as HTMLElement | null;
+
+  function updateHeader() {
     header?.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  }
+
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
 </script>
