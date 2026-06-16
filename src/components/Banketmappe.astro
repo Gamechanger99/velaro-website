@@ -1,6 +1,20 @@
 ---
-// Banketmappe.astro – Interaktiver Catering-Konfigurator
-// Vanilla JS, keine externen Abhängigkeiten
+import { getCollection } from 'astro:content';
+
+const speisekarteEntries = await getCollection('speisekarte');
+
+function getKat(id: string) {
+  const entry = speisekarteEntries.find(e => e.data.kategorie === id);
+  return entry?.data.items ?? [];
+}
+
+const SHARED_SUPPEN      = getKat('suppen');
+const SHARED_HAUPTGAENGE = getKat('hauptgaenge');
+const SHARED_VEGETARISCH = getKat('vegetarisch');
+const SHARED_BEILAGEN    = getKat('beilagen');
+const SHARED_DESSERT     = getKat('dessert');
+const GRILL_ITEMS        = getKat('grill');
+const SNACK_ITEMS        = getKat('snacks');
 ---
 
 
@@ -503,7 +517,7 @@
   }
 </style>
 
-<script>
+<script define:vars={{ SHARED_SUPPEN, SHARED_HAUPTGAENGE, SHARED_VEGETARISCH, SHARED_BEILAGEN, SHARED_DESSERT, GRILL_ITEMS, SNACK_ITEMS }}>
 // @ts-nocheck
 
 const CATS = [
@@ -519,53 +533,6 @@ const DRINKS = [
   { id:'full', name:'Getränke-Pauschale Premium',  desc:'Großes Getränke-Sortiment' },
 ];
 
-// Sub-Optionen: { label, subs: string[] | null }
-// subs:null = keine Sub-Auswahl nötig
-const SHARED_SUPPEN = [
-  { label:'Altmärker Hochzeitssuppe', subs:null },
-  { label:'Tomatencremesuppe', subs:null },
-  { label:'Pilzcremesuppe', subs:null },
-];
-const SHARED_HAUPTGAENGE = [
-  { label:'Deftiges vom Blech (Schnitzel, Schweinefilet & Hähnchenbrust)', subs:['mit Pilzrahmsauce','mit Zwiebel-Bratensauce','mit klassischer Bratensauce','mit Pfeffersauce','dazu mediterranes Grillgemüse'] },
-  { label:'Hähnchenbrust', subs:null, cascade:[
-      { question:'Zubereitung', options:['klassisch gewürzt','gefüllt mit Feta und Spinat','Caprese Style'] },
-      { question:'Beilage',     options:['auf Bandnudeln in feiner Kräuter-Rahmsauce mit Estragon','mit mediterranem Grillgemüse','mit Pfeffersauce'] }
-    ]
-  },
-  { label:'Schweinefilet', subs:['mit mediterranem Grillgemüse','mit Pfeffersauce','in Pfefferrahm'] },
-  { label:'Lachsfilet', subs:['auf Sesam-Spargel-Pfanne','auf jungem Blattspinat','in Zitronen-Dill-Sauce','Pasta al Salmone / Seelachsfilet'] },
-];
-const SHARED_VEGETARISCH = [
-  { label:'Gnocchipfanne', subs:null },
-  { label:'Falafel', subs:['auf geröstetem Paprikagemüse','Tomatenreis','Rote Beete-Feta-Stampf'] },
-  { label:'Gefüllte Zucchini', subs:['auf geröstetem Paprikagemüse','Tomatenreis','Rote Beete-Feta-Stampf'] },
-];
-const SHARED_BEILAGEN = [
-  { label:'Frische Salatauswahl',  subs:null, default:true, badge:'Inklusive' },
-  { label:'Baguette und Brot',     subs:null, default:true, badge:'Inklusive' },
-  { label:'Butterplatte',          subs:null, default:true, badge:'Inklusive' },
-  { label:'Dipvariation',          subs:null, default:true, badge:'Inklusive' },
-  { label:'Kartoffelgratin',       subs:null },
-  { label:'Salzkartoffeln',        subs:null },
-  { label:'Petersilienkartoffeln', subs:null },
-  { label:'Reis',                  subs:null },
-  { label:'Spätzle',               subs:null },
-  { label:'Nudeln',                subs:null },
-  { label:'Risotto',               subs:null },
-  { label:'Pilzrisotto',           subs:null },
-  { label:'Cheddarrisotto',        subs:null },
-  { label:'Kartoffelbrei',         subs:null },
-];
-const SHARED_DESSERT = [
-  { label:'Obstsalat', subs:null },
-  { label:'Schokomousse mit Kirschgrütze', subs:null },
-  { label:'Crème Brûlée', subs:null },
-  { label:'Schichtgläser', subs:null },
-  { label:'Cremespeise mit Fruchtspiegel', subs:null },
-  { label:'Kuchenvariation', subs:null },
-];
-
 const MENU = {
   buffet: {
     sections:[
@@ -578,14 +545,7 @@ const MENU = {
   },
   grill: {
     sections:[
-      { title:'Vom Grill', items:[
-        { label:'Bratwurst', subs:null },
-        { label:'Boulette', subs:null },
-        { label:'Grillgemüse', subs:null },
-        { label:'Tomaten-Feta-Pfännchen', subs:null },
-        { label:'Fackeln', subs:null },
-        { label:'Steak', subs:['Schwein','Hühnchen'] },
-      ]},
+      { title:'Vom Grill', items: GRILL_ITEMS },
       { title:'Suppen', items: SHARED_SUPPEN },
       { title:'Hauptgänge', items: SHARED_HAUPTGAENGE },
       { title:'Vegetarisch', items: SHARED_VEGETARISCH },
@@ -595,15 +555,7 @@ const MENU = {
   },
   snacks: {
     sections:[
-      { title:'Auswahl', items:[
-        { label:'Obst', subs:null },
-        { label:'Fingerfood', subs:null },
-        { label:'Belegte Brötchen', subs:null },
-        { label:'Obstsalat', subs:null },
-        { label:'Suppe', subs:null },
-        { label:'Crostinis', subs:null },
-        { label:'Bruschetta', subs:null },
-      ]},
+      { title:'Auswahl', items: SNACK_ITEMS },
     ],
   },
   truck: {

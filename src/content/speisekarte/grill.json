@@ -1,0 +1,12 @@
+{
+  "kategorie": "grill",
+  "label": "Vom Grill",
+  "items": [
+    { "label": "Bratwurst", "subs": null },
+    { "label": "Boulette", "subs": null },
+    { "label": "Grillgemüse", "subs": null },
+    { "label": "Tomaten-Feta-Pfännchen", "subs": null },
+    { "label": "Fackeln", "subs": null },
+    { "label": "Steak", "subs": ["Schwein","Hühnchen"] }
+  ]
+}

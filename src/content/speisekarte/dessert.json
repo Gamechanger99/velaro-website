@@ -1,0 +1,12 @@
+{
+  "kategorie": "dessert",
+  "label": "Dessert",
+  "items": [
+    { "label": "Obstsalat", "subs": null },
+    { "label": "Schokomousse mit Kirschgrütze", "subs": null },
+    { "label": "Crème Brûlée", "subs": null },
+    { "label": "Schichtgläser", "subs": null },
+    { "label": "Cremespeise mit Fruchtspiegel", "subs": null },
+    { "label": "Kuchenvariation", "subs": null }
+  ]
+}

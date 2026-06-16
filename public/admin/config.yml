@@ -48,3 +48,57 @@ collections:
         name: adresse
         widget: string
         hint: "Wird für Google Maps genutzt — z.B. Hauptplatz 1, 52525 Heinsberg"
+
+  - name: speisekarte
+    label: Speisekarte
+    label_singular: Kategorie
+    folder: src/content/speisekarte
+    create: false
+    delete: false
+    format: json
+    slug: "{{fields.kategorie}}"
+    summary: "{{fields.label}}"
+    fields:
+      - label: Kategorie-ID
+        name: kategorie
+        widget: hidden
+
+      - label: Anzeigename
+        name: label
+        widget: string
+        hint: "Wird als Überschrift im Konfigurator angezeigt"
+
+      - label: Gerichte
+        name: items
+        widget: list
+        label_singular: Gericht
+        summary: "{{fields.label}}"
+        fields:
+          - label: Gericht / Name
+            name: label
+            widget: string
+            hint: "Name des Gerichts, z.B. Tomatencremesuppe"
+
+          - label: Unterpunkte (optional)
+            name: subs
+            widget: list
+            required: false
+            allow_add: true
+            hint: "Z.B. Soßen- oder Beilagenoptionen zum Auswählen. Leer lassen wenn keine Unterpunkte."
+            field:
+              label: Option
+              name: value
+              widget: string
+
+          - label: Standard ausgewählt?
+            name: default
+            widget: boolean
+            default: false
+            required: false
+            hint: "Wenn aktiv, ist dieses Gericht automatisch vorausgewählt (z.B. inklusive Beilagen)"
+
+          - label: Badge-Label
+            name: badge
+            widget: string
+            required: false
+            hint: "Optional: z.B. 'Inklusive' oder 'Empfehlung'"

@@ -1,0 +1,9 @@
+{
+  "kategorie": "vegetarisch",
+  "label": "Vegetarisch",
+  "items": [
+    { "label": "Gnocchipfanne", "subs": null },
+    { "label": "Falafel", "subs": ["auf geröstetem Paprikagemüse","Tomatenreis","Rote Beete-Feta-Stampf"] },
+    { "label": "Gefüllte Zucchini", "subs": ["auf geröstetem Paprikagemüse","Tomatenreis","Rote Beete-Feta-Stampf"] }
+  ]
+}

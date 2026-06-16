@@ -1,0 +1,9 @@
+{
+  "kategorie": "suppen",
+  "label": "Suppen",
+  "items": [
+    { "label": "Altmärker Hochzeitssuppe", "subs": null },
+    { "label": "Tomatencremesuppe", "subs": null },
+    { "label": "Pilzcremesuppe", "subs": null }
+  ]
+}

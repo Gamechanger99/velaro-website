@@ -1,0 +1,26 @@
+{
+  "kategorie": "hauptgaenge",
+  "label": "Hauptgänge",
+  "items": [
+    {
+      "label": "Deftiges vom Blech (Schnitzel, Schweinefilet & Hähnchenbrust)",
+      "subs": ["mit Pilzrahmsauce","mit Zwiebel-Bratensauce","mit klassischer Bratensauce","mit Pfeffersauce","dazu mediterranes Grillgemüse"]
+    },
+    {
+      "label": "Hähnchenbrust",
+      "subs": null,
+      "cascade": [
+        { "question": "Zubereitung", "options": ["klassisch gewürzt","gefüllt mit Feta und Spinat","Caprese Style"] },
+        { "question": "Beilage", "options": ["auf Bandnudeln in feiner Kräuter-Rahmsauce mit Estragon","mit mediterranem Grillgemüse","mit Pfeffersauce"] }
+      ]
+    },
+    {
+      "label": "Schweinefilet",
+      "subs": ["mit mediterranem Grillgemüse","mit Pfeffersauce","in Pfefferrahm"]
+    },
+    {
+      "label": "Lachsfilet",
+      "subs": ["auf Sesam-Spargel-Pfanne","auf jungem Blattspinat","in Zitronen-Dill-Sauce","Pasta al Salmone / Seelachsfilet"]
+    }
+  ]
+}
