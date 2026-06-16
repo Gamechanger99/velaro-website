@@ -454,6 +454,45 @@
   }
   .bm-info-icon { color: #488d94; flex-shrink: 0; margin-top: 0.05rem; }
 
+  /* ── Custom Items ── */
+  .bm-custom-item { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
+  .bm-custom-input {
+    flex: 1; background: #0e1827; border: 1px solid #1e2d42;
+    border-radius: 0.5rem; color: #e8e0d0; padding: 0.45rem 0.75rem;
+    font-size: 0.88rem; outline: none; transition: border-color 0.2s;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-custom-input:focus { border-color: #488d94; }
+  .bm-custom-remove {
+    background: none; border: 1px solid #3a4a5e; border-radius: 0.4rem;
+    color: #7a8fa6; padding: 0.35rem 0.6rem; cursor: pointer;
+    font-size: 0.85rem; transition: color 0.2s, border-color 0.2s;
+  }
+  .bm-custom-remove:hover { color: #e05555; border-color: #e05555; }
+  .bm-custom-add {
+    display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.75rem;
+    background: none; border: 1px dashed #2a3f5a; border-radius: 0.5rem;
+    color: #488d94; padding: 0.4rem 0.9rem; font-size: 0.82rem;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-custom-add:hover { border-color: #488d94; background: rgba(72,141,148,0.06); }
+
+  /* ── Cascade Dropdowns ── */
+  .bm-cascade-select {
+    width: 100%; background: #0e1827; border: 1px solid #1e2d42;
+    border-radius: 0.5rem; color: #e8e0d0; padding: 0.5rem 0.75rem;
+    font-size: 0.88rem; margin-top: 0.4rem; outline: none; cursor: pointer;
+    transition: border-color 0.2s; font-family: "Montserrat", sans-serif;
+    -webkit-appearance: none; appearance: none;
+  }
+  .bm-cascade-select:focus { border-color: #488d94; }
+  .bm-cascade-wrap {
+    margin-top: 0.5rem; display: flex; flex-direction: column;
+    gap: 0.4rem; padding: 0 0.25rem;
+  }
+  .bm-cascade-label { font-size: 0.78rem; color: #7a8fa6; margin-bottom: 0.1rem; font-family: "Montserrat", sans-serif; }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
     .bm-body, .bm-card-header { padding: 1.25rem; }
@@ -489,8 +528,11 @@ const SHARED_SUPPEN = [
 ];
 const SHARED_HAUPTGAENGE = [
   { label:'Deftiges vom Blech (Schnitzel, Schweinefilet & Hähnchenbrust)', subs:['mit Pilzrahmsauce','mit Zwiebel-Bratensauce','mit klassischer Bratensauce','mit Pfeffersauce','dazu mediterranes Grillgemüse'] },
-  { label:'Hähnchenbrust', subs:['A – klassisch gewürzt','B – gefüllt mit Feta und Spinat','C – Caprese Style'] },
-  { label:'Hähnchenbrust – Zubereitung', subs:['auf Bandnudeln in feiner Kräuter-Rahmsauce mit Estragon','mit mediterranem Grillgemüse','mit Pfeffersauce'] },
+  { label:'Hähnchenbrust', subs:null, cascade:[
+      { question:'Zubereitung', options:['klassisch gewürzt','gefüllt mit Feta und Spinat','Caprese Style'] },
+      { question:'Beilage',     options:['auf Bandnudeln in feiner Kräuter-Rahmsauce mit Estragon','mit mediterranem Grillgemüse','mit Pfeffersauce'] }
+    ]
+  },
   { label:'Schweinefilet', subs:['mit mediterranem Grillgemüse','mit Pfeffersauce','in Pfefferrahm'] },
   { label:'Lachsfilet', subs:['auf Sesam-Spargel-Pfanne','auf jungem Blattspinat','in Zitronen-Dill-Sauce','Pasta al Salmone / Seelachsfilet'] },
 ];
@@ -599,6 +641,14 @@ const TOTAL_STEPS = 6;
 const TITLES = ['Willkommen','Kategorie','Eckdaten','Menü zusammenstellen','Getränkepauschale','Individuelle Wünsche','Zusammenfassung'];
 
 const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', menuSel:{}, drink:'none', wishes:'' };
+
+function findItemDef(secTitle, itemLabel) {
+  const menu = MENU[S.category];
+  if (!menu) return null;
+  const sec = menu.sections.find(s => s.title === secTitle);
+  if (!sec) return null;
+  return sec.items.find(it => it.label === itemLabel) || null;
+}
 
 function initDefaults(catId) {
   S.menuSel = {};
@@ -733,7 +783,12 @@ function toggleItem(secTitle, itemLabel) {
   const arr = S.menuSel[secTitle];
   const idx = arr.findIndex(x=>x.item===itemLabel);
   if (idx>=0) arr.splice(idx,1);
-  else arr.push({ item:itemLabel, subOptions:[] });
+  else {
+    const entry = { item:itemLabel, subOptions:[] };
+    const itDef = findItemDef(secTitle, itemLabel);
+    if (itDef?.cascade) entry.cascadeChoices = {};
+    arr.push(entry);
+  }
 }
 
 function toggleSub(secTitle, itemLabel, sub) {
@@ -749,6 +804,24 @@ function badgeClass(badge) {
   if (badge === 'Inklusive')      return 'bm-badge-incl';
   if (badge === 'Grundsortiment') return 'bm-badge-base';
   return 'bm-badge-extra';
+}
+
+function htmlCascade(it, entry, sec) {
+  let html = '<div class="bm-cascade-wrap">';
+  for (let i = 0; i < it.cascade.length; i++) {
+    const step = it.cascade[i];
+    if (i > 0 && !entry.cascadeChoices[it.cascade[i-1].question]) break;
+    const currentVal = entry.cascadeChoices[step.question] || '';
+    html += `<div>
+      <div class="bm-cascade-label">${step.question}</div>
+      <select class="bm-cascade-select" data-sec="${esc(sec.title)}" data-item="${esc(it.label)}" data-cascade-key="${esc(step.question)}">
+        <option value="">Bitte wählen ...</option>
+        ${step.options.map(o=>`<option value="${esc(o)}"${currentVal===o?' selected':''}>${o}</option>`).join('')}
+      </select>
+    </div>`;
+  }
+  html += '</div>';
+  return html;
 }
 
 function htmlMenu() {
@@ -775,6 +848,8 @@ function htmlMenu() {
             return `<span class="bm-sub-chip${subActive?' bm-active':''}" data-sub="${esc(s)}">${s}</span>`;
           }).join('')}
         </div>`;
+      } else if (active && it.cascade) {
+        subHtml = htmlCascade(it, entry, sec);
       }
       return `<div class="bm-dish-wrap">
         <div class="bm-dish${active?' bm-active':''}" data-sec="${esc(sec.title)}" data-item="${esc(it.label)}">
@@ -785,9 +860,21 @@ function htmlMenu() {
         ${subHtml}
       </div>`;
     }).join('');
+    const customEntries = secSel.map((e,i)=>({e,i})).filter(({e})=>e.isCustom);
+    const customHtml = customEntries.map(({e,i})=>{
+      const displayName = e.item.replace(/^__custom__/,'');
+      return `<div class="bm-custom-item">
+        <input type="text" class="bm-custom-input bm-custom-existing"
+          data-sec="${esc(sec.title)}" data-custom-idx="${i}"
+          value="${esc(displayName)}" placeholder="Eigener Wunsch ...">
+        <button class="bm-custom-remove" data-sec="${esc(sec.title)}" data-custom-idx="${i}">✕</button>
+      </div>`;
+    }).join('');
     return `<div class="bm-dish-group">
       <div class="bm-dish-group-title">${sec.title}</div>
       <div class="bm-dish-list">${itemsHtml}</div>
+      ${customHtml}
+      <button class="bm-custom-add" data-sec="${esc(sec.title)}">+ Eigener Wunsch</button>
     </div>`;
   }).join('');
 
@@ -814,6 +901,63 @@ function bindMenu() {
       const sec=wrap.getAttribute('data-sec'), item=wrap.getAttribute('data-item');
       const sub=el.getAttribute('data-sub');
       toggleSub(sec,item,sub);
+      document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu();
+    });
+  });
+  bindCascade();
+  bindCustom();
+}
+
+function bindCascade() {
+  document.querySelectorAll('.bm-cascade-select').forEach(el=>{
+    el.addEventListener('change', ()=>{
+      const key  = el.getAttribute('data-cascade-key');
+      const sec  = el.getAttribute('data-sec');
+      const item = el.getAttribute('data-item');
+      const arr  = S.menuSel[sec];
+      if (!arr) return;
+      const entry = arr.find(x=>x.item===item);
+      if (!entry) return;
+      entry.cascadeChoices[key] = el.value;
+      const itDef = findItemDef(sec, item);
+      if (itDef?.cascade) {
+        const keyIdx = itDef.cascade.findIndex(c=>c.question===key);
+        for (let i = keyIdx+1; i < itDef.cascade.length; i++) {
+          entry.cascadeChoices[itDef.cascade[i].question] = '';
+        }
+      }
+      document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu();
+    });
+  });
+}
+
+function bindCustom() {
+  document.querySelectorAll('.bm-custom-add').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const sec = el.getAttribute('data-sec');
+      if (!S.menuSel[sec]) S.menuSel[sec] = [];
+      S.menuSel[sec].push({ item:'__custom__', subOptions:[], isCustom:true });
+      document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu();
+    });
+  });
+  document.querySelectorAll('.bm-custom-existing').forEach(el=>{
+    let timer;
+    el.addEventListener('input', ()=>{
+      const sec = el.getAttribute('data-sec');
+      const idx = parseInt(el.getAttribute('data-custom-idx'));
+      clearTimeout(timer);
+      timer = setTimeout(()=>{
+        const arr = S.menuSel[sec];
+        if (arr && arr[idx]) arr[idx].item = '__custom__' + el.value;
+      }, 300);
+    });
+  });
+  document.querySelectorAll('.bm-custom-remove').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const sec = el.getAttribute('data-sec');
+      const idx = parseInt(el.getAttribute('data-custom-idx'));
+      const arr = S.menuSel[sec];
+      if (arr) arr.splice(idx, 1);
       document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu();
     });
   });
@@ -858,10 +1002,19 @@ function htmlSummary() {
   const menuHtml = Object.entries(S.menuSel).filter(([,arr])=>arr.length>0).map(([sec,arr])=>{
     const secDef = menu?.sections.find(s=>s.title===sec);
     const lines  = arr.map(e=>{
+      if (e.isCustom) {
+        const displayName = e.item.replace(/^__custom__/,'');
+        return `<div class="bm-summary-row"><span class="bm-row-key">—</span><span class="bm-row-val">(Eigener Wunsch) ${displayName}</span></div>`;
+      }
       const itDef     = secDef?.items.find(i=>i.label===e.item);
       const badgePart = itDef?.badge ? ` <span style="color:#488d94;font-size:0.72rem">(${itDef.badge})</span>` : '';
       const subPart   = e.subOptions.length ? ` → ${e.subOptions.join(', ')}` : '';
-      return `<div class="bm-summary-row"><span class="bm-row-key">—</span><span class="bm-row-val">${e.item}${subPart}${badgePart}</span></div>`;
+      let cascadePart = '';
+      if (e.cascadeChoices) {
+        const choices = Object.entries(e.cascadeChoices).filter(([,v])=>v).map(([k,v])=>`${k}: ${v}`).join(' | ');
+        if (choices) cascadePart = ` → ${choices}`;
+      }
+      return `<div class="bm-summary-row"><span class="bm-row-key">—</span><span class="bm-row-val">${e.item}${subPart}${cascadePart}${badgePart}</span></div>`;
     }).join('');
     return `<div class="bm-summary-block"><div class="bm-summary-title">${sec}</div>${lines}</div>`;
   }).join('');
@@ -905,11 +1058,21 @@ async function submit() {
     .map(([sec,arr])=>{
       const secDef = menu?.sections.find(s=>s.title===sec);
       const lines  = arr.map(e=>{
+        if (e.isCustom) {
+          const displayName = e.item.replace(/^__custom__/,'');
+          if (!displayName) return null;
+          return `  — [Eigener Wunsch] ${displayName}`;
+        }
         const itDef     = secDef?.items.find(i=>i.label===e.item);
         const badgePart = itDef?.badge ? ` (${itDef.badge})` : '';
         const subPart   = e.subOptions.length ? ` → ${e.subOptions.join(', ')}` : '';
-        return `  — ${e.item}${subPart}${badgePart}`;
-      }).join('\n');
+        let cascadePart = '';
+        if (e.cascadeChoices) {
+          const choices = Object.entries(e.cascadeChoices).filter(([,v])=>v).map(([k,v])=>`${k}: ${v}`).join(' | ');
+          if (choices) cascadePart = ` → ${choices}`;
+        }
+        return `  — ${e.item}${subPart}${cascadePart}${badgePart}`;
+      }).filter(Boolean).join('\n');
       return `${sec}:\n${lines}`;
     }).join('\n') || '–';
 

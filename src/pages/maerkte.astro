@@ -44,20 +44,10 @@ function mapsUrl(adresse: string): string {
 
   <!-- HERO -->
   <section class="page-hero">
-    <div class="wrap hero-inner">
-      <div class="hero-text">
-        <div class="label-row reveal"><span class="ix">Unsere Termine</span><span class="ln"></span></div>
-        <h1 class="stagger">Märkte &amp; <span class="it">Veranstaltungen.</span></h1>
-        <p class="hero-sub reveal" data-d="2">Findet uns auf regionalen Märkten und Veranstaltungen in der Region. Frisch zubereitet, direkt zu euch.</p>
-      </div>
-      <div class="hero-img-wrap reveal" data-d="1">
-        <img
-          src="https://images.unsplash.com/photo-1638132704849-9370475ed2de?auto=format&fit=crop&w=900&q=80"
-          alt="Velaro Foodtruck auf dem Markt"
-          class="hero-img"
-        />
-        <div class="hero-img-glow"></div>
-      </div>
+    <div class="wrap">
+      <div class="label-row reveal"><span class="ix">Unsere Termine</span><span class="ln"></span></div>
+      <h1 class="stagger">Märkte &amp; <span class="it">Veranstaltungen.</span></h1>
+      <p class="hero-sub reveal" data-d="2">Findet uns auf regionalen Märkten und Veranstaltungen in der Region. Frisch zubereitet, direkt zu euch.</p>
     </div>
   </section>
 
@@ -161,37 +151,25 @@ function mapsUrl(adresse: string): string {
 
 <style>
   /* HERO */
-  .page-hero { padding: 80px 0 88px; border-bottom: 1px solid var(--line); }
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    align-items: center;
-  }
-  .hero-text { display: flex; flex-direction: column; }
-  .page-hero h1 { font-size: 62px; font-weight: 700; line-height: 1.03; letter-spacing: -.025em; margin-top: 16px; }
-  .hero-sub { font-size: 17px; color: var(--ink-2); line-height: 1.65; max-width: 44ch; margin-top: 24px; }
-
-  .hero-img-wrap {
+  .page-hero {
     position: relative;
-    border-radius: 14px;
+    padding: 120px 0 100px;
+    margin-top: -1px;
+    background-image: url('https://images.unsplash.com/photo-1505826759037-406b40feb4cd?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
     overflow: hidden;
-    aspect-ratio: 4/3;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.45);
   }
-  .hero-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 40%;
-    display: block;
-    transition: transform 6s ease;
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(14,24,39,0.95) 40%, rgba(14,24,39,0.6) 100%);
+    z-index: 0;
   }
-  .hero-img-wrap:hover .hero-img { transform: scale(1.04); }
-  .hero-img-glow {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(72,141,148,0.12) 0%, transparent 60%);
-    pointer-events: none;
-  }
+  .page-hero .wrap { position: relative; z-index: 1; }
+  .page-hero h1 { font-size: 64px; font-weight: 700; line-height: 1.03; letter-spacing: -.025em; margin-top: 16px; max-width: 14ch; }
+  .hero-sub { font-size: 17px; color: var(--ink-2); line-height: 1.65; max-width: 52ch; margin-top: 22px; }
 
   /* MK LIST */
   .mk-list { display: flex; flex-direction: column; gap: 12px; }
@@ -251,9 +229,8 @@ function mapsUrl(adresse: string): string {
 
   /* MOBILE */
   @media (max-width: 900px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 36px; }
-    .hero-img-wrap { aspect-ratio: 16/7; }
     .page-hero h1 { font-size: 48px; }
+    .page-hero { background-attachment: scroll; }
     .mk-row { grid-template-columns: 72px 1fr; }
     .mk-go { display: none; }
   }
