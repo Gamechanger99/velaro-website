@@ -1,5 +1,9 @@
 ---
 import '../styles/global.css';
+import '@fontsource/schibsted-grotesk/400.css';
+import '@fontsource/schibsted-grotesk/500.css';
+import '@fontsource/schibsted-grotesk/600.css';
+import '@fontsource/newsreader/400-italic.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -21,9 +25,6 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital@0;1&display=swap" rel="stylesheet" />
   </head>
   <body>
     <Header />
