@@ -8,23 +8,52 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
-  title?: string;
+  title: string;
   description?: string;
+  ogImage?: string;
+  ogType?: string;
 }
 
 const {
-  title = 'Velaro Catering & Foodtruckservice',
-  description = 'Professionelles Catering für Events und Märkte.',
+  title,
+  description = 'Professionelles Catering & Foodtruck-Service aus Haldensleben. Frisch gekocht, regional eingekauft — für Events, Feiern und Märkte.',
+  ogImage = '/og-default.jpg',
+  ogType = 'website',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://velaro-catering.de');
 ---
 
 <!DOCTYPE html>
 <html lang="de">
   <head>
+    <!-- Primary -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`https://velaro-catering.de${ogImage}`} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Velaro Catering & Foodtruckservice" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://velaro-catering.de${ogImage}`} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/logoohnesubtext.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
     <Header />
