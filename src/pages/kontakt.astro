@@ -7,6 +7,14 @@ import Layout from '../layouts/Layout.astro';
   description="Fragen oder eine Anfrage? Schreib uns — wir melden uns innerhalb von 24 Stunden mit einem persönlichen Angebot."
 >
 
+  <!-- Netlify static form discovery -->
+  <form name="kontakt" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="telefon" />
+    <textarea name="nachricht"></textarea>
+  </form>
+
   <!-- HERO -->
   <section class="page-hero">
     <div class="wrap">
