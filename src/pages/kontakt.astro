@@ -35,6 +35,15 @@ import Layout from '../layouts/Layout.astro';
             <h2>Nachricht senden</h2>
             <p class="form-sub">Alle Felder mit * sind Pflichtfelder.</p>
 
+            <div class="kontakt-banketmappe-hint">
+              <p>
+                Für <strong>Catering-Anfragen</strong> empfehlen wir unsere
+                <a href="/catering#banketmappe">interaktive Banketmappe</a> —
+                dort können Sie Ihr Wunschmenü direkt konfigurieren und
+                unverbindlich anfragen.
+              </p>
+            </div>
+
             <form
               name="kontakt"
               method="POST"
@@ -279,6 +288,27 @@ import Layout from '../layouts/Layout.astro';
     .page-hero h1 { font-size: 32px; }
     .form-card { padding: 24px; }
     .form-row { grid-template-columns: 1fr; }
+  }
+  .kontakt-banketmappe-hint {
+    background: rgba(72, 141, 148, 0.08);
+    border: 1px solid rgba(72, 141, 148, 0.25);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: #a6b8c8;
+    line-height: 1.6;
+  }
+  .kontakt-banketmappe-hint strong {
+    color: #e8e0d0;
+  }
+  .kontakt-banketmappe-hint a {
+    color: #488d94;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .kontakt-banketmappe-hint a:hover {
+    opacity: 0.8;
   }
 </style>
 
