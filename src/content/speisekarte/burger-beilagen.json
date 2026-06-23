@@ -1,0 +1,12 @@
+{
+  "kategorie": "burger-beilagen",
+  "label": "Beilagen (Foodtruck)",
+  "items": [
+    { "label": "Pommes Frites", "subs": null, "default": true, "badge": "Grundsortiment" },
+    { "label": "Loaded Fries", "subs": null, "default": true, "badge": "Grundsortiment" },
+    { "label": "Onion Rings", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Coleslaw", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Sweet Potato Fries", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Mac & Cheese Bites", "subs": null, "badge": "Aufpreis auf Anfrage" }
+  ]
+}

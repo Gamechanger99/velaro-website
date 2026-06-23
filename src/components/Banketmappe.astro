@@ -15,7 +15,8 @@ const SHARED_BEILAGEN    = getKat('beilagen');
 const SHARED_DESSERT     = getKat('dessert');
 const GRILL_ITEMS        = getKat('grill');
 const SNACK_ITEMS        = getKat('snacks');
-const BURGER_ITEMS       = getKat('burger');
+const BURGER_ITEMS          = getKat('burger');
+const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
 ---
 
 
@@ -34,6 +35,7 @@ const BURGER_ITEMS       = getKat('burger');
     <input name="kontakt_name" />
     <input name="kontakt_email" />
     <input name="kontakt_telefon" />
+    <input name="patty" />
   </form>
 
   <div class="container">
@@ -525,6 +527,29 @@ const BURGER_ITEMS       = getKat('burger');
     opacity: 0.8;
   }
 
+  /* ── Patty-Auswahl ── */
+  .bm-patty-wrap {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: rgba(72,141,148,0.06);
+    border: 1px solid rgba(72,141,148,0.2);
+    border-radius: 0.75rem;
+  }
+  .bm-patty-hint {
+    font-size: 0.8rem; color: #7a8fa6;
+    margin: 0.25rem 0 0.75rem;
+    font-family: "Montserrat", sans-serif;
+  }
+  .bm-patty-options { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .bm-patty-btn {
+    padding: 0.5rem 1.25rem; border-radius: 2rem;
+    border: 1px solid #2a3f5a; background: transparent;
+    color: #a6b8c8; font-size: 0.88rem; cursor: pointer;
+    transition: all 0.2s; font-family: "Montserrat", sans-serif;
+  }
+  .bm-patty-btn:hover { border-color: #488d94; color: #e8e0d0; }
+  .bm-patty-active { background: #488d94 !important; border-color: #488d94 !important; color: #fff !important; }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
     .bm-body, .bm-card-header { padding: 1.25rem; }
@@ -535,7 +560,7 @@ const BURGER_ITEMS       = getKat('burger');
   }
 </style>
 
-<script define:vars={{ SHARED_SUPPEN, SHARED_HAUPTGAENGE, SHARED_VEGETARISCH, SHARED_BEILAGEN, SHARED_DESSERT, GRILL_ITEMS, SNACK_ITEMS, BURGER_ITEMS }}>
+<script define:vars={{ SHARED_SUPPEN, SHARED_HAUPTGAENGE, SHARED_VEGETARISCH, SHARED_BEILAGEN, SHARED_DESSERT, GRILL_ITEMS, SNACK_ITEMS, BURGER_ITEMS, BURGER_BEILAGEN_ITEMS }}>
 // @ts-nocheck
 
 const CATS = [
@@ -579,7 +604,8 @@ const MENU = {
   truck: {
     infoBox: 'Die folgenden 5 Burger sowie Pommes Frites und Loaded Fries sind im Grundsortiment enthalten. Weitere Burger und Beilagen können gegen Aufpreis (nach Absprache) hinzugefügt werden.',
     sections:[
-      { title:'Burger & Beilagen', items: BURGER_ITEMS },
+      { title:'Burger', items: BURGER_ITEMS },
+      { title:'Beilagen', items: BURGER_BEILAGEN_ITEMS },
     ],
   },
 };
@@ -587,7 +613,7 @@ const MENU = {
 const TOTAL_STEPS = 6;
 const TITLES = ['Willkommen','Kategorie','Eckdaten','Menü zusammenstellen','Getränkepauschale','Individuelle Wünsche','Zusammenfassung'];
 
-const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', menuSel:{}, drink:'none', wishes:'' };
+const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', menuSel:{}, drink:'none', wishes:'', patty:'' };
 
 function findItemDef(secTitle, itemLabel) {
   const menu = MENU[S.category];
@@ -826,7 +852,24 @@ function htmlMenu() {
     </div>`;
   }).join('');
 
+  let pattyHtml = '';
+  if (S.category === 'truck') {
+    pattyHtml = `
+      <div class="bm-patty-wrap">
+        <div class="bm-dish-group-title">Patty-Auswahl</div>
+        <p class="bm-patty-hint">Gilt für alle ausgewählten Burger</p>
+        <div class="bm-patty-options">
+          ${['Beef', 'Crispy Chicken', 'Beides möglich'].map(opt => `
+            <button class="bm-patty-btn${S.patty === opt ? ' bm-patty-active' : ''}"
+              data-patty="${opt}">${opt}</button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   return `<p class="bm-step-desc">Wählen Sie Ihre gewünschten Speisen aus.</p>
+    ${pattyHtml}
     ${infoBoxHtml}
     <div class="bm-menu-status"><span>Ausgewählt: <strong>${totalSel} Gericht${totalSel!==1?'e':''}</strong></span></div>
     ${sectionsHtml}`;
@@ -850,6 +893,13 @@ function bindMenu() {
       const sub=el.getAttribute('data-sub');
       toggleSub(sec,item,sub);
       document.getElementById('bmBody').innerHTML=htmlMenu(); bindMenu();
+    });
+  });
+  document.querySelectorAll('.bm-patty-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      S.patty = btn.getAttribute('data-patty');
+      document.getElementById('bmBody').innerHTML = htmlMenu();
+      bindMenu();
     });
   });
   bindCascade();
@@ -972,6 +1022,7 @@ function htmlSummary() {
       ${row('Catering-Art',cat.name)}${row('Datum',S.date||'–')}${row('Ort',S.location||'–')}${row('Personen',S.persons+' Personen')}
     </div>
     ${menuHtml || `<div class="bm-summary-block"><div class="bm-summary-title">Menü</div>${row('—','Keine Auswahl getroffen')}</div>`}
+    ${S.category === 'truck' && S.patty ? `<div class="bm-summary-block"><div class="bm-summary-title">Patty-Wahl</div>${row('Patty',S.patty)}</div>` : ''}
     <div class="bm-summary-block"><div class="bm-summary-title">Getränke</div>
       ${row('Getränkepauschale', DRINKS.find(d=>d.id===S.drink)?.name || '–')}
     </div>
@@ -1037,6 +1088,7 @@ async function submit() {
     'kontakt_name':    S.name,
     'kontakt_email':   S.email,
     'kontakt_telefon': S.phone || '–',
+    'patty':           S.patty || 'Nicht angegeben',
   });
 
   try {

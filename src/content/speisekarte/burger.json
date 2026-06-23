@@ -1,131 +1,21 @@
 {
   "kategorie": "burger",
-  "label": "Burger & Beilagen (Foodtruck)",
+  "label": "Burger (Foodtruck)",
   "items": [
-    {
-      "label": "Cheeseburger",
-      "subs": [
-        "Beef",
-        "Crispy Chicken"
-      ],
-      "default": true,
-      "badge": "Grundsortiment"
-    },
-    {
-      "label": "Hamburger",
-      "subs": [
-        "Beef",
-        "Crispy Chicken"
-      ],
-      "default": true,
-      "badge": "Grundsortiment"
-    },
-    {
-      "label": "Chili-Cheese Burger",
-      "subs": [
-        "Beef",
-        "Crispy Chicken"
-      ],
-      "default": true,
-      "badge": "Grundsortiment"
-    },
-    {
-      "label": "Onion Overload",
-      "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
-    },
-    {
-      "label": "Veggie Burger",
-      "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
-    },
-    {
-      "label": "Pulled Pork Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Teriyaki Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "BBQ Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "default": true,
-      "label": "Lime-Chili Burger",
-      "subs": [
-        "Beef ",
-        "Chicken"
-      ],
-      "badge": "Perfekt für den Sommer"
-    },
-    {
-      "label": "Apfel-Camembert Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Pulled Teriyaki Lachs Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Leberkäse Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Rösti Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Burger Mexiko-Style",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Ziegenkäse-Rucola-Feigenmarmeladen Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Pommes Frites",
-      "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
-    },
-    {
-      "label": "Loaded Fries",
-      "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
-    },
-    {
-      "label": "Onion Rings",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Coleslaw",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Sweet Potato Fries",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    },
-    {
-      "label": "Mac & Cheese Bites",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
-    }
+    { "label": "Cheeseburger", "subs": null, "default": true, "badge": "Grundsortiment" },
+    { "label": "Hamburger", "subs": null, "default": true, "badge": "Grundsortiment" },
+    { "label": "Chili-Cheese Burger", "subs": null, "default": true, "badge": "Grundsortiment" },
+    { "label": "Onion Overload", "subs": null, "default": true, "badge": "Grundsortiment" },
+    { "label": "Veggie Burger", "subs": null, "default": true, "badge": "Grundsortiment" },
+    { "label": "Lime-Chili Burger", "subs": null, "default": true, "badge": "Perfekt für den Sommer" },
+    { "label": "Pulled Pork Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Teriyaki Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "BBQ Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Apfel-Camembert Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Pulled Teriyaki Lachs Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Leberkäse Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Rösti Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Burger Mexiko-Style", "subs": null, "badge": "Aufpreis auf Anfrage" },
+    { "label": "Ziegenkäse-Rucola-Feigenmarmeladen Burger", "subs": null, "badge": "Aufpreis auf Anfrage" }
   ]
 }
