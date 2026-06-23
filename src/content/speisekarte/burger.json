@@ -2,20 +2,86 @@
   "kategorie": "burger",
   "label": "Burger (Foodtruck)",
   "items": [
-    { "label": "Cheeseburger", "subs": null, "default": true, "badge": "Grundsortiment" },
-    { "label": "Hamburger", "subs": null, "default": true, "badge": "Grundsortiment" },
-    { "label": "Chili-Cheese Burger", "subs": null, "default": true, "badge": "Grundsortiment" },
-    { "label": "Onion Overload", "subs": null, "default": true, "badge": "Grundsortiment" },
-    { "label": "Veggie Burger", "subs": null, "default": true, "badge": "Grundsortiment" },
-    { "label": "Lime-Chili Burger", "subs": null, "default": true, "badge": "Perfekt für den Sommer" },
-    { "label": "Pulled Pork Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "Teriyaki Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "BBQ Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "Apfel-Camembert Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "Pulled Teriyaki Lachs Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "Leberkäse Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "Rösti Burger", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "Burger Mexiko-Style", "subs": null, "badge": "Aufpreis auf Anfrage" },
-    { "label": "Ziegenkäse-Rucola-Feigenmarmeladen Burger", "subs": null, "badge": "Aufpreis auf Anfrage" }
+    {
+      "label": "Cheeseburger",
+      "subs": null,
+      "default": true,
+      "badge": "Grundsortiment"
+    },
+    {
+      "label": "Hamburger",
+      "subs": null,
+      "default": true,
+      "badge": "Grundsortiment"
+    },
+    {
+      "label": "Chili-Cheese Burger",
+      "subs": null,
+      "default": true,
+      "badge": "Grundsortiment"
+    },
+    {
+      "label": "Onion Overload",
+      "subs": null,
+      "default": true,
+      "badge": "Grundsortiment"
+    },
+    {
+      "label": "Veggie Burger",
+      "subs": null,
+      "default": true,
+      "badge": "Grundsortiment"
+    },
+    {
+      "label": "Lime-Chili Burger",
+      "subs": null,
+      "default": false,
+      "badge": "Perfekt für den Sommer"
+    },
+    {
+      "label": "Pulled Pork Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "Teriyaki Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "BBQ Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "Apfel-Camembert Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "Pulled Teriyaki Lachs Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "Leberkäse Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "Rösti Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "Burger Mexiko-Style",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    },
+    {
+      "label": "Ziegenkäse-Rucola-Feigenmarmeladen Burger",
+      "subs": null,
+      "badge": "Aufpreis auf Anfrage"
+    }
   ]
 }
