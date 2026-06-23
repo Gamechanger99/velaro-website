@@ -57,7 +57,7 @@
       "badge": "Aufpreis auf Anfrage"
     },
     {
-      "default": false,
+      "default": true,
       "label": "Lime-Chili Burger",
       "subs": [
         "Beef ",
