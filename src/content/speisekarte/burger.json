@@ -69,7 +69,7 @@
       "badge": ""
     },
     {
-      "default": true,
+      "default": false,
       "label": "Lime-Chili Burger",
       "subs": [
         "Beef ",
