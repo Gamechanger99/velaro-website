@@ -31,7 +31,10 @@
     },
     {
       "label": "Onion Overload",
-      "subs": null,
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
       "default": true,
       "badge": "Grundsortiment"
     },
@@ -43,18 +46,27 @@
     },
     {
       "label": "Pulled Pork Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Pulled Pork",
+        "Pulled Chicken "
+      ],
+      "badge": ""
     },
     {
       "label": "Teriyaki Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
+      "badge": ""
     },
     {
       "label": "BBQ Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
+      "badge": ""
     },
     {
       "default": true,
@@ -67,33 +79,48 @@
     },
     {
       "label": "Apfel-Camembert Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
+      "badge": ""
     },
     {
       "label": "Pulled Teriyaki Lachs Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
+      "badge": ""
     },
     {
       "label": "Leberkäse Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Rösti Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
+      "badge": ""
     },
     {
       "label": "Burger Mexiko-Style",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
+      "badge": ""
     },
     {
       "label": "Ziegenkäse-Rucola-Feigenmarmeladen Burger",
-      "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "subs": [
+        "Beef",
+        "Crispy Chicken"
+      ],
+      "badge": ""
     },
     {
       "label": "Pommes Frites",
