@@ -48,12 +48,22 @@
         "auf Sesam-Spargel-Pfanne",
         "auf jungem Blattspinat",
         "in Zitronen-Dill-Sauce",
-        "Pasta al Salmone / Seelachsfilet"
+        "Pasta al Salmone"
       ]
     },
     {
       "default": false,
       "label": "Geschnetzeltes vom Schwein"
+    },
+    {
+      "default": false,
+      "label": "Seelachsfilet",
+      "subs": [
+        "auf Sesam-Spargel-Pfanne",
+        "auf Blattspinat",
+        "in Zitronen-Dill-Sauce",
+        "\"Caprese\" - Style"
+      ]
     }
   ]
 }
