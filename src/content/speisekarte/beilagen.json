@@ -2,19 +2,45 @@
   "kategorie": "beilagen",
   "label": "Beilagen",
   "items": [
-    { "label": "Frische Salatauswahl", "subs": null, "default": true, "badge": "Inklusive" },
-    { "label": "Baguette und Brot", "subs": null, "default": true, "badge": "Inklusive" },
-    { "label": "Butterplatte", "subs": null, "default": true, "badge": "Inklusive" },
-    { "label": "Dipvariation", "subs": null, "default": true, "badge": "Inklusive" },
-    { "label": "Kartoffelgratin", "subs": null },
-    { "label": "Salzkartoffeln", "subs": null },
-    { "label": "Petersilienkartoffeln", "subs": null },
-    { "label": "Reis", "subs": null },
-    { "label": "Spätzle", "subs": null },
-    { "label": "Nudeln", "subs": null },
-    { "label": "Risotto", "subs": null },
-    { "label": "Pilzrisotto", "subs": null },
-    { "label": "Cheddarrisotto", "subs": null },
-    { "label": "Kartoffelbrei", "subs": null }
+    {
+      "label": "Kartoffelgratin",
+      "subs": null
+    },
+    {
+      "label": "Salzkartoffeln",
+      "subs": null
+    },
+    {
+      "label": "Petersilienkartoffeln",
+      "subs": null
+    },
+    {
+      "label": "Reis",
+      "subs": null
+    },
+    {
+      "label": "Spätzle",
+      "subs": null
+    },
+    {
+      "label": "Nudeln",
+      "subs": null
+    },
+    {
+      "label": "Risotto",
+      "subs": null
+    },
+    {
+      "label": "Pilzrisotto",
+      "subs": null
+    },
+    {
+      "label": "Cheddarrisotto",
+      "subs": null
+    },
+    {
+      "label": "Kartoffelbrei",
+      "subs": null
+    }
   ]
 }
