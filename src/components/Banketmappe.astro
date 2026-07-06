@@ -8,6 +8,7 @@ function getKat(id: string) {
   return entry?.data.items ?? [];
 }
 
+const SHARED_VORSPEISEN  = getKat('vorspeisen');
 const SHARED_SUPPEN      = getKat('suppen');
 const SHARED_HAUPTGAENGE = getKat('hauptgaenge');
 const SHARED_VEGETARISCH = getKat('vegetarisch');
@@ -25,17 +26,17 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
 
   <!-- Netlify erkennt dieses Formular beim Build -->
   <form name="banketmappe" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input name="kategorie" />
+    <input name="kontakt_name" />
     <input name="datum" />
     <input name="personen" />
     <input name="ort" />
+    <input name="kategorie" />
     <input name="menu_auswahl" />
+    <input name="patty" />
     <input name="getraenke" />
     <input name="wuensche" />
-    <input name="kontakt_name" />
     <input name="kontakt_email" />
     <input name="kontakt_telefon" />
-    <input name="patty" />
   </form>
 
   <div class="container">
@@ -560,7 +561,7 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
   }
 </style>
 
-<script define:vars={{ SHARED_SUPPEN, SHARED_HAUPTGAENGE, SHARED_VEGETARISCH, SHARED_BEILAGEN, SHARED_DESSERT, GRILL_ITEMS, SNACK_ITEMS, BURGER_ITEMS, BURGER_BEILAGEN_ITEMS }}>
+<script define:vars={{ SHARED_VORSPEISEN, SHARED_SUPPEN, SHARED_HAUPTGAENGE, SHARED_VEGETARISCH, SHARED_BEILAGEN, SHARED_DESSERT, GRILL_ITEMS, SNACK_ITEMS, BURGER_ITEMS, BURGER_BEILAGEN_ITEMS }}>
 // @ts-nocheck
 
 const CATS = [
@@ -579,6 +580,7 @@ const DRINKS = [
 const MENU = {
   buffet: {
     sections:[
+      { title:'Vorspeisen', items: SHARED_VORSPEISEN },
       { title:'Suppen', items: SHARED_SUPPEN },
       { title:'Hauptgänge', items: SHARED_HAUPTGAENGE },
       { title:'Vegetarisch', items: SHARED_VEGETARISCH },
@@ -588,6 +590,7 @@ const MENU = {
   },
   grill: {
     sections:[
+      { title:'Vorspeisen', items: SHARED_VORSPEISEN },
       { title:'Vom Grill', items: GRILL_ITEMS },
       { title:'Suppen', items: SHARED_SUPPEN },
       { title:'Hauptgänge', items: SHARED_HAUPTGAENGE },
@@ -997,14 +1000,14 @@ function htmlSummary() {
   const menu = MENU[S.category];
   const row  = (k,v)=>`<div class="bm-summary-row"><span class="bm-row-key">${k}</span><span class="bm-row-val">${v}</span></div>`;
 
-  const menuHtml = Object.entries(S.menuSel).filter(([,arr])=>arr.length>0).map(([sec,arr])=>{
-    const secDef = menu?.sections.find(s=>s.title===sec);
-    const lines  = arr.map(e=>{
+  const menuHtml = (menu?.sections || []).filter(secDef=>(S.menuSel[secDef.title]||[]).length>0).map(secDef=>{
+    const arr   = S.menuSel[secDef.title];
+    const lines = arr.map(e=>{
       if (e.isCustom) {
         const displayName = e.item.replace(/^__custom__/,'');
         return `<div class="bm-summary-row"><span class="bm-row-key">—</span><span class="bm-row-val">(Eigener Wunsch) ${displayName}</span></div>`;
       }
-      const itDef     = secDef?.items.find(i=>i.label===e.item);
+      const itDef     = secDef.items.find(i=>i.label===e.item);
       const badgePart = itDef?.badge ? ` <span style="color:#488d94;font-size:0.72rem">(${itDef.badge})</span>` : '';
       const subPart   = e.subOptions.length ? ` → ${e.subOptions.join(', ')}` : '';
       let cascadePart = '';
@@ -1014,7 +1017,7 @@ function htmlSummary() {
       }
       return `<div class="bm-summary-row"><span class="bm-row-key">—</span><span class="bm-row-val">${e.item}${subPart}${cascadePart}${badgePart}</span></div>`;
     }).join('');
-    return `<div class="bm-summary-block"><div class="bm-summary-title">${sec}</div>${lines}</div>`;
+    return `<div class="bm-summary-block"><div class="bm-summary-title">${secDef.title}</div>${lines}</div>`;
   }).join('');
 
   return `
@@ -1053,17 +1056,17 @@ async function submit() {
   const cat  = CATS.find(c => c.id === S.category);
   const menu = MENU[S.category];
 
-  const menuText = Object.entries(S.menuSel)
-    .filter(([,arr])=>arr.length>0)
-    .map(([sec,arr])=>{
-      const secDef = menu?.sections.find(s=>s.title===sec);
-      const lines  = arr.map(e=>{
+  const menuText = (menu?.sections || [])
+    .filter(sec => (S.menuSel[sec.title] || []).length > 0)
+    .map(secDef => {
+      const arr   = S.menuSel[secDef.title];
+      const lines = arr.map(e=>{
         if (e.isCustom) {
           const displayName = e.item.replace(/^__custom__/,'');
           if (!displayName) return null;
           return `  — [Eigener Wunsch] ${displayName}`;
         }
-        const itDef     = secDef?.items.find(i=>i.label===e.item);
+        const itDef     = secDef.items.find(i=>i.label===e.item);
         const badgePart = itDef?.badge ? ` (${itDef.badge})` : '';
         const subPart   = e.subOptions.length ? ` → ${e.subOptions.join(', ')}` : '';
         let cascadePart = '';
@@ -1073,23 +1076,25 @@ async function submit() {
         }
         return `  — ${e.item}${subPart}${cascadePart}${badgePart}`;
       }).filter(Boolean).join('\n');
-      return `${sec}:\n${lines}`;
+      return `${secDef.title}:\n${lines}`;
     }).join('\n') || '–';
 
-  const payload = new URLSearchParams({
+  const fields = {
     'form-name':       'banketmappe',
-    'kategorie':       cat.name,
+    'kontakt_name':    S.name,
     'datum':           S.date,
     'personen':        String(S.persons),
     'ort':             S.location,
+    'kategorie':       cat.name,
     'menu_auswahl':    menuText,
-    'getraenke':       DRINKS.find(d=>d.id===S.drink)?.name || '–',
-    'wuensche':        S.wishes || 'Keine',
-    'kontakt_name':    S.name,
-    'kontakt_email':   S.email,
-    'kontakt_telefon': S.phone || '–',
-    'patty':           S.patty || 'Nicht angegeben',
-  });
+  };
+  if (S.category === 'truck') fields['patty'] = S.patty || 'Nicht angegeben';
+  fields['getraenke']       = DRINKS.find(d=>d.id===S.drink)?.name || '–';
+  fields['wuensche']        = S.wishes || 'Keine';
+  fields['kontakt_email']   = S.email;
+  fields['kontakt_telefon'] = S.phone || '–';
+
+  const payload = new URLSearchParams(fields);
 
   try {
     const res = await fetch('/', {

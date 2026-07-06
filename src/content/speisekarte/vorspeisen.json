@@ -1,0 +1,34 @@
+{
+  "kategorie": "vorspeisen",
+  "label": "Vorspeisen",
+  "items": [
+    {
+      "label": "Frische Salatauswahl",
+      "subs": null
+    },
+    {
+      "label": "Baguette und Brot",
+      "subs": null
+    },
+    {
+      "label": "Butterplatte",
+      "subs": null
+    },
+    {
+      "label": "Dipvariation",
+      "subs": null
+    },
+    {
+      "label": "Antipasti",
+      "subs": null
+    },
+    {
+      "label": "Tomate und Mozzarella",
+      "subs": null
+    },
+    {
+      "label": "Frittierte Auberginenscheiben",
+      "subs": null
+    }
+  ]
+}
