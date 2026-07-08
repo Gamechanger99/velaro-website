@@ -3,10 +3,6 @@
   "label": "Vorspeisen",
   "items": [
     {
-      "label": "Frische Salatauswahl",
-      "subs": null
-    },
-    {
       "label": "Baguette und Brot",
       "subs": null
     },
@@ -16,6 +12,10 @@
     },
     {
       "label": "Dipvariation",
+      "subs": null
+    },
+    {
+      "label": "Frische Salatauswahl",
       "subs": null
     },
     {
@@ -29,6 +29,26 @@
     {
       "label": "Frittierte Auberginenscheiben",
       "subs": null
+    },
+    {
+      "default": false,
+      "label": "Honigmelone mit Schinken"
+    },
+    {
+      "default": false,
+      "label": "Wurstplatte"
+    },
+    {
+      "default": false,
+      "label": "Käseplatte"
+    },
+    {
+      "default": false,
+      "label": "Fischplatte"
+    },
+    {
+      "default": false,
+      "label": "Fleischplatte (Kaltplatte mit Schnitzel, Hähnchenkeulen und Klopse)"
     }
   ]
 }
