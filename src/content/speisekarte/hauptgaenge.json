@@ -43,6 +43,10 @@
       ]
     },
     {
+      "default": false,
+      "label": "Geschnetzeltes vom Schwein"
+    },
+    {
       "label": "Lachsfilet",
       "subs": [
         "auf Sesam-Spargel-Pfanne",
@@ -50,10 +54,6 @@
         "in Zitronen-Dill-Sauce",
         "Pasta al Salmone"
       ]
-    },
-    {
-      "default": false,
-      "label": "Geschnetzeltes vom Schwein"
     },
     {
       "default": false,
