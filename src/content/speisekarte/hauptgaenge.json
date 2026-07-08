@@ -62,8 +62,17 @@
         "auf Sesam-Spargel-Pfanne",
         "auf Blattspinat",
         "in Zitronen-Dill-Sauce",
-        "\"Caprese\" - Style"
+        "\"Caprese\" - Style",
+        "auf Radieschengemüse"
       ]
+    },
+    {
+      "default": false,
+      "label": "Nudelauflauf"
+    },
+    {
+      "default": false,
+      "label": "Lasagne"
     }
   ]
 }
