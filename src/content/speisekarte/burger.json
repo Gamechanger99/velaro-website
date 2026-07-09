@@ -5,32 +5,32 @@
     {
       "label": "Cheeseburger",
       "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
+      "default": false,
+      "badge": ""
     },
     {
       "label": "Hamburger",
       "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
+      "default": false,
+      "badge": ""
     },
     {
       "label": "Chili-Cheese Burger",
       "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
+      "default": false,
+      "badge": ""
     },
     {
       "label": "Onion Overload",
       "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
+      "default": false,
+      "badge": ""
     },
     {
       "label": "Veggie Burger",
       "subs": null,
-      "default": true,
-      "badge": "Grundsortiment"
+      "default": false,
+      "badge": ""
     },
     {
       "label": "Lime-Chili Burger",
@@ -41,47 +41,47 @@
     {
       "label": "Pulled Pork Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Teriyaki Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "BBQ Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Apfel-Camembert Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Pulled Teriyaki Lachs Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Leberkäse Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Rösti Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Burger Mexiko-Style",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     },
     {
       "label": "Ziegenkäse-Rucola-Feigenmarmeladen Burger",
       "subs": null,
-      "badge": "Aufpreis auf Anfrage"
+      "badge": ""
     }
   ]
 }
