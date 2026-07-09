@@ -22,6 +22,10 @@
       "subs": null
     },
     {
+      "default": false,
+      "label": "Grillkäse"
+    },
+    {
       "label": "Grillgemüse",
       "subs": null
     },
