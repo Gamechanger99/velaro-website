@@ -2,11 +2,40 @@
   "kategorie": "grill",
   "label": "Vom Grill",
   "items": [
-    { "label": "Bratwurst", "subs": null },
-    { "label": "Boulette", "subs": null },
-    { "label": "Grillgemüse", "subs": null },
-    { "label": "Tomaten-Feta-Pfännchen", "subs": null },
-    { "label": "Fackeln", "subs": null },
-    { "label": "Steak", "subs": ["Schwein","Hühnchen"] }
+    {
+      "label": "Bratwurst",
+      "subs": null
+    },
+    {
+      "label": "Boulette",
+      "subs": null
+    },
+    {
+      "label": "Steak",
+      "subs": [
+        "Schwein",
+        "Hühnchen"
+      ]
+    },
+    {
+      "label": "Fackeln",
+      "subs": null
+    },
+    {
+      "label": "Grillgemüse",
+      "subs": null
+    },
+    {
+      "label": "Tomaten-Feta-Pfännchen",
+      "subs": null
+    },
+    {
+      "default": false,
+      "label": "Baguette",
+      "subs": [
+        "Kräuter",
+        "Knoblauch"
+      ]
+    }
   ]
 }
