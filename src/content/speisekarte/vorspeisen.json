@@ -16,7 +16,15 @@
     },
     {
       "label": "Frische Salatauswahl",
-      "subs": null
+      "subs": [
+        "Nudelsalat",
+        "Kartoffelsalat",
+        "Feta-Melonensalat",
+        "Gnocchisalat",
+        "Griechischer Bauernsalat",
+        "Rote Bete Salat",
+        "Nudelsalat mit Mayo"
+      ]
     },
     {
       "label": "Antipasti",
