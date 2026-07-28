@@ -43,6 +43,10 @@
       ]
     },
     {
+      "default": false,
+      "label": "Geschnetzeltes vom Schwein"
+    },
+    {
       "label": "Lachsfilet",
       "subs": [
         "auf Sesam-Spargel-Pfanne",
@@ -53,17 +57,22 @@
     },
     {
       "default": false,
-      "label": "Geschnetzeltes vom Schwein"
-    },
-    {
-      "default": false,
       "label": "Seelachsfilet",
       "subs": [
         "auf Sesam-Spargel-Pfanne",
         "auf Blattspinat",
         "in Zitronen-Dill-Sauce",
-        "\"Caprese\" - Style"
+        "\"Caprese\" - Style",
+        "auf Radieschengemüse"
       ]
+    },
+    {
+      "default": false,
+      "label": "Nudelauflauf"
+    },
+    {
+      "default": false,
+      "label": "Lasagne"
     }
   ]
 }

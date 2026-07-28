@@ -41,6 +41,10 @@
     {
       "label": "Kartoffelbrei",
       "subs": null
+    },
+    {
+      "default": false,
+      "label": "Kroketten"
     }
   ]
 }

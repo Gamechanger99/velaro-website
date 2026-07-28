@@ -3,10 +3,6 @@
   "label": "Vorspeisen",
   "items": [
     {
-      "label": "Frische Salatauswahl",
-      "subs": null
-    },
-    {
       "label": "Baguette und Brot",
       "subs": null
     },
@@ -19,6 +15,19 @@
       "subs": null
     },
     {
+      "label": "Frische Salatauswahl",
+      "subs": [
+        "italienischer Nudelsalat",
+        "Kartoffelsalat",
+        "Feta-Melonensalat",
+        "Gnocchisalat",
+        "Griechischer Bauernsalat",
+        "Rote Bete Salat",
+        "Nudelsalat mit Mayo",
+        "Cous Cous Salat"
+      ]
+    },
+    {
       "label": "Antipasti",
       "subs": null
     },
@@ -29,6 +38,26 @@
     {
       "label": "Frittierte Auberginenscheiben",
       "subs": null
+    },
+    {
+      "default": false,
+      "label": "Honigmelone mit Schinken"
+    },
+    {
+      "default": false,
+      "label": "Wurstplatte"
+    },
+    {
+      "default": false,
+      "label": "Käseplatte"
+    },
+    {
+      "default": false,
+      "label": "Fischplatte"
+    },
+    {
+      "default": false,
+      "label": "Fleischplatte (Kaltplatte mit Schnitzel, Hähnchenkeulen und Klopse)"
     }
   ]
 }

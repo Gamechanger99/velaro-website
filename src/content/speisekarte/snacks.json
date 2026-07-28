@@ -2,11 +2,38 @@
   "kategorie": "snacks",
   "label": "Fingerfood & Canapés",
   "items": [
-    { "label": "Obst", "subs": null },
-    { "label": "Fingerfood", "subs": null },
-    { "label": "Belegte Brötchen", "subs": null },
-    { "label": "Obstsalat", "subs": null },
-    { "label": "Canapés", "subs": null },
-    { "label": "Wraps", "subs": null }
+    {
+      "label": "Obst",
+      "subs": null
+    },
+    {
+      "label": "Fingerfood",
+      "subs": null
+    },
+    {
+      "label": "Canapés",
+      "subs": null
+    },
+    {
+      "label": "Belegte Brötchen",
+      "subs": [
+        "Salami",
+        "Schinken",
+        "Käse",
+        "Ei"
+      ]
+    },
+    {
+      "label": "Wraps",
+      "subs": [
+        "Käse-Schinken",
+        "Hähnchen",
+        "Lachs"
+      ]
+    },
+    {
+      "label": "Obstsalat",
+      "subs": null
+    }
   ]
 }
