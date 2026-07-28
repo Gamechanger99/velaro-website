@@ -33,6 +33,8 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
     <input name="kategorie" />
     <input name="menu_auswahl" />
     <input name="getraenke" />
+    <input name="geschirr" />
+    <input name="saeuberung" />
     <input name="wuensche" />
     <input name="kontakt_email" />
     <input name="kontakt_telefon" />
@@ -429,6 +431,12 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
   /* ── Getränke-Step ── */
   .bm-drink-cards { display: flex; flex-direction: column; gap: 0.875rem; }
 
+  /* ── Geschirr & Säuberung-Step ── */
+  .bm-choice-group { margin-bottom: 1.5rem; }
+  .bm-choice-group:last-child { margin-bottom: 0; }
+  .bm-choice-grid { display: flex; flex-wrap: wrap; gap: 0.875rem; }
+  .bm-choice-card { flex: 1 1 160px; min-width: 150px; padding: 1rem 1.1rem; }
+
   /* ── Dish label ── */
   .bm-dish-label { flex: 1; }
 
@@ -556,6 +564,7 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
     .bm-nav { padding: 0.9rem 1.25rem; }
     .bm-price-bar { padding: 0.7rem 1.25rem; }
     .bm-cat-grid, .bm-drink-grid, .bm-dish-grid { grid-template-columns: 1fr; }
+    .bm-choice-card { flex-basis: 100%; }
     .bm-form-row { grid-template-columns: 1fr; }
   }
 </style>
@@ -575,6 +584,19 @@ const DRINKS = [
   { id:'soft', name:'Getränke-Pauschale',          desc:'Inkl. Bier & Weinauswahl' },
   { id:'full', name:'Getränke-Pauschale Premium',  desc:'Großes Getränke-Sortiment' },
 ];
+
+const GESCHIRR_OPTIONS = ['Besteck', 'Teller', 'Beides'];
+
+const SAEUBERUNG_OPTIONS = [
+  { id:'eigen', name:'Eigene Säuberung', hint:'10% Nachlass' },
+  { id:'uns',   name:'Säuberung von uns' },
+];
+
+function saeuberungLabel(id) {
+  const opt = SAEUBERUNG_OPTIONS.find(o=>o.id===id);
+  if (!opt) return '';
+  return opt.hint ? `${opt.name} (${opt.hint})` : opt.name;
+}
 
 const MENU = {
   buffet: {
@@ -612,10 +634,10 @@ const MENU = {
   },
 };
 
-const TOTAL_STEPS = 6;
-const TITLES = ['Willkommen','Kategorie','Eckdaten','Menü zusammenstellen','Getränkepauschale','Individuelle Wünsche','Zusammenfassung'];
+const TOTAL_STEPS = 7;
+const TITLES = ['Willkommen','Kategorie','Eckdaten','Menü zusammenstellen','Getränkepauschale','Geschirr & Säuberung','Individuelle Wünsche','Zusammenfassung'];
 
-const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', menuSel:{}, drink:'none', wishes:'', patty:'' };
+const S = { step:0, category:'', persons:30, date:'', location:'', name:'', email:'', phone:'', menuSel:{}, drink:'none', geschirr:'', saeuberung:'', wishes:'', patty:'' };
 
 function findItemDef(secTitle, itemLabel) {
   const menu = MENU[S.category];
@@ -682,8 +704,9 @@ function render() {
     case 2: body.innerHTML = htmlDetails(); bindDetails(); break;
     case 3: body.innerHTML = htmlMenu(); bindMenu(); break;
     case 4: body.innerHTML = htmlDrinks(); bindDrinks(); break;
-    case 5: body.innerHTML = htmlWishes(); bindWishes(); break;
-    case 6: body.innerHTML = htmlSummary(); break;
+    case 5: body.innerHTML = htmlGeschirrSaeuberung(); bindGeschirrSaeuberung(); break;
+    case 6: body.innerHTML = htmlWishes(); bindWishes(); break;
+    case 7: body.innerHTML = htmlSummary(); break;
   }
 }
 
@@ -693,7 +716,7 @@ function htmlWelcome() {
     <p>Kategorien wählen, Gerichte zusammenstellen und direkt anfragen — in wenigen Schritten zu Ihrem individuellen Angebot.</p>
     <div class="bm-feature-row">
       <div class="bm-feature-item"><div class="bm-feature-bubble">4</div><span class="bm-feature-label">Kategorien</span></div>
-      <div class="bm-feature-item"><div class="bm-feature-bubble">6</div><span class="bm-feature-label">Schritte</span></div>
+      <div class="bm-feature-item"><div class="bm-feature-bubble">7</div><span class="bm-feature-label">Schritte</span></div>
       <div class="bm-feature-item"><div class="bm-feature-bubble">✉</div><span class="bm-feature-label">Direkt anfragen</span></div>
     </div>
   </div>`;
@@ -982,6 +1005,42 @@ function bindDrinks() {
   });
 }
 
+function htmlGeschirrSaeuberung() {
+  return `<p class="bm-step-desc">Bitte treffen Sie Ihre Auswahl zu Geschirr und Säuberung.</p>
+  <div class="bm-choice-group">
+    <p class="bm-field-group-label">Geschirr</p>
+    <div class="bm-choice-grid">${GESCHIRR_OPTIONS.map(opt=>`
+      <div class="bm-cat-card bm-choice-card${S.geschirr===opt?' bm-selected':''}" data-geschirr="${esc(opt)}">
+        <div class="bm-cat-name">${opt}</div>
+      </div>`).join('')}</div>
+  </div>
+  <div class="bm-choice-group">
+    <p class="bm-field-group-label">Säuberung</p>
+    <div class="bm-choice-grid">${SAEUBERUNG_OPTIONS.map(opt=>`
+      <div class="bm-cat-card bm-choice-card${S.saeuberung===opt.id?' bm-selected':''}" data-saeuberung="${esc(opt.id)}">
+        <div class="bm-cat-name">${opt.name}</div>
+        ${opt.hint ? `<div class="bm-cat-desc">${opt.hint}</div>` : ''}
+      </div>`).join('')}</div>
+  </div>`;
+}
+
+function bindGeschirrSaeuberung() {
+  document.querySelectorAll('[data-geschirr]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      S.geschirr = el.getAttribute('data-geschirr');
+      document.querySelectorAll('[data-geschirr]').forEach(c=>c.classList.remove('bm-selected'));
+      el.classList.add('bm-selected');
+    });
+  });
+  document.querySelectorAll('[data-saeuberung]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      S.saeuberung = el.getAttribute('data-saeuberung');
+      document.querySelectorAll('[data-saeuberung]').forEach(c=>c.classList.remove('bm-selected'));
+      el.classList.add('bm-selected');
+    });
+  });
+}
+
 function htmlWishes() {
   return `<p class="bm-step-desc">Haben Sie besondere Wünsche, Allergien oder sonstige Anmerkungen?</p>
   <div class="bm-wishes-wrap">
@@ -1028,6 +1087,9 @@ function htmlSummary() {
     <div class="bm-summary-block"><div class="bm-summary-title">Getränke</div>
       ${row('Getränkepauschale', DRINKS.find(d=>d.id===S.drink)?.name || '–')}
     </div>
+    <div class="bm-summary-block"><div class="bm-summary-title">Geschirr & Säuberung</div>
+      ${row('Geschirr', S.geschirr || '–')}${row('Säuberung', saeuberungLabel(S.saeuberung) || '–')}
+    </div>
     <div class="bm-summary-block"><div class="bm-summary-title">Kontakt</div>
       ${row('Name',S.name||'–')}${row('E-Mail',S.email||'–')}${S.phone?row('Telefon',S.phone):''}
     </div>
@@ -1047,6 +1109,10 @@ function validate() {
   if(S.step===3){
     const total=Object.values(S.menuSel).reduce((a,arr)=>a+arr.length,0);
     if(total<1){alert('Bitte mindestens ein Gericht auswählen.');return false;}
+  }
+  if(S.step===5){
+    if(!S.geschirr){alert('Bitte wählen Sie eine Geschirr-Option.');return false;}
+    if(!S.saeuberung){alert('Bitte wählen Sie eine Säuberungs-Option.');return false;}
   }
   return true;
 }
@@ -1089,6 +1155,8 @@ async function submit() {
   };
   if (S.category === 'truck') fields['patty'] = S.patty || 'Nicht angegeben';
   fields['getraenke']       = DRINKS.find(d=>d.id===S.drink)?.name || '–';
+  fields['geschirr']        = S.geschirr || '–';
+  fields['saeuberung']      = saeuberungLabel(S.saeuberung) || '–';
   fields['wuensche']        = S.wishes || 'Keine';
   fields['kontakt_email']   = S.email;
   fields['kontakt_telefon'] = S.phone || '–';
@@ -1125,7 +1193,7 @@ document.getElementById('bmBack')?.addEventListener('click',()=>{
 });
 
 document.getElementById('bmReset')?.addEventListener('click',()=>{
-  Object.assign(S,{step:0,category:'',persons:30,date:'',location:'',name:'',email:'',phone:'',menuSel:{},drink:'none',wishes:''});
+  Object.assign(S,{step:0,category:'',persons:30,date:'',location:'',name:'',email:'',phone:'',menuSel:{},drink:'none',geschirr:'',saeuberung:'',wishes:''});
   document.getElementById('bmCard').style.display='';
   document.getElementById('bmSuccess').classList.remove('bm-visible');
   render();
