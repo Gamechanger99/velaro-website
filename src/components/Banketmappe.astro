@@ -432,10 +432,11 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
   .bm-drink-cards { display: flex; flex-direction: column; gap: 0.875rem; }
 
   /* ── Geschirr & Säuberung-Step ── */
-  .bm-choice-group { margin-bottom: 1.5rem; }
+  .bm-choice-group { margin-bottom: 1.25rem; }
   .bm-choice-group:last-child { margin-bottom: 0; }
+  .bm-choice-group .bm-field-group-label { margin-bottom: 1.25rem; }
   .bm-choice-grid { display: flex; flex-wrap: wrap; gap: 0.875rem; }
-  .bm-choice-card { flex: 1 1 160px; min-width: 150px; padding: 1rem 1.1rem; }
+  .bm-choice-card { flex: 1 1 160px; min-width: 150px; }
 
   /* ── Dish label ── */
   .bm-dish-label { flex: 1; }
@@ -588,7 +589,7 @@ const DRINKS = [
 const GESCHIRR_OPTIONS = ['Besteck', 'Teller', 'Beides'];
 
 const SAEUBERUNG_OPTIONS = [
-  { id:'eigen', name:'Eigene Säuberung', hint:'10% Nachlass' },
+  { id:'eigen', name:'Eigene Säuberung', hint:'10% Preisnachlass' },
   { id:'uns',   name:'Säuberung von uns' },
 ];
 
