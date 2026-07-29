@@ -565,7 +565,8 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
     .bm-nav { padding: 0.9rem 1.25rem; }
     .bm-price-bar { padding: 0.7rem 1.25rem; }
     .bm-cat-grid, .bm-drink-grid, .bm-dish-grid { grid-template-columns: 1fr; }
-    .bm-choice-card { flex-basis: 100%; }
+    .bm-choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.875rem; }
+    .bm-choice-card { flex-basis: auto; min-width: 0; }
     .bm-form-row { grid-template-columns: 1fr; }
   }
 </style>
@@ -586,7 +587,7 @@ const DRINKS = [
   { id:'full', name:'Getränke-Pauschale Premium',  desc:'Großes Getränke-Sortiment' },
 ];
 
-const GESCHIRR_OPTIONS = ['Besteck', 'Teller', 'Beides'];
+const GESCHIRR_OPTIONS = ['Besteck', 'Teller', 'Beides', 'Keine'];
 
 const SAEUBERUNG_OPTIONS = [
   { id:'eigen', name:'Eigene Säuberung', hint:'10% Preisnachlass' },
