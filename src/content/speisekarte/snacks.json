@@ -8,11 +8,21 @@
     },
     {
       "label": "Fingerfood",
-      "subs": null
+      "subs": [
+        "Mini-Frikadellen",
+        "Hähnchenspieße",
+        "Blätterteigstangen",
+        "Gemüsesticks mit Dip"
+      ]
     },
     {
       "label": "Canapés",
-      "subs": null
+      "subs": [
+        "Lachs",
+        "Frischkäse-Kräuter",
+        "Roastbeef",
+        "Mett"
+      ]
     },
     {
       "label": "Belegte Brötchen",
