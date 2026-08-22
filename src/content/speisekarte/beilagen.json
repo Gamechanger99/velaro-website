@@ -3,20 +3,24 @@
   "label": "Beilagen",
   "items": [
     {
-      "label": "Kartoffelgratin",
-      "subs": null
+      "label": "Kartoffelbeilage",
+      "subs": [
+        "Kartoffelgratin",
+        "Salzkartoffeln",
+        "Petersilienkartoffeln",
+        "Kartoffelbrei",
+        "Kroketten"
+      ]
     },
     {
-      "label": "Salzkartoffeln",
-      "subs": null
-    },
-    {
-      "label": "Petersilienkartoffeln",
-      "subs": null
-    },
-    {
-      "label": "Reis",
-      "subs": null
+      "label": "Reisbeilage/Risotto",
+      "subs": [
+        "klassischer Reis",
+        "Tomatenreis",
+        "Risotto",
+        "Pilzrisotto",
+        "Cheddarrisotto"
+      ]
     },
     {
       "label": "Spätzle",
@@ -25,26 +29,6 @@
     {
       "label": "Nudeln",
       "subs": null
-    },
-    {
-      "label": "Risotto",
-      "subs": null
-    },
-    {
-      "label": "Pilzrisotto",
-      "subs": null
-    },
-    {
-      "label": "Cheddarrisotto",
-      "subs": null
-    },
-    {
-      "label": "Kartoffelbrei",
-      "subs": null
-    },
-    {
-      "default": false,
-      "label": "Kroketten"
     }
   ]
 }
