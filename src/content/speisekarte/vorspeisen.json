@@ -45,19 +45,25 @@
     },
     {
       "default": false,
-      "label": "Wurstplatte"
+      "label": "Platten",
+      "subs": [
+        "Wurstplatte",
+        "Käseplatte",
+        "Fischplatte",
+        "Fleischplatte (Kaltplatte mit Schnitzel, Hähnchenkeulen und Klopse)"
+      ]
     },
     {
       "default": false,
-      "label": "Käseplatte"
-    },
-    {
-      "default": false,
-      "label": "Fischplatte"
-    },
-    {
-      "default": false,
-      "label": "Fleischplatte (Kaltplatte mit Schnitzel, Hähnchenkeulen und Klopse)"
+      "label": "Wraps",
+      "badge": "",
+      "subs": [
+        "Käse-Schinken",
+        "Hähnchenbrustfilet",
+        "Lachs",
+        "Pulled Teriyaki Lachs",
+        "Pulled Chicken"
+      ]
     }
   ]
 }
