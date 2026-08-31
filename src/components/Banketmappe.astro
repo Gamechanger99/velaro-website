@@ -18,6 +18,7 @@ const GRILL_ITEMS        = getKat('grill');
 const SNACK_ITEMS        = getKat('snacks');
 const BURGER_ITEMS          = getKat('burger');
 const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
+const KINDER_ITEMS          = getKat('kinder');
 ---
 
 
@@ -571,14 +572,14 @@ const BURGER_BEILAGEN_ITEMS = getKat('burger-beilagen');
   }
 </style>
 
-<script define:vars={{ SHARED_VORSPEISEN, SHARED_SUPPEN, SHARED_HAUPTGAENGE, SHARED_VEGETARISCH, SHARED_BEILAGEN, SHARED_DESSERT, GRILL_ITEMS, SNACK_ITEMS, BURGER_ITEMS, BURGER_BEILAGEN_ITEMS }}>
+<script define:vars={{ SHARED_VORSPEISEN, SHARED_SUPPEN, SHARED_HAUPTGAENGE, SHARED_VEGETARISCH, SHARED_BEILAGEN, SHARED_DESSERT, GRILL_ITEMS, SNACK_ITEMS, BURGER_ITEMS, BURGER_BEILAGEN_ITEMS, KINDER_ITEMS }}>
 // @ts-nocheck
 
 const CATS = [
   { id:'buffet', tag:'Buffet',     name:'Klassisches Buffet',  desc:'Warme & kalte Speisen für jeden Anlass' },
   { id:'grill',  tag:'Grill',      name:'Grillbuffet',          desc:'Frisch vom Grill – deftig & gesellig' },
   { id:'snacks', tag:'Fingerfood', name:'Kleine Speisen',        desc:'Wraps, Canapés & Fingerfood – ab 10 Personen' },
-  { id:'truck',  tag:'Food Truck', name:'Food Truck Catering',   desc:'Saftige Burger direkt zu Ihrem Event' },
+  { id:'truck',  tag:'Burger',     name:'Burger Catering',       desc:'Saftige Burger direkt zu Ihrem Event' },
 ];
 
 const DRINKS = [
@@ -609,6 +610,7 @@ const MENU = {
       { title:'Vegetarisch', items: SHARED_VEGETARISCH },
       { title:'Beilagen', items: SHARED_BEILAGEN },
       { title:'Dessert', items: SHARED_DESSERT },
+      { title:'Für die Kleinen', items: KINDER_ITEMS },
     ],
   },
   grill: {
@@ -620,6 +622,7 @@ const MENU = {
       { title:'Vegetarisch', items: SHARED_VEGETARISCH },
       { title:'Beilagen', items: SHARED_BEILAGEN },
       { title:'Dessert', items: SHARED_DESSERT },
+      { title:'Für die Kleinen', items: KINDER_ITEMS },
     ],
   },
   snacks: {
