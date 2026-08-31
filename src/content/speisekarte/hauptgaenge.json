@@ -14,7 +14,14 @@
     },
     {
       "label": "Hähnchenbrust",
-      "subs": null,
+      "subs": [
+        "klassisch gewürzt",
+        "\"Caprese\" - Style",
+        "mit Feta - Spinatcremefüllung",
+        "mit mediterranem Grillgemüse",
+        "mit Pilzrahmsauce",
+        "mit klassischer Bratensauce"
+      ],
       "cascade": [
         {
           "question": "Zubereitung",
@@ -37,6 +44,9 @@
     {
       "label": "Schweinefilet",
       "subs": [
+        "klassisch gewürzt",
+        "\"Caprese\" - Style",
+        "mit Feta - Spinatcremefüllung",
         "mit mediterranem Grillgemüse",
         "mit Pfeffersauce",
         "in Pfefferrahm"

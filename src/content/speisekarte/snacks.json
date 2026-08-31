@@ -8,11 +8,23 @@
     },
     {
       "label": "Fingerfood",
-      "subs": null
+      "subs": [
+        "Mini-Frikadellen",
+        "Hähnchenspieße",
+        "Blätterteigstangen",
+        "Gemüsesticks mit Dip"
+      ]
     },
     {
       "label": "Canapés",
-      "subs": null
+      "subs": [
+        "Lachs",
+        "Frischkäse-Kräuter",
+        "Roastbeef",
+        "Mett",
+        "Pfirsich - Prosciutto - Ziegenkäse",
+        "Pfirsich - Prosciutto - Ricotta"
+      ]
     },
     {
       "label": "Belegte Brötchen",
@@ -27,8 +39,10 @@
       "label": "Wraps",
       "subs": [
         "Käse-Schinken",
-        "Hähnchen",
-        "Lachs"
+        "Hähnchenbrustfilet",
+        "Lachs",
+        "Pulled Teriyaki Lachs",
+        "Pulled Chicken"
       ]
     },
     {
