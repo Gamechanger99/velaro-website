@@ -1,5 +1,30 @@
 {
   "kategorie": "kinder",
   "label": "Für die Kleinen",
-  "items": []
+  "items": [
+    {
+      "default": false,
+      "label": "Nudeln mit Tomatensoße"
+    },
+    {
+      "default": false,
+      "label": "Nuggets"
+    },
+    {
+      "default": false,
+      "label": "Schnitzel"
+    },
+    {
+      "default": false,
+      "label": "Minipizzen"
+    },
+    {
+      "default": false,
+      "label": "Milchreis mit Zimt und Zucker"
+    },
+    {
+      "default": false,
+      "label": "Kaiserschmarrn"
+    }
+  ]
 }
